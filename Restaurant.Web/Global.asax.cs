@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace Restaurant.Web
 {
@@ -15,7 +11,27 @@ namespace Restaurant.Web
         {
             // Código que se ejecuta al iniciar la aplicación
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            // RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //void RegisterRoutes(RouteCollection routes)
+        //{
+        //    routes.MapPageRoute(
+        //        "About",
+        //        "About",
+        //        "~/Paginas/About.aspx"
+        //    );
+        //    routes.MapPageRoute(
+        //        "contact",
+        //        "contact",
+        //        "~/Paginas/contact.aspx"
+        //    );
+        //    routes.MapPageRoute(
+        //        "default",
+        //        "default",
+        //        "~/Paginas/default.aspx"
+        //    );
+        //}
     }
 }

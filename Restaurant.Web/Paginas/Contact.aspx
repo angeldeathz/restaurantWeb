@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="Restaurant.Web.Contact" %>
+﻿<%@ Page Title="Contact" Language="C#" MasterPageFile="../Master/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="Restaurant.Web.Paginas.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>.</h2>
