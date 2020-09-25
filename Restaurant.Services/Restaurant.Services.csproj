@@ -68,6 +68,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurant.Model\Restaurant.Model.csproj">
+      <Project>{A8953F27-2492-4EFF-881A-FFB6FF274BA1}</Project>
+      <Name>Restaurant.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

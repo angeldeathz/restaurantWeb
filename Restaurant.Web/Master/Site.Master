@@ -54,6 +54,7 @@
                         <li><a runat="server" href="../Paginas/inicio">Inicio</a></li>
                         <li><a runat="server" href="../Paginas/about">Acerca de</a></li>
                         <li><a runat="server" href="../Paginas/contact">Contacto</a></li>
+                        <li><a runat="server" href="../Paginas/iniciarsesion">Iniciar Sesión</a></li>
                     </ul>
                 </div>
             </div>
