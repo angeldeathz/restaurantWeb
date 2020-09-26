@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using Restaurant.Model.Clases;
 using Restaurant.Model.Dto;
 using Restaurant.Services.Shared;
 
@@ -21,10 +22,10 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
-        public object ObtenerPorRut(string rut)
+        public Usuario ObtenerPorRut(string rut)
         {
             string url = $"http://localhost/restaurant/api/usuarios?rut={rut}";
-            var respuesta = _restClientHttp.Get<object>(url, rut);
+            var respuesta = _restClientHttp.Get<Usuario>(url, rut);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
