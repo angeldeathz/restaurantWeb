@@ -111,6 +111,9 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Images\logo_sxxi.png" />
+    <Content Include="Images\logo_sxxi_long.png" />
+    <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Paginas\About.aspx" />
     <Content Include="Paginas\Contact.aspx" />
     <Content Include="Content\Site.css" />

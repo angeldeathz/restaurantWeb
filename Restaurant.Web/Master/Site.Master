@@ -38,46 +38,51 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-      
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" runat="server" href="../Paginas/inicio">Nombre de la aplicación</a>
+          <a class="navbar-brand" runat="server" href="../Paginas/inicio"><img src="../Images/logo_sxxi_long.png" /></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
               <li class="nav-item active px-2">
                 <a class="nav-link" runat="server" href="../Paginas/inicio">Inicio</a>
               </li>
               <li class="nav-item px-2">
-                <a class="nav-link" runat="server" href="../Paginas/about">Acerca de</a>
+                <a class="nav-link" runat="server" href="../Paginas/about">Nosotros</a>
               </li>
               <li class="nav-item px-2">
                 <a class="nav-link" runat="server" href="../Paginas/contact">Contacto</a>
               </li>
+             
               <li class="nav-item px-2">
-                <a class="nav-link" runat="server" href="../Paginas/iniciarsesion">Iniciar Sesión</a>
+                <a class="nav-link" runat="server" href="../Paginas/about">Reservas</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown link
+                  Carta
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Platos</a>
+                  <a class="dropdown-item" href="#">Postres</a>
+                  <a class="dropdown-item" href="#">Bebestibles</a>
                 </div>
+              </li>
+              <li class="nav-item px-2">
+                <a class="btn btn-outline-secondary" runat="server" href="../Paginas/iniciarsesion">Iniciar Sesión</a>
               </li>
             </ul>
           </div>
         </nav>
       
-        <div class="container">
+        <div class="container d-flex flex-column">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - 2020 Restaurante Siglo XII</p>
+            <footer class="mt-auto">
+                <p>&copy; <%: DateTime.Now.Year %> Restaurante Siglo XII</p>
             </footer>
         </div>
 

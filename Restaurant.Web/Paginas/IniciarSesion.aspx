@@ -8,8 +8,8 @@
                 <h3 class="">¡Bienvenido!</h3>
                 <asp:Label runat="server" for="txtRut" CssClass="">Rut</asp:Label>
                 <asp:TextBox runat="server" ID="txtRut" CssClass="form-control"></asp:TextBox><br />
-                <asp:Label runat="server" for="txtContrasena" CssClass="">Contraseña</asp:Label>
-                <asp:TextBox runat="server" ID="txtContrasena" CssClass="form-control"></asp:TextBox><br />
+                <asp:Label runat="server" for="txtContrasena" CssClass="" >Contraseña</asp:Label>
+                <asp:TextBox runat="server" ID="txtContrasena" CssClass="form-control" TextMode="Password"></asp:TextBox><br />
                 <div class="text-center">
                     <asp:Button runat="server" ID="btnIniciarSesion" Text="Iniciar Sesión" OnClick="btnIniciarSesion_OnClick" 
                         CssClass="btn btn-info"/>
