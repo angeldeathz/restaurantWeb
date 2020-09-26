@@ -29,6 +29,7 @@ namespace Restaurant.Web.Paginas
                 if (usuario != null)
                 {
                     Session["usuario"] = usuario;
+                    Response.Redirect("../Administrador/inicio");
                 }
             }
         }

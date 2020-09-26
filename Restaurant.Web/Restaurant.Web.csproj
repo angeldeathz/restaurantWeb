@@ -111,13 +111,31 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Images\auto_servicio.jpg" />
+    <Content Include="Images\auto_servicio_2.jpg" />
     <Content Include="Images\logo_sxxi.png" />
     <Content Include="Images\logo_sxxi_long.png" />
     <Content Include="Images\logo_sxxi_sm.png" />
-    <Content Include="Paginas\About.aspx" />
-    <Content Include="Paginas\Contact.aspx" />
+    <Content Include="Images\paste_choclo.PNG" />
+    <Content Include="Images\paste_choclo_2.png" />
+    <Content Include="Paginas\Administrador\GestionClientes.aspx" />
+    <Content Include="Paginas\Administrador\GestionFinanzas.aspx" />
+    <Content Include="Paginas\Administrador\GestionInsumos.aspx" />
+    <Content Include="Paginas\Administrador\GestionInventario.aspx" />
+    <Content Include="Paginas\Administrador\GestionMesas.aspx" />
+    <Content Include="Paginas\Administrador\GestionOrdenes.aspx" />
+    <Content Include="Paginas\Administrador\GestionPedidos.aspx" />
+    <Content Include="Paginas\Administrador\GestionProductos.aspx" />
+    <Content Include="Paginas\Administrador\GestionProveedores.aspx" />
+    <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
+    <Content Include="Paginas\Administrador\GestionReservas.aspx" />
+    <Content Include="Paginas\Administrador\Inicio.aspx" />
+    <Content Include="Paginas\Administrador\Reporteria.aspx" />
+    <Content Include="Paginas\Publica\Menu.aspx" />
+    <Content Include="Paginas\Publica\Nosotros.aspx" />
+    <Content Include="Paginas\Publica\Contacto.aspx" />
     <Content Include="Content\Site.css" />
-    <Content Include="Paginas\IniciarSesion.aspx" />
+    <Content Include="Paginas\Publica\IniciarSesion.aspx" />
     <Content Include="Paginas\Inicio.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -133,6 +151,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Paginas\Publica\Reservas.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -157,6 +176,7 @@
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\WebForms\SmartNav.js" />
     <Content Include="Scripts\WebForms\TreeView.js" />
     <Content Include="Scripts\WebForms\WebForms.js" />
@@ -170,26 +190,124 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Paginas\About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionClientes.aspx.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionClientes.aspx.designer.cs">
+      <DependentUpon>GestionClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.cs">
+      <DependentUpon>GestionFinanzas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.designer.cs">
+      <DependentUpon>GestionFinanzas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionInsumos.aspx.cs">
+      <DependentUpon>GestionInsumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionInsumos.aspx.designer.cs">
+      <DependentUpon>GestionInsumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionInventario.aspx.cs">
+      <DependentUpon>GestionInventario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionInventario.aspx.designer.cs">
+      <DependentUpon>GestionInventario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionMesas.aspx.cs">
+      <DependentUpon>GestionMesas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionMesas.aspx.designer.cs">
+      <DependentUpon>GestionMesas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.cs">
+      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.designer.cs">
+      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionPedidos.aspx.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionPedidos.aspx.designer.cs">
+      <DependentUpon>GestionPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionProductos.aspx.cs">
+      <DependentUpon>GestionProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionProductos.aspx.designer.cs">
+      <DependentUpon>GestionProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.cs">
+      <DependentUpon>GestionProveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.designer.cs">
+      <DependentUpon>GestionProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.cs">
+      <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.designer.cs">
+      <DependentUpon>GestionUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionReservas.aspx.cs">
+      <DependentUpon>GestionReservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionReservas.aspx.designer.cs">
+      <DependentUpon>GestionReservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Administrador\Reporteria.aspx.cs">
+      <DependentUpon>Reporteria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\Reporteria.aspx.designer.cs">
+      <DependentUpon>Reporteria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Publica\Menu.aspx.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Publica\Menu.aspx.designer.cs">
+      <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Publica\Nosotros.aspx.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Publica\Nosotros.aspx.designer.cs">
+      <DependentUpon>Nosotros.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Paginas\Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
+    <Compile Include="Paginas\Publica\Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
+    <Compile Include="Paginas\Publica\Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\IniciarSesion.aspx.cs">
+    <Compile Include="Paginas\Publica\IniciarSesion.aspx.cs">
       <DependentUpon>IniciarSesion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\IniciarSesion.aspx.designer.cs">
+    <Compile Include="Paginas\Publica\IniciarSesion.aspx.designer.cs">
       <DependentUpon>IniciarSesion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Inicio.aspx.cs">
@@ -201,6 +319,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Publica\Reservas.aspx.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Publica\Reservas.aspx.designer.cs">
+      <DependentUpon>Reservas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master\Site.Master.cs">

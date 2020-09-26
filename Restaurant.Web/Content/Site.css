@@ -20,6 +20,10 @@
     color: #25776c;
 }
 
+#carrusel_home .carousel-item img{
+    max-height: 320px;
+    border-radius: 20px;
+}
 
 .bg-blanco {
     background-color: #ffffff;
@@ -53,6 +57,9 @@
     background-color: #B02D21;
 }
 
+.bg-rosado {
+    background-color: #d99280;
+}
 
 .texto-blanco {
     color: #ffffff;
@@ -84,4 +91,8 @@
 
 .text-rojo {
     color: #B02D21;
+}
+
+.text-rosado {
+    color: #d99280;
 }
