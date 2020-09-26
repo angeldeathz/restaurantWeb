@@ -1,31 +1,87 @@
-﻿/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿body {
+    color: #1d8057;
+    background-color: #cfded0;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.container {
+    min-height: 85vh;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #e4a799;
+    font-weight: 600;
+}
+
+.navbar-light .navbar-nav .active .nav-link, .navbar-light .navbar-nav .nav-link:hover {
+    color: #25776c;
 }
 
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .jumbotron {
-        margin-top: 20px;
-    }
+.bg-blanco {
+    background-color: #ffffff;
+}
 
-    .body-content {
-        padding: 0;
-    }
+.bg-gris-claro {
+    background-color: #cfded0;
+}
+
+.bg-gris {
+    background-color: #5a6c72;
+}
+
+.bg-gris-oscuro {
+    background-color: #1D2C34;
+}
+
+.bg-verde-oscuro {
+    background-color: #1d8057;
+}
+
+.bg-amarillo {
+    background-color: #E6BD57;
+}
+
+.bg-naranjo {
+    background-color: #EB8F2F;
+}
+
+.bg-rojo {
+    background-color: #B02D21;
+}
+
+
+.texto-blanco {
+    color: #ffffff;
+}
+
+.text-gris-claro {
+    color: #cfded0;
+}
+
+.text-gris {
+    color: #5a6c72;
+}
+
+.text-gris-oscuro {
+    color: #1D2C34;
+}
+
+.text-verde-oscuro {
+    color: #1d8057;
+}
+
+.text-amarillo {
+    color: #E6BD57;
+}
+
+.text-naranjo {
+    color: #EB8F2F;
+}
+
+.text-rojo {
+    color: #B02D21;
 }
