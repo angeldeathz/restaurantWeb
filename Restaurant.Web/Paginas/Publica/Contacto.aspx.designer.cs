@@ -11,7 +11,7 @@ namespace Restaurant.Web.Paginas
 {
 
 
-    public partial class _Inicio
+    public partial class Contact
     {
     }
 }
