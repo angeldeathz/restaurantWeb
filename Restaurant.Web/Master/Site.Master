@@ -49,26 +49,26 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active px-2">
-                <a class="nav-link" runat="server" href="../Paginas/inicio">Inicio</a>
+                <a class="nav-link" runat="server" href="/Paginas/inicio">Inicio</a>
               </li>
               <li class="nav-item px-2">
-                <a class="nav-link" runat="server" href="../Paginas/Publica/nosotros">Nosotros</a>
+                <a class="nav-link" runat="server" href="/Paginas/Publica/nosotros">Nosotros</a>
               </li>
               <li class="nav-item px-2">
-                <a class="nav-link" runat="server" href="../Paginas/Publica/contacto">Contacto</a>
+                <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
               </li>
              
               <li class="nav-item px-2">
-                <a class="nav-link" runat="server" href="../Paginas/Publica/reservas">Reservas</a>
+                <a class="nav-link" runat="server" href="/Paginas/Publica/reservas">Reservas</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Carta
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" runat="server" href="../Paginas/Publica/menu#platos">Platos</a>
-                  <a class="dropdown-item" runat="server" href="../Paginas/Publica/menu#postres">Postres</a>
-                  <a class="dropdown-item" runat="server" href="../Paginas/Publica/menu#bebestibles">Bebestibles</a>
+                  <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#platos">Platos</a>
+                  <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#postres">Postres</a>
+                  <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#bebestibles">Bebestibles</a>
                 </div>
               </li>
               <li class="nav-item px-2">

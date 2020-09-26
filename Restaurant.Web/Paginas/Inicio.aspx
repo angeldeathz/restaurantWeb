@@ -45,25 +45,25 @@
                 Somos un restaurante familiar, ofreciendo delicosos platos tradicionales por más de 50 años.
             </p>
             <p>
-                <a class="btn btn-warning" runat="server" href="../Paginas/Publica/nosotros">Conocer más &raquo;</a>
+                <a class="btn btn-info" runat="server" href="../Paginas/Publica/nosotros">Conocer más &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
             <h2>Local</h2>
-            <p>
+            <p class="text-rosado">
                 Nuestro local es una antigua casona colonial, ubicada en el corazón de providencia, 
             </p>
             <p>
-                <a class="btn btn-warning" runat="server" href="../Paginas/Publica/contacto">Conocer más &raquo;</a>
+                <a class="btn btn-info" runat="server" href="../Paginas/Publica/contacto">Conocer más &raquo;</a>
             </p>
         </div>
         <div class="col-md-4">
             <h2>Menú</h2>
-            <p>
+            <p class="text-rosado">
                 Ofrecemos una variedad de platos tradicionales
             </p>
             <p>
-                <a class="btn btn-warning" runat="server" href="../Paginas/Publica/menu">Conocer más &raquo;</a>
+                <a class="btn btn-info" runat="server" href="../Paginas/Publica/menu">Conocer más &raquo;</a>
             </p>
         </div>
     </div>
