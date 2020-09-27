@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using Restaurant.Model.Clases;
 
 namespace Restaurant.Web.Master
 {
