@@ -30,5 +30,17 @@ namespace Restaurant.Web.Master
             Session["token"] = null;
             Response.Redirect("/Paginas/Inicio.aspx");
         }
+
+        protected void navLinkInicio_OnServerClick(object sender, EventArgs e)
+        {
+            if (Session["Usuario"] != null && Session["token"] != null)
+            {
+                Response.Redirect("/Paginas/Administrador/Inicio.aspx");
+            }
+            else
+            {
+                Response.Redirect("/Paginas/Inicio.aspx");
+            }
+        }
     }
 }
