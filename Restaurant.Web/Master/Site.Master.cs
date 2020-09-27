@@ -9,7 +9,7 @@ namespace Restaurant.Web.Master
         {
             if (!IsPostBack)
             {
-                if (Session["Usuario"] != null)
+                if (Session["Usuario"] != null && Session["token"] != null)
                 {
                     btnIniciarSesion.Visible = false;
                     btnCerrarSesion.Visible = true;

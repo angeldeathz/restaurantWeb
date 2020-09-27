@@ -11,7 +11,18 @@ namespace Restaurant.Web.Paginas.Administrador
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                ValidarSesion();
+            }
+        }
 
+        private void ValidarSesion()
+        {
+            if (Session["usuario"] == null || Session["token"] == null)
+            {
+                Response.Redirect("../Publica/IniciarSesion.aspx");
+            }
         }
     }
 }
