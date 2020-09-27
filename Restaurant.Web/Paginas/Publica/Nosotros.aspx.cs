@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace Restaurant.Web.Paginas
+namespace Restaurant.Web.Paginas.Publica
 {
     public partial class About : Page
     {

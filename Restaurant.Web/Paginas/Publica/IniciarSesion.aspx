@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Iniciar Sesión" Language="C#" MasterPageFile="~/Master/Site.Master" CodeBehind="IniciarSesion.aspx.cs" Inherits="Restaurant.Web.Paginas.IniciarSesion" %>
+﻿<%@ Page Title="Iniciar Sesión" Language="C#" MasterPageFile="~/Master/Site.Master" CodeBehind="IniciarSesion.aspx.cs" Inherits="Restaurant.Web.Paginas.Publica.IniciarSesion" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 

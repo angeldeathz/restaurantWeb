@@ -2,7 +2,7 @@
 using System.Web.UI;
 using Restaurant.Services.Servicios;
 
-namespace Restaurant.Web.Paginas
+namespace Restaurant.Web.Paginas.Publica
 {
     public partial class IniciarSesion : Page
     {
