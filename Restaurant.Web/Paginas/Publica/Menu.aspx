@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="Restaurant.Web.Paginas.Publica.Menu" %>
+﻿<%@ Page Title="Menu" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="Restaurant.Web.Paginas.Publica.Menu" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="row">
