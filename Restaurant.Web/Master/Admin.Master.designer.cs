@@ -7,29 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Master
 {
 
 
-    public partial class Inicio
+    public partial class Admin
     {
 
         /// <summary>
-        /// lblNombres control.
+        /// btnCerrarSesion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombres;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnCerrarSesion;
 
         /// <summary>
-        /// lblPerfil control.
+        /// MainContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPerfil;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
     }
 }

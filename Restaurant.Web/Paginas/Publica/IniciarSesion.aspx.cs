@@ -41,6 +41,8 @@ namespace Restaurant.Web.Paginas.Publica
                 {
                     Session["usuario"] = usuario;
                     Response.Redirect("../Administrador/inicio");
+
+
                 }
             }
         }

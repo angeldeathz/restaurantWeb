@@ -150,6 +150,7 @@
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Master\Admin.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Paginas\Publica\Reservas.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -190,6 +191,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Master\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\Administrador\GestionClientes.aspx.cs">
       <DependentUpon>GestionClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
