@@ -34,6 +34,7 @@ namespace Restaurant.Web.Paginas.Publica
             var token = _usuarioService.Autenticar(txtRut.Text, txtContrasena.Text);
             if (token != null)
             {
+                _usuarioService.Token = token.access_token;
                 Session["token"] = token;
                 var usuario = _usuarioService.ObtenerPorRut(txtRut.Text);
 

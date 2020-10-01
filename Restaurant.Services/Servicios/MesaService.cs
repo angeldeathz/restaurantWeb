@@ -10,9 +10,9 @@ namespace Restaurant.Services.Servicios
         private readonly RestClientHttp _restClientHttp;
         private string _url = $"http://localhost/restaurant/api/mesas/";
 
-        public MesaService()
+        public MesaService(string token)
         {
-            _restClientHttp = new RestClientHttp();
+            _restClientHttp = new RestClientHttp(token);
         }
 
         public List<Mesa> Obtener()
