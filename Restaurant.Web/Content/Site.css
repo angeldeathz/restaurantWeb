@@ -20,11 +20,15 @@
     color: #25776c;
 }
 
-.nav-pills .nav-link.active {
+.nav-pills .nav-link.active, .list-group .list-group-item.active {
     background-color: #1d8057;
 }
 
-.nav-pills .nav-link:not(.active) {
+.list-group .list-group-item.active {
+    border-color: #1d8057;
+}
+
+.nav-pills .nav-link:not(.active), .list-group .list-group-item:not(.active) a {
     color: #1d8057;
 }
 
