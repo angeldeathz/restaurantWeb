@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections;
+using Restaurant.Model.Dto;
 
 namespace Restaurant.Web.Paginas.Administrador
 {
@@ -21,45 +22,49 @@ namespace Restaurant.Web.Paginas.Administrador
             if (!IsPostBack)
             {
                 ValidarSesion();
-                _proveedorService = new ProveedorService();
-                _insumoService = new InsumoService();
-                _unidadDeMedidaService = new UnidadDeMedidaService();
-
-                List<Insumo> insumos = _insumoService.Obtener();
-                if (insumos != null && insumos.Count > 0)
+                if (Session["token"] != null)
                 {
-                    listaInsumos.DataSource = insumos;
-                    listaInsumos.DataBind();
-                }
+                    Token token = (Token) Session["token"];
+                    _proveedorService = new ProveedorService(token.access_token);
+                    _insumoService = new InsumoService(token.access_token);
+                    _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
 
-                List<Proveedor> proveedores = _proveedorService.Obtener();
-                if (proveedores != null)
-                {
-                    if (proveedores.Count > 0 && proveedores.Count > 0)
+                    List<Insumo> insumos = _insumoService.Obtener();
+                    if (insumos != null && insumos.Count > 0)
                     {
-                        listaProveedores.DataSource = proveedores;
-                        listaProveedores.DataBind();
-
-                        ddlProveedorInsumo.DataSource = proveedores;
-                        ddlProveedorInsumo.DataTextField = "NombreProveedor";
-                        ddlProveedorInsumo.DataValueField = "Id"; 
-                        ddlProveedorInsumo.DataBind();
-                        ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
-                        ddlProveedorInsumo.SelectedIndex = 0;
+                        listaInsumos.DataSource = insumos;
+                        listaInsumos.DataBind();
                     }
-                }
 
-                List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
-                if (unidades != null)
-                {
-                    if (unidades.Count > 0)
+                    List<Proveedor> proveedores = _proveedorService.Obtener();
+                    if (proveedores != null)
                     {
-                        ddlProveedorInsumo.DataSource = unidades;
-                        ddlProveedorInsumo.DataTextField = "Nombre";
-                        ddlProveedorInsumo.DataValueField = "Id";
-                        ddlProveedorInsumo.DataBind();
-                        ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
-                        ddlProveedorInsumo.SelectedIndex = 0;
+                        if (proveedores.Count > 0 && proveedores.Count > 0)
+                        {
+                            listaProveedores.DataSource = proveedores;
+                            listaProveedores.DataBind();
+
+                            ddlProveedorInsumo.DataSource = proveedores;
+                            ddlProveedorInsumo.DataTextField = "NombreProveedor";
+                            ddlProveedorInsumo.DataValueField = "Id";
+                            ddlProveedorInsumo.DataBind();
+                            ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
+                            ddlProveedorInsumo.SelectedIndex = 0;
+                        }
+                    }
+
+                    List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
+                    if (unidades != null)
+                    {
+                        if (unidades.Count > 0)
+                        {
+                            ddlProveedorInsumo.DataSource = unidades;
+                            ddlProveedorInsumo.DataTextField = "Nombre";
+                            ddlProveedorInsumo.DataValueField = "Id";
+                            ddlProveedorInsumo.DataBind();
+                            ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
+                            ddlProveedorInsumo.SelectedIndex = 0;
+                        }
                     }
                 }
             }

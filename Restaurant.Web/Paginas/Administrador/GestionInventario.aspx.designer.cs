@@ -96,6 +96,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProveedores;
 
         /// <summary>
+        /// btnModalProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalProveedor;
+
+        /// <summary>
         /// listaProveedores control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,15 @@ namespace Restaurant.Web.Paginas.Administrador
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOrdenes;
+
+        /// <summary>
+        /// btnModalCrearOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModalCrearOrden;
 
         /// <summary>
         /// listaOrdenes control.

@@ -20,7 +20,7 @@
     color: #25776c;
 }
 
-.nav-pills .nav-link.active, .list-group .list-group-item.active {
+.list-group .list-group-item.active {
     background-color: #1d8057;
 }
 
@@ -28,14 +28,25 @@
     border-color: #1d8057;
 }
 
-.nav-pills .nav-link:not(.active), .list-group .list-group-item:not(.active) a {
+.nav-tabs, .nav-tabs .nav-link {
+    border: none;
+}
+
+.nav-tabs .nav-link:not(.active), .nav-tabs .nav-link.active, .list-group .list-group-item:not(.active) a {
     color: #1d8057;
 }
 
-.nav-pills .nav-link:hover, .nav-pills .nav-link:focus {
+.nav-tabs .nav-link:hover {
+    color: #35a778;
+}
+   
+.nav-tabs .nav-link {
     font-weight: 600;
 }
 
+.contenedor-mantenedores {
+    min-height: 400px;
+}
 
 #carrusel_home .carousel-item img{
     max-height: 320px;
