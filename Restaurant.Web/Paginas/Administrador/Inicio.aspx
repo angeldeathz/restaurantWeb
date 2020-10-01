@@ -17,9 +17,9 @@
                 <li class="list-group-item active">Mantenedores</li>
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de inventario</a>
                     <ul>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionInsumos.aspx">Insumos</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionProveedores.aspx">Proveedores</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionOrdenes.aspx">Órdenes proveedores</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divInsumos">Insumos</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divProveedores">Proveedores</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divOrdenes">Órdenes proveedores</a></li>
                     </ul>
                 </li>
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionReservas.aspx" class="font-weight-bold">Gestión de Restaurante</a>

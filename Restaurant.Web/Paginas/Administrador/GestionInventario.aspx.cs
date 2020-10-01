@@ -25,10 +25,17 @@ namespace Restaurant.Web.Paginas.Administrador
                 _insumoService = new InsumoService();
                 _unidadDeMedidaService = new UnidadDeMedidaService();
 
+                List<Insumo> insumos = _insumoService.Obtener();
+                if (insumos != null && insumos.Count > 0)
+                {
+                    listaInsumos.DataSource = insumos;
+                    listaInsumos.DataBind();
+                }
+
                 List<Proveedor> proveedores = _proveedorService.Obtener();
                 if (proveedores != null)
                 {
-                    if (proveedores.Count > 0)
+                    if (proveedores.Count > 0 && proveedores.Count > 0)
                     {
                         listaProveedores.DataSource = proveedores;
                         listaProveedores.DataBind();
@@ -40,13 +47,6 @@ namespace Restaurant.Web.Paginas.Administrador
                         ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
                         ddlProveedorInsumo.SelectedIndex = 0;
                     }
-                }
-
-                List<Insumo> insumos = _insumoService.Obtener();
-                if (insumos != null)
-                {
-                    listaInsumos.DataSource = insumos;
-                    listaInsumos.DataBind();
                 }
 
                 List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();

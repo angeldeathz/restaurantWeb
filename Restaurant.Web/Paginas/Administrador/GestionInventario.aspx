@@ -23,11 +23,42 @@
               </asp:Repeater>
           </div>
           <div class="tab-pane fade" id="divProveedores" role="tabpanel" aria-labelledby="tabProveedores" runat="server" ClientIDMode="Static">
-              <asp:Repeater ID="listaProveedores" runat="server">
-
-              </asp:Repeater>
+              <asp:Button ID="btnModalProveedor" runat="server" Text="Crear Proveedor" CssClass="btn btn-info float-right mb-3"/>
+                <div class="table-responsive">
+                    <asp:Repeater ID="listaProveedores" runat="server">
+                    <HeaderTemplate>
+                        <table border="1" class="table">
+                        <tr>
+                            <td><b>Rut</b></td>
+                            <td><b>Nombre</b></td>
+                            <td><b>Apellido</b></td>
+                            <td><b>Email</b></td>
+                            <td><b>Teléfono</b></td>
+                            <td><b>Dirección</b></td>
+                            <td><b>Es empresa</b></td>
+                            <td><b>Editar</b></td>
+                        </tr>
+                    </HeaderTemplate>          
+                    <ItemTemplate>
+                        <tr>
+                        <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                        <td> <%# Eval("Persona.Nombre") %> </td>
+                        <td> <%# Eval("Persona.Apellido") %> </td>
+                        <td> <%# Eval("Persona.Email") %> </td>
+                        <td> <%# Eval("Persona.Telefono") %> </td>
+                        <td> <%# Eval("Direccion") %> </td>
+                        <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
+                        <td> <i></i> </td>
+                        </tr>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </table>
+                    </FooterTemplate>
+                  </asp:Repeater>
+                </div>
           </div>
           <div class="tab-pane fade" id="divOrdenes" role="tabpanel" aria-labelledby="tabOrdenes" runat="server" ClientIDMode="Static">
+              <asp:Button ID="btnModalCrearOrden" runat="server" Text="Crear Orden" CssClass="btn btn-info float-right"/>
               <asp:Repeater ID="listaOrdenes" runat="server">
 
               </asp:Repeater>
