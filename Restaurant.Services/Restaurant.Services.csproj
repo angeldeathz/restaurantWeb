@@ -61,6 +61,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servicios\ArticuloService.cs" />
+    <Compile Include="Servicios\EstadoArticuloService.cs" />
+    <Compile Include="Servicios\InsumoService.cs" />
+    <Compile Include="Servicios\MesaService.cs" />
+    <Compile Include="Servicios\PersonaService.cs" />
+    <Compile Include="Servicios\ProveedorService.cs" />
+    <Compile Include="Servicios\TipoConsumoService.cs" />
+    <Compile Include="Servicios\TipoPreparacionService.cs" />
+    <Compile Include="Servicios\TipoUsuarioService.cs" />
+    <Compile Include="Servicios\UnidadDeMedidaService.cs" />
     <Compile Include="Servicios\UsuarioService.cs" />
     <Compile Include="Shared\RestClientHttp.cs" />
     <Compile Include="Shared\RestClientResponse.cs" />
