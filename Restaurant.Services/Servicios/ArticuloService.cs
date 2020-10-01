@@ -10,9 +10,9 @@ namespace Restaurant.Services.Servicios
         private readonly RestClientHttp _restClientHttp;
         private string _url = $"http://localhost/restaurant/api/articulos/";
 
-        public ArticuloService()
+        public ArticuloService(string token)
         {
-            _restClientHttp = new RestClientHttp();
+            _restClientHttp = new RestClientHttp(token);
         }
 
         public List<Articulo> Obtener()

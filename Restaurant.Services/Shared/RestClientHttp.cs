@@ -7,22 +7,20 @@ namespace Restaurant.Services.Shared
 {
     public class RestClientHttp
     {
+        private readonly string _token;
+
+        public RestClientHttp(string token)
+        {
+            _token = token;
+        }
+
         #region Get
 
         public T GetObject<T>(string url)
         {
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(url).Result;
-                return response.Content.ReadAsAsync<T>().Result;
-            }
-        }
-
-        public T GetObject<T>(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 var response = httpClient.GetAsync(url).Result;
                 return response.Content.ReadAsAsync<T>().Result;
             }
@@ -32,16 +30,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(url).Result;
-                return response.Content.ReadAsStringAsync().Result;
-            }
-        }
-
-        public string GetString(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 var response = httpClient.GetAsync(url).Result;
                 return response.Content.ReadAsStringAsync().Result;
             }
@@ -51,23 +40,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(url).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse Get(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 var response = httpClient.GetAsync(url).Result;
 
                 return new RestClientResponse
@@ -84,27 +57,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.GetAsync(url).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
-        public RestClientResponse<T> Get<T>(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 var response = httpClient.GetAsync(url).Result;
 
                 var restClientResponse = new RestClientResponse<T>
@@ -129,24 +82,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse Post(string url, object objectToPost, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
                 var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
 
@@ -164,28 +100,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
-        public RestClientResponse<T> Post<T>(string url, object objectToPost, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
                 var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
 
@@ -238,24 +153,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.DeleteAsync(url).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse Delete(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
                 var response = httpClient.DeleteAsync(url).Result;
 
@@ -273,27 +171,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                var response = httpClient.DeleteAsync(url).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
-        public RestClientResponse<T> Delete<T>(string url, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 var response = httpClient.DeleteAsync(url).Result;
 
                 var restClientResponse = new RestClientResponse<T>
@@ -318,24 +196,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse Put(string url, object objectToPut, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
                 var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
 
@@ -353,28 +214,7 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
-        public RestClientResponse<T> Put<T>(string url, object objectToPut, string token)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
                 var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
 

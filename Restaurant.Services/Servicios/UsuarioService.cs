@@ -8,12 +8,13 @@ namespace Restaurant.Services.Servicios
 {
     public class UsuarioService
     {
-        private readonly RestClientHttp _restClientHttp;
+        private RestClientHttp _restClientHttp;
         private string _url = $"http://localhost/restaurant/api/usuarios";
+        public string Token { get; set; }
 
         public UsuarioService()
         {
-            _restClientHttp = new RestClientHttp();
+            _restClientHttp = new RestClientHttp(Token);
         }
 
         public Token Autenticar(string rut, string contrasena)
@@ -27,7 +28,8 @@ namespace Restaurant.Services.Servicios
         public Usuario ObtenerPorRut(string rut)
         {
             _url = $"{_url}?rut={rut}";
-            var respuesta = _restClientHttp.Get<Usuario>(_url, rut);
+            _restClientHttp = new RestClientHttp(Token);
+            var respuesta = _restClientHttp.Get<Usuario>(_url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
