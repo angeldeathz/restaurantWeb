@@ -21,7 +21,7 @@
                         <table border="1" class="table">
                         <tr>
                             <td><b>Id</b></td>
-                            <td><b>Fecha</b></td>
+                            <td><b>Fecha y Hora</b></td>
                             <td><b>Mesa</b></td>
                             <td><b>Comensales</b></td>
                             <td><b>Cliente</b></td>
@@ -102,21 +102,15 @@
                     </button>
                   </div>
                   <div class="modal-body py-4">                      
-                      <asp:TextBox ID="txtIdReserva" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
-                      <asp:Label ID="lblNombreReserva" runat="server" Text="Nombre"></asp:Label>
-                      <asp:TextBox ID="txtNombreReserva" runat="server" CssClass="form-control"></asp:TextBox>
+                      <asp:TextBox ID="txtIdReserva" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
                       <div class="row">
-                        <div class="col-12 col-sm-4">
-                          <asp:Label ID="lblStockActual" runat="server" Text="Stock actual"></asp:Label>
-                          <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <asp:Label ID="lblStockCritico" runat="server" Text="Stock crítico"></asp:Label>
-                            <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <asp:Label ID="lblStockOptimo" runat="server" Text="Stock óptimo"></asp:Label>
-                            <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblFechaHoraReserva" runat="server" Text="Fecha"></asp:Label>
+                            <asp:TextBox ID="txtFechaHoraReserva" runat="server" CssClass="form-control" TextMode="DateTime"></asp:TextBox>                           
+                        </div>                      
+                        <div class="col-12 col-md-6">
+                           <asp:Label ID="lblCantidadComensalesReserva" runat="server" Text="Comensales"></asp:Label>
+                            <asp:TextBox ID="txtCantidadComensalesReserva" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>              
                         </div>
                       </div>
                       <div class="row">
@@ -125,10 +119,16 @@
                             <asp:DropDownList ID="ddlClienteReserva" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                         <div class="col-12 col-sm-6">
-                            <asp:Label ID="lblUnidadMedida" runat="server" Text="Unidad Medida"></asp:Label>
-                            <asp:DropDownList ID="ddlUnidadMedida" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:Label ID="lblMesaReserva" runat="server" Text="Mesa"></asp:Label>
+                            <asp:DropDownList ID="ddlMesaReserva" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <asp:Label ID="lblEstadoReserva" runat="server" Text="Estado"></asp:Label>
+                            <asp:DropDownList ID="ddlEstadoReserva" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                      </div>                      
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -139,8 +139,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
       </div>
-    </div>
-    <!-- Fin Modal Reservas-- >
+    </div> <!-- Fin Modal Reservas-- >
     <!-- Modal Clientes -->
     <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="tituloModalCliente" aria-hidden="true">
       <div class="modal-dialog modal-md" role="document">
@@ -161,11 +160,11 @@
                             <asp:TextBox ID="txtRutCliente" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
                             &nbsp;-&nbsp;
                             <asp:TextBox ID="txtDigitoVerificadorCliente" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>                           
-                        </div>                      
+                        </div>
                         <div class="col-12 col-md-6">
                           <br />
-                          <asp:CheckBox ID="txtEsEmpresa" runat="server" />
-                          <asp:Label ID="lblEsEmpresa" runat="server" Text="Es empresa"></asp:Label>
+                          <asp:CheckBox ID="chkEsPersonaJuridica" runat="server" />
+                          <asp:Label ID="lblEsPersonaJuridica" runat="server" Text="Es persona jurídica"></asp:Label>
                         </div>
                       </div>
                       <div class="row">
@@ -188,12 +187,6 @@
                             <asp:TextBox ID="txtTelefonoCliente" runat="server" CssClass="form-control"></asp:TextBox>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-12">
-                            <asp:Label ID="lblDireccionCliente" runat="server" Text="Dirección"></asp:Label>
-                            <asp:TextBox ID="txtDireccionCliente" runat="server" CssClass="form-control"></asp:TextBox>
-                        </div>
-                      </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -204,6 +197,46 @@
             </ContentTemplate>
         </asp:UpdatePanel>
       </div>
-    </div>
-    <!-- Fin modal Clientes -->
+    </div><!-- Fin modal Clientes -->
+    <!-- Modal Mesas -->
+    <div class="modal fade" id="modalMesa" tabindex="-1" role="dialog" aria-labelledby="tituloModalMesa" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+          <asp:UpdatePanel ID="upModalMesa" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-content">                    
+                  <div class="modal-header">
+                    <asp:Label ID="tituloModalMesa" class="modal-title h5" runat="server" Text="Crear Mesa"></asp:Label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body py-4">                      
+                      <asp:TextBox ID="txtIdMesa" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
+                      <div class="row">
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblNombreMesa" runat="server" Text="Nombre"></asp:Label>
+                            <asp:TextBox ID="txtNombreMesa" runat="server" CssClass="form-control"></asp:TextBox>                           
+                        </div>                      
+                        <div class="col-12 col-md-6">
+                           <asp:Label ID="lblCantidadComensalesMesa" runat="server" Text="Comensales"></asp:Label>
+                            <asp:TextBox ID="txtCantidadComensalesMesa" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>              
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <asp:Label ID="lblEstadoMesa" runat="server" Text="Estado"></asp:Label>
+                            <asp:DropDownList ID="ddlEstadoMesa" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCrearMesa" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearMesa_Click"/>
+                    <asp:Button ID="btnEditarMesa" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarMesa_Click" />
+                  </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div> <!-- Fin Modal Mesas-- >
 </asp:Content>
