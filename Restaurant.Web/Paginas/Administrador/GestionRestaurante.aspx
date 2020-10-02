@@ -14,9 +14,9 @@
       <div class="col-12 bg-blanco rounded contenedor-mantenedores">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane fade" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReservas_Click" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReserva_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReservas_Click">
+                    <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -106,7 +106,7 @@
                       <div class="row">
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblFechaHoraReserva" runat="server" Text="Fecha"></asp:Label>
-                            <asp:TextBox ID="txtFechaHoraReserva" runat="server" CssClass="form-control" TextMode="DateTime"></asp:TextBox>                           
+                            <asp:TextBox ID="txtFechaHoraReserva" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
                         </div>                      
                         <div class="col-12 col-md-6">
                            <asp:Label ID="lblCantidadComensalesReserva" runat="server" Text="Comensales"></asp:Label>
@@ -238,5 +238,5 @@
             </ContentTemplate>
         </asp:UpdatePanel>
       </div>
-    </div> <!-- Fin Modal Mesas-- >
+    </div> <!-- Fin Modal Mesas-->
 </asp:Content>

@@ -27,6 +27,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 _clienteService = new ClienteService(token.access_token);
                 _reservaService = new ReservaService(token.access_token);
                 _mesaService = new MesaService(token.access_token);
+                _estadoReservaService = new EstadoReservaService(token.access_token);
 
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
@@ -92,7 +93,7 @@ namespace Restaurant.Web.Paginas.Administrador
             divClientes.Attributes.Add("class", "tab-pane fade");
             divMesas.Attributes.Add("class", "tab-pane fade");
         }
-        protected void btnModalCrearReservas_Click(object sender, EventArgs e)
+        protected void btnModalCrearReserva_Click(object sender, EventArgs e)
         {
             ValidarSesion();
             tituloModalReserva.Text = "Crear Reserva";
@@ -104,7 +105,7 @@ namespace Restaurant.Web.Paginas.Administrador
             ddlClienteReserva.SelectedValue = "";
             ddlMesaReserva.SelectedValue = "";
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('show');", true);
             upModalReserva.Update();
 
             limpiarTabs();
@@ -112,7 +113,7 @@ namespace Restaurant.Web.Paginas.Administrador
             divReservas.Attributes.Add("class", "tab-pane fade active show");
         }
 
-        protected void btnModalEditarReservas_Click(object sender, RepeaterCommandEventArgs e)
+        protected void btnModalEditarReserva_Click(object sender, RepeaterCommandEventArgs e)
         {
             ValidarSesion();
             int idReserva;
@@ -133,7 +134,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlClienteReserva.SelectedValue = reserva.IdCliente.ToString();
                     ddlMesaReserva.SelectedValue = reserva.IdMesa.ToString();
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal();", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('show');", true);
                     upModalReserva.Update();
                 }
             }
@@ -205,7 +206,7 @@ namespace Restaurant.Web.Paginas.Administrador
             txtEmailCliente.Text = "";
             txtTelefonoCliente.Text = "";
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('show');", true);
             upModalCliente.Update();
 
             limpiarTabs();
@@ -233,7 +234,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtEmailCliente.Text = cliente.Persona.Email;
                     txtTelefonoCliente.Text = cliente.Persona.Telefono;
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal();", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('show');", true);
                     upModalCliente.Update();
                 }
             }
@@ -258,7 +259,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
-            /*
             int idCliente = _clienteService.Guardar(cliente);
 
             if (idCliente != 0)
@@ -270,7 +270,6 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Error al crear cliente');", true);
             }
-            */
         }
 
         protected void btnEditarCliente_Click(object sender, EventArgs e)
@@ -287,8 +286,7 @@ namespace Restaurant.Web.Paginas.Administrador
             cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             Token token = (Token)Session["token"];
-            _clienteService = new ClienteService(token.access_token);
-            /*
+            _clienteService = new ClienteService(token.access_token);            
             bool editar = _clienteService.Modificar(cliente);
             if (editar)
             {
@@ -299,9 +297,8 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Error al editar cliente');", true);
             }
-            */
         }
-        protected void btnModalCrearMesas_Click(object sender, EventArgs e)
+        protected void btnModalCrearMesa_Click(object sender, EventArgs e)
         {
             ValidarSesion();
             tituloModalMesa.Text = "Crear Mesa";
@@ -311,7 +308,7 @@ namespace Restaurant.Web.Paginas.Administrador
             txtCantidadComensalesMesa.Text = "";
             ddlEstadoMesa.SelectedValue = "";
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('show');", true);
             upModalMesa.Update();
 
             limpiarTabs();
@@ -319,7 +316,7 @@ namespace Restaurant.Web.Paginas.Administrador
             divMesas.Attributes.Add("class", "tab-pane fade active show");
         }
 
-        protected void btnModalEditarMesas_Click(object sender, RepeaterCommandEventArgs e)
+        protected void btnModalEditarMesa_Click(object sender, RepeaterCommandEventArgs e)
         {
             ValidarSesion();
             int idMesa;
@@ -338,7 +335,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtCantidadComensalesMesa.Text = mesa.CantidadComensales.ToString();
                     ddlEstadoMesa.SelectedValue = mesa.IdEstadoMesa.ToString();
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal();", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('show');", true);
                     upModalMesa.Update();
                 }
             }

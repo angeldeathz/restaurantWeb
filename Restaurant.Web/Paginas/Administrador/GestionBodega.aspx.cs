@@ -86,7 +86,7 @@ namespace Restaurant.Web.Paginas.Administrador
             divProveedores.Attributes.Add("class", "tab-pane fade");
             divOrdenes.Attributes.Add("class", "tab-pane fade");
         }
-        protected void btnModalCrearInsumos_Click(object sender, EventArgs e)
+        protected void btnModalCrearInsumo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
             tituloModalInsumo.Text = "Crear Insumo";
@@ -99,7 +99,7 @@ namespace Restaurant.Web.Paginas.Administrador
             ddlProveedorInsumo.SelectedValue = "";
             ddlUnidadMedida.SelectedValue = "";
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
             upModalInsumo.Update();
 
             limpiarTabs();
@@ -107,7 +107,7 @@ namespace Restaurant.Web.Paginas.Administrador
             divInsumos.Attributes.Add("class", "tab-pane fade active show");
         }
 
-        protected void btnModalEditarInsumos_Click(object sender, RepeaterCommandEventArgs e)
+        protected void btnModalEditarInsumo_Click(object sender, RepeaterCommandEventArgs e)
         {
             ValidarSesion();
             int idInsumo;
@@ -129,7 +129,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlProveedorInsumo.SelectedValue = insumo.IdProveedor.ToString();
                     ddlUnidadMedida.SelectedValue = insumo.IdUnidadDeMedida.ToString();
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal();", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
                     upModalInsumo.Update();
                 }
             }
@@ -204,7 +204,7 @@ namespace Restaurant.Web.Paginas.Administrador
             txtDireccionProveedor.Text = "";
             chkEsPersonaJuridica.Checked = false;
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal();", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
             upModalProveedor.Update();
 
             limpiarTabs();
@@ -233,7 +233,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono;
                     txtDireccionProveedor.Text = proveedor.Direccion;
                     chkEsPersonaJuridica.Checked = ! Convert.ToBoolean(int.Parse(proveedor.Persona.EsPersonaNatural.ToString()));
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal();", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
                     upModalProveedor.Update();
                 }
             }
@@ -257,8 +257,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Direccion = txtDireccionProveedor.Text;
             proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             Token token = (Token)Session["token"];
-            _proveedorService = new ProveedorService(token.access_token);
-            /*
+            _proveedorService = new ProveedorService(token.access_token);            
             int idProveedor = _proveedorService.Guardar(proveedor);
 
             if (idProveedor != 0)
@@ -270,7 +269,6 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al crear proveedor');", true);
             }
-            */
         }
 
         protected void btnEditarProveedor_Click(object sender, EventArgs e)
@@ -289,7 +287,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
-            /*
             bool editar = _proveedorService.Modificar(proveedor);
             if (editar)
             {
@@ -300,7 +297,6 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al editar proveedor');", true);
             }
-            */
         }
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
         {

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionInventario.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestionInventario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionBodega.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestionInventario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <div class="row p-3">
       <div class="col-12 text-center">
@@ -17,9 +17,9 @@
           <div class="tab-pane fade show active" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
           <div class="tab-pane fade" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumos_Click" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumos_Click">
+                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumo_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
