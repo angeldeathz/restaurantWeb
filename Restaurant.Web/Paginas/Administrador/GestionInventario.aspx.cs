@@ -202,7 +202,8 @@ namespace Restaurant.Web.Paginas.Administrador
             txtEmailProveedor.Text = "";
             txtTelefonoProveedor.Text = "";
             txtDireccionProveedor.Text = "";
-           
+            chkEsPersonaJuridica.Checked = false;
+
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal();", true);
             upModalProveedor.Update();
 
@@ -231,6 +232,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtEmailProveedor.Text = proveedor.Persona.Email;
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono;
                     txtDireccionProveedor.Text = proveedor.Direccion;
+                    chkEsPersonaJuridica.Checked = ! Convert.ToBoolean(int.Parse(proveedor.Persona.EsPersonaNatural.ToString()));
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal();", true);
                     upModalProveedor.Update();
                 }
@@ -253,7 +255,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = txtTelefonoProveedor.Text;
             proveedor.Direccion = txtDireccionProveedor.Text;
-
+            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
             /*
@@ -283,6 +285,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = txtTelefonoProveedor.Text;
             proveedor.Direccion = txtDireccionProveedor.Text;
+            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);

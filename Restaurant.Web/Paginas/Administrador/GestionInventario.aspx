@@ -62,7 +62,7 @@
                             <td><b>Email</b></td>
                             <td><b>Teléfono</b></td>
                             <td><b>Dirección</b></td>
-                            <td><b>Es empresa</b></td>
+                            <td><b>Es persona natural</b></td>
                             <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
@@ -96,7 +96,7 @@
     </div>
     <!-- Modal Insumos -->
     <div class="modal fade" id="modalInsumo" tabindex="-1" role="dialog" aria-labelledby="tituloModalInsumo" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-md" role="document">
           <asp:UpdatePanel ID="upModalInsumo" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-content">                    
@@ -169,8 +169,8 @@
                         </div>                      
                         <div class="col-12 col-md-6">
                           <br />
-                          <asp:CheckBox ID="txtEsEmpresa" runat="server" />
-                          <asp:Label ID="lblEsEmpresa" runat="server" Text="Es empresa"></asp:Label>
+                          <asp:CheckBox ID="chkEsPersonaJuridica" runat="server" />
+                          <asp:Label ID="lblEsPersonaJuridica" runat="server" Text="Es persona jurídica"></asp:Label>
                         </div>
                       </div>
                       <div class="row">
