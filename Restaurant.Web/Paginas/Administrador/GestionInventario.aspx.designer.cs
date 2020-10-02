@@ -159,6 +159,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Label tituloModalInsumo;
 
         /// <summary>
+        /// txtIdInsumo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIdInsumo;
+
+        /// <summary>
         /// lblNombreInsumo control.
         /// </summary>
         /// <remarks>
