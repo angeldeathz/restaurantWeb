@@ -15,24 +15,24 @@
         <div class="col-12 col-md-6">
             <ul class="list-group">
                 <li class="list-group-item active">Mantenedores</li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de inventario</a>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionBodega.aspx" class="font-weight-bold">Gestión de Boedga</a>
                     <ul>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divInsumos">Insumos</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divProveedores">Proveedores</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divOrdenes">Órdenes proveedores</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionBodega#divInsumos">Insumos</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionBodega#divProveedores">Proveedores</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionBodega#divOrdenes">Órdenes proveedores</a></li>
                     </ul>
                 </li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionReservas.aspx" class="font-weight-bold">Gestión de Restaurante</a>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx" class="font-weight-bold">Gestión de Restaurante</a>
                     <ul>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionReservas.aspx">Reservas</a>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionClientes.aspx">Gestión de clientes</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionMesas.aspx">Gestión de mesas</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Reservas</a>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Clientes</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Mesas</a></li>
                     </ul>
                 </li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de Cocina</a>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionCocina.aspx" class="font-weight-bold">Gestión de Cocina</a>
                     <ul>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionProductos.aspx">Artículos</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionPedidos.aspx">Pedidos</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionCocina.aspx">Artículos</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionCocina.aspx">Pedidos</a></li>
                     </ul>
                 </li>
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionUsuarios.aspx" class="font-weight-bold">Gestión de usuarios</a></li>

@@ -118,16 +118,11 @@
     <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
-    <Content Include="Paginas\Administrador\GestionClientes.aspx" />
     <Content Include="Paginas\Administrador\GestionFinanzas.aspx" />
-    <Content Include="Paginas\Administrador\GestionInventario.aspx" />
-    <Content Include="Paginas\Administrador\GestionMesas.aspx" />
-    <Content Include="Paginas\Administrador\GestionOrdenes.aspx" />
-    <Content Include="Paginas\Administrador\GestionPedidos.aspx" />
-    <Content Include="Paginas\Administrador\GestionProductos.aspx" />
-    <Content Include="Paginas\Administrador\GestionProveedores.aspx" />
+    <Content Include="Paginas\Administrador\GestionBodega.aspx" />
+    <Content Include="Paginas\Administrador\GestionCocina.aspx" />
     <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
-    <Content Include="Paginas\Administrador\GestionReservas.aspx" />
+    <Content Include="Paginas\Administrador\GestionRestaurante.aspx" />
     <Content Include="Paginas\Administrador\Inicio.aspx" />
     <Content Include="Paginas\Administrador\Reporteria.aspx" />
     <Content Include="Paginas\Publica\Menu.aspx" />
@@ -196,13 +191,6 @@
     <Compile Include="Master\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionClientes.aspx.cs">
-      <DependentUpon>GestionClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionClientes.aspx.designer.cs">
-      <DependentUpon>GestionClientes.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.cs">
       <DependentUpon>GestionFinanzas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -210,47 +198,19 @@
     <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.designer.cs">
       <DependentUpon>GestionFinanzas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionInventario.aspx.cs">
-      <DependentUpon>GestionInventario.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionBodega.aspx.cs">
+      <DependentUpon>GestionBodega.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionInventario.aspx.designer.cs">
-      <DependentUpon>GestionInventario.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionBodega.aspx.designer.cs">
+      <DependentUpon>GestionBodega.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionMesas.aspx.cs">
-      <DependentUpon>GestionMesas.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionCocina.aspx.cs">
+      <DependentUpon>GestionCocina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionMesas.aspx.designer.cs">
-      <DependentUpon>GestionMesas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.cs">
-      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.designer.cs">
-      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionPedidos.aspx.cs">
-      <DependentUpon>GestionPedidos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionPedidos.aspx.designer.cs">
-      <DependentUpon>GestionPedidos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProductos.aspx.cs">
-      <DependentUpon>GestionProductos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProductos.aspx.designer.cs">
-      <DependentUpon>GestionProductos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.cs">
-      <DependentUpon>GestionProveedores.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.designer.cs">
-      <DependentUpon>GestionProveedores.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionCocina.aspx.designer.cs">
+      <DependentUpon>GestionCocina.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
@@ -259,12 +219,12 @@
     <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionReservas.aspx.cs">
-      <DependentUpon>GestionReservas.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionRestaurante.aspx.cs">
+      <DependentUpon>GestionRestaurante.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionReservas.aspx.designer.cs">
-      <DependentUpon>GestionReservas.aspx</DependentUpon>
+    <Compile Include="Paginas\Administrador\GestionRestaurante.aspx.designer.cs">
+      <DependentUpon>GestionRestaurante.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Administrador\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>

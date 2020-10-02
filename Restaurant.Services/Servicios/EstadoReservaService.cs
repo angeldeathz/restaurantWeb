@@ -5,42 +5,41 @@ using Restaurant.Services.Shared;
 
 namespace Restaurant.Services.Servicios
 {
-    public class MesaService
+    public class EstadoReservaService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/mesas/";
+        private string _url = $"http://localhost/restaurant/api/estadoReservas/";
 
-        public MesaService(string token)
+        public EstadoReservaService(string token)
         {
             _restClientHttp = new RestClientHttp(token);
         }
 
-        public List<Mesa> Obtener()
+        public List<EstadoReserva> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<Mesa>>(_url);
+            var respuesta = _restClientHttp.Get<List<EstadoReserva>>(_url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
-        public Mesa Obtener(int id)
+        public EstadoReserva Obtener(int id)
         {
             _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<Mesa>(_url);
+            var respuesta = _restClientHttp.Get<EstadoReserva>(_url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
-
-        public int Guardar(Mesa mesa)
+        public int Guardar(EstadoReserva estadoReserva)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, mesa);
+            var respuesta = _restClientHttp.Post<int>(_url, estadoReserva);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
-        public bool Modificar(Mesa mesa)
+        public bool Modificar(EstadoReserva estadoReserva)
         {
-            var respuesta = _restClientHttp.Put<bool>(_url, mesa);
+            var respuesta = _restClientHttp.Put<bool>(_url, estadoReserva);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }

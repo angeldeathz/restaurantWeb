@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionInventario.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestionInventario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionBodega.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestionInventario" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <div class="row p-3">
       <div class="col-12 text-center">
-        <h1 class="text-rosado">Gestión de Inventario</h1>
+        <h1 class="text-rosado">Gestión de Bodega</h1>
       </div>
       <div class="col-12">
         <div class="nav nav-tabs" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
@@ -17,9 +17,9 @@
           <div class="tab-pane fade show active" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
           <div class="tab-pane fade" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumos_Click" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumos_Click">
+                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumo_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -39,7 +39,7 @@
                         <td> <%# Eval("StockActual") %> </td>
                         <td> <%# Eval("StockCritico") %> </td>
                         <td> <%# Eval("StockOptimo") %> </td>
-                        <td><asp:LinkButton ID="btnEditar" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                        <td><asp:LinkButton ID="btnModalEditarInsumo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
                     </ItemTemplate>
@@ -50,9 +50,9 @@
                 </div>
           </div>
           <div class="tab-pane fade" id="divProveedores" role="tabpanel" aria-labelledby="tabProveedores" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalProveedor" runat="server" Text="Crear Proveedor" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearProveedor" runat="server" Text="Crear Proveedor" OnClick="btnModalCrearProveedor_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaProveedores" runat="server">
+                    <asp:Repeater ID="listaProveedores" runat="server"  OnItemCommand="btnModalEditarProveedor_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -62,7 +62,7 @@
                             <td><b>Email</b></td>
                             <td><b>Teléfono</b></td>
                             <td><b>Dirección</b></td>
-                            <td><b>Es empresa</b></td>
+                            <td><b>Es persona natural</b></td>
                             <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
@@ -75,7 +75,7 @@
                         <td> <%# Eval("Persona.Telefono") %> </td>
                         <td> <%# Eval("Direccion") %> </td>
                         <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
-                         <td><asp:LinkButton ID="btnEditar" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                         <td><asp:LinkButton ID="btnModalEditarProveedor" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
                     </ItemTemplate>
@@ -86,7 +86,7 @@
                 </div>
           </div>
           <div class="tab-pane fade" id="divOrdenes" role="tabpanel" aria-labelledby="tabOrdenes" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearOrden" runat="server" Text="Crear Orden" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearOrden" runat="server" Text="Crear Orden" OnClick="btnModalCrearOrden_Click" CssClass="btn btn-info float-right"/>
               <asp:Repeater ID="listaOrdenes" runat="server">
 
               </asp:Repeater>
@@ -94,9 +94,9 @@
         </div>
       </div>
     </div>
-
+    <!-- Modal Insumos -->
     <div class="modal fade" id="modalInsumo" tabindex="-1" role="dialog" aria-labelledby="tituloModalInsumo" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-md" role="document">
           <asp:UpdatePanel ID="upModalInsumo" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-content">                    
@@ -145,4 +145,70 @@
         </asp:UpdatePanel>
       </div>
     </div>
+    <!-- Fin Modal Insumos-- >
+    <!-- Modal Proveedores -->
+    <div class="modal fade" id="modalProveedor" tabindex="-1" role="dialog" aria-labelledby="tituloModalProveedor" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+          <asp:UpdatePanel ID="upModalProveedor" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-content">                    
+                  <div class="modal-header">
+                    <asp:Label ID="tituloModalProveedor" class="modal-title h5" runat="server" Text="Crear Proveedor"></asp:Label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body py-4">                      
+                      <asp:TextBox ID="txtIdProveedor" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
+                      <div class="row">
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblRutProveedor" runat="server" Text="Rut" CssClass="d-block"></asp:Label>
+                            <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
+                            &nbsp;-&nbsp;
+                            <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>                           
+                        </div>                      
+                        <div class="col-12 col-md-6">
+                          <br />
+                          <asp:CheckBox ID="chkEsPersonaJuridica" runat="server" />
+                          <asp:Label ID="lblEsPersonaJuridica" runat="server" Text="Es persona jurídica"></asp:Label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblNombreProveedor" runat="server" Text="Nombre"></asp:Label>
+                            <asp:TextBox ID="txtNombreProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblApellidoProveedor" runat="server" Text="Apellido"></asp:Label>
+                            <asp:TextBox ID="txtApellidoProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblEmailProveedor" runat="server" Text="E-mail"></asp:Label>
+                            <asp:TextBox ID="txtEmailProveedor" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <asp:Label ID="lblTelefonoProveedor" runat="server" Text="Teléfono"></asp:Label>
+                            <asp:TextBox ID="txtTelefonoProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                            <asp:Label ID="lblDireccionProveedor" runat="server" Text="Dirección"></asp:Label>
+                            <asp:TextBox ID="txtDireccionProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCrearProveedor" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearProveedor_Click"/>
+                    <asp:Button ID="btnEditarProveedor" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarProveedor_Click" />
+                  </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div>
+    <!-- Fin modal proveedores -->
 </asp:Content>

@@ -53,6 +53,14 @@
     border-radius: 20px;
 }
 
+.w-15 {
+    width:15%;
+}
+
+.modal-md { 
+    max-width: 650px;
+}
+
 .bg-blanco {
     background-color: #ffffff;
 }

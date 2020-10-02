@@ -54,17 +54,17 @@
                         <a class="nav-link" runat="server" href="/Paginas/Administrador/Inicio.aspx">Inicio</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionInventario.aspx">Inventario</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionBodega.aspx">Bodega</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/GestionMesas.aspx">Restaurante</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Restaurante</a>
                     </li>
 
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/GestionProductos.aspx">Cocina</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionProductos.aspx">Cocina</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/Reporteria.aspx">Reportería</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/Reporteria.aspx">Reportería</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="btn btn-outline-secondary" id="btnCerrarSesion" runat="server" onserverclick="btnCerrarSesion_OnServerClick">Cerrar Sesión</a>
