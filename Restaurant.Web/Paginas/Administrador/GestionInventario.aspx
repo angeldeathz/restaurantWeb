@@ -148,7 +148,7 @@
     <!-- Fin Modal Insumos-- >
     <!-- Modal Proveedores -->
     <div class="modal fade" id="modalProveedor" tabindex="-1" role="dialog" aria-labelledby="tituloModalProveedor" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-md" role="document">
           <asp:UpdatePanel ID="upModalProveedor" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-content">                    
@@ -162,11 +162,13 @@
                       <asp:TextBox ID="txtIdProveedor" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
                       <div class="row">
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblRutProveedor" runat="server" Text="Rut"></asp:Label>
-                            <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75" TextMode="Number"></asp:TextBox>
-                            <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-25" MaxLength="1"></asp:TextBox>                           
+                            <asp:Label ID="lblRutProveedor" runat="server" Text="Rut" CssClass="d-block"></asp:Label>
+                            <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
+                            &nbsp;-&nbsp;
+                            <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>                           
                         </div>                      
                         <div class="col-12 col-md-6">
+                          <br />
                           <asp:CheckBox ID="txtEsEmpresa" runat="server" />
                           <asp:Label ID="lblEsEmpresa" runat="server" Text="Es empresa"></asp:Label>
                         </div>

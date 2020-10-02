@@ -192,7 +192,7 @@ namespace Restaurant.Web.Paginas.Administrador
         protected void btnModalCrearProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            tituloModalProveedor.Text = "Crear Prvoeedor";
+            tituloModalProveedor.Text = "Crear Proveedor";
             btnCrearProveedor.Visible = true;
             btnEditarProveedor.Visible = false;
             txtIdProveedor.Text = "";
@@ -221,7 +221,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 Proveedor proveedor = _proveedorService.Obtener(idProveedor);
                 if (proveedor != null)
                 {
-                    tituloModalProveedor.Text = "Editar Prvoeedor";
+                    tituloModalProveedor.Text = "Editar Proveedor";
                     btnCrearProveedor.Visible = false;
                     btnEditarProveedor.Visible = true;
                     txtIdProveedor.Text = proveedor.Id.ToString();
@@ -256,6 +256,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
+            /*
             int idProveedor = _proveedorService.Guardar(proveedor);
 
             if (idProveedor != 0)
@@ -267,34 +268,37 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al crear proveedor');", true);
             }
+            */
         }
 
         protected void btnEditarProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            Insumo insumo = new Insumo();
-            insumo.Id = int.Parse(txtIdInsumo.Text);
-            insumo.Nombre = txtNombreInsumo.Text;
-            insumo.StockActual = int.Parse(txtStockActual.Text);
-            insumo.StockCritico = int.Parse(txtStockCritico.Text);
-            insumo.StockOptimo = int.Parse(txtStockOptimo.Text);
-            insumo.IdProveedor = int.Parse(ddlProveedorInsumo.SelectedValue);
-            insumo.IdUnidadDeMedida = int.Parse(ddlUnidadMedida.SelectedValue);
+            Proveedor proveedor = new Proveedor();
+            proveedor.Id = int.Parse(txtIdProveedor.Text);
+            proveedor.Persona.Nombre = txtNombreProveedor.Text;
+            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
+            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
+            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+            proveedor.Persona.Email = txtEmailProveedor.Text;
+            proveedor.Persona.Telefono = txtTelefonoProveedor.Text;
+            proveedor.Direccion = txtDireccionProveedor.Text;
 
             Token token = (Token)Session["token"];
-            _insumoService = new InsumoService(token.access_token);
-            bool editar = _insumoService.Modificar(insumo);
+            _proveedorService = new ProveedorService(token.access_token);
+            /*
+            bool editar = _proveedorService.Modificar(proveedor);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Proveedor editado');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Error al editar insumo');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al editar proveedor');", true);
             }
+            */
         }
-
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
         {
 

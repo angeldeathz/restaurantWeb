@@ -122,10 +122,8 @@
     <Content Include="Paginas\Administrador\GestionFinanzas.aspx" />
     <Content Include="Paginas\Administrador\GestionInventario.aspx" />
     <Content Include="Paginas\Administrador\GestionMesas.aspx" />
-    <Content Include="Paginas\Administrador\GestionOrdenes.aspx" />
     <Content Include="Paginas\Administrador\GestionPedidos.aspx" />
     <Content Include="Paginas\Administrador\GestionProductos.aspx" />
-    <Content Include="Paginas\Administrador\GestionProveedores.aspx" />
     <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
     <Content Include="Paginas\Administrador\GestionReservas.aspx" />
     <Content Include="Paginas\Administrador\Inicio.aspx" />
@@ -224,13 +222,6 @@
     <Compile Include="Paginas\Administrador\GestionMesas.aspx.designer.cs">
       <DependentUpon>GestionMesas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.cs">
-      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionOrdenes.aspx.designer.cs">
-      <DependentUpon>GestionOrdenes.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Paginas\Administrador\GestionPedidos.aspx.cs">
       <DependentUpon>GestionPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -244,13 +235,6 @@
     </Compile>
     <Compile Include="Paginas\Administrador\GestionProductos.aspx.designer.cs">
       <DependentUpon>GestionProductos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.cs">
-      <DependentUpon>GestionProveedores.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionProveedores.aspx.designer.cs">
-      <DependentUpon>GestionProveedores.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
