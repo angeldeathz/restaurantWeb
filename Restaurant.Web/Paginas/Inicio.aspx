@@ -14,6 +14,7 @@
                 <img src="../Images/logo_sxxi.png" alt="Restaurante Siglo XXI"/>
                 <h1>Restaurante</h1>
                 <p class="lead text-rosado font-weight-bold">Local de comida tradicional, con más de 50 años de historia</p>
+                <br />
             </div>
             <div class="carousel-item p-5">
                 <img src="../Images/paste_choclo_2.png" alt="Pastel de Choclo"/>
