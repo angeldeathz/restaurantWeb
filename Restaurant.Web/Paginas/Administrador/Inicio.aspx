@@ -15,7 +15,7 @@
         <div class="col-12 col-md-6">
             <ul class="list-group">
                 <li class="list-group-item active">Mantenedores</li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de inventario</a>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de Boedga</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divInsumos">Insumos</a></li>
                         <li><a runat="server" href="/Paginas/Administrador/GestionInventario#divProveedores">Proveedores</a></li>
@@ -25,8 +25,8 @@
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionReservas.aspx" class="font-weight-bold">Gestión de Restaurante</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Administrador/GestionReservas.aspx">Reservas</a>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionClientes.aspx">Gestión de clientes</a></li>
-                        <li><a runat="server" href="/Paginas/Administrador/GestionMesas.aspx">Gestión de mesas</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionClientes.aspx">Clientes</a></li>
+                        <li><a runat="server" href="/Paginas/Administrador/GestionMesas.aspx">Mesas</a></li>
                     </ul>
                 </li>
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionInventario.aspx" class="font-weight-bold">Gestión de Cocina</a>
