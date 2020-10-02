@@ -19,7 +19,7 @@
           <div class="tab-pane fade" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumos_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaInsumos" runat="server">
+                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumos_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -28,17 +28,19 @@
                             <td><b>Stock actual</b></td>
                             <td><b>Stock crítico</b></td>
                             <td><b>Stock óptimo</b></td>
-                            <td><b>Editar</b></td>
+                            <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
                     <ItemTemplate>
+                        <asp:HiddenField ID="idInsumo" runat="server"  Value='<%# Eval("Id") %>'/>
                         <tr>
                         <td> <%# Eval("Id") %></td>
                         <td> <%# Eval("Nombre") %> </td>
                         <td> <%# Eval("StockActual") %> </td>
                         <td> <%# Eval("StockCritico") %> </td>
                         <td> <%# Eval("StockOptimo") %> </td>
-                        <td> <i></i> </td>
+                        <td><asp:LinkButton ID="btnEditar" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                Editar</asp:LinkButton></td>
                         </tr>
                     </ItemTemplate>
                     <FooterTemplate>
@@ -61,7 +63,7 @@
                             <td><b>Teléfono</b></td>
                             <td><b>Dirección</b></td>
                             <td><b>Es empresa</b></td>
-                            <td><b>Editar</b></td>
+                            <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
                     <ItemTemplate>
@@ -73,7 +75,8 @@
                         <td> <%# Eval("Persona.Telefono") %> </td>
                         <td> <%# Eval("Direccion") %> </td>
                         <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
-                        <td> <i></i> </td>
+                         <td><asp:LinkButton ID="btnEditar" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                Editar</asp:LinkButton></td>
                         </tr>
                     </ItemTemplate>
                     <FooterTemplate>
@@ -103,7 +106,8 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body py-4">
+                  <div class="modal-body py-4">                      
+                      <asp:TextBox ID="txtIdInsumo" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
                       <asp:Label ID="lblNombreInsumo" runat="server" Text="Nombre"></asp:Label>
                       <asp:TextBox ID="txtNombreInsumo" runat="server" CssClass="form-control"></asp:TextBox>
                       <div class="row">
