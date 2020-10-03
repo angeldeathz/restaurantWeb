@@ -29,5 +29,18 @@ namespace Restaurant.Services.Servicios
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
+        public int Guardar(EstadoArticulo estadoArticulo)
+        {
+            var respuesta = _restClientHttp.Post<int>(_url, estadoArticulo);
+            if (respuesta.StatusName != HttpStatusCode.OK) return 0;
+            return respuesta.Response;
+        }
+
+        public bool Modificar(EstadoArticulo estadoArticulo)
+        {
+            var respuesta = _restClientHttp.Put<bool>(_url, estadoArticulo);
+            if (respuesta.StatusName != HttpStatusCode.OK) return false;
+            return respuesta.Response;
+        }
     }
 }
