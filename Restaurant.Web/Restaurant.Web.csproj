@@ -119,7 +119,6 @@
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
     <Content Include="Paginas\Administrador\GestionCocina.aspx" />
-    <Content Include="Paginas\Administrador\GestionFinanzas.aspx" />
     <Content Include="Paginas\Administrador\GestionBodega.aspx" />
     <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
     <Content Include="Paginas\Administrador\GestionRestaurante.aspx" />
@@ -197,13 +196,6 @@
     </Compile>
     <Compile Include="Paginas\Administrador\GestionCocina.aspx.designer.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.cs">
-      <DependentUpon>GestionFinanzas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.designer.cs">
-      <DependentUpon>GestionFinanzas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Administrador\GestionBodega.aspx.cs">
       <DependentUpon>GestionBodega.aspx</DependentUpon>

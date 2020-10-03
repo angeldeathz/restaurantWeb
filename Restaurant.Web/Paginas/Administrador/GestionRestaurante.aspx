@@ -15,7 +15,11 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReserva_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
+               <div class="text-center">
+                <asp:Label ID="listaReservasVacia" runat="server" 
+                    Text="No existen Reservas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>    
+              <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
@@ -48,8 +52,12 @@
           </div>
           <div class="tab-pane fade" id="divClientes" role="tabpanel" aria-labelledby="tabClientes" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearCliente" runat="server" Text="Crear Cliente" OnClick="btnModalCrearCliente_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaClientes" runat="server"  OnItemCommand="btnModalEditarCliente_Click">
+              <div class="text-center">
+                <asp:Label ID="listaClientesVacia" runat="server" 
+                    Text="No existen Clientes para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>  
+              <div class="table-responsive pt-3">
+                 <asp:Repeater ID="listaClientes" runat="server"  OnItemCommand="btnModalEditarCliente_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -82,6 +90,10 @@
           </div>
           <div class="tab-pane fade" id="divMesas" role="tabpanel" aria-labelledby="tabMesas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearMesa" runat="server" Text="Crear Mesa" OnClick="btnModalCrearMesa_Click" CssClass="btn btn-info float-right"/>
+              <div class="text-center">
+                <asp:Label ID="listaMesasVacia" runat="server" 
+                    Text="No existen Mesas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>   
               <asp:Repeater ID="listaMesas" runat="server">
 
               </asp:Repeater>

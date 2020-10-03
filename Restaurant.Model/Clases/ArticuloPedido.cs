@@ -1,5 +1,8 @@
-﻿namespace Restaurant.Model.Clases
+﻿using System;
+
+namespace Restaurant.Model.Clases
 {
+    [Serializable]
     public class ArticuloPedido
     {
         public int Id { get; set; }

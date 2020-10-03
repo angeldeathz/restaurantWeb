@@ -78,6 +78,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearInsumos;
 
         /// <summary>
+        /// listaInsumosVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaInsumosVacia;
+
+        /// <summary>
         /// listaInsumos control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Restaurant.Web.Paginas.Administrador
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCrearProveedor;
+
+        /// <summary>
+        /// listaProveedoresVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaProveedoresVacia;
 
         /// <summary>
         /// listaProveedores control.

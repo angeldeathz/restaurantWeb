@@ -3,7 +3,9 @@ using Restaurant.Model.Dto;
 using Restaurant.Services.Servicios;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace Restaurant.Web.Paginas.Administrador
@@ -16,6 +18,7 @@ namespace Restaurant.Web.Paginas.Administrador
         private EstadoArticuloService _estadoArticuloService;
         private TipoConsumoService _tipoConsumoService;
         private MesaService _mesaService;
+        private ArticuloPedidoService _articuloPedidoService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,15 +37,13 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
                 {
-                    listaPedidos.DataSource = pedidos;
-                    listaPedidos.DataBind();
+                    actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
                 }
 
                 List<Articulo> articulos = _articuloService.Obtener();
                 if (articulos != null && articulos.Count > 0)
                 {
-                    listaArticulos.DataSource = articulos;
-                    listaArticulos.DataBind();
+                    actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
 
                     ddlArticuloPedido.DataSource = articulos;
                     ddlArticuloPedido.DataTextField = "Nombre";
@@ -50,6 +51,13 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlArticuloPedido.DataBind();
                     ddlArticuloPedido.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlArticuloPedido.SelectedIndex = 0;
+
+                    ddlPrecioArticuloPedido.DataSource = articulos;
+                    ddlPrecioArticuloPedido.DataTextField = "Precio";
+                    ddlPrecioArticuloPedido.DataValueField = "Id";
+                    ddlPrecioArticuloPedido.DataBind();
+                    ddlPrecioArticuloPedido.Items.Insert(0, new ListItem("", ""));
+                    ddlPrecioArticuloPedido.SelectedIndex = 0;
                 }
 
                 List<Mesa> mesas = _mesaService.Obtener();
@@ -115,10 +123,11 @@ namespace Restaurant.Web.Paginas.Administrador
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('show');", true);
             upModalPedido.Update();
+            Session["articulosPedidos"] = new List<ArticuloPedido>();
 
             limpiarTabs();
             tabPedidos.Attributes.Add("class", "nav-link active");
-            divPedidos.Attributes.Add("class", "tab-pane fade active show");
+            divPedidos.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnModalEditarPedido_Click(object sender, RepeaterCommandEventArgs e)
@@ -146,9 +155,11 @@ namespace Restaurant.Web.Paginas.Administrador
                     upModalPedido.Update();
                 }
             }
+            Session["articulosPedidos"] = new List<ArticuloPedido>();
+
             limpiarTabs();
             tabPedidos.Attributes.Add("class", "nav-link active");
-            divPedidos.Attributes.Add("class", "tab-pane fade active show");
+            divPedidos.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnCrearPedido_Click(object sender, EventArgs e)
@@ -167,6 +178,13 @@ namespace Restaurant.Web.Paginas.Administrador
             int idPedido = _pedidoService.Guardar(pedido);
             if (idPedido != 0)
             {
+                List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
+                foreach (ArticuloPedido articuloPedido in listaArticulos)
+                {
+                    articuloPedido.IdPedido = idPedido;
+                    _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                    int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Pedido creado');", true);
             }
@@ -192,6 +210,14 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _pedidoService.Modificar(pedido);
             if (editar)
             {
+                List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
+                //SE DEBERÍAN ELIMINAR LOS articulosPedido que ya existen, asociados?
+                foreach (ArticuloPedido articuloPedido in listaArticulos)
+                {
+                    articuloPedido.IdPedido = pedido.Id;
+                    _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                    int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Pedido editado');", true);
             }
@@ -200,7 +226,83 @@ namespace Restaurant.Web.Paginas.Administrador
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al editar pedido');", true);
             }
         }
-        
+        protected void ddlArticuloPedido_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idArticulo = ddlArticuloPedido.SelectedValue;
+            ddlPrecioArticuloPedido.SelectedValue = idArticulo;
+            upPrecio.Update();
+            limpiarTabs();
+            tabPedidos.Attributes.Add("class", "nav-link active");
+            divPedidos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnAgregarArticuloPedido_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+
+            ArticuloPedido articuloPedido = new ArticuloPedido();
+            Articulo articulo = new Articulo();
+            articulo.Nombre = ddlArticuloPedido.SelectedItem.Text;
+            articuloPedido.IdArticulo = int.Parse(ddlArticuloPedido.SelectedValue);
+            articuloPedido.Precio = int.Parse(ddlPrecioArticuloPedido.SelectedItem.Text);
+            articuloPedido.Cantidad = int.Parse(txtCantidadArticuloPedido.Text);
+            articuloPedido.Total = articuloPedido.Precio * articuloPedido.Cantidad;
+            articuloPedido.IdEstadoArticuloPedido = 1;
+
+            List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
+            var articuloExiste = listaArticulos.FirstOrDefault(a => a.IdArticulo == articuloPedido.IdArticulo);
+            if(articuloExiste != null)
+            {
+                articuloExiste.Cantidad = articuloExiste.Cantidad + articuloPedido.Cantidad;
+                articuloExiste.Total = articuloExiste.Precio * articuloExiste.Cantidad;
+            }
+            else
+            {
+                listaArticulos.Add(articuloPedido);
+            }
+            Session["articulosPedidos"] = listaArticulos;
+            actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
+            var totalPedido = listaArticulos.Sum(x =>x.Total);
+            lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+            txtTotalPedido.Text = totalPedido.ToString();
+            upArticulosPedido.Update();
+
+            limpiarTabs();
+            tabPedidos.Attributes.Add("class", "nav-link active");
+            divPedidos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnEliminarArticuloPedido_Click(object sender, RepeaterCommandEventArgs e)
+        {
+            ValidarSesion();
+            int idArticulo;
+            if (int.TryParse((string)e.CommandArgument, out idArticulo))
+            {
+                List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
+                var articuloEliminar = listaArticulos.FirstOrDefault(a => a.IdArticulo == idArticulo);
+                if(articuloEliminar!=null)
+                {
+                    listaArticulos.Remove(articuloEliminar);
+                }
+                Session["articulosPedidos"] = listaArticulos;
+                actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
+                var totalPedido = listaArticulos.Sum(x => x.Total);
+                if(totalPedido == 0)
+                {
+                    lblTotalPedido.Text = "";
+                }
+                else
+                {
+                    lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                }
+                txtTotalPedido.Text = totalPedido.ToString();
+                upArticulosPedido.Update();
+            }
+            limpiarTabs();
+            tabPedidos.Attributes.Add("class", "nav-link active");
+            divPedidos.Attributes.Add("class", "tab-pane active show");
+        }
+
         protected void btnModalCrearArticulo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
@@ -219,7 +321,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             limpiarTabs();
             tabArticulos.Attributes.Add("class", "nav-link active");
-            divArticulos.Attributes.Add("class", "tab-pane fade active show");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
         }
         protected void btnModalEditarArticulo_Click(object source, RepeaterCommandEventArgs e)
         {
@@ -246,9 +348,10 @@ namespace Restaurant.Web.Paginas.Administrador
                     upModalArticulo.Update();
                 }
             }
+
             limpiarTabs();
             tabArticulos.Attributes.Add("class", "nav-link active");
-            divArticulos.Attributes.Add("class", "tab-pane fade active show");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnCrearArticulo_Click(object sender, EventArgs e)
@@ -256,7 +359,6 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Articulo articulo = new Articulo();
-            articulo.Id = int.Parse(txtIdArticulo.Text);
             articulo.Nombre = txtNombreArticulo.Text;
             articulo.Descripcion = txtDescripcionArticulo.Text;
             articulo.Precio = int.Parse(txtPrecioArticulo.Text);
@@ -303,13 +405,20 @@ namespace Restaurant.Web.Paginas.Administrador
             }
         }
 
-        protected void btnAgregarArticuloPedido_Click(object sender, EventArgs e)
+        public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {
-
+            repeater.DataSource = listaData;
+            repeater.DataBind();
+            if (listaData.Count() == 0)
+            {
+                repeater.Visible = false;
+                mensajeListaVacia.Visible = true;
+            }
+            else
+            {
+                repeater.Visible = true;
+                mensajeListaVacia.Visible = false;
+            }
         }
-        protected void btnEliminarArticuloPedido_Click(object sender, EventArgs e)
-        {
-
-        }        
     }
 }
