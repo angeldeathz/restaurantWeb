@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row p-3">
       <div class="col-12 text-center">
-        <h1 class="text-rosado">Gestión del Restaurante</h1>
+        <h1 class="text-rosado">Gestión de la Cocina</h1>
       </div>
       <div class="col-12">
         <div class="nav nav-tabs" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
@@ -19,7 +19,7 @@
                     Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
               </div>  
               <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
+                 <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
