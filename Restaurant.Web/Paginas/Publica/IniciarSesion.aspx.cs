@@ -6,12 +6,7 @@ namespace Restaurant.Web.Paginas.Publica
 {
     public partial class IniciarSesion : Page
     {
-        private readonly UsuarioService _usuarioService;
-
-        public IniciarSesion()
-        {
-            _usuarioService = new UsuarioService();
-        }
+        private UsuarioService _usuarioService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,10 +26,11 @@ namespace Restaurant.Web.Paginas.Publica
 
         protected void btnIniciarSesion_OnClick(object sender, EventArgs e)
         {
+            _usuarioService = new UsuarioService(string.Empty);
             var token = _usuarioService.Autenticar(txtRut.Text, txtContrasena.Text);
             if (token != null)
             {
-                _usuarioService.Token = token.access_token;
+                _usuarioService = new UsuarioService(token.access_token);
                 Session["token"] = token;
                 var usuario = _usuarioService.ObtenerPorRut(txtRut.Text);
 
@@ -42,8 +38,6 @@ namespace Restaurant.Web.Paginas.Publica
                 {
                     Session["usuario"] = usuario;
                     Response.Redirect("../Administrador/inicio");
-
-
                 }
             }
         }

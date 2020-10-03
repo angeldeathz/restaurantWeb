@@ -22,7 +22,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 ValidarSesion();
 
                 Token token = (Token)Session["token"];
-                _usuarioService = new UsuarioService();
+                _usuarioService = new UsuarioService(token.access_token);
                 _tipoUsuarioService = new TipoUsuarioService(token.access_token);
 
                 List<Usuario> usuarios = _usuarioService.Obtener();
@@ -88,7 +88,7 @@ namespace Restaurant.Web.Paginas.Administrador
             if (int.TryParse((string)e.CommandArgument, out idUsuario))
             {
                 Token token = (Token)Session["token"];
-                _usuarioService = new UsuarioService();
+                _usuarioService = new UsuarioService(token.access_token);
                 Usuario usuario = _usuarioService.Obtener(idUsuario);
                 if (usuario != null)
                 {
@@ -140,7 +140,7 @@ namespace Restaurant.Web.Paginas.Administrador
             usuario.Contrasena = txtContrasena.Text;
 
             Token token = (Token)Session["token"];
-            _usuarioService = new UsuarioService();
+            _usuarioService = new UsuarioService(token.access_token);
             int idUsuario = _usuarioService.Guardar(usuario);
 
             if (idUsuario != 0)
@@ -157,8 +157,8 @@ namespace Restaurant.Web.Paginas.Administrador
         protected void btnEditarUsuario_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            string contrasena = txtContrasena.Text = "";
-            string contrasenaRepetir = txtContrasenaRepetir.Text = "";
+            string contrasena = txtContrasena.Text;
+            string contrasenaRepetir = txtContrasenaRepetir.Text;
 
             if (contrasena != contrasenaRepetir)
             {
@@ -167,6 +167,7 @@ namespace Restaurant.Web.Paginas.Administrador
             }
 
             Usuario usuario = new Usuario();
+            usuario.Persona = new Persona();
             usuario.Id = int.Parse(txtIdUsuario.Text);
             usuario.Persona.Nombre = txtNombreUsuario.Text;
             usuario.Persona.Apellido = txtApellidoUsuario.Text;
@@ -178,7 +179,7 @@ namespace Restaurant.Web.Paginas.Administrador
             usuario.Contrasena = txtContrasena.Text;
 
             Token token = (Token)Session["token"];
-            _usuarioService = new UsuarioService();
+            _usuarioService = new UsuarioService(token.access_token);
             bool editar = _usuarioService.Modificar(usuario, usuario.Id);
             if (editar)
             {

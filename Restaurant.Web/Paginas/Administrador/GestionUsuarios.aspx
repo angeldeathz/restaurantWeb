@@ -38,7 +38,7 @@
                         <td> <%# Eval("Persona.Apellido") %> </td>
                         <td> <%# Eval("Persona.Email") %> </td>
                         <td> <%# Eval("Persona.Telefono") %> </td>
-                        <td> <%# Eval("TipoDeUsuario.Nombre") %> </td>
+                        <td> <%# Eval("TipoUsuario.Nombre") %> </td>
                          <td><asp:LinkButton ID="btnModalEditarUsuario" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
