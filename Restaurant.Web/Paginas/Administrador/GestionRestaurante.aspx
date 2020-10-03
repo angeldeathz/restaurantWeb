@@ -36,10 +36,10 @@
                         <asp:HiddenField ID="idReserva" runat="server"  Value='<%# Eval("Id") %>'/>
                         <tr>
                         <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("FechaHora") %> </td>
+                        <td> <%# Eval("FechaReserva") %> </td>
                         <td> <%# Eval("Mesa.Nombre") %> </td>
                         <td> <%# Eval("CantidadComensales") %> </td>
-                        <td> <%# Eval("Cliente.Nombre") %> <%# Eval("Cliente.Apellido") %></td>
+                        <td> <%# Eval("Cliente.Persona.Nombre") %> <%# Eval("Cliente.Persona.Apellido") %></td>
                         <td><asp:LinkButton ID="btnModalEditarReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>

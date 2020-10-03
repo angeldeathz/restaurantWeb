@@ -14,110 +14,6 @@ namespace Restaurant.Services.Shared
             _token = token;
         }
 
-        #region Get
-
-        public T GetObject<T>(string url)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                var response = httpClient.GetAsync(url).Result;
-                return response.Content.ReadAsAsync<T>().Result;
-            }
-        }
-
-        public string GetString(string url)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                var response = httpClient.GetAsync(url).Result;
-                return response.Content.ReadAsStringAsync().Result;
-            }
-        }
-
-        public RestClientResponse Get(string url)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                var response = httpClient.GetAsync(url).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse<T> Get<T>(string url)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                var response = httpClient.GetAsync(url).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
-        #endregion
-
-        #region Post
-
-        public RestClientResponse Post(string url, object objectToPost)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
-
-                return new RestClientResponse
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
-            }
-        }
-
-        public RestClientResponse<T> Post<T>(string url, object objectToPost)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
-
-                var restClientResponse = new RestClientResponse<T>
-                {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.StatusCode != HttpStatusCode.OK ?
-                        default(T) :
-                        response.Content.ReadAsAsync<T>().Result
-                };
-
-                return restClientResponse;
-            }
-        }
-
         public RestClientResponse<T> GetToken<T>(string url, string rut, string contrasena)
         {
             using (var httpClient = new HttpClient())
@@ -141,29 +37,74 @@ namespace Restaurant.Services.Shared
                         response.Content.ReadAsAsync<T>().Result
                 };
 
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
                 return restClientResponse;
             }
         }
 
-        #endregion
+        public RestClientResponse<T> Get<T>(string url)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
+                var response = httpClient.GetAsync(url).Result;
 
-        #region Delete
+                var restClientResponse = new RestClientResponse<T>
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusName = response.StatusCode,
+                    Message = response.ReasonPhrase,
+                    Response = response.StatusCode != HttpStatusCode.OK ?
+                        default(T) :
+                        response.Content.ReadAsAsync<T>().Result
+                };
 
-        public RestClientResponse Delete(string url)
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
+                return restClientResponse;
+            }
+        }
+
+        public RestClientResponse<T> Post<T>(string url, object objectToPost)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.DeleteAsync(url).Result;
+                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
 
-                return new RestClientResponse
+                var restClientResponse = new RestClientResponse<T>
                 {
                     StatusCode = (int)response.StatusCode,
                     StatusName = response.StatusCode,
                     Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
+                    Response = response.StatusCode != HttpStatusCode.OK ?
+                        default(T) :
+                        response.Content.ReadAsAsync<T>().Result
                 };
+
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
+                return restClientResponse;
             }
         }
 
@@ -184,29 +125,15 @@ namespace Restaurant.Services.Shared
                         response.Content.ReadAsAsync<T>().Result
                 };
 
-                return restClientResponse;
-            }
-        }
-
-        #endregion
-
-        #region Put
-
-        public RestClientResponse Put(string url, object objectToPut)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
-
-                return new RestClientResponse
+                switch (response.StatusCode)
                 {
-                    StatusCode = (int)response.StatusCode,
-                    StatusName = response.StatusCode,
-                    Message = response.ReasonPhrase,
-                    Response = response.Content.ReadAsStringAsync().Result
-                };
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
+                return restClientResponse;
             }
         }
 
@@ -228,10 +155,16 @@ namespace Restaurant.Services.Shared
                         response.Content.ReadAsAsync<T>().Result
                 };
 
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
                 return restClientResponse;
             }
         }
-
-        #endregion
     }
 }

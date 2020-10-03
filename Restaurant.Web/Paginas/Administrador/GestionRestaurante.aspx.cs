@@ -178,7 +178,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _reservaService = new ReservaService(token.access_token);
-            bool editar = _reservaService.Modificar(reserva);
+            bool editar = _reservaService.Modificar(reserva, reserva.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
@@ -286,7 +286,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);            
-            bool editar = _clienteService.Modificar(cliente);
+            bool editar = _clienteService.Modificar(cliente, cliente.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
@@ -377,7 +377,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _mesaService = new MesaService(token.access_token);
-            bool editar = _mesaService.Modificar(mesa);
+            bool editar = _mesaService.Modificar(mesa, mesa.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);

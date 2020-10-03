@@ -78,6 +78,7 @@
     <Compile Include="Servicios\TipoUsuarioService.cs" />
     <Compile Include="Servicios\UnidadDeMedidaService.cs" />
     <Compile Include="Servicios\UsuarioService.cs" />
+    <Compile Include="Shared\ErrorResponse.cs" />
     <Compile Include="Shared\RestClientHttp.cs" />
     <Compile Include="Shared\RestClientResponse.cs" />
   </ItemGroup>

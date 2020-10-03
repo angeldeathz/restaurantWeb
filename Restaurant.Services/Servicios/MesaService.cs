@@ -30,7 +30,6 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
-
         public int Guardar(Mesa mesa)
         {
             var respuesta = _restClientHttp.Post<int>(_url, mesa);
@@ -38,8 +37,9 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
-        public bool Modificar(Mesa mesa)
+        public bool Modificar(Mesa mesa, int idMesa)
         {
+            _url = $"{_url}{idMesa}";
             var respuesta = _restClientHttp.Put<bool>(_url, mesa);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;

@@ -8,6 +8,7 @@ namespace Restaurant.Services.Shared
         public HttpStatusCode StatusName { get; set; }
         public string Message { get; set; }
         public T Response { get; set; }
+        public ErrorResponse Error { get; set; }
     }
 
     public class RestClientResponse
@@ -16,5 +17,6 @@ namespace Restaurant.Services.Shared
         public HttpStatusCode StatusName { get; set; }
         public string Message { get; set; }
         public string Response { get; set; }
+        public ErrorResponse Error { get; set; }
     }
 }

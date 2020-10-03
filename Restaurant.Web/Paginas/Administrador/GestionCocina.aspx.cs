@@ -200,14 +200,14 @@ namespace Restaurant.Web.Paginas.Administrador
             Pedido pedido = new Pedido();
             pedido.Id = int.Parse(txtIdPedido.Text);
             pedido.FechaInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
-            pedido.FechaInicio = Convert.ToDateTime(txtFechaFinPedido.Text);
+            pedido.FechaTermino = Convert.ToDateTime(txtFechaFinPedido.Text);
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = int.Parse(ddlEstadoPedido.SelectedValue);
             pedido.IdMesa = int.Parse(ddlMesaPedido.SelectedValue);
 
             Token token = (Token)Session["token"];
             _pedidoService = new PedidoService(token.access_token);
-            bool editar = _pedidoService.Modificar(pedido);
+            bool editar = _pedidoService.Modificar(pedido, pedido.Id);
             if (editar)
             {
                 List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
@@ -393,7 +393,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _articuloService = new ArticuloService(token.access_token);
-            bool editar = _articuloService.Modificar(articulo);
+            bool editar = _articuloService.Modificar(articulo, articulo.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);

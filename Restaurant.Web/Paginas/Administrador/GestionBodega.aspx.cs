@@ -174,7 +174,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _insumoService = new InsumoService(token.access_token);
-            bool editar = _insumoService.Modificar(insumo);
+            bool editar = _insumoService.Modificar(insumo, insumo.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
@@ -286,7 +286,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
-            bool editar = _proveedorService.Modificar(proveedor);
+            bool editar = _proveedorService.Modificar(proveedor, proveedor.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
