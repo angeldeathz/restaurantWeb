@@ -29,16 +29,17 @@ namespace Restaurant.Services.Servicios
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
-        public int Guardar(ArticuloPedido ArticuloPedido)
+
+        public int Guardar(ArticuloPedido articuloPedido)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, ArticuloPedido);
+            var respuesta = _restClientHttp.Post<int>(_url, articuloPedido);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
-        public bool Modificar(ArticuloPedido ArticuloPedido)
+        public bool Modificar(ArticuloPedido articuloPedido)
         {
-            var respuesta = _restClientHttp.Put<bool>(_url, ArticuloPedido);
+            var respuesta = _restClientHttp.Put<bool>(_url, articuloPedido);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }
