@@ -199,6 +199,7 @@ namespace Restaurant.Web.Paginas.Administrador
             txtNombreProveedor.Text = "";
             txtApellidoProveedor.Text = "";
             txtRutProveedor.Text = "";
+            txtDigitoVerificadorProveedor.Text = "";
             txtEmailProveedor.Text = "";
             txtTelefonoProveedor.Text = "";
             txtDireccionProveedor.Text = "";
@@ -228,7 +229,8 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtIdProveedor.Text = proveedor.Id.ToString();
                     txtNombreProveedor.Text = proveedor.Persona.Nombre;
                     txtApellidoProveedor.Text = proveedor.Persona.Apellido;
-                    txtRutProveedor.Text = proveedor.Persona.Rut.ToString() + proveedor.Persona.DigitoVerificador.ToString();
+                    txtRutProveedor.Text = proveedor.Persona.Rut.ToString();
+                    txtDigitoVerificadorProveedor.Text = proveedor.Persona.DigitoVerificador.ToString();
                     txtEmailProveedor.Text = proveedor.Persona.Email;
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono;
                     txtDireccionProveedor.Text = proveedor.Direccion;

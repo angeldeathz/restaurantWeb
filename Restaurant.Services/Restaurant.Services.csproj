@@ -62,7 +62,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicios\ArticuloService.cs" />
+    <Compile Include="Servicios\EstadoPedidoService.cs" />
     <Compile Include="Servicios\EstadoReservaService.cs" />
+    <Compile Include="Servicios\PedidoService.cs" />
     <Compile Include="Servicios\ReservaService.cs" />
     <Compile Include="Servicios\EstadoArticuloService.cs" />
     <Compile Include="Servicios\InsumoService.cs" />

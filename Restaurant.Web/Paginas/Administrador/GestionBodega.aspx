@@ -14,7 +14,7 @@
       </div>
       <div class="col-12 bg-blanco rounded contenedor-mantenedores">
         <div class="tab-content py-3 px-1" id="contenido_gestion_inventario">
-          <div class="tab-pane fade show active" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
+          <div class="tab-pane show active" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
           <div class="tab-pane fade" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
