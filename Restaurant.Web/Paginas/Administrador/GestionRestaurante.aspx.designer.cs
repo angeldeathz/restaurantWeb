@@ -60,7 +60,20 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearReservas;
 
         /// <summary>
+<<<<<<< HEAD
+        /// listaReservasVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaReservasVacia;
+
+        /// <summary>
+        /// listaReservas control.
+=======
         /// Control listaReservas.
+>>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -87,7 +100,20 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearCliente;
 
         /// <summary>
+<<<<<<< HEAD
+        /// listaClientesVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaClientesVacia;
+
+        /// <summary>
+        /// listaClientes control.
+=======
         /// Control listaClientes.
+>>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -114,7 +140,20 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearMesa;
 
         /// <summary>
+<<<<<<< HEAD
+        /// listaMesasVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaMesasVacia;
+
+        /// <summary>
+        /// listaMesas control.
+=======
         /// Control listaMesas.
+>>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

@@ -14,7 +14,11 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divPedidos" role="tabpanel" aria-labelledby="tabPedidos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearPedidos" runat="server" Text="Crear Pedido" OnClick="btnModalCrearPedido_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
+              <div class="text-center">
+                <asp:Label ID="listaPedidosVacia" runat="server" 
+                    Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>  
+              <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
@@ -47,7 +51,11 @@
           </div>
           <div class="tab-pane fade" id="divArticulos" role="tabpanel" aria-labelledby="tabArticulos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearArticulo" runat="server" Text="Crear Articulo" OnClick="btnModalCrearArticulo_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
+              <div class="text-center">
+                <asp:Label ID="listaArticulosVacia" runat="server" 
+                    Text="No existen Artículos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>   
+              <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaArticulos" runat="server"  OnItemCommand="btnModalEditarArticulo_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
@@ -67,7 +75,7 @@
                         <td> <%# Eval("Precio") %> </td>
                         <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                         <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                         <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
                     </ItemTemplate>
@@ -114,43 +122,55 @@
                     </div>
                     <hr />
                     <div class="row">
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-5">
                             <asp:Label ID="lblArticuloPedido" runat="server" Text="Artículo"></asp:Label>
-                            <asp:DropDownList ID="ddlArticuloPedido" runat="server" CssClass="form-control"></asp:DropDownList>     
-                        </div>  
-                        <div class="col-12 col-md-3">
+                            <asp:DropDownList ID="ddlArticuloPedido" runat="server" CssClass="form-control" 
+                                OnSelectedIndexChanged="ddlArticuloPedido_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>     
+                        </div>                          
+                        <div class="col-12 col-md-2">
+                            <asp:UpdatePanel ID="upPrecio" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Label ID="lblPrecioArticuloPedido" runat="server" Text="Total"></asp:Label>
+                                    <asp:DropDownList ID="ddlPrecioArticuloPedido" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>              
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="col-12 col-md-2">
                             <asp:Label ID="lblCantidadArticuloPedido" runat="server" Text="Cantidad"></asp:Label>
                             <asp:TextBox ID="txtCantidadArticuloPedido" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
                         </div> 
                         <div class="col-12 col-md-3">
                             <br />
                             <asp:Button ID="btnAgregarArticuloPedido" runat="server" CssClass="btn btn-info btn-block" Text="Agregar" OnClick="btnAgregarArticuloPedido_Click"/>
-                        </div>                          
-                        <div class="col-12 col-md-3">
-                            <asp:Label ID="lblTotalPedido" runat="server" Text="Total"></asp:Label>
-                            <asp:TextBox ID="txtTotalPedido" runat="server" CssClass="form-control" TextMode="Number" Enabled="false"></asp:TextBox>              
-                        </div>
+                        </div>     
                     </div>   
                     <div class="row">
                         <div class="col-12">
                             <asp:UpdatePanel ID="upArticulosPedido" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                                 <ContentTemplate>
+                                    <div class="text-center">
+                                        <asp:Label ID="listaArticulosPedidoVacia" runat="server" 
+                                            Text="No han agregado artículos al pedido" CssClass="d-inline-block h5 my-5"></asp:Label>
+                                    </div>
                                     <div class="table-responsive pt-3">
                                         <asp:Repeater ID="listaArticulosPedido" runat="server" OnItemCommand="btnEliminarArticuloPedido_Click">
                                         <HeaderTemplate>
                                             <table border="1" class="table">
                                             <tr>
                                                 <td><b>Nombre</b></td>
+                                                <td><b>Precio</b></td>
                                                 <td><b>Cantidad</b></td>
                                                 <td><b>Total</b></td>
+                                                <td></td>
                                             </tr>
                                         </HeaderTemplate>          
                                         <ItemTemplate>
                                             <tr>
-                                            <td> <%# Eval("Nombre") %> </td>
+                                            <td> <%# Eval("Articulo.Nombre") %> </td>
+                                            <td> $<%# Eval("Precio") %> </td>
                                             <td> <%# Eval("Cantidad") %> </td>
-                                            <td> <%# Eval("Total") %> </td>
-                                                <td><asp:LinkButton ID="btnEliminarArticuloPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                            <td> $<%# Eval("Total") %> </td>
+                                                <td><asp:LinkButton ID="btnEliminarArticuloPedido" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
                                                     Eliminar</asp:LinkButton></td>
                                             </tr>
                                         </ItemTemplate>
@@ -159,10 +179,14 @@
                                         </FooterTemplate>
                                         </asp:Repeater>
                                     </div>
+                                    <div class="col-12 text-right">
+                                        <asp:Label ID="lblTotalPedido" runat="server" Text=""></asp:Label>
+                                        <asp:TextBox ID="txtTotalPedido" runat="server" CssClass="form-control" TextMode="Number" Visible="false"></asp:TextBox>              
+                                    </div>
                                 </ContentTemplate>
                             </asp:UpdatePanel>  
                         </div> 
-                    </div> 
+                    </div>   
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

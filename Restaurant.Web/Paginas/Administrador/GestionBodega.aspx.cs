@@ -31,8 +31,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<Insumo> insumos = _insumoService.Obtener();
                 if (insumos != null && insumos.Count > 0)
                 {
-                    listaInsumos.DataSource = insumos;
-                    listaInsumos.DataBind();
+                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                 }
 
                 List<Proveedor> proveedores = _proveedorService.Obtener();
@@ -40,8 +39,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     if (proveedores.Count > 0 && proveedores.Count > 0)
                     {
-                        listaProveedores.DataSource = proveedores;
-                        listaProveedores.DataBind();
+                        actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
 
                         ddlProveedorInsumo.DataSource = proveedores;
                         ddlProveedorInsumo.DataTextField = "NombreProveedor";
@@ -162,7 +160,6 @@ namespace Restaurant.Web.Paginas.Administrador
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Error al crear insumo');", true);
             }
         }
-
         protected void btnEditarInsumo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
@@ -303,6 +300,22 @@ namespace Restaurant.Web.Paginas.Administrador
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
+        {
+            repeater.DataSource = listaData;
+            repeater.DataBind();
+            if (listaData.Count() == 0)
+            {
+                repeater.Visible = false;
+                mensajeListaVacia.Visible = true;
+            }
+            else
+            {
+                repeater.Visible = true;
+                mensajeListaVacia.Visible = false;
+            }
         }
     }
 }

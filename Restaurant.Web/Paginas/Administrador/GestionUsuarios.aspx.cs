@@ -28,8 +28,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<Usuario> usuarios = _usuarioService.Obtener();
                 if (usuarios != null && usuarios.Count > 0)
                 {
-                    listaUsuarios.DataSource = usuarios;
-                    listaUsuarios.DataBind();
+                    actualizarRepeater(listaUsuarios, usuarios, listaUsuariosVacia);
                 }
 
                 List<TipoUsuario> tipoUsuarios = _tipoUsuarioService.Obtener();
@@ -189,6 +188,21 @@ namespace Restaurant.Web.Paginas.Administrador
             else
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Error al editar usuario');", true);
+            }
+        }
+        public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
+        {
+            repeater.DataSource = listaData;
+            repeater.DataBind();
+            if (listaData.Count() == 0)
+            {
+                repeater.Visible = false;
+                mensajeListaVacia.Visible = true;
+            }
+            else
+            {
+                repeater.Visible = true;
+                mensajeListaVacia.Visible = false;
             }
         }
     }

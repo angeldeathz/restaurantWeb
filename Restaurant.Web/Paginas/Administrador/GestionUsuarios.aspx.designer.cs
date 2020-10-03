@@ -42,6 +42,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearUsuario;
 
         /// <summary>
+        /// listaUsuariosVacia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label listaUsuariosVacia;
+
+        /// <summary>
         /// listaUsuarios control.
         /// </summary>
         /// <remarks>

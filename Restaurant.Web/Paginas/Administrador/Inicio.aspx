@@ -35,7 +35,7 @@
                         <li><a runat="server" href="/Paginas/Administrador/GestionCocina.aspx">Pedidos</a></li>
                     </ul>
                 </li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionUsuarios.aspx" class="font-weight-bold">Gestión de usuarios</a></li>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionUsuarios.aspx" class="font-weight-bold">Gestión de Usuarios</a></li>
                 <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/Reporteria.aspx" class="font-weight-bold">Informes y Reportería</a></li>
             </ul>
         </div>

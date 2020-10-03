@@ -32,15 +32,13 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
-                    listaReservas.DataSource = reservas;
-                    listaReservas.DataBind();
+                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
                 }
 
                 List<Cliente> clientes = _clienteService.Obtener();
                 if (clientes != null && clientes.Count > 0)
                 {
-                    listaClientes.DataSource = clientes;
-                    listaClientes.DataBind();
+                    actualizarRepeater(listaClientes, clientes, listaClientesVacia);
 
                     ddlClienteReserva.DataSource = clientes;
                     ddlClienteReserva.DataTextField = "NombreCliente";
@@ -53,8 +51,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
                 {
-                    listaMesas.DataSource = mesas;
-                    listaMesas.DataBind();
+                    actualizarRepeater(listaMesas, mesas, listaMesasVacia);
 
                     ddlMesaReserva.DataSource = mesas;
                     ddlMesaReserva.DataTextField = "Nombre";
@@ -389,6 +386,21 @@ namespace Restaurant.Web.Paginas.Administrador
             else
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "alert('Error al editar mesa');", true);
+            }
+        }
+        public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
+        {
+            repeater.DataSource = listaData;
+            repeater.DataBind();
+            if (listaData.Count() == 0)
+            {
+                repeater.Visible = false;
+                mensajeListaVacia.Visible = true;
+            }
+            else
+            {
+                repeater.Visible = true;
+                mensajeListaVacia.Visible = false;
             }
         }
     }

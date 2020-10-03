@@ -6,19 +6,23 @@
       </div>
       <div class="col-12">
         <div class="nav nav-tabs" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="tabInventario" data-toggle="pill" href="#divInventario" role="tab" aria-controls="divInventario" aria-selected="true" runat="server">Inventario</a>
-          <a class="nav-link" id="tabInsumos" data-toggle="pill" href="#divInsumos" role="tab" aria-controls="divInsumos" aria-selected="false" runat="server">Insumos</a>
+          <!--<a class="nav-link active" id="tabInventario" data-toggle="pill" href="#divInventario" role="tab" aria-controls="divInventario" aria-selected="true" runat="server">Inventario</a>-->
+          <a class="nav-link active" id="tabInsumos" data-toggle="pill" href="#divInsumos" role="tab" aria-controls="divInsumos" aria-selected="false" runat="server">Insumos</a>
           <a class="nav-link" id="tabProveedores" data-toggle="pill" href="#divProveedores" role="tab" aria-controls="divProveedores" aria-selected="false" runat="server">Proveedores</a>
           <a class="nav-link" id="tabOrdenes" data-toggle="pill" href="#divOrdenes" role="tab" aria-controls="divOrdenes" aria-selected="false" runat="server">Órdenes</a>
         </div>
       </div>
       <div class="col-12 bg-blanco rounded contenedor-mantenedores">
         <div class="tab-content py-3 px-1" id="contenido_gestion_inventario">
-          <div class="tab-pane show active" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
+          <div class="tab-pane fade" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
-          <div class="tab-pane fade" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
+          <div class="tab-pane show active" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
+              <div class="text-center">
+                <asp:Label ID="listaInsumosVacia" runat="server" 
+                    Text="No existen Insumos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>     
+              <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumo_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
@@ -51,7 +55,11 @@
           </div>
           <div class="tab-pane fade" id="divProveedores" role="tabpanel" aria-labelledby="tabProveedores" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearProveedor" runat="server" Text="Crear Proveedor" OnClick="btnModalCrearProveedor_Click" CssClass="btn btn-info float-right"/>
-                <div class="table-responsive pt-3">
+               <div class="text-center">
+                <asp:Label ID="listaProveedoresVacia" runat="server" 
+                    Text="No existen Proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>     
+              <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaProveedores" runat="server"  OnItemCommand="btnModalEditarProveedor_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
@@ -87,6 +95,10 @@
           </div>
           <div class="tab-pane fade" id="divOrdenes" role="tabpanel" aria-labelledby="tabOrdenes" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearOrden" runat="server" Text="Crear Orden" OnClick="btnModalCrearOrden_Click" CssClass="btn btn-info float-right"/>
+              <div class="text-center">
+                <asp:Label ID="listaOrdenesVacia" runat="server" 
+                    Text="No existen Ordenes de proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+              </div>   
               <asp:Repeater ID="listaOrdenes" runat="server">
 
               </asp:Repeater>
