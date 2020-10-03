@@ -203,6 +203,7 @@ namespace Restaurant.Web.Paginas.Administrador
             txtNombreCliente.Text = "";
             txtApellidoCliente.Text = "";
             txtRutCliente.Text = "";
+            txtDigitoVerificadorCliente.Text = "";
             txtEmailCliente.Text = "";
             txtTelefonoCliente.Text = "";
 
@@ -230,7 +231,8 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtIdCliente.Text = cliente.Id.ToString();
                     txtNombreCliente.Text = cliente.Persona.Nombre;
                     txtApellidoCliente.Text = cliente.Persona.Apellido;
-                    txtRutCliente.Text = cliente.Persona.Rut.ToString() + cliente.Persona.DigitoVerificador.ToString();
+                    txtRutCliente.Text = cliente.Persona.Rut.ToString();
+                    txtDigitoVerificadorCliente.Text = cliente.Persona.DigitoVerificador.ToString();
                     txtEmailCliente.Text = cliente.Persona.Email;
                     txtTelefonoCliente.Text = cliente.Persona.Telefono;
 

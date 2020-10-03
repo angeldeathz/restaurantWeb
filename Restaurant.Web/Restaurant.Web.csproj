@@ -118,9 +118,9 @@
     <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
+    <Content Include="Paginas\Administrador\GestionCocina.aspx" />
     <Content Include="Paginas\Administrador\GestionFinanzas.aspx" />
     <Content Include="Paginas\Administrador\GestionBodega.aspx" />
-    <Content Include="Paginas\Administrador\GestionCocina.aspx" />
     <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
     <Content Include="Paginas\Administrador\GestionRestaurante.aspx" />
     <Content Include="Paginas\Administrador\Inicio.aspx" />
@@ -191,6 +191,13 @@
     <Compile Include="Master\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\Administrador\GestionCocina.aspx.cs">
+      <DependentUpon>GestionCocina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Administrador\GestionCocina.aspx.designer.cs">
+      <DependentUpon>GestionCocina.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\Administrador\GestionFinanzas.aspx.cs">
       <DependentUpon>GestionFinanzas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -204,13 +211,6 @@
     </Compile>
     <Compile Include="Paginas\Administrador\GestionBodega.aspx.designer.cs">
       <DependentUpon>GestionBodega.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionCocina.aspx.cs">
-      <DependentUpon>GestionCocina.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Paginas\Administrador\GestionCocina.aspx.designer.cs">
-      <DependentUpon>GestionCocina.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionRestaurante.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestiónBodega" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <div class="row p-3">
+    <div class="row p-3">
       <div class="col-12 text-center">
         <h1 class="text-rosado">Gestión del Restaurante</h1>
       </div>
@@ -13,7 +13,7 @@
       </div>
       <div class="col-12 bg-blanco rounded contenedor-mantenedores">
         <div class="tab-content py-3 px-1">
-          <div class="tab-pane fade" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
+          <div class="tab-pane show active" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReserva_Click" CssClass="btn btn-info float-right"/>
                 <div class="table-responsive pt-3">
                     <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">

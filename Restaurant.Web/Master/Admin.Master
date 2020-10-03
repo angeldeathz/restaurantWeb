@@ -59,9 +59,11 @@
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Restaurante</a>
                     </li>
-
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionProductos.aspx">Cocina</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionCocina.aspx">Cocina</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionUsuarios.aspx">Usuarios</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Administrador/Reporteria.aspx">Reportería</a>

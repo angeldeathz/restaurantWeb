@@ -5,40 +5,41 @@ using Restaurant.Services.Shared;
 
 namespace Restaurant.Services.Servicios
 {
-    public class TipoConsumoService
+    public class PedidoService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/tipoConsumos/";
+        private string _url = $"http://localhost/restaurant/api/pedidos/";
 
-        public TipoConsumoService(string token)
+        public PedidoService(string token)
         {
             _restClientHttp = new RestClientHttp(token);
         }
 
-        public List<TipoConsumo> Obtener()
+        public List<Pedido> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<TipoConsumo>>(_url);
+            var respuesta = _restClientHttp.Get<List<Pedido>>(_url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
-        public TipoConsumo Obtener(int id)
+        public Pedido Obtener(int id)
         {
             _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<TipoConsumo>(_url);
+            var respuesta = _restClientHttp.Get<Pedido>(_url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
-        public int Guardar(TipoConsumo tipoConsumo)
+
+        public int Guardar(Pedido pedido)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, tipoConsumo);
+            var respuesta = _restClientHttp.Post<int>(_url, pedido);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
-        public bool Modificar(TipoConsumo tipoConsumo)
+        public bool Modificar(Pedido pedido)
         {
-            var respuesta = _restClientHttp.Put<bool>(_url, tipoConsumo);
+            var respuesta = _restClientHttp.Put<bool>(_url, pedido);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }
