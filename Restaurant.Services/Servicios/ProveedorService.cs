@@ -37,8 +37,9 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
-        public bool Modificar(Proveedor proveedor)
+        public bool Modificar(Proveedor proveedor, int idProveedor)
         {
+            _url = $"{_url}{idProveedor}";
             var respuesta = _restClientHttp.Put<bool>(_url, proveedor);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;

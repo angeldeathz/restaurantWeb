@@ -180,7 +180,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Token token = (Token)Session["token"];
             _usuarioService = new UsuarioService();
-            bool editar = _usuarioService.Modificar(usuario);
+            bool editar = _usuarioService.Modificar(usuario, usuario.Id);
             if (editar)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
