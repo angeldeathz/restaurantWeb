@@ -76,7 +76,6 @@
                         <td> <%# Eval("Persona.Apellido") %> </td>
                         <td> <%# Eval("Persona.Email") %> </td>
                         <td> <%# Eval("Persona.Telefono") %> </td>
-                        <td> <%# Eval("Direccion") %> </td>
                         <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
                          <td><asp:LinkButton ID="btnModalEditarCliente" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
@@ -94,9 +93,31 @@
                 <asp:Label ID="listaMesasVacia" runat="server" 
                     Text="No existen Mesas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
               </div>   
-              <asp:Repeater ID="listaMesas" runat="server">
-
-              </asp:Repeater>
+              <div class="table-responsive pt-3">
+                  <asp:Repeater ID="listaMesas" runat="server"  OnItemCommand="btnModalEditarMesa_Click">
+                      <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Nombre</b></td>
+                                <td><b>Comensales</b></td>
+                                <td><b>Estado</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <tr>
+                            <td> <%# Eval("Nombre") %> </td>
+                            <td> <%# Eval("CantidadComensales") %> </td>
+                            <td> <%# Eval("EstadoMesa.Nombre") %> </td>
+                            <td><asp:LinkButton ID="btnModalEditarMesa" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                  </asp:Repeater>
+             </div>
           </div>
         </div>
       </div>

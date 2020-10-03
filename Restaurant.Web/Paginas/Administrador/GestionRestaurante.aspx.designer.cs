@@ -60,7 +60,6 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearReservas;
 
         /// <summary>
-<<<<<<< HEAD
         /// listaReservasVacia control.
         /// </summary>
         /// <remarks>
@@ -71,9 +70,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
         /// <summary>
         /// listaReservas control.
-=======
-        /// Control listaReservas.
->>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -100,7 +96,6 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearCliente;
 
         /// <summary>
-<<<<<<< HEAD
         /// listaClientesVacia control.
         /// </summary>
         /// <remarks>
@@ -111,9 +106,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
         /// <summary>
         /// listaClientes control.
-=======
-        /// Control listaClientes.
->>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -140,7 +132,6 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearMesa;
 
         /// <summary>
-<<<<<<< HEAD
         /// listaMesasVacia control.
         /// </summary>
         /// <remarks>
@@ -151,9 +142,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
         /// <summary>
         /// listaMesas control.
-=======
-        /// Control listaMesas.
->>>>>>> master
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
