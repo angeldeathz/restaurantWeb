@@ -247,7 +247,6 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Cliente cliente = new Cliente();
-            cliente.Id = int.Parse(txtIdCliente.Text);
             cliente.Persona.Nombre = txtNombreCliente.Text;
             cliente.Persona.Apellido = txtApellidoCliente.Text;
             cliente.Persona.Rut = int.Parse(txtRutCliente.Text);

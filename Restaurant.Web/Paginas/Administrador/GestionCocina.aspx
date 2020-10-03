@@ -24,10 +24,11 @@
                         <table border="1" class="table">
                         <tr>
                             <td><b>Id</b></td>
-                            <td><b>Fecha y Hora</b></td>
+                            <td><b>Fecha Inicio</b></td>
+                            <td><b>Fecha Fin</b></td>
+                            <td><b>Total</b></td>
                             <td><b>Mesa</b></td>
-                            <td><b>Comensales</b></td>
-                            <td><b>Articulo</b></td>
+                            <td><b>Estado</b></td>
                             <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
@@ -35,10 +36,11 @@
                         <asp:HiddenField ID="idPedido" runat="server"  Value='<%# Eval("Id") %>'/>
                         <tr>
                         <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("FechaHora") %> </td>
+                        <td> <%# Eval("FechaHoraInicio") %> </td>
+                        <td> <%# Eval("FechaHoraFin") %> </td>
+                        <td> <%# Eval("Total") %> </td>
                         <td> <%# Eval("Mesa.Nombre") %> </td>
-                        <td> <%# Eval("CantidadComensales") %> </td>
-                        <td> <%# Eval("Articulo.Nombre") %> <%# Eval("Articulo.Apellido") %></td>
+                        <td> <%# Eval("Estado.Nombre") %></td>
                         <td><asp:LinkButton ID="btnModalEditarPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
@@ -130,7 +132,7 @@
                         <div class="col-12 col-md-2">
                             <asp:UpdatePanel ID="upPrecio" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <asp:Label ID="lblPrecioArticuloPedido" runat="server" Text="Total"></asp:Label>
+                                    <asp:Label ID="lblPrecioArticuloPedido" runat="server" Text="Precio"></asp:Label>
                                     <asp:DropDownList ID="ddlPrecioArticuloPedido" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>              
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -197,7 +199,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
       </div>
-    </div> <!-- Fin Modal Pedidos-- >
+    </div> <!-- Fin Modal Pedidos-->
     <!-- Modal Articulos -->
     <div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="tituloModalArticulo" aria-hidden="true">
       <div class="modal-dialog modal-md" role="document">

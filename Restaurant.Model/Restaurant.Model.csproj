@@ -48,6 +48,7 @@
     <Compile Include="Clases\DocumentoPago.cs" />
     <Compile Include="Clases\EstadoArticulo.cs" />
     <Compile Include="Clases\EstadoMesa.cs" />
+    <Compile Include="Clases\EstadoOrden.cs" />
     <Compile Include="Clases\EstadoPedido.cs" />
     <Compile Include="Clases\EstadoReserva.cs" />
     <Compile Include="Clases\HorarioReserva.cs" />

@@ -172,7 +172,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
       </div>
-    </div> <!-- Fin Modal Reservas-- >
+    </div> <!-- Fin Modal Reservas-->
     <!-- Modal Clientes -->
     <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog" aria-labelledby="tituloModalCliente" aria-hidden="true">
       <div class="modal-dialog modal-md" role="document">

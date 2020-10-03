@@ -16,6 +16,9 @@ namespace Restaurant.Web.Paginas.Administrador
         private ProveedorService _proveedorService;
         private InsumoService _insumoService;
         private UnidadDeMedidaService _unidadDeMedidaService;
+        private DetalleOrdenProveedorService _detalleOrdenProveedorService;
+        private OrdenProveedorService _ordenProveedorService;
+        //private EstadoOrdenService _estadoOrdenService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,11 +30,18 @@ namespace Restaurant.Web.Paginas.Administrador
                 _proveedorService = new ProveedorService(token.access_token);
                 _insumoService = new InsumoService(token.access_token);
                 _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
+                _ordenProveedorService = new OrdenProveedorService(token.access_token);
 
                 List<Insumo> insumos = _insumoService.Obtener();
                 if (insumos != null && insumos.Count > 0)
                 {
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                }
+
+                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                {
+                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
                 }
 
                 List<Proveedor> proveedores = _proveedorService.Obtener();
@@ -246,7 +256,6 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Proveedor proveedor = new Proveedor();
-            proveedor.Id = int.Parse(txtIdProveedor.Text);
             proveedor.Persona.Nombre = txtNombreProveedor.Text;
             proveedor.Persona.Apellido = txtApellidoProveedor.Text;
             proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
@@ -299,7 +308,191 @@ namespace Restaurant.Web.Paginas.Administrador
         }
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
         {
+            ValidarSesion();
+            tituloModalOrden.Text = "Crear Orden Proveedor";
+            btnCrearOrden.Visible = true;
+            btnEditarOrden.Visible = false;
+            txtFechaHoraOrden.Text = "";
+            txtTotalOrden.Text = "";
+            ddlEstadoOrden.SelectedValue = "";
+            ddlProveedorOrden.SelectedValue = "";
 
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+            upModalOrden.Update();
+            Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
+
+            limpiarTabs();
+            tabOrdenes.Attributes.Add("class", "nav-link active");
+            divOrdenes.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnModalEditarOrden_Click(object sender, RepeaterCommandEventArgs e)
+        {
+            ValidarSesion();
+            int idOrdenProveedor;
+            if (int.TryParse((string)e.CommandArgument, out idOrdenProveedor))
+            {
+                Token token = (Token)Session["token"];
+                _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                OrdenProveedor ordenProveedor = _ordenProveedorService.Obtener(idOrdenProveedor);
+                if (ordenProveedor != null)
+                {
+                    tituloModalOrden.Text = "Editar OrdenProveedor";
+                    btnCrearOrden.Visible = false;
+                    btnEditarOrden.Visible = true;
+                    txtIdOrden.Text = ordenProveedor.Id.ToString();
+                    txtFechaHoraOrden.Text = ordenProveedor.FechaOrden.ToShortTimeString();
+                    txtTotalOrden.Text = ordenProveedor.Total.ToString();
+                    ddlEstadoOrden.SelectedValue = ordenProveedor.IdEstadoOrden.ToString();
+                    ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
+
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                    upModalOrden.Update();
+                }
+            }
+            Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
+
+            limpiarTabs();
+            tabOrdenes.Attributes.Add("class", "nav-link active");
+            divOrdenes.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnCrearOrden_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+
+            OrdenProveedor ordenProveedor = new OrdenProveedor();
+            ordenProveedor.FechaOrden = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
+            ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
+            ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
+
+            Token token = (Token)Session["token"];
+            _ordenProveedorService = new OrdenProveedorService(token.access_token);
+            int idOrdenProveedor = _ordenProveedorService.Guardar(ordenProveedor);
+            if (idOrdenProveedor != 0)
+            {
+                List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+                foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
+                {
+                    detalleOrdenProveedor.IdOrdenProveedor = idOrdenProveedor;
+                    _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
+                    int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor creado');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('Error al crear OrdenProveedor');", true);
+            }
+        }
+
+        protected void btnEditarOrden_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+            OrdenProveedor ordenProveedor = new OrdenProveedor();
+            ordenProveedor.Id = int.Parse(txtIdOrden.Text);
+            ordenProveedor.FechaOrden = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
+            ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
+            ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
+
+            Token token = (Token)Session["token"];
+            _ordenProveedorService = new OrdenProveedorService(token.access_token);
+            bool editar = _ordenProveedorService.Modificar(ordenProveedor, ordenProveedor.Id);
+            if (editar)
+            {
+                List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+                //SE DEBERÍAN ELIMINAR LOS insumosOrdenProveedor que ya existen, asociados?
+                foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
+                {
+                    detalleOrdenProveedor.IdOrdenProveedor = ordenProveedor.Id;
+                    _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
+                    int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor editado');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('Error al editar OrdenProveedor');", true);
+            }
+        }
+        protected void ddlInsumoOrden_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idInsumo = ddlInsumoOrden.SelectedValue;
+            ddlPrecioInsumoOrden.SelectedValue = idInsumo;
+            upPrecio.Update();
+            limpiarTabs();
+            tabOrdenes.Attributes.Add("class", "nav-link active");
+            divOrdenes.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnAgregarInsumoOrden_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+
+            DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
+            Insumo insumo = new Insumo();
+            insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
+            detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
+            detalleOrdenProveedor.Precio = int.Parse(ddlPrecioInsumoOrden.SelectedItem.Text);
+            detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
+            detalleOrdenProveedor.Total = detalleOrdenProveedor.Precio * detalleOrdenProveedor.Cantidad;
+
+            List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+            var insumoExiste = listaInsumos.FirstOrDefault(a => a.IdInsumo == detalleOrdenProveedor.IdInsumo);
+            if (insumoExiste != null)
+            {
+                insumoExiste.Cantidad = insumoExiste.Cantidad + detalleOrdenProveedor.Cantidad;
+                insumoExiste.Total = insumoExiste.Precio * insumoExiste.Cantidad;
+            }
+            else
+            {
+                listaInsumos.Add(detalleOrdenProveedor);
+            }
+            Session["detalleOrdenProveedor"] = listaInsumos;
+            actualizarRepeater(listaInsumosOrden, listaInsumos, listaInsumosOrdenVacia);
+            var totalOrdenProveedor = listaInsumos.Sum(x => x.Total);
+            lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
+            txtTotalOrden.Text = totalOrdenProveedor.ToString();
+            upInsumosOrden.Update();
+
+            limpiarTabs();
+            tabOrdenes.Attributes.Add("class", "nav-link active");
+            divOrdenes.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnEliminarInsumoOrden_Click(object sender, RepeaterCommandEventArgs e)
+        {
+            ValidarSesion();
+            int idInsumo;
+            if (int.TryParse((string)e.CommandArgument, out idInsumo))
+            {
+                List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+                var insumoEliminar = listaInsumos.FirstOrDefault(a => a.IdInsumo == idInsumo);
+                if (insumoEliminar != null)
+                {
+                    listaInsumos.Remove(insumoEliminar);
+                }
+                Session["detalleOrdenProveedor"] = listaInsumos;
+                actualizarRepeater(listaInsumosOrden, listaInsumos, listaInsumosOrdenVacia);
+                var totalOrdenProveedor = listaInsumos.Sum(x => x.Total);
+                if (totalOrdenProveedor == 0)
+                {
+                    lblTotalOrden.Text = "";
+                }
+                else
+                {
+                    lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
+                }
+                txtTotalOrden.Text = totalOrdenProveedor.ToString();
+                upInsumosOrden.Update();
+            }
+            limpiarTabs();
+            tabOrdenes.Attributes.Add("class", "nav-link active");
+            divOrdenes.Attributes.Add("class", "tab-pane active show");
         }
 
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
