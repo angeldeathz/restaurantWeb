@@ -231,7 +231,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtRutCliente.Text = cliente.Persona.Rut.ToString();
                     txtDigitoVerificadorCliente.Text = cliente.Persona.DigitoVerificador.ToString();
                     txtEmailCliente.Text = cliente.Persona.Email;
-                    txtTelefonoCliente.Text = cliente.Persona.Telefono;
+                    txtTelefonoCliente.Text = cliente.Persona.Telefono.ToString();
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('show');", true);
                     upModalCliente.Update();
@@ -247,12 +247,13 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Cliente cliente = new Cliente();
+            cliente.Persona = new Persona();
             cliente.Persona.Nombre = txtNombreCliente.Text;
             cliente.Persona.Apellido = txtApellidoCliente.Text;
             cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
             cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
             cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = txtTelefonoCliente.Text;
+            cliente.Persona.Telefono = int.Parse(txtTelefonoCliente.Text);
             cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             Token token = (Token)Session["token"];
@@ -274,13 +275,14 @@ namespace Restaurant.Web.Paginas.Administrador
         {
             ValidarSesion();
             Cliente cliente = new Cliente();
+            cliente.Persona = new Persona();
             cliente.Id = int.Parse(txtIdCliente.Text);
             cliente.Persona.Nombre = txtNombreCliente.Text;
             cliente.Persona.Apellido = txtApellidoCliente.Text;
             cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
             cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
             cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = txtTelefonoCliente.Text;
+            cliente.Persona.Telefono = int.Parse(txtTelefonoCliente.Text);
             cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             Token token = (Token)Session["token"];
@@ -387,6 +389,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "alert('Error al editar mesa');", true);
             }
         }
+
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {
             repeater.DataSource = listaData;

@@ -101,7 +101,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtRutUsuario.Text = usuario.Persona.Rut.ToString();
                     txtDigitoVerificadorUsuario.Text = usuario.Persona.DigitoVerificador.ToString();
                     txtEmailUsuario.Text = usuario.Persona.Email;
-                    txtTelefonoUsuario.Text = usuario.Persona.Telefono;
+                    txtTelefonoUsuario.Text = usuario.Persona.Telefono.ToString();
                     ddlTipoUsuario.SelectedValue = usuario.IdTipoUsuario.ToString();
                     txtContrasena.Text = "";
                     txtContrasenaRepetir.Text = "";
@@ -129,13 +129,14 @@ namespace Restaurant.Web.Paginas.Administrador
             }
 
             Usuario usuario = new Usuario();
+            usuario.Persona = new Persona();
             usuario.Id = int.Parse(txtIdUsuario.Text);
             usuario.Persona.Nombre = txtNombreUsuario.Text;
             usuario.Persona.Apellido = txtApellidoUsuario.Text;
             usuario.Persona.Rut = int.Parse(txtRutUsuario.Text);
             usuario.Persona.DigitoVerificador = txtDigitoVerificadorUsuario.Text;
             usuario.Persona.Email = txtEmailUsuario.Text;
-            usuario.Persona.Telefono = txtTelefonoUsuario.Text;
+            usuario.Persona.Telefono = int.Parse(txtTelefonoUsuario.Text);
             usuario.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
             usuario.Contrasena = txtContrasena.Text;
 
@@ -174,7 +175,7 @@ namespace Restaurant.Web.Paginas.Administrador
             usuario.Persona.Rut = int.Parse(txtRutUsuario.Text);
             usuario.Persona.DigitoVerificador = txtDigitoVerificadorUsuario.Text;
             usuario.Persona.Email = txtEmailUsuario.Text;
-            usuario.Persona.Telefono = txtTelefonoUsuario.Text;
+            usuario.Persona.Telefono = int.Parse(txtTelefonoUsuario.Text);
             usuario.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
             usuario.Contrasena = txtContrasena.Text;
 
