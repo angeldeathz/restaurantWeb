@@ -86,8 +86,6 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlUnidadMedida.SelectedIndex = 0;                    
                 }
-                upModalInsumo.Update();
-                upModalOrden.Update();
             }
         }
 
