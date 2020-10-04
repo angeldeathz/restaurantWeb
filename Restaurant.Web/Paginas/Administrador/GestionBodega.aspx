@@ -106,20 +106,20 @@
                         <tr>
                             <td><b>Id</b></td>
                             <td><b>Fecha y Hora</b></td>
-                            <td><b>Mesa</b></td>
-                            <td><b>Comensales</b></td>
-                            <td><b>Articulo</b></td>
+                            <td><b>Total</b></td>
+                            <td><b>Estado</b></td>
+                            <td><b>Proveedor</b></td>
                             <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
                     <ItemTemplate>
-                        <asp:HiddenField ID="idPedido" runat="server"  Value='<%# Eval("Id") %>'/>
+                        <asp:HiddenField ID="idOrden" runat="server"  Value='<%# Eval("Id") %>'/>
                         <tr>
                         <td> <%# Eval("Id") %></td>
                         <td> <%# Eval("FechaHora") %> </td>
-                        <td> <%# Eval("Mesa.Nombre") %> </td>
-                        <td> <%# Eval("CantidadComensales") %> </td>
-                        <td> <%# Eval("Articulo.Nombre") %> <%# Eval("Articulo.Apellido") %></td>
+                        <td> <%# Eval("Total") %> </td>
+                        <td> <%# Eval("EstadoOrden.Nombre") %> </td>
+                        <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Insumo.Apellido") %></td>
                         <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
@@ -250,4 +250,103 @@
       </div>
     </div>
     <!-- Fin modal proveedores -->
+        <!-- Modal Ordenes -->
+    <div class="modal fade" id="modalOrden" tabindex="-1" role="dialog" aria-labelledby="tituloModalOrden" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <asp:UpdatePanel ID="upModalOrden" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-content">                    
+                  <div class="modal-header">
+                    <asp:Label ID="tituloModalOrden" class="modal-title h5" runat="server" Text="Crear Orden"></asp:Label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body py-4">                      
+                    <asp:TextBox ID="txtIdOrden" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <asp:Label ID="lblFechaHoraOrden" runat="server" Text="Fecha"></asp:Label>
+                            <asp:TextBox ID="txtFechaHoraOrden" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
+                        </div>  
+                        <div class="col-12 col-sm-3">
+                            <asp:Label ID="lblEstadoOrden" runat="server" Text="Estado"></asp:Label>
+                            <asp:DropDownList ID="ddlEstadoOrden" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                        <div class="col-12 col-sm-3">
+                            <asp:Label ID="lblProveedorOrden" runat="server" Text="Proveedor"></asp:Label>
+                            <asp:DropDownList ID="ddlProveedorOrden" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12 col-md-5">
+                            <asp:Label ID="lblInsumoOrden" runat="server" Text="Insumo"></asp:Label>
+                            <asp:DropDownList ID="ddlInsumoOrden" runat="server" CssClass="form-control"></asp:DropDownList>     
+                        </div>                          
+                        <div class="col-12 col-md-2">
+                            <asp:Label ID="lblPrecioInsumoOrden" runat="server" Text="Precio"></asp:Label>
+                            <asp:TextBox ID="txtPrecioInsumoOrden" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox> 
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <asp:Label ID="lblCantidadInsumoOrden" runat="server" Text="Cantidad"></asp:Label>
+                            <asp:TextBox ID="txtCantidadInsumoOrden" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
+                        </div> 
+                        <div class="col-12 col-md-3">
+                            <br />
+                            <asp:Button ID="btnAgregarInsumoOrden" runat="server" CssClass="btn btn-info btn-block" Text="Agregar" OnClick="btnAgregarInsumoOrden_Click"/>
+                        </div>     
+                    </div>   
+                    <div class="row">
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="upInsumosOrden" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="text-center">
+                                        <asp:Label ID="listaInsumosOrdenVacia" runat="server" 
+                                            Text="No han agregado artículos al Orden" CssClass="d-inline-block h5 my-5"></asp:Label>
+                                    </div>
+                                    <div class="table-responsive pt-3">
+                                        <asp:Repeater ID="listaInsumosOrden" runat="server" OnItemCommand="btnEliminarInsumoOrden_Click">
+                                        <HeaderTemplate>
+                                            <table border="1" class="table">
+                                            <tr>
+                                                <td><b>Nombre</b></td>
+                                                <td><b>Precio</b></td>
+                                                <td><b>Cantidad</b></td>
+                                                <td></td>
+                                            </tr>
+                                        </HeaderTemplate>          
+                                        <ItemTemplate>
+                                            <tr>
+                                            <td> <%# Eval("Insumo.Nombre") %> </td>
+                                            <td> $<%# Eval("Precio") %> </td>
+                                            <td> <%# Eval("Cantidad") %> </td>
+                                                <td><asp:LinkButton ID="btnEliminarInsumoOrden" CommandArgument='<%# Eval("IdInsumo") %>' runat="server" >
+                                                    Eliminar</asp:LinkButton></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </table>
+                                        </FooterTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                    <div class="col-12 text-right">
+                                        <asp:Label ID="lblTotalOrden" runat="server" Text=""></asp:Label>
+                                        <asp:TextBox ID="txtTotalOrden" runat="server" CssClass="form-control" TextMode="Number" Visible="false"></asp:TextBox>              
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>  
+                        </div> 
+                    </div>   
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCrearOrden" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearOrden_Click"/>
+                    <asp:Button ID="btnEditarOrden" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarOrden_Click" />
+                  </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div> <!-- Fin Modal Ordenes-->
 </asp:Content>

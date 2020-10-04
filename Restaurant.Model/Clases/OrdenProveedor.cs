@@ -11,5 +11,7 @@ namespace Restaurant.Model.Clases
         public int IdUsuario { get; set; }
         public Proveedor Proveedor { get; set; }
         public Usuario Usuario { get; set; }
+        public int IdEstadoOrden { get; set; }
+        public EstadoOrden EstadoOrden { get; set; }
     }
 }
