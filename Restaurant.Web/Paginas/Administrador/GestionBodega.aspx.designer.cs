@@ -600,15 +600,6 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.DropDownList ddlInsumoOrden;
 
         /// <summary>
-        /// upPrecio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPrecio;
-
-        /// <summary>
         /// lblPrecioInsumoOrden control.
         /// </summary>
         /// <remarks>
@@ -618,13 +609,13 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Label lblPrecioInsumoOrden;
 
         /// <summary>
-        /// ddlPrecioInsumoOrden control.
+        /// txtPrecioInsumoOrden control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrecioInsumoOrden;
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioInsumoOrden;
 
         /// <summary>
         /// lblCantidadInsumoOrden control.

@@ -18,7 +18,7 @@ namespace Restaurant.Web.Paginas.Administrador
         private UnidadDeMedidaService _unidadDeMedidaService;
         private DetalleOrdenProveedorService _detalleOrdenProveedorService;
         private OrdenProveedorService _ordenProveedorService;
-        //private EstadoOrdenService _estadoOrdenService;
+        private EstadoOrdenService _estadoOrdenService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,11 +31,19 @@ namespace Restaurant.Web.Paginas.Administrador
                 _insumoService = new InsumoService(token.access_token);
                 _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
                 _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                _estadoOrdenService = new EstadoOrdenService(token.access_token);
 
                 List<Insumo> insumos = _insumoService.Obtener();
                 if (insumos != null && insumos.Count > 0)
                 {
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+
+                    ddlInsumoOrden.DataSource = insumos;
+                    ddlInsumoOrden.DataTextField = "Nombre";
+                    ddlInsumoOrden.DataValueField = "Id";
+                    ddlInsumoOrden.DataBind();
+                    ddlInsumoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlInsumoOrden.SelectedIndex = 0;
                 }
 
                 List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
@@ -45,34 +53,41 @@ namespace Restaurant.Web.Paginas.Administrador
                 }
 
                 List<Proveedor> proveedores = _proveedorService.Obtener();
-                if (proveedores != null)
+                if (proveedores != null && proveedores.Count > 0)
                 {
-                    if (proveedores.Count > 0 && proveedores.Count > 0)
-                    {
-                        actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
 
-                        ddlProveedorInsumo.DataSource = proveedores;
-                        ddlProveedorInsumo.DataTextField = "NombreProveedor";
-                        ddlProveedorInsumo.DataValueField = "Id";
-                        ddlProveedorInsumo.DataBind();
-                        ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
-                        ddlProveedorInsumo.SelectedIndex = 0;
-                    }
+                    ddlProveedorInsumo.DataSource = proveedores;
+                    ddlProveedorInsumo.DataTextField = "NombreProveedor";
+                    ddlProveedorInsumo.DataValueField = "Id";
+                    ddlProveedorInsumo.DataBind();
+                    ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlProveedorInsumo.SelectedIndex = 0;
+                }
+
+                List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
+                if (estadosOrden != null && estadosOrden.Count > 0)
+                {
+                    ddlUnidadMedida.DataSource = estadosOrden;
+                    ddlUnidadMedida.DataTextField = "Nombre";
+                    ddlUnidadMedida.DataValueField = "Id";
+                    ddlUnidadMedida.DataBind();
+                    ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlUnidadMedida.SelectedIndex = 0;                    
                 }
 
                 List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
-                if (unidades != null)
-                {
-                    if (unidades.Count > 0)
-                    {
-                        ddlUnidadMedida.DataSource = unidades;
-                        ddlUnidadMedida.DataTextField = "Nombre";
-                        ddlUnidadMedida.DataValueField = "Id";
-                        ddlUnidadMedida.DataBind();
-                        ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
-                        ddlUnidadMedida.SelectedIndex = 0;
-                    }
+                if (unidades != null && unidades.Count > 0)
+                { 
+                    ddlUnidadMedida.DataSource = unidades;
+                    ddlUnidadMedida.DataTextField = "Nombre";
+                    ddlUnidadMedida.DataValueField = "Id";
+                    ddlUnidadMedida.DataBind();
+                    ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlUnidadMedida.SelectedIndex = 0;                    
                 }
+                upModalInsumo.Update();
+                upModalOrden.Update();
             }
         }
 
@@ -419,16 +434,6 @@ namespace Restaurant.Web.Paginas.Administrador
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('Error al editar OrdenProveedor');", true);
             }
         }
-        protected void ddlInsumoOrden_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string idInsumo = ddlInsumoOrden.SelectedValue;
-            ddlPrecioInsumoOrden.SelectedValue = idInsumo;
-            upPrecio.Update();
-            limpiarTabs();
-            tabOrdenes.Attributes.Add("class", "nav-link active");
-            divOrdenes.Attributes.Add("class", "tab-pane active show");
-        }
-
         protected void btnAgregarInsumoOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
@@ -437,7 +442,7 @@ namespace Restaurant.Web.Paginas.Administrador
             Insumo insumo = new Insumo();
             insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
             detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
-            detalleOrdenProveedor.Precio = int.Parse(ddlPrecioInsumoOrden.SelectedItem.Text);
+            detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);
             detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
             detalleOrdenProveedor.Total = detalleOrdenProveedor.Precio * detalleOrdenProveedor.Cantidad;
 

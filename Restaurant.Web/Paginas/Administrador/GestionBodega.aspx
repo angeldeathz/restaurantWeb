@@ -282,16 +282,11 @@
                     <div class="row">
                         <div class="col-12 col-md-5">
                             <asp:Label ID="lblInsumoOrden" runat="server" Text="Insumo"></asp:Label>
-                            <asp:DropDownList ID="ddlInsumoOrden" runat="server" CssClass="form-control" 
-                                OnSelectedIndexChanged="ddlInsumoOrden_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>     
+                            <asp:DropDownList ID="ddlInsumoOrden" runat="server" CssClass="form-control"></asp:DropDownList>     
                         </div>                          
                         <div class="col-12 col-md-2">
-                            <asp:UpdatePanel ID="upPrecio" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <asp:Label ID="lblPrecioInsumoOrden" runat="server" Text="Precio"></asp:Label>
-                                    <asp:DropDownList ID="ddlPrecioInsumoOrden" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>              
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                            <asp:Label ID="lblPrecioInsumoOrden" runat="server" Text="Precio"></asp:Label>
+                            <asp:TextBox ID="txtPrecioInsumoOrden" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox> 
                         </div>
                         <div class="col-12 col-md-2">
                             <asp:Label ID="lblCantidadInsumoOrden" runat="server" Text="Cantidad"></asp:Label>
