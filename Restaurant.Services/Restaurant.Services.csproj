@@ -64,6 +64,7 @@
     <Compile Include="Servicios\DetalleOrdenProveedorService.cs.cs" />
     <Compile Include="Servicios\ArticuloService.cs" />
     <Compile Include="Servicios\ArticuloPedidoService.cs" />
+    <Compile Include="Servicios\EstadoMesaService.cs" />
     <Compile Include="Servicios\EstadoOrdenService.cs" />
     <Compile Include="Servicios\EstadoPedidoService.cs" />
     <Compile Include="Servicios\EstadoReservaService.cs" />

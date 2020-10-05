@@ -231,7 +231,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtRutCliente.Text = cliente.Persona.Rut.ToString();
                     txtDigitoVerificadorCliente.Text = cliente.Persona.DigitoVerificador.ToString();
                     txtEmailCliente.Text = cliente.Persona.Email;
-                    txtTelefonoCliente.Text = cliente.Persona.Telefono;
+                    txtTelefonoCliente.Text = cliente.Persona.Telefono.ToString();
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('show');", true);
                     upModalCliente.Update();
@@ -254,7 +254,7 @@ namespace Restaurant.Web.Paginas.Administrador
             persona.Rut = int.Parse(txtRutCliente.Text);
             persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
             persona.Email = txtEmailCliente.Text;
-            persona.Telefono = txtTelefonoCliente.Text;
+            persona.Telefono = int.Parse(txtTelefonoCliente.Text);
             persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             cliente.Persona = persona;
@@ -296,7 +296,7 @@ namespace Restaurant.Web.Paginas.Administrador
             persona.Rut = int.Parse(txtRutCliente.Text);
             persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
             persona.Email = txtEmailCliente.Text;
-            persona.Telefono = txtTelefonoCliente.Text;
+            persona.Telefono = int.Parse(txtTelefonoCliente.Text);
             persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             cliente.Id = int.Parse(txtIdCliente.Text);
