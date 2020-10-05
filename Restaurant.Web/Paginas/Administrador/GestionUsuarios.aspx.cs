@@ -119,8 +119,8 @@ namespace Restaurant.Web.Paginas.Administrador
         {
             ValidarSesion();
 
-            string contrasena = txtContrasena.Text = "";
-            string contrasenaRepetir = txtContrasenaRepetir.Text = "";
+            string contrasena = txtContrasena.Text;
+            string contrasenaRepetir = txtContrasenaRepetir.Text;
 
             if (contrasena != contrasenaRepetir)
             {
@@ -146,7 +146,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             if (idUsuario != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
+                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Usuario creado');", true);
             }
             else
