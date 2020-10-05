@@ -119,7 +119,7 @@
                         <td> <%# Eval("FechaHora") %> </td>
                         <td> <%# Eval("Total") %> </td>
                         <td> <%# Eval("EstadoOrden.Nombre") %> </td>
-                        <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Insumo.Apellido") %></td>
+                        <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Proveedor.Apellido") %></td>
                         <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>
