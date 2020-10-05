@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -68,6 +69,8 @@ namespace Restaurant.Services.Shared
 
                 switch (response.StatusCode)
                 {
+                    case HttpStatusCode.Unauthorized:
+                        throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
                         restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
@@ -98,6 +101,8 @@ namespace Restaurant.Services.Shared
 
                 switch (response.StatusCode)
                 {
+                    case HttpStatusCode.Unauthorized:
+                        throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
                         restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
@@ -127,6 +132,8 @@ namespace Restaurant.Services.Shared
 
                 switch (response.StatusCode)
                 {
+                    case HttpStatusCode.Unauthorized:
+                        throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
                         restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
@@ -157,6 +164,8 @@ namespace Restaurant.Services.Shared
 
                 switch (response.StatusCode)
                 {
+                    case HttpStatusCode.Unauthorized:
+                        throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
                         restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;

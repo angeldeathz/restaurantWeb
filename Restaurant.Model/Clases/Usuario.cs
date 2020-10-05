@@ -8,8 +8,6 @@
             Contrasena = string.Empty;
             IdPersona = 0;
             IdTipoUsuario = 0;
-            Persona = new Persona();
-            TipoUsuario = new TipoUsuario();
         }
 
         public int Id { get; set; }

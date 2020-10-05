@@ -8,7 +8,6 @@
             Nombre = string.Empty;
             CantidadComensales = 0;
             IdEstadoMesa = 0;
-            EstadoMesa = new EstadoMesa();
         }
 
         public int Id { get; set; }

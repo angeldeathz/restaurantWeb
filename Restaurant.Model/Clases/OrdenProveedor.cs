@@ -11,10 +11,7 @@ namespace Restaurant.Model.Clases
             Total = 0;
             IdProveedor = 0;
             IdUsuario = 0;
-            Proveedor = new Proveedor();
-            Usuario = new Usuario();
             IdEstadoOrden = 0;
-            EstadoOrden = new EstadoOrden();
         }
 
         public int Id { get; set; }

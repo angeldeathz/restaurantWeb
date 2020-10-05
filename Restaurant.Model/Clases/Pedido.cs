@@ -7,12 +7,11 @@ namespace Restaurant.Model.Clases
         public Pedido()
         {
             Id = 0;
-            FechaHoraInicio = new DateTime();
+            FechaHoraFin = new DateTime();
             FechaHoraFin = new DateTime();
             Total = 0;
             IdEstadoPedido = 0;
             IdMesa = 0;
-            Mesa = new Mesa();
         }
 
         public int Id { get; set; }

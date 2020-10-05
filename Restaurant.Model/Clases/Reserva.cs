@@ -11,8 +11,6 @@ namespace Restaurant.Model.Clases
             IdCliente = 0;
             IdMesa = 0;
             IdEstadoReserva = 0;
-            Cliente = new Cliente();
-            Mesa = new Mesa();
             CantidadComensales = 0;
         }
 

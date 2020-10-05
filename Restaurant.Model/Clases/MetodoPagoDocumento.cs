@@ -8,8 +8,6 @@
             Monto = 0;
             IdDocumentoPago = 0;
             IdMetodoPago = 0;
-            DocumentoPago = new DocumentoPago();
-            MetodoPago = new MetodoPago();
         }
 
         public int Id { get; set; }

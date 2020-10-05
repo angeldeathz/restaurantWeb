@@ -9,8 +9,6 @@
             TiempoPreparacion = 0;
             IdArticulo = 0;
             IdTipoPreparacion = 0;
-            Articulo = new Articulo();
-            TipoPreparacion = new TipoPreparacion();
         }
 
         public int Id { get; set; }

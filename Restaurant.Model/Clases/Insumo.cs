@@ -11,8 +11,6 @@
             StockCritico = 0;
             IdProveedor = 0;
             IdUnidadDeMedida = 0;
-            Proveedor = new Proveedor();
-            UnidadMedida = new UnidadMedida();
         }
 
         public int Id { get; set; }

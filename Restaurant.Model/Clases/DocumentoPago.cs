@@ -11,8 +11,6 @@ namespace Restaurant.Model.Clases
             Total = 0;
             IdPedido = 0;
             IdTipoDocumentoPago = 0;
-            Pedido = new Pedido();
-            TipoDocumentoPago =  new TipoDocumentoPago();
         }
 
         public int Id { get; set; }

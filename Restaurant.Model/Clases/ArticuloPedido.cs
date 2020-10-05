@@ -14,8 +14,6 @@ namespace Restaurant.Model.Clases
             IdPedido = 0;
             IdArticulo = 0;
             IdEstadoArticuloPedido = 0;
-            Pedido = new Pedido();
-            Articulo = new Articulo();
         }
 
         public int Id { get; set; }
