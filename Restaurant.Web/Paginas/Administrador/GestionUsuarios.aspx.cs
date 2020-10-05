@@ -130,7 +130,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Usuario usuario = new Usuario();
             usuario.Persona = new Persona();
-            usuario.Id = int.Parse(txtIdUsuario.Text);
+
             usuario.Persona.Nombre = txtNombreUsuario.Text;
             usuario.Persona.Apellido = txtApellidoUsuario.Text;
             usuario.Persona.Rut = int.Parse(txtRutUsuario.Text);

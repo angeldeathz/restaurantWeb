@@ -60,6 +60,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlPrecioArticuloPedido.SelectedIndex = 0;
                 }
 
+
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
                 {
@@ -91,6 +92,17 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlTipoConsumoArticulo.DataBind();
                     ddlTipoConsumoArticulo.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlTipoConsumoArticulo.SelectedIndex = 0;
+                }
+
+                List<EstadoArticulo> estadoArticulo = _estadoArticuloService.Obtener();
+                if (estadoArticulo != null && estadoArticulo.Count > 0)
+                {
+                    ddlEstadoArticulo.DataSource = estadoArticulo;
+                    ddlEstadoArticulo.DataTextField = "Nombre";
+                    ddlEstadoArticulo.DataValueField = "Id";
+                    ddlEstadoArticulo.DataBind();
+                    ddlEstadoArticulo.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoArticulo.SelectedIndex = 0;
                 }
             }
         }

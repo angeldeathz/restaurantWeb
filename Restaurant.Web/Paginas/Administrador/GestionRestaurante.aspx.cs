@@ -16,6 +16,7 @@ namespace Restaurant.Web.Paginas.Administrador
         private ReservaService _reservaService;
         private MesaService _mesaService;
         private EstadoReservaService _estadoReservaService;
+        private EstadoMesaService _estadoMesaService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 _reservaService = new ReservaService(token.access_token);
                 _mesaService = new MesaService(token.access_token);
                 _estadoReservaService = new EstadoReservaService(token.access_token);
+                _estadoMesaService = new EstadoMesaService(token.access_token);
 
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
@@ -71,6 +73,18 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlEstadoReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlEstadoReserva.SelectedIndex = 0;
                 }
+                List<EstadoMesa> estadoMesa = _estadoMesaService.Obtener();
+                if (estadoMesa != null && estadoMesa.Count > 0)
+                {
+
+                    ddlEstadoMesa.DataSource = estadoMesa;
+                    ddlEstadoMesa.DataTextField = "Nombre";
+                    ddlEstadoMesa.DataValueField = "Id";
+                    ddlEstadoMesa.DataBind();
+                    ddlEstadoMesa.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoMesa.SelectedIndex = 0;
+                }
+
             }
         }
 
@@ -247,14 +261,17 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Cliente cliente = new Cliente();
-            cliente.Persona = new Persona();
-            cliente.Persona.Nombre = txtNombreCliente.Text;
-            cliente.Persona.Apellido = txtApellidoCliente.Text;
-            cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
-            cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
-            cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = int.Parse(txtTelefonoCliente.Text);
-            cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            Persona persona = new Persona();
+
+            persona.Nombre = txtNombreCliente.Text;
+            persona.Apellido = txtApellidoCliente.Text;
+            persona.Rut = int.Parse(txtRutCliente.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
+            persona.Email = txtEmailCliente.Text;
+            persona.Telefono = int.Parse(txtTelefonoCliente.Text);
+            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+
+            cliente.Persona = persona;
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
@@ -264,26 +281,41 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Cliente creado');", true);
+
             }
             else
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Error al crear cliente');", true);
+            }
+
+            List<Cliente> clientes = _clienteService.Obtener();
+            if (clientes != null && clientes.Count > 0)
+            {
+                actualizarRepeater(listaClientes, clientes, listaClientesVacia);
             }
         }
 
         protected void btnEditarCliente_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+
+
             Cliente cliente = new Cliente();
-            cliente.Persona = new Persona();
+            Persona persona = new Persona();
+
+
+
+            persona.Nombre = txtNombreCliente.Text;
+            persona.Apellido = txtApellidoCliente.Text;
+            persona.Rut = int.Parse(txtRutCliente.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
+            persona.Email = txtEmailCliente.Text;
+            persona.Telefono = int.Parse(txtTelefonoCliente.Text);
+            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+
             cliente.Id = int.Parse(txtIdCliente.Text);
-            cliente.Persona.Nombre = txtNombreCliente.Text;
-            cliente.Persona.Apellido = txtApellidoCliente.Text;
-            cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
-            cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
-            cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = int.Parse(txtTelefonoCliente.Text);
-            cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            cliente.Persona = persona;
+
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);            
@@ -389,7 +421,6 @@ namespace Restaurant.Web.Paginas.Administrador
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "alert('Error al editar mesa');", true);
             }
         }
-
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {
             repeater.DataSource = listaData;
