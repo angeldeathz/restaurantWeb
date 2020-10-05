@@ -278,7 +278,6 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona = persona;
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);            
