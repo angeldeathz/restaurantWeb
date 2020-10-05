@@ -200,8 +200,8 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _insumoService.Modificar(insumo, insumo.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo editado');", true);        
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);  
             }
             else
             {
@@ -269,14 +269,15 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Proveedor proveedor = new Proveedor();
-            proveedor.Persona.Nombre = txtNombreProveedor.Text;
-            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
-            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
-            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
-            proveedor.Persona.Email = txtEmailProveedor.Text;
-            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+            Persona persona = new Persona();
+            persona.Nombre = txtNombreProveedor.Text;
+            persona.Apellido = txtApellidoProveedor.Text;
+            persona.Rut = int.Parse(txtRutProveedor.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+            persona.Email = txtEmailProveedor.Text;
+            persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);            
             int idProveedor = _proveedorService.Guardar(proveedor);

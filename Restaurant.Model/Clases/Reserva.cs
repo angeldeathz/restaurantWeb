@@ -4,6 +4,18 @@ namespace Restaurant.Model.Clases
 {
     public class Reserva
     {
+        public Reserva()
+        {
+            Id = 0;
+            FechaReserva = new DateTime();
+            IdCliente = 0;
+            IdMesa = 0;
+            IdEstadoReserva = 0;
+            Cliente = new Cliente();
+            Mesa = new Mesa();
+            CantidadComensales = 0;
+        }
+
         public int Id { get; set; }
         public DateTime FechaReserva { get; set; }
         public int IdCliente { get; set; }

@@ -2,6 +2,19 @@
 {
     public class Insumo
     {
+        public Insumo()
+        {
+            Id = 0;
+            Nombre = string.Empty;
+            StockActual = 0;
+            StockOptimo = 0;
+            StockCritico = 0;
+            IdProveedor = 0;
+            IdUnidadDeMedida = 0;
+            Proveedor = new Proveedor();
+            UnidadMedida = new UnidadMedida();
+        }
+
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int StockActual { get; set; }

@@ -2,6 +2,15 @@
 {
     public class Mesa
     {
+        public Mesa()
+        {
+            Id = 0;
+            Nombre = string.Empty;
+            CantidadComensales = 0;
+            IdEstadoMesa = 0;
+            EstadoMesa = new EstadoMesa();
+        }
+
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int CantidadComensales { get; set; }

@@ -2,6 +2,18 @@
 {
     public class Articulo
     {
+        public Articulo()
+        {
+            Id = 0;
+            Nombre = string.Empty;
+            Descripcion = string.Empty;
+            Precio = 0;
+            IdEstadoArticulo = 0;
+            IdTipoConsumo = 0;
+            EstadoArticulo = new EstadoArticulo();
+            TipoConsumo = new TipoConsumo();
+        }
+
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }

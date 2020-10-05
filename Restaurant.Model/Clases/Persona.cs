@@ -5,6 +5,18 @@ namespace Restaurant.Model.Clases
 {
     public class Persona
     {
+        public Persona()
+        {
+            Id = 0;
+            Rut = 0;
+            DigitoVerificador = string.Empty;
+            Nombre = string.Empty;
+            Apellido = string.Empty;
+            Email = string.Empty;
+            Telefono = 0;
+            EsPersonaNatural = ' ';
+        }
+
         public int Id { get; set; }
         public int Rut { get; set; }
         public string DigitoVerificador { get; set; }
