@@ -355,7 +355,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     btnCrearOrden.Visible = false;
                     btnEditarOrden.Visible = true;
                     txtIdOrden.Text = ordenProveedor.Id.ToString();
-                    txtFechaHoraOrden.Text = ordenProveedor.FechaOrden.ToShortTimeString();
+                    txtFechaHoraOrden.Text = ordenProveedor.FechaHora.ToShortTimeString();
                     txtTotalOrden.Text = ordenProveedor.Total.ToString();
                     ddlEstadoOrden.SelectedValue = ordenProveedor.IdEstadoOrden.ToString();
                     ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
@@ -376,7 +376,7 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             OrdenProveedor ordenProveedor = new OrdenProveedor();
-            ordenProveedor.FechaOrden = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
@@ -407,7 +407,7 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.Id = int.Parse(txtIdOrden.Text);
-            ordenProveedor.FechaOrden = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);

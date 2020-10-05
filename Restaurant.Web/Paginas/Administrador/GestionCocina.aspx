@@ -40,7 +40,7 @@
                         <td> <%# Eval("FechaHoraFin") %> </td>
                         <td> <%# Eval("Total") %> </td>
                         <td> <%# Eval("Mesa.Nombre") %> </td>
-                        <td> <%# Eval("Estado.Nombre") %></td>
+                        <td> <%# Eval("EstadoPedido.Nombre") %></td>
                         <td><asp:LinkButton ID="btnModalEditarPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>

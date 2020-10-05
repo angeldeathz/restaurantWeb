@@ -145,8 +145,8 @@ namespace Restaurant.Web.Paginas.Administrador
                     btnCrearPedido.Visible = false;
                     btnEditarPedido.Visible = true;
                     txtIdPedido.Text = pedido.Id.ToString();
-                    txtFechaInicioPedido.Text = pedido.FechaInicio.ToShortTimeString();
-                    txtFechaFinPedido.Text = pedido.FechaTermino.ToShortTimeString();
+                    txtFechaInicioPedido.Text = pedido.FechaHoraInicio.ToShortTimeString();
+                    txtFechaFinPedido.Text = pedido.FechaHoraFin.ToShortTimeString();
                     txtTotalPedido.Text = pedido.Total.ToString();
                     ddlEstadoPedido.SelectedValue = pedido.IdEstadoPedido.ToString();
                     ddlMesaPedido.SelectedValue = pedido.IdMesa.ToString();
@@ -167,8 +167,8 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Pedido pedido = new Pedido();
-            pedido.FechaInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
-            pedido.FechaTermino = Convert.ToDateTime(txtFechaFinPedido.Text);
+            pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
+            pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPedido.Text);
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = int.Parse(ddlEstadoPedido.SelectedValue);
             pedido.IdMesa = int.Parse(ddlMesaPedido.SelectedValue);
@@ -199,8 +199,8 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
             Pedido pedido = new Pedido();
             pedido.Id = int.Parse(txtIdPedido.Text);
-            pedido.FechaInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
-            pedido.FechaTermino = Convert.ToDateTime(txtFechaFinPedido.Text);
+            pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
+            pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPedido.Text);
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = int.Parse(ddlEstadoPedido.SelectedValue);
             pedido.IdMesa = int.Parse(ddlMesaPedido.SelectedValue);

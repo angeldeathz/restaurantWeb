@@ -8,7 +8,7 @@ namespace Restaurant.Services.Servicios
     public class EstadoOrdenService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/estadoOrdenes/";
+        private string _url = $"http://localhost/restaurant/api/estadoOrdenesProveedor/";
 
         public EstadoOrdenService(string token)
         {
