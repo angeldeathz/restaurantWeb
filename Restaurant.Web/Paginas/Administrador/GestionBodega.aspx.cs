@@ -297,6 +297,7 @@ namespace Restaurant.Web.Paginas.Administrador
         {
             ValidarSesion();
             Proveedor proveedor = new Proveedor();
+            proveedor.Persona = new Persona();
             proveedor.Id = int.Parse(txtIdProveedor.Text);
             proveedor.Persona.Nombre = txtNombreProveedor.Text;
             proveedor.Persona.Apellido = txtApellidoProveedor.Text;
