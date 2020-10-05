@@ -7,7 +7,7 @@ namespace Restaurant.Model.Clases
         public OrdenProveedor()
         {
             Id = 0;
-            FechaOrden = new DateTime();
+            FechaHora = new DateTime();
             Total = 0;
             IdProveedor = 0;
             IdUsuario = 0;
