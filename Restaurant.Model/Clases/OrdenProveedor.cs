@@ -5,7 +5,7 @@ namespace Restaurant.Model.Clases
     public class OrdenProveedor
     {
         public int Id { get; set; }
-        public DateTime FechaOrden { get; set; }
+        public DateTime FechaHora { get; set; }
         public int Total { get; set; }
         public int IdProveedor { get; set; }
         public int IdUsuario { get; set; }
