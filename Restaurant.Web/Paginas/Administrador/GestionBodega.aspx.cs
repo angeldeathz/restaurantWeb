@@ -269,14 +269,14 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Proveedor proveedor = new Proveedor();
-            Persona persona = new Persona();
-            persona.Nombre = txtNombreProveedor.Text;
-            persona.Apellido = txtApellidoProveedor.Text;
-            persona.Rut = int.Parse(txtRutProveedor.Text);
-            persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
-            persona.Email = txtEmailProveedor.Text;
-            persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona = new Persona();
+            proveedor.Persona.Nombre = txtNombreProveedor.Text;
+            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
+            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
+            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+            proveedor.Persona.Email = txtEmailProveedor.Text;
+            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             proveedor.Direccion = txtDireccionProveedor.Text;
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);            
