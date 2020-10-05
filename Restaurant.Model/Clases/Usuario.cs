@@ -9,6 +9,5 @@
         public Persona Persona { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
         public string NombreProveedor { get { return string.Concat(Persona.Nombre, Persona.Apellido); } }
-
     }
 }

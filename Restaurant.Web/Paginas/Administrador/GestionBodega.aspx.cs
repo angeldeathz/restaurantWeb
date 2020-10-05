@@ -252,7 +252,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtRutProveedor.Text = proveedor.Persona.Rut.ToString();
                     txtDigitoVerificadorProveedor.Text = proveedor.Persona.DigitoVerificador.ToString();
                     txtEmailProveedor.Text = proveedor.Persona.Email;
-                    txtTelefonoProveedor.Text = proveedor.Persona.Telefono;
+                    txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
                     txtDireccionProveedor.Text = proveedor.Direccion;
                     chkEsPersonaJuridica.Checked = ! Convert.ToBoolean(int.Parse(proveedor.Persona.EsPersonaNatural.ToString()));
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
@@ -274,7 +274,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
             proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
             proveedor.Persona.Email = txtEmailProveedor.Text;
-            proveedor.Persona.Telefono = txtTelefonoProveedor.Text;
+            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Direccion = txtDireccionProveedor.Text;
             proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
             Token token = (Token)Session["token"];
@@ -302,7 +302,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
             proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
             proveedor.Persona.Email = txtEmailProveedor.Text;
-            proveedor.Persona.Telefono = txtTelefonoProveedor.Text;
+            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Direccion = txtDireccionProveedor.Text;
             proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
