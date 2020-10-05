@@ -12,7 +12,6 @@ namespace Restaurant.Model.Clases
             Total = 0;
             IdEstadoPedido = 0;
             IdMesa = 0;
-            Mesa = new Mesa();
         }
 
         public int Id { get; set; }

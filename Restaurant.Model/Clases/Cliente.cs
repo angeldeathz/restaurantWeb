@@ -6,7 +6,6 @@
         {
             Id = 0;
             IdPersona = 0;
-            Persona = new Persona();
         }
 
         public int Id { get; set; }

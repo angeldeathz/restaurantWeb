@@ -10,8 +10,6 @@
             Precio = 0;
             IdEstadoArticulo = 0;
             IdTipoConsumo = 0;
-            EstadoArticulo = new EstadoArticulo();
-            TipoConsumo = new TipoConsumo();
         }
 
         public int Id { get; set; }

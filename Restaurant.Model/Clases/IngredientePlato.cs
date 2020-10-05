@@ -8,8 +8,6 @@
             CantidadInsumo = 0;
             IdInsumo = 0;
             IdPlato = 0;
-            Insumo = new Insumo();
-            Plato = new Plato();
         }
 
         public int Id { get; set; }

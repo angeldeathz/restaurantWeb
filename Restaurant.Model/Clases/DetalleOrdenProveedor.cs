@@ -9,8 +9,6 @@
             Cantidad = 0;
             Total = 0;
             IdInsumo = 0;
-            Insumo = new Insumo();
-            OrdenProveedor = new OrdenProveedor();
             IdOrdenProveedor = 0;
         }
 
