@@ -129,15 +129,18 @@ namespace Restaurant.Web.Paginas.Administrador
             }
 
             Usuario usuario = new Usuario();
-            usuario.Id = int.Parse(txtIdUsuario.Text);
-            usuario.Persona.Nombre = txtNombreUsuario.Text;
-            usuario.Persona.Apellido = txtApellidoUsuario.Text;
-            usuario.Persona.Rut = int.Parse(txtRutUsuario.Text);
-            usuario.Persona.DigitoVerificador = txtDigitoVerificadorUsuario.Text;
-            usuario.Persona.Email = txtEmailUsuario.Text;
-            usuario.Persona.Telefono = txtTelefonoUsuario.Text;
+            Persona persona = new Persona();
+
+            persona.Nombre = txtNombreUsuario.Text;
+            persona.Apellido = txtApellidoUsuario.Text;
+            persona.Rut = int.Parse(txtRutUsuario.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorUsuario.Text;
+            persona.Email = txtEmailUsuario.Text;
+            persona.Telefono = txtTelefonoUsuario.Text;
+
             usuario.IdTipoUsuario = int.Parse(ddlTipoUsuario.SelectedValue);
             usuario.Contrasena = txtContrasena.Text;
+            usuario.Persona = persona;
 
             Token token = (Token)Session["token"];
             _usuarioService = new UsuarioService(token.access_token);

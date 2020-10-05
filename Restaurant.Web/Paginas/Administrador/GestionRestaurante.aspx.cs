@@ -247,13 +247,17 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Cliente cliente = new Cliente();
-            cliente.Persona.Nombre = txtNombreCliente.Text;
-            cliente.Persona.Apellido = txtApellidoCliente.Text;
-            cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
-            cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
-            cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = txtTelefonoCliente.Text;
-            cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            Persona persona = new Persona();
+
+            persona.Nombre = txtNombreCliente.Text;
+            persona.Apellido = txtApellidoCliente.Text;
+            persona.Rut = int.Parse(txtRutCliente.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
+            persona.Email = txtEmailCliente.Text;
+            persona.Telefono = txtTelefonoCliente.Text;
+            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+
+            cliente.Persona = persona;
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
@@ -263,25 +267,41 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Cliente creado');", true);
+
             }
             else
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Error al crear cliente');", true);
+            }
+
+            List<Cliente> clientes = _clienteService.Obtener();
+            if (clientes != null && clientes.Count > 0)
+            {
+                actualizarRepeater(listaClientes, clientes, listaClientesVacia);
             }
         }
 
         protected void btnEditarCliente_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+
+
             Cliente cliente = new Cliente();
+            Persona persona = new Persona();
+
+
+
+            persona.Nombre = txtNombreCliente.Text;
+            persona.Apellido = txtApellidoCliente.Text;
+            persona.Rut = int.Parse(txtRutCliente.Text);
+            persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
+            persona.Email = txtEmailCliente.Text;
+            persona.Telefono = txtTelefonoCliente.Text;
+            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+
             cliente.Id = int.Parse(txtIdCliente.Text);
-            cliente.Persona.Nombre = txtNombreCliente.Text;
-            cliente.Persona.Apellido = txtApellidoCliente.Text;
-            cliente.Persona.Rut = int.Parse(txtRutCliente.Text);
-            cliente.Persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
-            cliente.Persona.Email = txtEmailCliente.Text;
-            cliente.Persona.Telefono = txtTelefonoCliente.Text;
-            cliente.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            cliente.Persona = persona;
+
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);            
