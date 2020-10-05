@@ -16,6 +16,7 @@ namespace Restaurant.Web.Paginas.Administrador
         private ReservaService _reservaService;
         private MesaService _mesaService;
         private EstadoReservaService _estadoReservaService;
+        private EstadoMesaService _estadoMesaService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 _reservaService = new ReservaService(token.access_token);
                 _mesaService = new MesaService(token.access_token);
                 _estadoReservaService = new EstadoReservaService(token.access_token);
+                _estadoMesaService = new EstadoMesaService(token.access_token);
 
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
@@ -71,6 +73,18 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlEstadoReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlEstadoReserva.SelectedIndex = 0;
                 }
+                List<EstadoMesa> estadoMesa = _estadoMesaService.Obtener();
+                if (estadoMesa != null && estadoMesa.Count > 0)
+                {
+
+                    ddlEstadoMesa.DataSource = estadoMesa;
+                    ddlEstadoMesa.DataTextField = "Nombre";
+                    ddlEstadoMesa.DataValueField = "Id";
+                    ddlEstadoMesa.DataBind();
+                    ddlEstadoMesa.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoMesa.SelectedIndex = 0;
+                }
+
             }
         }
 
