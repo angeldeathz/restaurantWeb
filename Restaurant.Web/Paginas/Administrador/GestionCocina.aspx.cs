@@ -44,22 +44,8 @@ namespace Restaurant.Web.Paginas.Administrador
                 if (articulos != null && articulos.Count > 0)
                 {
                     actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
-
-                    ddlArticuloPedido.DataSource = articulos;
-                    ddlArticuloPedido.DataTextField = "Nombre";
-                    ddlArticuloPedido.DataValueField = "Id";
-                    ddlArticuloPedido.DataBind();
-                    ddlArticuloPedido.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlArticuloPedido.SelectedIndex = 0;
-
-                    ddlPrecioArticuloPedido.DataSource = articulos;
-                    ddlPrecioArticuloPedido.DataTextField = "Precio";
-                    ddlPrecioArticuloPedido.DataValueField = "Id";
-                    ddlPrecioArticuloPedido.DataBind();
-                    ddlPrecioArticuloPedido.Items.Insert(0, new ListItem("", ""));
-                    ddlPrecioArticuloPedido.SelectedIndex = 0;
+                    actualizarDdlArticulos(articulos);
                 }
-
 
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
@@ -289,6 +275,7 @@ namespace Restaurant.Web.Paginas.Administrador
             articuloPedido.Cantidad = int.Parse(txtCantidadArticuloPedido.Text);
             articuloPedido.Total = articuloPedido.Precio * articuloPedido.Cantidad;
             articuloPedido.IdEstadoArticuloPedido = 1;
+            articuloPedido.Articulo = articulo;
 
             List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
             var articuloExiste = listaArticulos.FirstOrDefault(a => a.IdArticulo == articuloPedido.IdArticulo);
@@ -417,6 +404,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
                     upListaArticulos.Update();
+                    actualizarDdlArticulos(articulos);
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "alert('Articulo creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
@@ -472,6 +460,23 @@ namespace Restaurant.Web.Paginas.Administrador
                 repeater.Visible = true;
                 mensajeListaVacia.Visible = false;
             }
+        }
+
+        public void actualizarDdlArticulos(List<Articulo> articulos)
+        {
+            ddlArticuloPedido.DataSource = articulos;
+            ddlArticuloPedido.DataTextField = "Nombre";
+            ddlArticuloPedido.DataValueField = "Id";
+            ddlArticuloPedido.DataBind();
+            ddlArticuloPedido.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlArticuloPedido.SelectedIndex = 0;
+
+            ddlPrecioArticuloPedido.DataSource = articulos;
+            ddlPrecioArticuloPedido.DataTextField = "Precio";
+            ddlPrecioArticuloPedido.DataValueField = "Id";
+            ddlPrecioArticuloPedido.DataBind();
+            ddlPrecioArticuloPedido.Items.Insert(0, new ListItem("", ""));
+            ddlPrecioArticuloPedido.SelectedIndex = 0;
         }
     }
 }
