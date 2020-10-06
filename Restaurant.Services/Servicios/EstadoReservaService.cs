@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class EstadoReservaService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/estadoReservas/";
 
         public EstadoReservaService(string token)
         {
@@ -17,30 +16,32 @@ namespace Restaurant.Services.Servicios
 
         public List<EstadoReserva> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<EstadoReserva>>(_url);
+            string url = $"http://localhost/restaurant/api/estadoReservas/";
+            var respuesta = _restClientHttp.Get<List<EstadoReserva>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public EstadoReserva Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<EstadoReserva>(_url);
+            string url = $"http://localhost/restaurant/api/estadoReservas/{id}";
+            var respuesta = _restClientHttp.Get<EstadoReserva>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public int Guardar(EstadoReserva estadoReserva)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, estadoReserva);
+            string url = $"http://localhost/restaurant/api/estadoReservas/";
+            var respuesta = _restClientHttp.Post<int>(url, estadoReserva);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
         public bool Modificar(EstadoReserva estadoReserva, int idEstadoReserva)
         {
-            _url = $"{_url}{idEstadoReserva}";
-            var respuesta = _restClientHttp.Put<bool>(_url, estadoReserva);
+            string url = $"http://localhost/restaurant/api/estadoReservas/{idEstadoReserva}";
+            var respuesta = _restClientHttp.Put<bool>(url, estadoReserva);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }
