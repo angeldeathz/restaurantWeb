@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class InsumoService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/Insumos/";
 
         public InsumoService(string token)
         {
@@ -17,30 +16,32 @@ namespace Restaurant.Services.Servicios
 
         public List<Insumo> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<Insumo>>(_url);
+            var url = $"http://localhost/restaurant/api/Insumos/";
+            var respuesta = _restClientHttp.Get<List<Insumo>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public Insumo Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<Insumo>(_url);
+            var url = $"http://localhost/restaurant/api/Insumos/{id}";
+            var respuesta = _restClientHttp.Get<Insumo>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public int Guardar(Insumo insumo)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, insumo);
+            var url = $"http://localhost/restaurant/api/Insumos/";
+            var respuesta = _restClientHttp.Post<int>(url, insumo);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
         public bool Modificar(Insumo insumo, int idInsumo)
         {
-            _url = $"{_url}{idInsumo}";
-            var respuesta = _restClientHttp.Put<bool>(_url, insumo);
+            var url = $"http://localhost/restaurant/api/Insumos/{idInsumo}";
+            var respuesta = _restClientHttp.Put<bool>(url, insumo);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }

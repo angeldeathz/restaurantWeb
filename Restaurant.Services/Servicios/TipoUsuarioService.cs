@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class TipoUsuarioService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/tipoUsuarios/";
 
         public TipoUsuarioService(string token)
         {
@@ -17,15 +16,16 @@ namespace Restaurant.Services.Servicios
 
         public List<TipoUsuario> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<TipoUsuario>>(_url);
+            string url = $"http://localhost/restaurant/api/tipoUsuarios/";
+            var respuesta = _restClientHttp.Get<List<TipoUsuario>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public TipoUsuario Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<TipoUsuario>(_url);
+            string url = $"http://localhost/restaurant/api/tipoUsuarios/{id}";
+            var respuesta = _restClientHttp.Get<TipoUsuario>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }

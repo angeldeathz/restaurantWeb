@@ -60,6 +60,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearReservas;
 
         /// <summary>
+        /// upListaReservas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListaReservas;
+
+        /// <summary>
         /// listaReservasVacia control.
         /// </summary>
         /// <remarks>
@@ -96,6 +105,15 @@ namespace Restaurant.Web.Paginas.Administrador
         protected global::System.Web.UI.WebControls.Button btnModalCrearCliente;
 
         /// <summary>
+        /// upListaClientes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListaClientes;
+
+        /// <summary>
         /// listaClientesVacia control.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace Restaurant.Web.Paginas.Administrador
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnModalCrearMesa;
+
+        /// <summary>
+        /// upListaMesas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upListaMesas;
 
         /// <summary>
         /// listaMesasVacia control.

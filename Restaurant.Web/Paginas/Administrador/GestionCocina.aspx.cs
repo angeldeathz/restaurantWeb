@@ -197,8 +197,14 @@ namespace Restaurant.Web.Paginas.Administrador
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
                 }
+                List<Pedido> pedidos = _pedidoService.Obtener();
+                if (pedidos != null && pedidos.Count > 0)
+                {
+                    actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
+                    upListaPedidos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPedido", "alert('Pedido creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Pedido creado');", true);
             }
             else
             {
@@ -230,8 +236,14 @@ namespace Restaurant.Web.Paginas.Administrador
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
                 }
+                List<Pedido> pedidos = _pedidoService.Obtener();
+                if (pedidos != null && pedidos.Count > 0)
+                {
+                    actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
+                    upListaPedidos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPedido", "alert('Pedido editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Pedido editado');", true);
             }
             else
             {
@@ -383,8 +395,14 @@ namespace Restaurant.Web.Paginas.Administrador
 
             if (idArticulo != 0)
             {
+                List<Articulo> articulos = _articuloService.Obtener();
+                if (articulos != null && articulos.Count > 0)
+                {
+                    actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
+                    upListaArticulos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "alert('Articulo creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Articulo creado');", true);
             }
             else
             {
@@ -408,8 +426,14 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _articuloService.Modificar(articulo, articulo.Id);
             if (editar)
             {
+                List<Articulo> articulos = _articuloService.Obtener();
+                if (articulos != null && articulos.Count > 0)
+                {
+                    actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
+                    upListaArticulos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarArticulo", "alert('Articulo editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Articulo editado');", true);
             }
             else
             {

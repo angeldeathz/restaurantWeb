@@ -9,7 +9,6 @@ namespace Restaurant.Services.Servicios
     public class UsuarioService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/usuarios";
 
         public UsuarioService(string token)
         {
@@ -18,7 +17,7 @@ namespace Restaurant.Services.Servicios
 
         public Token Autenticar(string rut, string contrasena)
         {
-            const string url = "http://localhost/Autenticacion/token";
+            var url = "http://localhost/Autenticacion/token";
             var respuesta = _restClientHttp.GetToken<Token>(url, rut, contrasena);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
@@ -26,38 +25,40 @@ namespace Restaurant.Services.Servicios
 
         public Usuario ObtenerPorRut(string rut)
         {
-            _url = $"{_url}?rut={rut}";
-            var respuesta = _restClientHttp.Get<Usuario>(_url);
+            string url = $"http://localhost/restaurant/api/usuarios?rut={rut}";
+            var respuesta = _restClientHttp.Get<Usuario>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public List<Usuario> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<Usuario>>(_url);
+            string url = $"http://localhost/restaurant/api/usuarios";
+            var respuesta = _restClientHttp.Get<List<Usuario>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public Usuario Obtener(int id)
         {
-            _url = $"{_url}/{id}";
-            var respuesta = _restClientHttp.Get<Usuario>(_url);
+            string url = $"http://localhost/restaurant/api/usuarios/{id}";
+            var respuesta = _restClientHttp.Get<Usuario>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public int Guardar(Usuario usuario)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, usuario);
+            string url = $"http://localhost/restaurant/api/usuarios";
+            var respuesta = _restClientHttp.Post<int>(url, usuario);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
         public bool Modificar(Usuario usuario, int idUsuario)
         {
-            _url = $"{_url}/{idUsuario}";
-            var respuesta = _restClientHttp.Put<bool>(_url, usuario);
+            string url = $"http://localhost/restaurant/api/usuarios/{idUsuario}";
+            var respuesta = _restClientHttp.Put<bool>(url, usuario);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }

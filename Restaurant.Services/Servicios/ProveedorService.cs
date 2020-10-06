@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class ProveedorService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/proveedores/";
 
         public ProveedorService(string token)
         {
@@ -17,30 +16,32 @@ namespace Restaurant.Services.Servicios
 
         public List<Proveedor> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<Proveedor>>(_url);
+            string url = $"http://localhost/restaurant/api/proveedores/";
+            var respuesta = _restClientHttp.Get<List<Proveedor>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public Proveedor Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<Proveedor>(_url);
+            string url = $"http://localhost/restaurant/api/proveedores/{id}";
+            var respuesta = _restClientHttp.Get<Proveedor>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public int Guardar(Proveedor proveedor)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, proveedor);
+            string url = $"http://localhost/restaurant/api/proveedores/";
+            var respuesta = _restClientHttp.Post<int>(url, proveedor);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
         public bool Modificar(Proveedor proveedor, int idProveedor)
         {
-            _url = $"{_url}{idProveedor}";
-            var respuesta = _restClientHttp.Put<bool>(_url, proveedor);
+            string url = $"http://localhost/restaurant/api/proveedores/{idProveedor}";
+            var respuesta = _restClientHttp.Put<bool>(url, proveedor);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }

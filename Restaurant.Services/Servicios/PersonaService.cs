@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class PersonaService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/personas";
 
         public PersonaService(string token)
         {
@@ -17,23 +16,24 @@ namespace Restaurant.Services.Servicios
 
         public List<Persona> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<Persona>>(_url);
+            string url = $"http://localhost/restaurant/api/personas";
+            var respuesta = _restClientHttp.Get<List<Persona>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public Persona Obtener(int id)
         {
-            _url = $"{_url}/{id}";
-            var respuesta = _restClientHttp.Get<Persona>(_url);
+            string url = $"http://localhost/restaurant/api/personas/{id}";
+            var respuesta = _restClientHttp.Get<Persona>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public Persona Obtener(string rut)
         {
-            _url = $"{_url}?rut={rut}";
-            var respuesta = _restClientHttp.Get<Persona>(_url);
+            string url = $"http://localhost/restaurant/api/personas?rut={rut}";
+            var respuesta = _restClientHttp.Get<Persona>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }

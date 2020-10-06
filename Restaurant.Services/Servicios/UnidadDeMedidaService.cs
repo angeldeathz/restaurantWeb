@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class UnidadDeMedidaService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/UnidadesDeMedida/";
 
         public UnidadDeMedidaService(string token)
         {
@@ -17,15 +16,16 @@ namespace Restaurant.Services.Servicios
 
         public List<UnidadMedida> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<UnidadMedida>>(_url);
+            string url = $"http://localhost/restaurant/api/UnidadesDeMedida/";
+            var respuesta = _restClientHttp.Get<List<UnidadMedida>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public UnidadMedida Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<UnidadMedida>(_url);
+            string url = $"http://localhost/restaurant/api/UnidadesDeMedida/{id}";
+            var respuesta = _restClientHttp.Get<UnidadMedida>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }

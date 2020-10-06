@@ -8,7 +8,6 @@ namespace Restaurant.Services.Servicios
     public class TipoConsumoService
     {
         private readonly RestClientHttp _restClientHttp;
-        private string _url = $"http://localhost/restaurant/api/tipoConsumos/";
 
         public TipoConsumoService(string token)
         {
@@ -17,29 +16,31 @@ namespace Restaurant.Services.Servicios
 
         public List<TipoConsumo> Obtener()
         {
-            var respuesta = _restClientHttp.Get<List<TipoConsumo>>(_url);
+            string url = $"http://localhost/restaurant/api/tipoConsumos/";
+            var respuesta = _restClientHttp.Get<List<TipoConsumo>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
 
         public TipoConsumo Obtener(int id)
         {
-            _url = $"{_url}{id}";
-            var respuesta = _restClientHttp.Get<TipoConsumo>(_url);
+            string url = $"http://localhost/restaurant/api/tipoConsumos/{id}";
+            var respuesta = _restClientHttp.Get<TipoConsumo>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
         }
         public int Guardar(TipoConsumo tipoConsumo)
         {
-            var respuesta = _restClientHttp.Post<int>(_url, tipoConsumo);
+            string url = $"http://localhost/restaurant/api/tipoConsumos/";
+            var respuesta = _restClientHttp.Post<int>(url, tipoConsumo);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
 
         public bool Modificar(TipoConsumo tipoConsumo, int idTipoConsumo)
         {
-            _url = $"{_url}{idTipoConsumo}";
-            var respuesta = _restClientHttp.Put<bool>(_url, tipoConsumo);
+            string url = $"http://localhost/restaurant/api/tipoConsumos/{idTipoConsumo}";
+            var respuesta = _restClientHttp.Put<bool>(url, tipoConsumo);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }

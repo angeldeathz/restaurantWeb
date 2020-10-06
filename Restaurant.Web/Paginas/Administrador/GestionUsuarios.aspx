@@ -13,41 +13,45 @@
         <div class="tab-content py-3 px-1">
             <div class="tab-pane show active" id="divUsuarios" role="tabpanel" aria-labelledby="tabUsuarios" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearUsuario" runat="server" Text="Crear Usuario" OnClick="btnModalCrearUsuario_Click" CssClass="btn btn-info float-right"/>
-                <div class="text-center">
-                    <asp:Label ID="listaUsuariosVacia" runat="server" 
-                        Text="No existen Usuarios para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-                </div>  
-                <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaUsuarios" runat="server"  OnItemCommand="btnModalEditarUsuario_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Rut</b></td>
-                            <td><b>Nombre</b></td>
-                            <td><b>Apellido</b></td>
-                            <td><b>Email</b></td>
-                            <td><b>Teléfono</b></td>
-                            <td><b>Tipo de usuario</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <tr>
-                        <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
-                        <td> <%# Eval("Persona.Nombre") %> </td>
-                        <td> <%# Eval("Persona.Apellido") %> </td>
-                        <td> <%# Eval("Persona.Email") %> </td>
-                        <td> <%# Eval("Persona.Telefono") %> </td>
-                        <td> <%# Eval("TipoUsuario.Nombre") %> </td>
-                         <td><asp:LinkButton ID="btnModalEditarUsuario" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+              <asp:UpdatePanel ID="upListaUsuarios" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate> 
+                    <div class="text-center">
+                        <asp:Label ID="listaUsuariosVacia" runat="server" 
+                            Text="No existen Usuarios para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                    </div>  
+                    <div class="table-responsive pt-3">
+                        <asp:Repeater ID="listaUsuarios" runat="server"  OnItemCommand="btnModalEditarUsuario_Click">
+                        <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Rut</b></td>
+                                <td><b>Nombre</b></td>
+                                <td><b>Apellido</b></td>
+                                <td><b>Email</b></td>
+                                <td><b>Teléfono</b></td>
+                                <td><b>Tipo de usuario</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <tr>
+                            <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                            <td> <%# Eval("Persona.Nombre") %> </td>
+                            <td> <%# Eval("Persona.Apellido") %> </td>
+                            <td> <%# Eval("Persona.Email") %> </td>
+                            <td> <%# Eval("Persona.Telefono") %> </td>
+                            <td> <%# Eval("TipoUsuario.Nombre") %> </td>
+                             <td><asp:LinkButton ID="btnModalEditarUsuario" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                      </asp:Repeater>
+                    </div>
+                   </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
       </div>
