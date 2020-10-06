@@ -175,8 +175,14 @@ namespace Restaurant.Web.Paginas.Administrador
             int idInsumo = _insumoService.Guardar(insumo);
             if (idInsumo != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
+                List<Insumo> insumos = _insumoService.Obtener();
+                if (insumos != null && insumos.Count > 0)
+                {
+                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                    upListaInsumos.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
             }
             else
             {
@@ -200,6 +206,12 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _insumoService.Modificar(insumo, insumo.Id);
             if (editar)
             {
+                List<Insumo> insumos = _insumoService.Obtener();
+                if (insumos != null && insumos.Count > 0)
+                {
+                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                    upListaInsumos.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);  
             }
@@ -276,7 +288,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
             proveedor.Direccion = txtDireccionProveedor.Text;
 
             Token token = (Token)Session["token"];
@@ -285,8 +297,15 @@ namespace Restaurant.Web.Paginas.Administrador
 
             if (idProveedor != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                List<Proveedor> proveedores = _proveedorService.Obtener();
+                if (proveedores != null && proveedores.Count > 0)
+                {
+                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                    upListaProveedores.Update();
+
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Proveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
             {
@@ -307,15 +326,21 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
             bool editar = _proveedorService.Modificar(proveedor, proveedor.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                List<Proveedor> proveedores = _proveedorService.Obtener();
+                if (proveedores != null && proveedores.Count > 0)
+                {
+                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                    upListaProveedores.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Proveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
             {
@@ -395,8 +420,15 @@ namespace Restaurant.Web.Paginas.Administrador
                     _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
                     int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+
+                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                {
+                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
+                    upListaOrdenes.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else
             {
@@ -427,8 +459,14 @@ namespace Restaurant.Web.Paginas.Administrador
                     _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
                     int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                {
+                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
+                    upListaOrdenes.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else
             {

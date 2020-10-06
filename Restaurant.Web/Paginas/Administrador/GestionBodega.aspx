@@ -17,118 +17,132 @@
           <div class="tab-pane fade" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
           <div class="tab-pane show active" id="divInsumos" role="tabpanel" aria-labelledby="tabInsumos" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaInsumosVacia" runat="server" 
-                    Text="No existen Insumos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>     
-              <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumo_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Id</b></td>
-                            <td><b>Nombre</b></td>
-                            <td><b>Stock actual</b></td>
-                            <td><b>Stock crítico</b></td>
-                            <td><b>Stock óptimo</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <asp:HiddenField ID="idInsumo" runat="server"  Value='<%# Eval("Id") %>'/>
-                        <tr>
-                        <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("Nombre") %> </td>
-                        <td> <%# Eval("StockActual") %> </td>
-                        <td> <%# Eval("StockCritico") %> </td>
-                        <td> <%# Eval("StockOptimo") %> </td>
-                        <td><asp:LinkButton ID="btnModalEditarInsumo" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+                <asp:Button ID="btnModalCrearInsumos" runat="server" Text="Crear Insumo" OnClick="btnModalCrearInsumo_Click" CssClass="btn btn-info float-right"/>
+                <asp:UpdatePanel ID="upListaInsumos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                   <ContentTemplate>
+                      <div class="text-center">
+                        <asp:Label ID="listaInsumosVacia" runat="server" 
+                            Text="No existen Insumos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                      </div>     
+                      <div class="table-responsive pt-3">                
+                            <asp:Repeater ID="listaInsumos" runat="server" OnItemCommand="btnModalEditarInsumo_Click">
+                                <HeaderTemplate>
+                                    <table border="1" class="table">
+                                    <tr>
+                                        <td><b>Id</b></td>
+                                        <td><b>Nombre</b></td>
+                                        <td><b>Stock actual</b></td>
+                                        <td><b>Stock crítico</b></td>
+                                        <td><b>Stock óptimo</b></td>
+                                        <td><b>Acciones</b></td>
+                                    </tr>
+                                </HeaderTemplate>          
+                                <ItemTemplate>
+                                    <asp:HiddenField ID="idInsumo" runat="server"  Value='<%# Eval("Id") %>'/>
+                                    <tr>
+                                    <td> <%# Eval("Id") %></td>
+                                    <td> <%# Eval("Nombre") %> </td>
+                                    <td> <%# Eval("StockActual") %> </td>
+                                    <td> <%# Eval("StockCritico") %> </td>
+                                    <td> <%# Eval("StockOptimo") %> </td>
+                                    <td><asp:LinkButton ID="btnModalEditarInsumo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                            Editar</asp:LinkButton></td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </table>
+                                </FooterTemplate>
+                          </asp:Repeater>
+                      </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
           </div>
+
           <div class="tab-pane fade" id="divProveedores" role="tabpanel" aria-labelledby="tabProveedores" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearProveedor" runat="server" Text="Crear Proveedor" OnClick="btnModalCrearProveedor_Click" CssClass="btn btn-info float-right"/>
-               <div class="text-center">
-                <asp:Label ID="listaProveedoresVacia" runat="server" 
-                    Text="No existen Proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>     
-              <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaProveedores" runat="server"  OnItemCommand="btnModalEditarProveedor_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Rut</b></td>
-                            <td><b>Nombre</b></td>
-                            <td><b>Apellido</b></td>
-                            <td><b>Email</b></td>
-                            <td><b>Teléfono</b></td>
-                            <td><b>Dirección</b></td>
-                            <td><b>Es persona natural</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <tr>
-                        <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
-                        <td> <%# Eval("Persona.Nombre") %> </td>
-                        <td> <%# Eval("Persona.Apellido") %> </td>
-                        <td> <%# Eval("Persona.Email") %> </td>
-                        <td> <%# Eval("Persona.Telefono") %> </td>
-                        <td> <%# Eval("Direccion") %> </td>
-                        <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
-                         <td><asp:LinkButton ID="btnModalEditarProveedor" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+              <asp:UpdatePanel ID="upListaProveedores" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                   <ContentTemplate>
+                      <div class="text-center">
+                        <asp:Label ID="listaProveedoresVacia" runat="server" 
+                            Text="No existen Proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                      </div>     
+                      <div class="table-responsive pt-3">
+                            <asp:Repeater ID="listaProveedores" runat="server"  OnItemCommand="btnModalEditarProveedor_Click">
+                            <HeaderTemplate>
+                                <table border="1" class="table">
+                                <tr>
+                                    <td><b>Rut</b></td>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Apellido</b></td>
+                                    <td><b>Email</b></td>
+                                    <td><b>Teléfono</b></td>
+                                    <td><b>Dirección</b></td>
+                                    <td><b>Es persona natural</b></td>
+                                    <td><b>Acciones</b></td>
+                                </tr>
+                            </HeaderTemplate>          
+                            <ItemTemplate>
+                                <tr>
+                                <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                                <td> <%# Eval("Persona.Nombre") %> </td>
+                                <td> <%# Eval("Persona.Apellido") %> </td>
+                                <td> <%# Eval("Persona.Email") %> </td>
+                                <td> <%# Eval("Persona.Telefono") %> </td>
+                                <td> <%# Eval("Direccion") %> </td>
+                                <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
+                                 <td><asp:LinkButton ID="btnModalEditarProveedor" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                        Editar</asp:LinkButton></td>
+                                </tr>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </table>
+                            </FooterTemplate>
+                          </asp:Repeater>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
           </div>
           <div class="tab-pane fade" id="divOrdenes" role="tabpanel" aria-labelledby="tabOrdenes" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearOrden" runat="server" Text="Crear Orden" OnClick="btnModalCrearOrden_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaOrdenesVacia" runat="server" 
-                    Text="No existen Ordenes de proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>   
-               <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaOrdenes" runat="server" OnItemCommand="btnModalEditarOrden_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Id</b></td>
-                            <td><b>Fecha y Hora</b></td>
-                            <td><b>Total</b></td>
-                            <td><b>Estado</b></td>
-                            <td><b>Proveedor</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <asp:HiddenField ID="idOrden" runat="server"  Value='<%# Eval("Id") %>'/>
-                        <tr>
-                        <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("FechaHora") %> </td>
-                        <td> <%# Eval("Total") %> </td>
-                        <td> <%# Eval("EstadoOrden.Nombre") %> </td>
-                        <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Proveedor.Apellido") %></td>
-                        <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+               <asp:UpdatePanel ID="upListaOrdenes" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate>
+                  <div class="text-center">
+                    <asp:Label ID="listaOrdenesVacia" runat="server" 
+                        Text="No existen Ordenes de proveedores para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                  </div>   
+                   <div class="table-responsive pt-3">
+                        <asp:Repeater ID="listaOrdenes" runat="server" OnItemCommand="btnModalEditarOrden_Click">
+                        <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Fecha y Hora</b></td>
+                                <td><b>Total</b></td>
+                                <td><b>Estado</b></td>
+                                <td><b>Proveedor</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <asp:HiddenField ID="idOrden" runat="server"  Value='<%# Eval("Id") %>'/>
+                            <tr>
+                            <td> <%# Eval("Id") %></td>
+                            <td> <%# Eval("FechaHora") %> </td>
+                            <td> <%# Eval("Total") %> </td>
+                            <td> <%# Eval("EstadoOrden.Nombre") %> </td>
+                            <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Proveedor.Apellido") %></td>
+                            <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                      </asp:Repeater>
+                     </div>
+               </ContentTemplate>
+            </asp:UpdatePanel>
           </div>
         </div>
       </div>
