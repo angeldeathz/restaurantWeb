@@ -388,11 +388,14 @@ namespace Restaurant.Web.Paginas.Administrador
         {
             ValidarSesion();
 
+            var usuario = (Usuario)Session["usuario"];
+
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
+            ordenProveedor.IdUsuario = usuario.Id;
 
             Token token = (Token)Session["token"];
             _ordenProveedorService = new OrdenProveedorService(token.access_token);
