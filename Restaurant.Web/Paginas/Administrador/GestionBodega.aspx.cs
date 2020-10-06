@@ -181,7 +181,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                     upListaInsumos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "alert('Insumo creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
             }
             else
@@ -212,7 +212,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                     upListaInsumos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Insumo editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "alert('Insumo editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);  
             }
             else
@@ -304,7 +304,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     upListaProveedores.Update();
 
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Proveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "alert('Proveedor creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
@@ -339,7 +339,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
                     upListaProveedores.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Proveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarProveedor", "alert('Proveedor editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
@@ -427,7 +427,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
                     upListaOrdenes.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearOrden", "alert('OrdenProveedor creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else
@@ -465,7 +465,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
                     upListaOrdenes.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('OrdenProveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarOrden", "alert('OrdenProveedor editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else

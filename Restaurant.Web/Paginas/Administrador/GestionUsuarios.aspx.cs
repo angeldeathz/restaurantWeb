@@ -152,7 +152,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaUsuarios, usuarios, listaUsuariosVacia);
                     upListaUsuarios.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Usuario creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearUsuario", "alert('Usuario creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
@@ -196,7 +196,7 @@ namespace Restaurant.Web.Paginas.Administrador
                     actualizarRepeater(listaUsuarios, usuarios, listaUsuariosVacia);
                     upListaUsuarios.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Usuario editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarUsuario", "alert('Usuario editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
