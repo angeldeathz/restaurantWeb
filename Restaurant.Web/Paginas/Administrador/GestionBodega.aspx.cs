@@ -261,7 +261,11 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtEmailProveedor.Text = proveedor.Persona.Email;
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
                     txtDireccionProveedor.Text = proveedor.Direccion;
-                    chkEsPersonaJuridica.Checked = ! Convert.ToBoolean(int.Parse(proveedor.Persona.EsPersonaNatural.ToString()));
+                    chkEsPersonaJuridica.Checked = true;
+                    if (proveedor.Persona.EsPersonaNatural == '0')
+                    {
+                        chkEsPersonaJuridica.Checked = false;
+                    }
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
                     upModalProveedor.Update();
                 }
@@ -283,7 +287,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
             proveedor.Direccion = txtDireccionProveedor.Text;
 
             Token token = (Token)Session["token"];
@@ -314,7 +318,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
@@ -384,15 +388,11 @@ namespace Restaurant.Web.Paginas.Administrador
         {
             ValidarSesion();
 
-            var usuario = (Usuario)Session["usuario"];
-
-
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
-            ordenProveedor.IdUsuario = usuario.Id;
 
             Token token = (Token)Session["token"];
             _ordenProveedorService = new OrdenProveedorService(token.access_token);
