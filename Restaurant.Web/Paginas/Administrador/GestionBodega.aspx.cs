@@ -368,6 +368,9 @@ namespace Restaurant.Web.Paginas.Administrador
             txtTotalOrden.Text = "";
             ddlEstadoOrden.SelectedValue = "";
             ddlProveedorOrden.SelectedValue = "";
+            ddlInsumoOrden.SelectedValue = "";
+            txtPrecioInsumoOrden.Text = "";
+            txtCantidadInsumoOrden.Text = "";
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
             upModalOrden.Update();
@@ -397,6 +400,9 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtTotalOrden.Text = ordenProveedor.Total.ToString();
                     ddlEstadoOrden.SelectedValue = ordenProveedor.IdEstadoOrden.ToString();
                     ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
+                    ddlInsumoOrden.SelectedValue = "";
+                    txtPrecioInsumoOrden.Text = "";
+                    txtCantidadInsumoOrden.Text = "";
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
                     upModalOrden.Update();

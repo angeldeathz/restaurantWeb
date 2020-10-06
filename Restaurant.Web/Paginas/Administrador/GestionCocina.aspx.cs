@@ -132,6 +132,9 @@ namespace Restaurant.Web.Paginas.Administrador
             txtTotalPedido.Text = "";
             ddlEstadoPedido.SelectedValue = "";
             ddlMesaPedido.SelectedValue = "";
+            ddlArticuloPedido.SelectedValue = "";
+            ddlPrecioArticuloPedido.SelectedValue = "";
+            txtCantidadArticuloPedido.Text = "";
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('show');", true);
             upModalPedido.Update();
@@ -162,6 +165,20 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtTotalPedido.Text = pedido.Total.ToString();
                     ddlEstadoPedido.SelectedValue = pedido.IdEstadoPedido.ToString();
                     ddlMesaPedido.SelectedValue = pedido.IdMesa.ToString();
+                    ddlArticuloPedido.SelectedValue = "";
+                    ddlPrecioArticuloPedido.SelectedValue = "";
+                    txtCantidadArticuloPedido.Text = "";
+                    /*
+                     * OBTENER ARTICULOS PEDIDO Q CORRESPONDEN AL PEDIDO
+                        _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                        List<ArticuloPedido> listaArticulos  _articuloPedidoService.Obtener(pedido.Id);
+                        Session["articulosPedidos"] =listaArticulos;
+                        actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
+                        var totalPedido = listaArticulos.Sum(x =>x.Total);
+                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        txtTotalPedido.Text = totalPedido.ToString();
+                        upArticulosPedido.Update();
+                    */
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('show');", true);
                     upModalPedido.Update();
