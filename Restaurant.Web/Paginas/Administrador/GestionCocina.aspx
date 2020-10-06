@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Gestión de la Cocina</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-column flex-md-row" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabPedidos" data-toggle="pill" href="#divPedidos" role="tab" aria-controls="divPedidos" aria-selected="false" runat="server">Pedidos</a>
           <a class="nav-link" id="tabArticulos" data-toggle="pill" href="#divArticulos" role="tab" aria-controls="divArticulos" aria-selected="false" runat="server">Artículos</a>
         </div>

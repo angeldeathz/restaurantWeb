@@ -37,13 +37,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 if (insumos != null && insumos.Count > 0)
                 {
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
-
-                    ddlInsumoOrden.DataSource = insumos;
-                    ddlInsumoOrden.DataTextField = "Nombre";
-                    ddlInsumoOrden.DataValueField = "Id";
-                    ddlInsumoOrden.DataBind();
-                    ddlInsumoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlInsumoOrden.SelectedIndex = 0;
+                    actualizarDdlInsumos(insumos);
                 }
 
                 List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
@@ -56,20 +50,8 @@ namespace Restaurant.Web.Paginas.Administrador
                 if (proveedores != null && proveedores.Count > 0)
                 {
                     actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
-
-                    ddlProveedorInsumo.DataSource = proveedores;
-                    ddlProveedorInsumo.DataTextField = "NombreProveedor";
-                    ddlProveedorInsumo.DataValueField = "Id";
-                    ddlProveedorInsumo.DataBind();
-                    ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlProveedorInsumo.SelectedIndex = 0;
-
-                    ddlProveedorOrden.DataSource = proveedores;
-                    ddlProveedorOrden.DataTextField = "NombreProveedor";
-                    ddlProveedorOrden.DataValueField = "Id";
-                    ddlProveedorOrden.DataBind();
-                    ddlProveedorOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlProveedorOrden.SelectedIndex = 0;
+                    actualizarDdlProveedoresInsumos(proveedores);
+                    actualizarDdlProveedoresOrdenes(proveedores);
                 }
 
                 List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
@@ -187,6 +169,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                     upListaInsumos.Update();
+                    actualizarDdlInsumos(insumos);
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "alert('Insumo creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
@@ -313,7 +296,8 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
                     upListaProveedores.Update();
-
+                    actualizarDdlProveedoresInsumos(proveedores);
+                    actualizarDdlProveedoresOrdenes(proveedores);
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "alert('Proveedor creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
@@ -374,7 +358,12 @@ namespace Restaurant.Web.Paginas.Administrador
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
             upModalOrden.Update();
+
             Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
+            actualizarRepeater(listaInsumosOrden, new List<DetalleOrdenProveedor>(), listaInsumosOrdenVacia);
+            lblTotalOrden.Text = "";           
+            txtTotalOrden.Text = "";
+            upInsumosOrden.Update();
 
             limpiarTabs();
             tabOrdenes.Attributes.Add("class", "nav-link active");
@@ -406,6 +395,14 @@ namespace Restaurant.Web.Paginas.Administrador
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
                     upModalOrden.Update();
+
+                    /*
+                    Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
+                    actualizarRepeater(listaInsumosOrden, new List<DetalleOrdenProveedor>(), listaInsumosOrdenVacia);
+                    lblTotalOrden.Text = "";           
+                    txtTotalOrden.Text = "";
+                    upInsumosOrden.Update();
+                    */
                 }
             }
             Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
@@ -574,6 +571,35 @@ namespace Restaurant.Web.Paginas.Administrador
                 repeater.Visible = true;
                 mensajeListaVacia.Visible = false;
             }
+        }
+
+        public void actualizarDdlProveedoresOrdenes(List<Proveedor> proveedores)
+        {
+            ddlProveedorOrden.DataSource = proveedores;
+            ddlProveedorOrden.DataTextField = "NombreProveedor";
+            ddlProveedorOrden.DataValueField = "Id";
+            ddlProveedorOrden.DataBind();
+            ddlProveedorOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlProveedorOrden.SelectedIndex = 0;
+        }
+        public void actualizarDdlProveedoresInsumos(List<Proveedor> proveedores)
+        {
+            ddlProveedorInsumo.DataSource = proveedores;
+            ddlProveedorInsumo.DataTextField = "NombreProveedor";
+            ddlProveedorInsumo.DataValueField = "Id";
+            ddlProveedorInsumo.DataBind();
+            ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlProveedorInsumo.SelectedIndex = 0;
+        }
+
+        public void actualizarDdlInsumos(List<Insumo> insumos)
+        {
+            ddlInsumoOrden.DataSource = insumos;
+            ddlInsumoOrden.DataTextField = "Nombre";
+            ddlInsumoOrden.DataValueField = "Id";
+            ddlInsumoOrden.DataBind();
+            ddlInsumoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlInsumoOrden.SelectedIndex = 0;
         }
     }
 }

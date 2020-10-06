@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Gestión del Restaurante</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-column flex-md-row" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabReservas" data-toggle="pill" href="#divReservas" role="tab" aria-controls="divReservas" aria-selected="false" runat="server">Reservas</a>
           <a class="nav-link" id="tabClientes" data-toggle="pill" href="#divClientes" role="tab" aria-controls="divClientes" aria-selected="false" runat="server">Clientes</a>
           <a class="nav-link" id="tabMesas" data-toggle="pill" href="#divMesas" role="tab" aria-controls="divMesas" aria-selected="false" runat="server">Mesas</a>
@@ -72,6 +72,7 @@
                             <td><b>Apellido</b></td>
                             <td><b>Email</b></td>
                             <td><b>Teléfono</b></td>
+                            <td><b>Es persona natural</b></td>
                             <td><b>Acciones</b></td>
                         </tr>
                     </HeaderTemplate>          
@@ -82,7 +83,7 @@
                         <td> <%# Eval("Persona.Apellido") %> </td>
                         <td> <%# Eval("Persona.Email") %> </td>
                         <td> <%# Eval("Persona.Telefono") %> </td>
-                        <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
+                        <td> <%# Eval("Persona.EsPersonaNatural").ToString() != "0" ? "Sí" : "No" %> </td>
                          <td><asp:LinkButton ID="btnModalEditarCliente" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
                         </tr>

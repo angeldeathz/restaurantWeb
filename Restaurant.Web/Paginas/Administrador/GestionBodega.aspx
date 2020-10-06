@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Gestión de Bodega</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-column flex-md-row" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
           <!--<a class="nav-link active" id="tabInventario" data-toggle="pill" href="#divInventario" role="tab" aria-controls="divInventario" aria-selected="true" runat="server">Inventario</a>-->
           <a class="nav-link active" id="tabInsumos" data-toggle="pill" href="#divInsumos" role="tab" aria-controls="divInsumos" aria-selected="false" runat="server">Insumos</a>
           <a class="nav-link" id="tabProveedores" data-toggle="pill" href="#divProveedores" role="tab" aria-controls="divProveedores" aria-selected="false" runat="server">Proveedores</a>
@@ -90,7 +90,7 @@
                                 <td> <%# Eval("Persona.Email") %> </td>
                                 <td> <%# Eval("Persona.Telefono") %> </td>
                                 <td> <%# Eval("Direccion") %> </td>
-                                <td> <%# Eval("Persona.EsPersonaNatural") %> </td>
+                                <td> <%# Eval("Persona.EsPersonaNatural").ToString() != "0" ? "Sí" : "No" %> </td>
                                  <td><asp:LinkButton ID="btnModalEditarProveedor" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                         Editar</asp:LinkButton></td>
                                 </tr>
@@ -130,8 +130,10 @@
                             <td> <%# Eval("Id") %></td>
                             <td> <%# Eval("FechaHora") %> </td>
                             <td> <%# Eval("Total") %> </td>
-                            <td> <%# Eval("EstadoOrden.Nombre") %> </td>
-                            <td> <%# Eval("Proveedor.Nombre") %> <%# Eval("Proveedor.Apellido") %></td>
+                            <td> Creada </td>
+                            <td> Abarrotes Pepe </td>
+                            <!--<td> <%# Eval("EstadoOrden.Nombre") %> </td>-->
+                            <!--<td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>-->
                             <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                     Editar</asp:LinkButton></td>
                             </tr>

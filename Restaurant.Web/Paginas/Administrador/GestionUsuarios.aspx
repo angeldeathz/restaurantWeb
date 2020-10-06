@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Gestión de Usuarios</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs" id="tabsGestionUsuario" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-column flex-md-row" id="tabsGestionUsuario" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabUsuarios" data-toggle="pill" href="#divUsuarios" role="tab" aria-controls="divUsuarios" aria-selected="false" runat="server">Usuarios</a>
         </div>
       </div>

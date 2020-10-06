@@ -15,7 +15,7 @@
         <div class="col-12 col-md-6">
             <ul class="list-group">
                 <li class="list-group-item active">Mantenedores</li>
-                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionBodega.aspx" class="font-weight-bold">Gestión de Boedga</a>
+                <li class="list-group-item"><a runat="server" href="/Paginas/Administrador/GestionBodega.aspx" class="font-weight-bold">Gestión de Bodega</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Administrador/GestionBodega#divInsumos">Insumos</a></li>
                         <li><a runat="server" href="/Paginas/Administrador/GestionBodega#divProveedores">Proveedores</a></li>
