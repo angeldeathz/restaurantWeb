@@ -63,6 +63,13 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlProveedorInsumo.DataBind();
                     ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlProveedorInsumo.SelectedIndex = 0;
+
+                    ddlProveedorOrden.DataSource = proveedores;
+                    ddlProveedorOrden.DataTextField = "NombreProveedor";
+                    ddlProveedorOrden.DataValueField = "Id";
+                    ddlProveedorOrden.DataBind();
+                    ddlProveedorOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlProveedorOrden.SelectedIndex = 0;
                 }
 
                 List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
