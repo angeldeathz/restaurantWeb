@@ -63,17 +63,24 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlProveedorInsumo.DataBind();
                     ddlProveedorInsumo.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlProveedorInsumo.SelectedIndex = 0;
+
+                    ddlProveedorOrden.DataSource = proveedores;
+                    ddlProveedorOrden.DataTextField = "NombreProveedor";
+                    ddlProveedorOrden.DataValueField = "Id";
+                    ddlProveedorOrden.DataBind();
+                    ddlProveedorOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlProveedorOrden.SelectedIndex = 0;
                 }
 
                 List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
                 if (estadosOrden != null && estadosOrden.Count > 0)
                 {
-                    ddlUnidadMedida.DataSource = estadosOrden;
-                    ddlUnidadMedida.DataTextField = "Nombre";
-                    ddlUnidadMedida.DataValueField = "Id";
-                    ddlUnidadMedida.DataBind();
-                    ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlUnidadMedida.SelectedIndex = 0;                    
+                    ddlEstadoOrden.DataSource = estadosOrden;
+                    ddlEstadoOrden.DataTextField = "Nombre";
+                    ddlEstadoOrden.DataValueField = "Id";
+                    ddlEstadoOrden.DataBind();
+                    ddlEstadoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoOrden.SelectedIndex = 0;                    
                 }
 
                 List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
@@ -254,10 +261,11 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtEmailProveedor.Text = proveedor.Persona.Email;
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
                     txtDireccionProveedor.Text = proveedor.Direccion;
-                    //Correccion
                     chkEsPersonaJuridica.Checked = true;
-                    if (proveedor.Persona.EsPersonaNatural == '0') { chkEsPersonaJuridica.Checked = false; }
-
+                    if (proveedor.Persona.EsPersonaNatural == '0')
+                    {
+                        chkEsPersonaJuridica.Checked = false;
+                    }
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
                     upModalProveedor.Update();
                 }
@@ -272,16 +280,15 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             Proveedor proveedor = new Proveedor();
-            Persona persona = new Persona();
-            persona.Nombre = txtNombreProveedor.Text;
-            persona.Apellido = txtApellidoProveedor.Text;
-            persona.Rut = int.Parse(txtRutProveedor.Text);
-            persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
-            persona.Email = txtEmailProveedor.Text;
-            persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
+            proveedor.Persona = new Persona();
+            proveedor.Persona.Nombre = txtNombreProveedor.Text;
+            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
+            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
+            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+            proveedor.Persona.Email = txtEmailProveedor.Text;
+            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona = persona;
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);            
@@ -444,8 +451,9 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
-            Insumo insumo = new Insumo();
-            insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
+            detalleOrdenProveedor.Insumo = new Insumo();
+
+            detalleOrdenProveedor.Insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
             detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
             detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);
             detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
