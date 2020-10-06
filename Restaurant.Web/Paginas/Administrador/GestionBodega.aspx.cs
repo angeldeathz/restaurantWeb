@@ -447,8 +447,9 @@ namespace Restaurant.Web.Paginas.Administrador
             ValidarSesion();
 
             DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
-            Insumo insumo = new Insumo();
-            insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
+            detalleOrdenProveedor.Insumo = new Insumo();
+
+            detalleOrdenProveedor.Insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
             detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
             detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);
             detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
