@@ -11,6 +11,6 @@
         public int Id { get; set; }
         public int IdPersona { get; set; }
         public Persona Persona { get; set; }
-        public string NombreCliente { get { return string.Concat(Persona.Nombre, Persona.Apellido); } }
+        public string NombreCliente { get { return Persona.Nombre + " " + Persona.Apellido; } }
     }
 }
