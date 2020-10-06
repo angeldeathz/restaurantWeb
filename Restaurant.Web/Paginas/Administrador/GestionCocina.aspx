@@ -14,78 +14,86 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divPedidos" role="tabpanel" aria-labelledby="tabPedidos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearPedidos" runat="server" Text="Crear Pedido" OnClick="btnModalCrearPedido_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaPedidosVacia" runat="server" 
-                    Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>  
-              <div class="table-responsive pt-3">
-                 <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Id</b></td>
-                            <td><b>Fecha Inicio</b></td>
-                            <td><b>Fecha Fin</b></td>
-                            <td><b>Total</b></td>
-                            <td><b>Mesa</b></td>
-                            <td><b>Estado</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <asp:HiddenField ID="idPedido" runat="server"  Value='<%# Eval("Id") %>'/>
-                        <tr>
-                        <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("FechaHoraInicio") %> </td>
-                        <td> <%# Eval("FechaHoraFin") %> </td>
-                        <td> <%# Eval("Total") %> </td>
-                        <td> <%# Eval("Mesa.Nombre") %> </td>
-                        <td> <%# Eval("EstadoPedido.Nombre") %></td>
-                        <td><asp:LinkButton ID="btnModalEditarPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+               <asp:UpdatePanel ID="upListaPedidos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate>
+                  <div class="text-center">
+                    <asp:Label ID="listaPedidosVacia" runat="server" 
+                        Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                  </div>  
+                  <div class="table-responsive pt-3">
+                     <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
+                        <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Fecha Inicio</b></td>
+                                <td><b>Fecha Fin</b></td>
+                                <td><b>Total</b></td>
+                                <td><b>Mesa</b></td>
+                                <td><b>Estado</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <asp:HiddenField ID="idPedido" runat="server"  Value='<%# Eval("Id") %>'/>
+                            <tr>
+                            <td> <%# Eval("Id") %></td>
+                            <td> <%# Eval("FechaHoraInicio") %> </td>
+                            <td> <%# Eval("FechaHoraFin") %> </td>
+                            <td> <%# Eval("Total") %> </td>
+                            <td> <%# Eval("Mesa.Nombre") %> </td>
+                            <td> <%# Eval("EstadoPedido.Nombre") %></td>
+                            <td><asp:LinkButton ID="btnModalEditarPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                      </asp:Repeater>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
           </div>
           <div class="tab-pane fade" id="divArticulos" role="tabpanel" aria-labelledby="tabArticulos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearArticulo" runat="server" Text="Crear Articulo" OnClick="btnModalCrearArticulo_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaArticulosVacia" runat="server" 
-                    Text="No existen Artículos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>   
-              <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaArticulos" runat="server"  OnItemCommand="btnModalEditarArticulo_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Nombre</b></td>
-                            <td><b>Descripción</b></td>
-                            <td><b>Precio</b></td>
-                            <td><b>Tipo de Consumo</b></td>
-                            <td><b>Estado</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <tr>
-                        <td> <%# Eval("Nombre") %> </td>
-                        <td> <%# Eval("Descripcion") %> </td>
-                        <td> <%# Eval("Precio") %> </td>
-                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+               <asp:UpdatePanel ID="upListaArticulos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate>
+                      <div class="text-center">
+                        <asp:Label ID="listaArticulosVacia" runat="server" 
+                            Text="No existen Artículos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                      </div>   
+                      <div class="table-responsive pt-3">
+                        <asp:Repeater ID="listaArticulos" runat="server"  OnItemCommand="btnModalEditarArticulo_Click">
+                        <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Nombre</b></td>
+                                <td><b>Descripción</b></td>
+                                <td><b>Precio</b></td>
+                                <td><b>Tipo de Consumo</b></td>
+                                <td><b>Estado</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <tr>
+                            <td> <%# Eval("Nombre") %> </td>
+                            <td> <%# Eval("Descripcion") %> </td>
+                            <td> <%# Eval("Precio") %> </td>
+                            <td> <%# Eval("TipoConsumo.Nombre") %> </td>
+                            <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                            <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                        </asp:Repeater>
+                    </div>
+                </ContentTemplate>
+             </asp:UpdatePanel>
           </div>        
         </div>
       </div>
