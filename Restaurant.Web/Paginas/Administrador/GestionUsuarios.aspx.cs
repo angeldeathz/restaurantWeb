@@ -146,8 +146,9 @@ namespace Restaurant.Web.Paginas.Administrador
 
             if (idUsuario != 0)
             {
-                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
+                
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Usuario creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
             {
@@ -184,8 +185,9 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _usuarioService.Modificar(usuario, usuario.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
+               
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Usuario editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
             {

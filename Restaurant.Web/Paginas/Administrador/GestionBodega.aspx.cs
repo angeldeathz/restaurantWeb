@@ -68,12 +68,12 @@ namespace Restaurant.Web.Paginas.Administrador
                 List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
                 if (estadosOrden != null && estadosOrden.Count > 0)
                 {
-                    ddlUnidadMedida.DataSource = estadosOrden;
-                    ddlUnidadMedida.DataTextField = "Nombre";
-                    ddlUnidadMedida.DataValueField = "Id";
-                    ddlUnidadMedida.DataBind();
-                    ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlUnidadMedida.SelectedIndex = 0;                    
+                    ddlEstadoOrden.DataSource = estadosOrden;
+                    ddlEstadoOrden.DataTextField = "Nombre";
+                    ddlEstadoOrden.DataValueField = "Id";
+                    ddlEstadoOrden.DataBind();
+                    ddlEstadoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoOrden.SelectedIndex = 0;                    
                 }
 
                 List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
