@@ -254,7 +254,10 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtEmailProveedor.Text = proveedor.Persona.Email;
                     txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
                     txtDireccionProveedor.Text = proveedor.Direccion;
-                    chkEsPersonaJuridica.Checked = ! Convert.ToBoolean(int.Parse(proveedor.Persona.EsPersonaNatural.ToString()));
+                    //Correccion
+                    chkEsPersonaJuridica.Checked = true;
+                    if (proveedor.Persona.EsPersonaNatural == '0') { chkEsPersonaJuridica.Checked = false; }
+
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
                     upModalProveedor.Update();
                 }
@@ -276,8 +279,9 @@ namespace Restaurant.Web.Paginas.Administrador
             persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
             persona.Email = txtEmailProveedor.Text;
             persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
             proveedor.Direccion = txtDireccionProveedor.Text;
+            proveedor.Persona = persona;
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);            
@@ -307,7 +311,7 @@ namespace Restaurant.Web.Paginas.Administrador
             proveedor.Persona.Email = txtEmailProveedor.Text;
             proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
             proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
+            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '1' : '0';
 
             Token token = (Token)Session["token"];
             _proveedorService = new ProveedorService(token.access_token);
