@@ -170,8 +170,14 @@ namespace Restaurant.Web.Paginas.Administrador
             int idReserva = _reservaService.Guardar(reserva);
             if (idReserva != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
+                List<Reserva> reservas = _reservaService.Obtener();
+                if (reservas != null && reservas.Count > 0)
+                {
+                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    upListaReservas.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Reserva creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
             }
             else
             {
@@ -195,8 +201,14 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _reservaService.Modificar(reserva, reserva.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
+                List<Reserva> reservas = _reservaService.Obtener();
+                if (reservas != null && reservas.Count > 0)
+                {
+                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    upListaReservas.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Reserva editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
             }
             else
             {
@@ -279,19 +291,18 @@ namespace Restaurant.Web.Paginas.Administrador
 
             if (idCliente != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
+                List<Cliente> clientes = _clienteService.Obtener();
+                if (clientes != null && clientes.Count > 0)
+                {
+                    actualizarRepeater(listaClientes, clientes, listaClientesVacia);
+                    upListaClientes.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Cliente creado');", true);
-
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
             }
             else
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Error al crear cliente');", true);
-            }
-
-            List<Cliente> clientes = _clienteService.Obtener();
-            if (clientes != null && clientes.Count > 0)
-            {
-                actualizarRepeater(listaClientes, clientes, listaClientesVacia);
             }
         }
 
@@ -302,8 +313,6 @@ namespace Restaurant.Web.Paginas.Administrador
 
             Cliente cliente = new Cliente();
             Persona persona = new Persona();
-
-
 
             persona.Nombre = txtNombreCliente.Text;
             persona.Apellido = txtApellidoCliente.Text;
@@ -322,8 +331,14 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _clienteService.Modificar(cliente, cliente.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
+                List<Cliente> clientes = _clienteService.Obtener();
+                if (clientes != null && clientes.Count > 0)
+                {
+                    actualizarRepeater(listaClientes, clientes, listaClientesVacia);
+                    upListaClientes.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "alert('Cliente editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
             }
             else
             {
@@ -389,8 +404,14 @@ namespace Restaurant.Web.Paginas.Administrador
             int idMesa = _mesaService.Guardar(mesa);
             if (idMesa != 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);
+                List<Mesa> mesas = _mesaService.Obtener();
+                if (mesas != null && mesas.Count > 0)
+                {
+                    actualizarRepeater(listaMesas, mesas, listaMesasVacia);
+                    upListaMesas.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "alert('Mesa creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);
             }
             else
             {
@@ -413,8 +434,14 @@ namespace Restaurant.Web.Paginas.Administrador
             bool editar = _mesaService.Modificar(mesa, mesa.Id);
             if (editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);
+                List<Mesa> mesas = _mesaService.Obtener();
+                if (mesas != null && mesas.Count > 0)
+                {
+                    actualizarRepeater(listaMesas, mesas, listaMesasVacia);
+                    upListaMesas.Update();
+                }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "alert('Mesa editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);
             }
             else
             {

@@ -15,49 +15,55 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReserva_Click" CssClass="btn btn-info float-right"/>
-               <div class="text-center">
-                <asp:Label ID="listaReservasVacia" runat="server" 
-                    Text="No existen Reservas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>    
-              <div class="table-responsive pt-3">
-                    <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
-                    <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Id</b></td>
-                            <td><b>Fecha y Hora</b></td>
-                            <td><b>Mesa</b></td>
-                            <td><b>Comensales</b></td>
-                            <td><b>Cliente</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
-                    </HeaderTemplate>          
-                    <ItemTemplate>
-                        <asp:HiddenField ID="idReserva" runat="server"  Value='<%# Eval("Id") %>'/>
-                        <tr>
-                        <td> <%# Eval("Id") %></td>
-                        <td> <%# Eval("FechaReserva") %> </td>
-                        <td> <%# Eval("Mesa.Nombre") %> </td>
-                        <td> <%# Eval("CantidadComensales") %> </td>
-                        <td> <%# Eval("Cliente.Persona.Nombre") %> <%# Eval("Cliente.Persona.Apellido") %></td>
-                        <td><asp:LinkButton ID="btnModalEditarReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                Editar</asp:LinkButton></td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        </table>
-                    </FooterTemplate>
-                  </asp:Repeater>
-                </div>
+                <asp:UpdatePanel ID="upListaReservas" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate> 
+                  <div class="text-center">
+                    <asp:Label ID="listaReservasVacia" runat="server" 
+                        Text="No existen Reservas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                  </div>    
+                  <div class="table-responsive pt-3">
+                     <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
+                        <HeaderTemplate>
+                            <table border="1" class="table">
+                            <tr>
+                                <td><b>Id</b></td>
+                                <td><b>Fecha y Hora</b></td>
+                                <td><b>Mesa</b></td>
+                                <td><b>Comensales</b></td>
+                                <td><b>Cliente</b></td>
+                                <td><b>Acciones</b></td>
+                            </tr>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <asp:HiddenField ID="idReserva" runat="server"  Value='<%# Eval("Id") %>'/>
+                            <tr>
+                            <td> <%# Eval("Id") %></td>
+                            <td> <%# Eval("FechaReserva") %> </td>
+                            <td> <%# Eval("Mesa.Nombre") %> </td>
+                            <td> <%# Eval("CantidadComensales") %> </td>
+                            <td> <%# Eval("Cliente.Persona.Nombre") %> <%# Eval("Cliente.Persona.Apellido") %></td>
+                            <td><asp:LinkButton ID="btnModalEditarReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                      </asp:Repeater>
+                    </div>
+              </ContentTemplate>
+            </asp:UpdatePanel>
           </div>
           <div class="tab-pane fade" id="divClientes" role="tabpanel" aria-labelledby="tabClientes" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearCliente" runat="server" Text="Crear Cliente" OnClick="btnModalCrearCliente_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaClientesVacia" runat="server" 
-                    Text="No existen Clientes para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>  
-              <div class="table-responsive pt-3">
-                 <asp:Repeater ID="listaClientes" runat="server"  OnItemCommand="btnModalEditarCliente_Click">
+               <asp:UpdatePanel ID="upListaClientes" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate> 
+                  <div class="text-center">
+                    <asp:Label ID="listaClientesVacia" runat="server" 
+                        Text="No existen Clientes para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                  </div>  
+                  <div class="table-responsive pt-3">
+                   <asp:Repeater ID="listaClientes" runat="server"  OnItemCommand="btnModalEditarCliente_Click">
                     <HeaderTemplate>
                         <table border="1" class="table">
                         <tr>
@@ -86,38 +92,44 @@
                     </FooterTemplate>
                   </asp:Repeater>
                 </div>
+              </ContentTemplate>
+            </asp:UpdatePanel>
           </div>
           <div class="tab-pane fade" id="divMesas" role="tabpanel" aria-labelledby="tabMesas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearMesa" runat="server" Text="Crear Mesa" OnClick="btnModalCrearMesa_Click" CssClass="btn btn-info float-right"/>
-              <div class="text-center">
-                <asp:Label ID="listaMesasVacia" runat="server" 
-                    Text="No existen Mesas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
-              </div>   
-              <div class="table-responsive pt-3">
-                  <asp:Repeater ID="listaMesas" runat="server"  OnItemCommand="btnModalEditarMesa_Click">
-                      <HeaderTemplate>
-                            <table border="1" class="table">
-                            <tr>
-                                <td><b>Nombre</b></td>
-                                <td><b>Comensales</b></td>
-                                <td><b>Estado</b></td>
-                                <td><b>Acciones</b></td>
-                            </tr>
-                        </HeaderTemplate>          
-                        <ItemTemplate>
-                            <tr>
-                            <td> <%# Eval("Nombre") %> </td>
-                            <td> <%# Eval("CantidadComensales") %> </td>
-                            <td> <%# Eval("EstadoMesa.Nombre") %> </td>
-                            <td><asp:LinkButton ID="btnModalEditarMesa" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                    Editar</asp:LinkButton></td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                            </table>
-                        </FooterTemplate>
-                  </asp:Repeater>
-             </div>
+              <asp:UpdatePanel ID="upListaMesas" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate> 
+                  <div class="text-center">
+                    <asp:Label ID="listaMesasVacia" runat="server" 
+                        Text="No existen Mesas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
+                  </div>   
+                  <div class="table-responsive pt-3">
+                      <asp:Repeater ID="listaMesas" runat="server"  OnItemCommand="btnModalEditarMesa_Click">
+                          <HeaderTemplate>
+                                <table border="1" class="table">
+                                <tr>
+                                    <td><b>Nombre</b></td>
+                                    <td><b>Comensales</b></td>
+                                    <td><b>Estado</b></td>
+                                    <td><b>Acciones</b></td>
+                                </tr>
+                            </HeaderTemplate>          
+                            <ItemTemplate>
+                                <tr>
+                                <td> <%# Eval("Nombre") %> </td>
+                                <td> <%# Eval("CantidadComensales") %> </td>
+                                <td> <%# Eval("EstadoMesa.Nombre") %> </td>
+                                <td><asp:LinkButton ID="btnModalEditarMesa" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                        Editar</asp:LinkButton></td>
+                                </tr>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </table>
+                            </FooterTemplate>
+                      </asp:Repeater>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
           </div>
         </div>
       </div>
