@@ -80,7 +80,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer class="mt-auto">
-                <p>&copy; <%: DateTime.Now.Year %> Restaurante Siglo XII</p>
+                <p>&copy; <%: DateTime.Now.Year %> Restaurante Siglo XXI</p>
             </footer>
         </div>
 

@@ -41,26 +41,14 @@ namespace Restaurant.Web.Paginas.Administrador
                 if (clientes != null && clientes.Count > 0)
                 {
                     actualizarRepeater(listaClientes, clientes, listaClientesVacia);
-
-                    ddlClienteReserva.DataSource = clientes;
-                    ddlClienteReserva.DataTextField = "NombreCliente";
-                    ddlClienteReserva.DataValueField = "Id";
-                    ddlClienteReserva.DataBind();
-                    ddlClienteReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlClienteReserva.SelectedIndex = 0;
+                    actualizarDdlClientes(clientes);
                 }                
 
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
                 {
                     actualizarRepeater(listaMesas, mesas, listaMesasVacia);
-
-                    ddlMesaReserva.DataSource = mesas;
-                    ddlMesaReserva.DataTextField = "Nombre";
-                    ddlMesaReserva.DataValueField = "Id";
-                    ddlMesaReserva.DataBind();
-                    ddlMesaReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlMesaReserva.SelectedIndex = 0;
+                    actualizarDdlMesas(mesas);
                 }
 
                 List<EstadoReserva> estadosReserva = _estadoReservaService.Obtener();
@@ -84,7 +72,6 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlEstadoMesa.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlEstadoMesa.SelectedIndex = 0;
                 }
-
             }
         }
 
@@ -296,6 +283,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     actualizarRepeater(listaClientes, clientes, listaClientesVacia);
                     upListaClientes.Update();
+                    actualizarDdlClientes(clientes);
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearCliente", "alert('Cliente creado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCliente", "$('#modalCliente').modal('hide');", true);
@@ -409,6 +397,7 @@ namespace Restaurant.Web.Paginas.Administrador
                 {
                     actualizarRepeater(listaMesas, mesas, listaMesasVacia);
                     upListaMesas.Update();
+                    actualizarDdlMesas(mesas);
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearMesa", "alert('Mesa creada');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "$('#modalMesa').modal('hide');", true);
@@ -462,6 +451,25 @@ namespace Restaurant.Web.Paginas.Administrador
                 repeater.Visible = true;
                 mensajeListaVacia.Visible = false;
             }
+        }
+
+        public void actualizarDdlClientes(List<Cliente> clientes)
+        {
+            ddlClienteReserva.DataSource = clientes;
+            ddlClienteReserva.DataTextField = "NombreCliente";
+            ddlClienteReserva.DataValueField = "Id";
+            ddlClienteReserva.DataBind();
+            ddlClienteReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlClienteReserva.SelectedIndex = 0;
+        }
+        public void actualizarDdlMesas(List<Mesa> mesas)
+        { 
+            ddlMesaReserva.DataSource = mesas;
+            ddlMesaReserva.DataTextField = "Nombre";
+            ddlMesaReserva.DataValueField = "Id";
+            ddlMesaReserva.DataBind();
+            ddlMesaReserva.Items.Insert(0, new ListItem("Seleccionar", ""));
+            ddlMesaReserva.SelectedIndex = 0;
         }
     }
 }
