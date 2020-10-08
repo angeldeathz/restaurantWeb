@@ -32,7 +32,7 @@ namespace Restaurant.Services.Servicios
 
         public Persona Obtener(string rut)
         {
-            string url = $"http://localhost/restaurant/api/personas?rut={rut}";
+            string url = $"http://localhost/restaurant/api/personas/filtro?rut={rut}";
             var respuesta = _restClientHttp.Get<Persona>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;

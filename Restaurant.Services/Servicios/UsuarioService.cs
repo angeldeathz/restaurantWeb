@@ -25,7 +25,7 @@ namespace Restaurant.Services.Servicios
 
         public Usuario ObtenerPorRut(string rut)
         {
-            string url = $"http://localhost/restaurant/api/usuarios?rut={rut}";
+            string url = $"http://localhost/restaurant/api/usuarios/filtro?rut={rut}";
             var respuesta = _restClientHttp.Get<Usuario>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
