@@ -32,8 +32,9 @@
                                         <td><b>Id</b></td>
                                         <td><b>Nombre</b></td>
                                         <td><b>Stock actual</b></td>
-                                        <td><b>Stock crítico</b></td>
-                                        <td><b>Stock óptimo</b></td>
+                                        <td><b>Stock mínimo</b></td>
+                                        <td><b>Stock máximo</b></td>
+                                        <td><b>Unidad de medida</b></td>
                                         <td><b>Acciones</b></td>
                                     </tr>
                                 </HeaderTemplate>          
@@ -45,6 +46,7 @@
                                     <td> <%# Eval("StockActual") %> </td>
                                     <td> <%# Eval("StockCritico") %> </td>
                                     <td> <%# Eval("StockOptimo") %> </td>
+                                    <td> <%# Eval("UnidadMedida.Nombre") %> </td>
                                     <td><asp:LinkButton ID="btnModalEditarInsumo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                             Editar</asp:LinkButton></td>
                                     </tr>
