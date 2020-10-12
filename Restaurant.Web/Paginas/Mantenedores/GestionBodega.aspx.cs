@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Collections;
 using Restaurant.Model.Dto;
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Paginas.Mantenedores
 {
     public partial class GestionInventario : System.Web.UI.Page
     {
