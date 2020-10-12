@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Model.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,6 +23,11 @@ namespace Restaurant.Web.Paginas.Administrador
             if (Session["usuario"] == null || Session["token"] == null)
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
+            }
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (usuario.IdTipoUsuario != TipoUsuario.administrador)
+            {
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
     }

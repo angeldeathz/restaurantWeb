@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Restaurant.Model.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,6 +22,28 @@ namespace Restaurant.Web.Master
                 {
                     btnCerrarSesion.Visible = false;
                 }
+                Usuario usuario = (Usuario)Session["usuario"];
+                if(usuario.IdTipoUsuario != TipoUsuario.administrador)
+                {
+                    linkUsuarios.Attributes.Add("class", "nav-link d-none");
+                    linkReporteria.Attributes.Add("class", "nav-link d-none");
+
+                    if (usuario.IdTipoUsuario != TipoUsuario.bodega)
+                    {
+                        linkBodega.Attributes.Add("class", "nav-link d-none");
+                    }
+
+                    if (![TipoUsuario.cocina, TipoUsuario.garzon].Contains(usuario.IdTipoUsuario))
+                    {
+                        linkCocina.Attributes.Add("class", "nav-link d-none");
+                        linkRestaurante.Attributes.Add("class", "nav-link d-none");
+                    }
+
+                    if (usuario.IdTipoUsuario != TipoUsuario.garzon)
+                    {
+                        linkRestaurante.Attributes.Add("class", "nav-link d-none");
+                    }
+                }
             }
         }
 
@@ -36,7 +59,7 @@ namespace Restaurant.Web.Master
         {
             if (Session["Usuario"] != null && Session["token"] != null)
             {
-                Response.Redirect("/Paginas/Administrador/Inicio.aspx");
+                Response.Redirect("/Paginas/Mantenedores/Inicio.aspx");
             }
             else
             {

@@ -60,6 +60,7 @@
     <Compile Include="Clases\OrdenProveedor.cs" />
     <Compile Include="Clases\Pedido.cs" />
     <Compile Include="Clases\Persona.cs" />
+    <Compile Include="Clases\ArticuloConsumoDirecto.cs" />
     <Compile Include="Clases\Plato.cs" />
     <Compile Include="Clases\Proveedor.cs" />
     <Compile Include="Clases\Reserva.cs" />

@@ -50,6 +50,11 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
             }
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (usuario.IdTipoUsuario != TipoUsuario.administrador)
+            {
+                Response.Redirect("../Mantenedores/Inicio.aspx");
+            }
         }
         public void limpiarTabs()
         {

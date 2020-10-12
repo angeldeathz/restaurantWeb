@@ -57,7 +57,8 @@
           </div>
           <div class="tab-pane fade" id="divArticulos" role="tabpanel" aria-labelledby="tabArticulos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearArticulo" runat="server" Text="Crear Articulo" OnClick="btnModalCrearArticulo_Click" CssClass="btn btn-info float-right"/>
-               <asp:UpdatePanel ID="upListaArticulos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+              <asp:Button ID="btnModalCrearPlato" runat="server" Text="Crear Plato" OnClick="btnModalCrearPlato_Click" CssClass="btn btn-info float-right"/>
+              <asp:UpdatePanel ID="upListaArticulos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                  <ContentTemplate>
                       <div class="text-center">
                         <asp:Label ID="listaArticulosVacia" runat="server" 
@@ -259,4 +260,109 @@
         </asp:UpdatePanel>
       </div>
     </div><!-- Fin modal Articulos -->
+        <!-- Modal Platos -->
+    <div class="modal fade" id="modalPlato" tabindex="-1" role="dialog" aria-labelledby="tituloModalPlato" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <asp:UpdatePanel ID="upModalPlato" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="modal-content">                    
+                  <div class="modal-header">
+                    <asp:Label ID="tituloModalPlato" class="modal-title h5" runat="server" Text="Crear Plato"></asp:Label>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body py-4">                      
+                    <asp:TextBox ID="txtIdPlato" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            <asp:Label ID="lblFechaInicioPlato" runat="server" Text="Fecha Inicio"></asp:Label>
+                            <asp:TextBox ID="txtFechaInicioPlato" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
+                        </div>  
+                        <div class="col-12 col-md-3">
+                            <asp:Label ID="lblFechaFinPlato" runat="server" Text="Fecha Fin"></asp:Label>
+                            <asp:TextBox ID="txtFechaFinPlato" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
+                        </div> 
+                            <div class="col-12 col-sm-3">
+                            <asp:Label ID="lblEstadoPlato" runat="server" Text="Estado"></asp:Label>
+                            <asp:DropDownList ID="ddlEstadoPlato" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                        <div class="col-12 col-sm-3">
+                            <asp:Label ID="lblMesaPlato" runat="server" Text="Mesa"></asp:Label>
+                            <asp:DropDownList ID="ddlMesaPlato" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12 col-md-5">
+                            <asp:Label ID="lblIngredientePlato" runat="server" Text="Artículo"></asp:Label>
+                            <asp:DropDownList ID="ddlIngredientePlato" runat="server" CssClass="form-control" 
+                                OnSelectedIndexChanged="ddlIngredientePlato_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>     
+                        </div>                          
+                        <div class="col-12 col-md-2">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:Label ID="lblPrecioIngredientePlato" runat="server" Text="Precio"></asp:Label>
+                                    <asp:DropDownList ID="ddlPrecioIngredientePlato" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>              
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <asp:Label ID="lblCantidadIngredientePlato" runat="server" Text="Cantidad"></asp:Label>
+                            <asp:TextBox ID="txtCantidadIngredientePlato" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
+                        </div> 
+                        <div class="col-12 col-md-3">
+                            <br />
+                            <asp:Button ID="btnAgregarIngredientePlato" runat="server" CssClass="btn btn-info btn-block" Text="Agregar" OnClick="btnAgregarIngredientePlato_Click"/>
+                        </div>     
+                    </div>   
+                    <div class="row">
+                        <div class="col-12">
+                            <asp:UpdatePanel ID="upIngredientesPlato" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <div class="text-center">
+                                        <asp:Label ID="listaIngredientesPlatoVacia" runat="server" 
+                                            Text="No han agregado artículos al pedido" CssClass="d-inline-block h5 my-5"></asp:Label>
+                                    </div>
+                                    <div class="table-responsive pt-3">
+                                        <asp:Repeater ID="listaIngredientesPlato" runat="server" OnItemCommand="btnEliminarIngredientePlato_Click">
+                                        <HeaderTemplate>
+                                            <table border="1" class="table">
+                                            <tr>
+                                                <td><b>Nombre</b></td>IngredientePlato
+                                        </HeaderTemplate>          
+                                        <ItemTemplate>
+                                            <tr>
+                                            <td> <%# Eval("Articulo.Nombre") %> </td>
+                                            <td> $<%# Eval("Precio") %> </td>
+                                            <td> <%# Eval("Cantidad") %> </td>
+                                            <td> $<%# Eval("Total") %> </td>
+                                                <td><asp:LinkButton ID="btnEliminarIngredientePlato" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
+                                                    Eliminar</asp:LinkButton></td>
+                                            </tr>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </table>
+                                        </FooterTemplate>
+                                        </asp:Repeater>
+                                    </div>
+                                    <div class="col-12 text-right">
+                                        <asp:Label ID="lblTotalPlato" runat="server" Text=""></asp:Label>
+                                        <asp:TextBox ID="txtTotalPlato" runat="server" CssClass="form-control" TextMode="Number" Visible="false"></asp:TextBox>              
+                                    </div>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>  
+                        </div> 
+                    </div>   
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnCrearPlato" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearPlato_Click"/>
+                    <asp:Button ID="btnEditarPlato" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarPlato_Click" />
+                  </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div> <!-- Fin Modal Platos-->
 </asp:Content>

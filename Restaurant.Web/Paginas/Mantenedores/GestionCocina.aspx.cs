@@ -19,6 +19,9 @@ namespace Restaurant.Web.Paginas.Administrador
         private TipoConsumoService _tipoConsumoService;
         private MesaService _mesaService;
         private ArticuloPedidoService _articuloPedidoService;
+        private InsumoService _insumoService;
+        private PlatoService _platoService;
+        private ArticuloConsumoDirectoService _articuloConsumoDirectoService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -99,6 +102,11 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
             }
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (![TipoUsuario.administrador, TipoUsuario.cocina, TipoUsuario.garzon].Contains(usuario.IdTipoUsuario))
+            {
+                Response.Redirect("../Mantenedores/Inicio.aspx");
+            }
         }
         public void limpiarTabs()
         {
@@ -154,17 +162,18 @@ namespace Restaurant.Web.Paginas.Administrador
                     ddlArticuloPedido.SelectedValue = "";
                     ddlPrecioArticuloPedido.SelectedValue = "";
                     txtCantidadArticuloPedido.Text = "";
-                    /*
-                     * OBTENER ARTICULOS PEDIDO Q CORRESPONDEN AL PEDIDO
-                        _articuloPedidoService = new ArticuloPedidoService(token.access_token);
-                        List<ArticuloPedido> listaArticulos  _articuloPedidoService.Obtener(pedido.Id);
-                        Session["articulosPedidos"] =listaArticulos;
-                        actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
-                        var totalPedido = listaArticulos.Sum(x =>x.Total);
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
-                        txtTotalPedido.Text = totalPedido.ToString();
-                        upArticulosPedido.Update();
-                    */
+                    
+                    //Buscar artículos del pedido
+                    _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                    List<ArticuloPedido> articulos =_articuloPedidoService.Obtener();
+                    List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)articulos.Where(x => x.IdPedido == pedido.Id);
+                    Session["articulosPedidos"] = articulosPedido;
+
+                    actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
+                    var totalPedido = articulosPedido.Sum(x =>x.Total);
+                    lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                    txtTotalPedido.Text = totalPedido.ToString();
+                    upArticulosPedido.Update();
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('show');", true);
                     upModalPedido.Update();
@@ -346,6 +355,7 @@ namespace Restaurant.Web.Paginas.Administrador
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
             upModalArticulo.Update();
+            Session["insumosArticulo"] = new List<Insumo>();
 
             limpiarTabs();
             tabArticulos.Attributes.Add("class", "nav-link active");
@@ -371,6 +381,13 @@ namespace Restaurant.Web.Paginas.Administrador
                     txtPrecioArticulo.Text = articulo.Precio.ToString();
                     ddlTipoConsumoArticulo.SelectedValue = articulo.IdTipoConsumo.ToString();
                     ddlEstadoArticulo.SelectedValue = articulo.IdEstadoArticulo.ToString();
+
+                    //Buscar insumos del articulo
+                    _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                    List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
+                    List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)articulos.Where(x => x.IdPedido == pedido.Id);
+                    Session["insumosArticulo"] = new List<Insumo>();
+
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
                     upModalArticulo.Update();
@@ -444,6 +461,230 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Error al editar articulo');", true);
             }
+        }
+        protected void btnModalCrearPlato_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+            tituloModalPlato.Text = "Crear Plato";
+            btnCrearPlato.Visible = true;
+            btnEditarPlato.Visible = false;
+            txtFechaInicioPlato.Text = "";
+            txtFechaFinPlato.Text = "";
+            txtTotalPlato.Text = "";
+            ddlEstadoPlato.SelectedValue = "";
+            ddlMesaPlato.SelectedValue = "";
+            ddlIngredientePlato.SelectedValue = "";
+            ddlPrecioIngredientePlato.SelectedValue = "";
+            txtCantidadIngredientePlato.Text = "";
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('show');", true);
+            upModalPlato.Update();
+            Session["insumosPlatos"] = new List<IngredientePlato>();
+
+            limpiarTabs();
+            tabArticulos.Attributes.Add("class", "nav-link active");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnModalEditarPlato_Click(object sender, RepeaterCommandEventArgs e)
+        {
+            ValidarSesion();
+            int idPlato;
+            if (int.TryParse((string)e.CommandArgument, out idPlato))
+            {
+                Token token = (Token)Session["token"];
+                _pedidoService = new PlatoService(token.access_token);
+                Plato pedido = _pedidoService.Obtener(idPlato);
+                if (pedido != null)
+                {
+                    tituloModalPlato.Text = "Editar Plato";
+                    btnCrearPlato.Visible = false;
+                    btnEditarPlato.Visible = true;
+                    txtIdPlato.Text = pedido.Id.ToString();
+                    txtFechaInicioPlato.Text = pedido.FechaHoraInicio.ToShortTimeString();
+                    txtFechaFinPlato.Text = pedido.FechaHoraFin.ToShortTimeString();
+                    txtTotalPlato.Text = pedido.Total.ToString();
+                    ddlEstadoPlato.SelectedValue = pedido.IdEstadoPlato.ToString();
+                    ddlMesaPlato.SelectedValue = pedido.IdMesa.ToString();
+                    ddlIngredientePlato.SelectedValue = "";
+                    ddlPrecioIngredientePlato.SelectedValue = "";
+                    txtCantidadIngredientePlato.Text = "";
+
+                    //Buscar artículos del pedido
+                    _ingredientePlatoService = new IngredientePlatoService(token.access_token);
+                    List<IngredientePlato> insumos = _ingredientePlatoService.Obtener();
+                    List<IngredientePlato> insumosPlato = (List<IngredientePlato>)insumos.Where(x => x.IdPlato == pedido.Id);
+                    Session["insumosPlatos"] = insumosPlato;
+
+                    actualizarRepeater(listaInsumosPlato, insumosPlato, listaInsumosPlatoVacia);
+                    var totalPlato = insumosPlato.Sum(x => x.Total);
+                    lblTotalPlato.Text = "Total: $" + totalPlato.ToString() + "-";
+                    txtTotalPlato.Text = totalPlato.ToString();
+                    upInsumosPlato.Update();
+
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('show');", true);
+                    upModalPlato.Update();
+                }
+            }
+            Session["insumosPlatos"] = new List<IngredientePlato>();
+
+            limpiarTabs();
+            tabArticulos.Attributes.Add("class", "nav-link active");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnCrearPlato_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+
+            Plato pedido = new Plato();
+            pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPlato.Text);
+            pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPlato.Text);
+            pedido.Total = int.Parse(txtTotalPlato.Text);
+            pedido.IdEstadoPlato = int.Parse(ddlEstadoPlato.SelectedValue);
+            pedido.IdMesa = int.Parse(ddlMesaPlato.SelectedValue);
+
+            Token token = (Token)Session["token"];
+            _pedidoService = new PlatoService(token.access_token);
+            int idPlato = _pedidoService.Guardar(pedido);
+            if (idPlato != 0)
+            {
+                List<IngredientePlato> listaInsumos = (List<IngredientePlato>)Session["insumosPlatos"];
+                foreach (IngredientePlato ingredientePlato in listaInsumos)
+                {
+                    ingredientePlato.IdPlato = idPlato;
+                    _ingredientePlatoService = new IngredientePlatoService(token.access_token);
+                    int idIngredientePlato = _ingredientePlatoService.Guardar(ingredientePlato);
+                }
+                List<Plato> pedidos = _pedidoService.Obtener();
+                if (pedidos != null && pedidos.Count > 0)
+                {
+                    actualizarRepeater(listaPlatos, pedidos, listaPlatosVacia);
+                    upListaPlatos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPlato", "alert('Plato creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('hide');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al crear pedido');", true);
+            }
+        }
+
+        protected void btnEditarPlato_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+            Plato pedido = new Plato();
+            pedido.Id = int.Parse(txtIdPlato.Text);
+            pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPlato.Text);
+            pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPlato.Text);
+            pedido.Total = int.Parse(txtTotalPlato.Text);
+            pedido.IdEstadoPlato = int.Parse(ddlEstadoPlato.SelectedValue);
+            pedido.IdMesa = int.Parse(ddlMesaPlato.SelectedValue);
+
+            Token token = (Token)Session["token"];
+            _pedidoService = new PlatoService(token.access_token);
+            bool editar = _pedidoService.Modificar(pedido, pedido.Id);
+            if (editar)
+            {
+                List<IngredientePlato> listaInsumos = (List<IngredientePlato>)Session["insumosPlatos"];
+                //SE DEBERÍAN ELIMINAR LOS insumosPlato que ya existen, asociados?
+                foreach (IngredientePlato ingredientePlato in listaInsumos)
+                {
+                    ingredientePlato.IdPlato = pedido.Id;
+                    _ingredientePlatoService = new IngredientePlatoService(token.access_token);
+                    int idIngredientePlato = _ingredientePlatoService.Guardar(ingredientePlato);
+                }
+                List<Plato> pedidos = _pedidoService.Obtener();
+                if (pedidos != null && pedidos.Count > 0)
+                {
+                    actualizarRepeater(listaPlatos, pedidos, listaPlatosVacia);
+                    upListaPlatos.Update();
+                }
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPlato", "alert('Plato editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('hide');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al editar pedido');", true);
+            }
+        }
+        protected void ddlIngredientePlato_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string idInsumo = ddlIngredientePlato.SelectedValue;
+            ddlPrecioIngredientePlato.SelectedValue = idInsumo;
+            upPrecio.Update();
+            limpiarTabs();
+            tabArticulos.Attributes.Add("class", "nav-link active");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnAgregarIngredientePlato_Click(object sender, EventArgs e)
+        {
+            ValidarSesion();
+
+            IngredientePlato ingredientePlato = new IngredientePlato();
+            Insumo insumo = new Insumo();
+            insumo.Nombre = ddlIngredientePlato.SelectedItem.Text;
+            ingredientePlato.IdInsumo = int.Parse(ddlIngredientePlato.SelectedValue);
+            ingredientePlato.Precio = int.Parse(ddlPrecioIngredientePlato.SelectedItem.Text);
+            ingredientePlato.Cantidad = int.Parse(txtCantidadIngredientePlato.Text);
+            ingredientePlato.Total = ingredientePlato.Precio * ingredientePlato.Cantidad;
+            ingredientePlato.IdEstadoIngredientePlato = 1;
+            ingredientePlato.Insumo = insumo;
+
+            List<IngredientePlato> listaInsumos = (List<IngredientePlato>)Session["insumosPlatos"];
+            var insumoExiste = listaInsumos.FirstOrDefault(a => a.IdInsumo == ingredientePlato.IdInsumo);
+            if (insumoExiste != null)
+            {
+                insumoExiste.Cantidad = insumoExiste.Cantidad + ingredientePlato.Cantidad;
+                insumoExiste.Total = insumoExiste.Precio * insumoExiste.Cantidad;
+            }
+            else
+            {
+                listaInsumos.Add(ingredientePlato);
+            }
+            Session["insumosPlatos"] = listaInsumos;
+            actualizarRepeater(listaInsumosPlato, listaInsumos, listaInsumosPlatoVacia);
+            var totalPlato = listaInsumos.Sum(x => x.Total);
+            lblTotalPlato.Text = "Total: $" + totalPlato.ToString() + "-";
+            txtTotalPlato.Text = totalPlato.ToString();
+            upInsumosPlato.Update();
+
+            limpiarTabs();
+            tabArticulos.Attributes.Add("class", "nav-link active");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
+        }
+
+        protected void btnEliminarIngredientePlato_Click(object sender, RepeaterCommandEventArgs e)
+        {
+            ValidarSesion();
+            int idInsumo;
+            if (int.TryParse((string)e.CommandArgument, out idInsumo))
+            {
+                List<IngredientePlato> listaInsumos = (List<IngredientePlato>)Session["insumosPlatos"];
+                var insumoEliminar = listaInsumos.FirstOrDefault(a => a.IdInsumo == idInsumo);
+                if (insumoEliminar != null)
+                {
+                    listaInsumos.Remove(insumoEliminar);
+                }
+                Session["insumosPlatos"] = listaInsumos;
+                actualizarRepeater(listaInsumosPlato, listaInsumos, listaInsumosPlatoVacia);
+                var totalPlato = listaInsumos.Sum(x => x.Total);
+                if (totalPlato == 0)
+                {
+                    lblTotalPlato.Text = "";
+                }
+                else
+                {
+                    lblTotalPlato.Text = "Total: $" + totalPlato.ToString() + "-";
+                }
+                txtTotalPlato.Text = totalPlato.ToString();
+                upInsumosPlato.Update();
+            }
+            limpiarTabs();
+            tabArticulos.Attributes.Add("class", "nav-link active");
+            divArticulos.Attributes.Add("class", "tab-pane active show");
         }
 
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
