@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Paginas.Mantenedores
 {
     public partial class GestionUsuarios : System.Web.UI.Page
     {
@@ -49,6 +49,11 @@ namespace Restaurant.Web.Paginas.Administrador
             if (Session["usuario"] == null || Session["token"] == null)
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
+            }
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (usuario.IdTipoUsuario != TipoUsuario.administrador)
+            {
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
         public void limpiarTabs()

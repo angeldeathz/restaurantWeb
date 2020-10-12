@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Restaurant.Model.Clases;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Restaurant.Model.Clases;
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Paginas.Mantenedores
 {
-    public partial class Inicio : System.Web.UI.Page
+    public partial class Reporteria : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,17 +24,11 @@ namespace Restaurant.Web.Paginas.Administrador
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
             }
-            else
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (usuario.IdTipoUsuario != TipoUsuario.administrador)
             {
-                ObtenerDatosUsuario();
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
-        }
-
-        private void ObtenerDatosUsuario()
-        {
-            var usuario = (Usuario)Session["usuario"];
-            lblNombres.Text = $"{usuario.Persona.Nombre} {usuario.Persona.Apellido}";
-            lblPerfil.Text = usuario.TipoUsuario.Nombre;
         }
     }
 }

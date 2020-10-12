@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Paginas.Mantenedores
 {
     public partial class GestiónBodega : System.Web.UI.Page
     {
@@ -80,6 +80,11 @@ namespace Restaurant.Web.Paginas.Administrador
             if (Session["usuario"] == null || Session["token"] == null)
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
+            }
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (!  new int[] { TipoUsuario.administrador, TipoUsuario.garzon }.Contains(usuario.IdTipoUsuario))
+            {
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
         public void limpiarTabs()

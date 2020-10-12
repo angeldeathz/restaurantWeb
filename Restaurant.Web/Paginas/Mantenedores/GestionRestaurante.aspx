@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionRestaurante.aspx.cs" Inherits="Restaurant.Web.Paginas.Administrador.GestiónBodega" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Admin.Master" AutoEventWireup="true" CodeBehind="GestionRestaurante.aspx.cs" Inherits="Restaurant.Web.Paginas.Mantenedores.GestiónBodega" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row p-3">
       <div class="col-12 text-center">

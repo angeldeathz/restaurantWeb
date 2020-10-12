@@ -7,12 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Restaurant.Web.Master
+namespace Restaurant.Web.Paginas.Mantenedores
 {
 
 
-    public partial class Admin
+    public partial class Inicio
     {
+
+        /// <summary>
+        /// lblNombres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombres;
+
+        /// <summary>
+        /// lblPerfil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPerfil;
 
         /// <summary>
         /// linkBodega control.
@@ -21,7 +39,7 @@ namespace Restaurant.Web.Master
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkBodega;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkBodega;
 
         /// <summary>
         /// linkRestaurante control.
@@ -30,7 +48,7 @@ namespace Restaurant.Web.Master
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkRestaurante;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkRestaurante;
 
         /// <summary>
         /// linkCocina control.
@@ -39,7 +57,7 @@ namespace Restaurant.Web.Master
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkCocina;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkCocina;
 
         /// <summary>
         /// linkUsuarios control.
@@ -48,7 +66,7 @@ namespace Restaurant.Web.Master
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkUsuarios;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkUsuarios;
 
         /// <summary>
         /// linkReporteria control.
@@ -57,24 +75,6 @@ namespace Restaurant.Web.Master
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor linkReporteria;
-
-        /// <summary>
-        /// btnCerrarSesion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnCerrarSesion;
-
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl linkReporteria;
     }
 }

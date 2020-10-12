@@ -20,7 +20,7 @@ namespace Restaurant.Web.Paginas.Publica
         {
             if (Session["usuario"] != null & Session["token"] != null)
             {
-                Response.Redirect("../Administrador/Inicio.aspx");
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Restaurant.Web.Paginas.Publica
                 if (usuario != null)
                 {
                     Session["usuario"] = usuario;
-                    Response.Redirect("../Administrador/inicio");
+                    Response.Redirect("../Mantenedores/inicio");
                 }
             }
         }

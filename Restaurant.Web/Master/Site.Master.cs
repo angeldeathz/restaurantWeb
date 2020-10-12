@@ -35,7 +35,7 @@ namespace Restaurant.Web.Master
         {
             if (Session["Usuario"] != null && Session["token"] != null)
             {
-                Response.Redirect("/Paginas/Administrador/Inicio.aspx");
+                Response.Redirect("/Paginas/Mantenedores/Inicio.aspx");
             }
             else
             {

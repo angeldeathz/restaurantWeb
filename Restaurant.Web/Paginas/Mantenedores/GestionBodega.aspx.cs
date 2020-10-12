@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Collections;
 using Restaurant.Model.Dto;
 
-namespace Restaurant.Web.Paginas.Administrador
+namespace Restaurant.Web.Paginas.Mantenedores
 {
     public partial class GestionInventario : System.Web.UI.Page
     {
@@ -83,6 +83,12 @@ namespace Restaurant.Web.Paginas.Administrador
             if (Session["usuario"] == null || Session["token"] == null)
             {
                 Response.Redirect("../Publica/IniciarSesion.aspx");
+            }
+
+            Usuario usuario = (Usuario)Session["usuario"];
+            if (! new int[] { TipoUsuario.administrador, TipoUsuario.bodega }.Contains(usuario.IdTipoUsuario))
+            {
+               Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
         public void limpiarTabs()

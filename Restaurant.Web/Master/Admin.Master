@@ -51,22 +51,22 @@
                 <ul class="navbar-nav ml-auto">
                     
                     <li class="nav-item active px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/Inicio.aspx">Inicio</a>
+                        <a class="nav-link" runat="server" href="/Paginas/Mantenedores/Inicio.aspx">Inicio</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionBodega.aspx">Bodega</a>
+                        <a class="nav-link" runat="server" id="linkBodega" href="/Paginas/Mantenedores/GestionBodega.aspx">Bodega</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionRestaurante.aspx">Restaurante</a>
+                        <a class="nav-link" runat="server" id="linkRestaurante" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Restaurante</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionCocina.aspx">Cocina</a>
+                        <a class="nav-link" runat="server" id="linkCocina"  href="/Paginas/Mantenedores/GestionCocina.aspx">Cocina</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/GestionUsuarios.aspx">Usuarios</a>
+                        <a class="nav-link" runat="server" id="linkUsuarios"  href="/Paginas/Mantenedores/GestionUsuarios.aspx">Usuarios</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Administrador/Reporteria.aspx">Reportería</a>
+                        <a class="nav-link" runat="server" id="linkReporteria"  href="/Paginas/Mantenedores/Reporteria.aspx">Reportería</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="btn btn-outline-secondary" id="btnCerrarSesion" runat="server" onserverclick="btnCerrarSesion_OnServerClick">Cerrar Sesión</a>

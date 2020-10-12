@@ -118,12 +118,12 @@
     <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
-    <Content Include="Paginas\Administrador\GestionCocina.aspx" />
-    <Content Include="Paginas\Administrador\GestionBodega.aspx" />
-    <Content Include="Paginas\Administrador\GestionUsuarios.aspx" />
-    <Content Include="Paginas\Administrador\GestionRestaurante.aspx" />
-    <Content Include="Paginas\Administrador\Inicio.aspx" />
-    <Content Include="Paginas\Administrador\Reporteria.aspx" />
+    <Content Include="Paginas\Mantenedores\GestionCocina.aspx" />
+    <Content Include="Paginas\Mantenedores\GestionBodega.aspx" />
+    <Content Include="Paginas\Mantenedores\GestionUsuarios.aspx" />
+    <Content Include="Paginas\Mantenedores\GestionRestaurante.aspx" />
+    <Content Include="Paginas\Mantenedores\Inicio.aspx" />
+    <Content Include="Paginas\Mantenedores\Reporteria.aspx" />
     <Content Include="Paginas\Publica\Menu.aspx" />
     <Content Include="Paginas\Publica\Nosotros.aspx" />
     <Content Include="Paginas\Publica\Contacto.aspx" />
@@ -190,46 +190,46 @@
     <Compile Include="Master\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionCocina.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\GestionCocina.aspx.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionCocina.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\GestionCocina.aspx.designer.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionBodega.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\GestionBodega.aspx.cs">
       <DependentUpon>GestionBodega.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionBodega.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\GestionBodega.aspx.designer.cs">
       <DependentUpon>GestionBodega.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\GestionUsuarios.aspx.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionUsuarios.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\GestionUsuarios.aspx.designer.cs">
       <DependentUpon>GestionUsuarios.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionRestaurante.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\GestionRestaurante.aspx.cs">
       <DependentUpon>GestionRestaurante.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\GestionRestaurante.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\GestionRestaurante.aspx.designer.cs">
       <DependentUpon>GestionRestaurante.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\Inicio.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\Inicio.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Administrador\Reporteria.aspx.cs">
+    <Compile Include="Paginas\Mantenedores\Reporteria.aspx.cs">
       <DependentUpon>Reporteria.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Administrador\Reporteria.aspx.designer.cs">
+    <Compile Include="Paginas\Mantenedores\Reporteria.aspx.designer.cs">
       <DependentUpon>Reporteria.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Publica\Menu.aspx.cs">
