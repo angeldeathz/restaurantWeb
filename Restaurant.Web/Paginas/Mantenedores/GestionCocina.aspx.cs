@@ -103,7 +103,8 @@ namespace Restaurant.Web.Paginas.Administrador
                 Response.Redirect("../Publica/IniciarSesion.aspx");
             }
             Usuario usuario = (Usuario)Session["usuario"];
-            if (![TipoUsuario.administrador, TipoUsuario.cocina, TipoUsuario.garzon].Contains(usuario.IdTipoUsuario))
+
+            if (! new int[] { TipoUsuario.administrador, TipoUsuario.cocina, TipoUsuario.garzon }.Contains(usuario.IdTipoUsuario))
             {
                 Response.Redirect("../Mantenedores/Inicio.aspx");
             }

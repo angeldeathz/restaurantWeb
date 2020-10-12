@@ -86,7 +86,7 @@ namespace Restaurant.Web.Paginas.Administrador
             }
 
             Usuario usuario = (Usuario)Session["usuario"];
-            if (![TipoUsuario.administrador, TipoUsuario.bodega].Contains(usuario.IdTipoUsuario))
+            if (! new int[] { TipoUsuario.administrador, TipoUsuario.bodega }.Contains(usuario.IdTipoUsuario))
             {
                Response.Redirect("../Mantenedores/Inicio.aspx");
             }

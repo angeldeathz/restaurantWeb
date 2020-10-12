@@ -33,7 +33,7 @@ namespace Restaurant.Web.Master
                         linkBodega.Attributes.Add("class", "nav-link d-none");
                     }
 
-                    if (![TipoUsuario.cocina, TipoUsuario.garzon].Contains(usuario.IdTipoUsuario))
+                    if (! new int[] { TipoUsuario.cocina, TipoUsuario.garzon }.Contains(usuario.IdTipoUsuario))
                     {
                         linkCocina.Attributes.Add("class", "nav-link d-none");
                         linkRestaurante.Attributes.Add("class", "nav-link d-none");
