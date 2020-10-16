@@ -73,6 +73,9 @@
                         </div>
                     </li>
                     <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/Autoservicio">Autoservicio</a>
+                    </li>
+                    <li class="nav-item px-2">
                         <a class="btn btn-outline-secondary" id="btnIniciarSesion" visible="true" runat="server" href="../Paginas/Publica/iniciarsesion">Iniciar Sesión</a>
                         <a class="btn btn-outline-secondary" id="btnCerrarSesion" visible="false" runat="server" onserverclick="btnCerrarSesion_OnServerClick">Cerrar Sesión</a>
                     </li>
