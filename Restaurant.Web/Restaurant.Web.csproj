@@ -118,12 +118,14 @@
     <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
+    <Content Include="Paginas\Autoservicio\GestionAutoservicio.aspx" />
     <Content Include="Paginas\Mantenedores\GestionCocina.aspx" />
     <Content Include="Paginas\Mantenedores\GestionBodega.aspx" />
     <Content Include="Paginas\Mantenedores\GestionUsuarios.aspx" />
     <Content Include="Paginas\Mantenedores\GestionRestaurante.aspx" />
     <Content Include="Paginas\Mantenedores\Inicio.aspx" />
     <Content Include="Paginas\Mantenedores\Reporteria.aspx" />
+    <Content Include="Paginas\Publica\Autoservicio.aspx" />
     <Content Include="Paginas\Publica\Menu.aspx" />
     <Content Include="Paginas\Publica\Nosotros.aspx" />
     <Content Include="Paginas\Publica\Contacto.aspx" />
@@ -146,6 +148,8 @@
     <Content Include="Master\Admin.Master" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Paginas\Publica\Reservas.aspx" />
+    <Content Include="Paginas\Reservas\CancelarReserva.aspx" />
+    <Content Include="Paginas\Reservas\CrearReserva.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -190,6 +194,13 @@
     <Compile Include="Master\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\Autoservicio\GestionAutoservicio.aspx.cs">
+      <DependentUpon>GestionAutoservicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\GestionAutoservicio.aspx.designer.cs">
+      <DependentUpon>GestionAutoservicio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\Mantenedores\GestionCocina.aspx.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -231,6 +242,13 @@
     </Compile>
     <Compile Include="Paginas\Mantenedores\Reporteria.aspx.designer.cs">
       <DependentUpon>Reporteria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Publica\Autoservicio.aspx.cs">
+      <DependentUpon>Autoservicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Publica\Autoservicio.aspx.designer.cs">
+      <DependentUpon>Autoservicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Publica\Menu.aspx.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
@@ -277,6 +295,20 @@
     </Compile>
     <Compile Include="Paginas\Publica\Reservas.aspx.designer.cs">
       <DependentUpon>Reservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\CancelarReserva.aspx.cs">
+      <DependentUpon>CancelarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\CancelarReserva.aspx.designer.cs">
+      <DependentUpon>CancelarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\CrearReserva.aspx.cs">
+      <DependentUpon>CrearReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\CrearReserva.aspx.designer.cs">
+      <DependentUpon>CrearReserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master\Site.Master.cs">

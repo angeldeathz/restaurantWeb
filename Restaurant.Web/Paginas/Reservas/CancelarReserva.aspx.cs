@@ -5,16 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Restaurant.Web.Paginas.Publica
+namespace Restaurant.Web.Paginas.Reservas
 {
-    public partial class Reservas : System.Web.UI.Page
+    public partial class CancelarReserva : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnReservarMesa_Click(object sender, EventArgs e)
         {
 
         }
