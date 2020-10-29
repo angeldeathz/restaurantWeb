@@ -23,7 +23,6 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
-
         public Token Autenticar(string rut, string contrasena)
         {
             var url = "http://localhost/Autenticacion/token";
