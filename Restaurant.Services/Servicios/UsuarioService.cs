@@ -15,6 +15,14 @@ namespace Restaurant.Services.Servicios
             _restClientHttp = new RestClientHttp(token);
         }
 
+        public Token AutenticarCliente()
+        {
+            var url = "http://localhost/Autenticacion/token";
+            var respuesta = _restClientHttp.GetToken<Token>(url);
+            if (respuesta.StatusName != HttpStatusCode.OK) return null;
+            return respuesta.Response;
+        }
+
         public Token Autenticar(string rut, string contrasena)
         {
             var url = "http://localhost/Autenticacion/token";

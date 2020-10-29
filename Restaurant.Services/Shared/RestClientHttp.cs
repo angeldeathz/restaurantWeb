@@ -50,6 +50,40 @@ namespace Restaurant.Services.Shared
             }
         }
 
+        public RestClientResponse<T> GetToken<T>(string url)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
+                var parameters = new Dictionary<string, string>
+                {
+                    {"grant_type", "password"},
+                    {"user_type", "cliente"}
+                };
+                var response = httpClient.PostAsync(url, new FormUrlEncodedContent(parameters)).Result;
+
+                var restClientResponse = new RestClientResponse<T>
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusName = response.StatusCode,
+                    Message = response.ReasonPhrase,
+                    Response = response.StatusCode != HttpStatusCode.OK ?
+                        default(T) :
+                        response.Content.ReadAsAsync<T>().Result
+                };
+
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.BadRequest:
+                    case HttpStatusCode.InternalServerError:
+                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        break;
+                }
+
+                return restClientResponse;
+            }
+        }
+
         public RestClientResponse<T> Get<T>(string url)
         {
             using (var httpClient = new HttpClient())
