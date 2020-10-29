@@ -2,6 +2,10 @@
 {
     public class EstadoReserva
     {
+
+        public const int creada = 1;
+        public const int enCurso = 2;
+        public const int cancelada = 3;
         public EstadoReserva()
         {
             Id = 0;

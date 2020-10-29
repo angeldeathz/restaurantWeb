@@ -9,6 +9,7 @@ namespace Restaurant.Web.Paginas.Reservas
 {
     public partial class CancelarReserva : System.Web.UI.Page
     {
+        private ReservaService _reservaService;
         protected void Page_Load(object sender, EventArgs e)
         {
 

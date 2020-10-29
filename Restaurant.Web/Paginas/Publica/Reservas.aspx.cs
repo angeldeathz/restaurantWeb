@@ -16,12 +16,12 @@ namespace Restaurant.Web.Paginas.Publica
 
         protected void btnReservarMesa_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
         }
 
         protected void btnCancelarReserva_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("/Paginas/Reservas/CancelarReserva.aspx");
         }
     }
 }

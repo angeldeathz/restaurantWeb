@@ -276,7 +276,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
             persona.EsPersonaNatural = Convert.ToChar(chkEsPersonaJuridica.Checked ? 0 : 1);
 
             cliente.Persona = persona;
-
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
             int idCliente = _clienteService.Guardar(cliente);
