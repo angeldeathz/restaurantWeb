@@ -11,8 +11,8 @@ namespace Restaurant.Web.Paginas.Publica
 {
     public partial class Autoservicio : System.Web.UI.Page
     {
-        private PedidoService _pedidoService;
-
+        private ReservaService _reservaService;
+        private UsuarioService _usuarioService;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,22 +21,31 @@ namespace Restaurant.Web.Paginas.Publica
         protected void btnAutoservicio_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text;
-            _pedidoService = new PedidoService(token.access_token);
-            List<Pedido> pedidos = _pedidoService.Obtener();
-            if (pedidos == null || pedidos.Count == 0)
+            _usuarioService = new UsuarioService(string.Empty);
+            var token = _usuarioService.AutenticarCliente();
+            if (token == null)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
+                return;
+            }
+            Session["token"] = token;
+
+            _reservaService = new ReservaService(token.access_token);
+            List<Reserva> reservas = _reservaService.Obtener();
+            if (reservas == null || reservas.Count == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
                 return;
             }
 
-            Pedido pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
-                                                          && x.Cliente.Persona.Email == email);
-            if (pedidoCliente == null)
+            Reserva reservaCliente = reservas.FirstOrDefault(x => x.IdEstadoReserva == EstadoReserva.enCurso
+                                                             && x.Cliente.Persona.Email == email);
+            if (reservaCliente == null)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
                 return;
             }
-            Session["pedidoCliente"] = pedidoCliente;
+            Session["reservaCliente"] = reservaCliente;
             Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
         }
     }

@@ -21,10 +21,7 @@ namespace Restaurant.Model.Clases
         public int Total { get; set; }
         public int IdEstadoPedido { get; set; }
         public int IdMesa { get; set; }
-
-        public int IdCliente { get; set; }
         public Mesa Mesa { get; set; }
         public EstadoPedido EstadoPedido { get; set; }
-        public Cliente Cliente { get; set; }
     }
 }
