@@ -6,14 +6,14 @@
         {
             Id = 0;
             Nombre = string.Empty;
-            TiempoPreparacion = 0;
+            MinutosPreparacion = 0;
             IdArticulo = 0;
             IdTipoPreparacion = 0;
         }
 
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public decimal TiempoPreparacion { get; set; }
+        public decimal MinutosPreparacion { get; set; }
         public int IdArticulo { get; set; }
         public int IdTipoPreparacion { get; set; }
         public Articulo Articulo { get; set; }
