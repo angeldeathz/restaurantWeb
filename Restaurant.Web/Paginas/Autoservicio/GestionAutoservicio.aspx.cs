@@ -12,9 +12,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
 {
     public partial class GestionAutoservicio : System.Web.UI.Page
     {
-        private ReservaService _reservaService;
         private PedidoService _pedidoService;
         private ArticuloPedidoService _articuloPedidoService;
+        private ArticuloService _articuloService;
         protected void Page_Load(object sender, EventArgs e)
         {
             validarIngreso();
@@ -41,7 +41,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
                         cargarPedido(token, pedidoCliente);
                     }
                 }
-            }       
+            }
+
+            _articuloService = new ArticuloService(token.access_token);
+            List<Articulo> articulos = _articuloService.Obtener();
+            listaEntradas.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.entradas);
+            //listaPlatosFondo.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo);
+            //listaPostres.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.postres);
+            //listaBebestibles.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles);
+
         }
         protected void validarIngreso()
         {
@@ -190,8 +198,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
                 {
-                    actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
-                    upListaPedidos.Update();
+                    //actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
+                    //upListaPedidos.Update();
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPedido", "alert('Pedido editado');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);

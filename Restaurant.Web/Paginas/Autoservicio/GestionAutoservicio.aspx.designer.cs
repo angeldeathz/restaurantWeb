@@ -42,31 +42,76 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMenu;
 
         /// <summary>
-        /// upListaPedidos control.
+        /// tabEntradas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upListaPedidos;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabEntradas;
 
         /// <summary>
-        /// listaPedidosVacia control.
+        /// tabPlatosFondo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label listaPedidosVacia;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabPlatosFondo;
 
         /// <summary>
-        /// listaPedidos control.
+        /// tabPostres control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater listaPedidos;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabPostres;
+
+        /// <summary>
+        /// tabBebestibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabBebestibles;
+
+        /// <summary>
+        /// divEntradas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEntradas;
+
+        /// <summary>
+        /// upMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upMenu;
+
+        /// <summary>
+        /// lblTituloEntradas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTituloEntradas;
+
+        /// <summary>
+        /// listaEntradas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater listaEntradas;
 
         /// <summary>
         /// divMiOrden control.
