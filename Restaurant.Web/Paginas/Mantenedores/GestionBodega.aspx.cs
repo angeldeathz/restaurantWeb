@@ -385,6 +385,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 Token token = (Token)Session["token"];
                 _ordenProveedorService = new OrdenProveedorService(token.access_token);
                 OrdenProveedor ordenProveedor = _ordenProveedorService.Obtener(idOrdenProveedor);
+                EstadoOrden estadoOrden = ordenProveedor.EstadosOrdenProveedor.LastOrDefault();
                 if (ordenProveedor != null)
                 {
                     tituloModalOrden.Text = "Editar OrdenProveedor";
@@ -393,7 +394,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     txtIdOrden.Text = ordenProveedor.Id.ToString();
                     txtFechaHoraOrden.Text = ordenProveedor.FechaHora.ToShortTimeString();
                     txtTotalOrden.Text = ordenProveedor.Total.ToString();
-                    ddlEstadoOrden.SelectedValue = ordenProveedor.IdEstadoOrden.ToString();
+                    ddlEstadoOrden.SelectedValue = estadoOrden.Id.ToString();
                     ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
                     ddlInsumoOrden.SelectedValue = "";
                     txtPrecioInsumoOrden.Text = "";

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Restaurant.Model.Clases
 {
@@ -23,5 +24,7 @@ namespace Restaurant.Model.Clases
         public Usuario Usuario { get; set; }
         public int IdEstadoOrden { get; set; }
         public EstadoOrden EstadoOrden { get; set; }
+
+        public List<EstadoOrden> EstadosOrdenProveedor { get; set; }
     }
 }
