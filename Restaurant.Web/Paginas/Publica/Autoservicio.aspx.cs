@@ -37,15 +37,20 @@ namespace Restaurant.Web.Paginas.Publica
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
                 return;
             }
+            List<int> idsEstadosReservas = new List<int>() {EstadoReserva.cancelada};
 
-            Reserva reservaCliente = reservas.FirstOrDefault(x => x.IdEstadoReserva == EstadoReserva.enCurso
-                                                             && x.Cliente.Persona.Email == email);
+            Reserva reservaCliente = reservas.FirstOrDefault(x => x.Cliente.Persona.Email == email
+                                                             && x.FechaReserva.Date == DateTime.Now.Date
+                                                             && x.EstadosReserva.Any(y => !idsEstadosReservas.Contains(y.Id))
+                                                             && x.EstadosReserva.Any(y => y.Id == EstadoReserva.enCurso));
             if (reservaCliente == null)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
                 return;
             }
             Session["reservaCliente"] = reservaCliente;
+            Session["pedidoCliente"] = null;
+
             Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
         }
     }

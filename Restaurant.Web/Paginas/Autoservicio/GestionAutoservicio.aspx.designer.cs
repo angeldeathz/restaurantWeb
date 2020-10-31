@@ -42,15 +42,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMenu;
 
         /// <summary>
-        /// btnModalCrearPedidos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalCrearPedidos;
-
-        /// <summary>
         /// upListaPedidos control.
         /// </summary>
         /// <remarks>
@@ -231,51 +222,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.DropDownList ddlMesaPedido;
 
         /// <summary>
-        /// lblArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblArticuloPedido;
-
-        /// <summary>
-        /// ddlArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlArticuloPedido;
-
-        /// <summary>
-        /// upPrecio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPrecio;
-
-        /// <summary>
-        /// lblPrecioArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrecioArticuloPedido;
-
-        /// <summary>
-        /// ddlPrecioArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrecioArticuloPedido;
-
-        /// <summary>
         /// lblCantidadArticuloPedido control.
         /// </summary>
         /// <remarks>
@@ -346,24 +292,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTotalPedido;
-
-        /// <summary>
-        /// btnCrearPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrearPedido;
-
-        /// <summary>
-        /// btnEditarPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarPedido;
 
         /// <summary>
         /// upModalArticulo control.
@@ -499,24 +427,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlInsumoArticulo;
-
-        /// <summary>
-        /// btnCrearArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrearArticulo;
-
-        /// <summary>
-        /// btnEditarArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarArticulo;
 
         /// <summary>
         /// upModalPlato control.
@@ -717,15 +627,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtCantidadIngredientePlato;
 
         /// <summary>
-        /// btnAgregarIngredientePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarIngredientePlato;
-
-        /// <summary>
         /// upIngredientesPlato control.
         /// </summary>
         /// <remarks>
@@ -751,23 +652,5 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater listaIngredientesPlato;
-
-        /// <summary>
-        /// btnCrearPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCrearPlato;
-
-        /// <summary>
-        /// btnEditarPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEditarPlato;
     }
 }

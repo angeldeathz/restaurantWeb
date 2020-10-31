@@ -31,13 +31,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (pedido == null)
             {
                 List<Pedido> pedidos = _pedidoService.Obtener();
-                Pedido pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
-                                                       && x.IdMesa == reserva.IdMesa);
-                if (pedidoCliente != null)
+                if(pedidos != null && pedidos.Count > 0)
                 {
-                    cargarPedido(token, pedidoCliente);
-                    btnHacerPedido.Visible = false;
-                    btnPagarCuenta.Visible = true;
+                    Pedido pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
+                                                                  && x.IdMesa == reserva.IdMesa
+                                                                  && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                    if (pedidoCliente != null)
+                    {
+                        cargarPedido(token, pedidoCliente);
+                    }
                 }
             }       
         }
@@ -53,7 +55,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Session["pedidoCliente"] = pedido;
             _articuloPedidoService = new ArticuloPedidoService(token.access_token);
             List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
-            List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)articulos.Where(x => x.IdPedido == pedido.Id);
+            List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
             Session["articulosPedido"] = articulosPedido;
 
             actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
@@ -63,6 +65,12 @@ namespace Restaurant.Web.Paginas.Autoservicio
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
             upModalPedido.Update();
+
+            if(articulosPedido.Count > 0)
+            {
+                btnHacerPedido.Visible = false;
+                btnPagarCuenta.Visible = true;
+            }
         }
         protected void btnHacerPedido_Click(object sender, EventArgs e)
         {
@@ -200,9 +208,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
             ArticuloPedido articuloPedido = new ArticuloPedido();
             Articulo articulo = new Articulo();
-            articulo.Nombre = ddlArticuloPedido.SelectedItem.Text;
-            articuloPedido.IdArticulo = int.Parse(ddlArticuloPedido.SelectedValue);
-            articuloPedido.Precio = int.Parse(ddlPrecioArticuloPedido.SelectedItem.Text);
+            //articulo.Nombre = ddlArticuloPedido.SelectedItem.Text;
+            //articuloPedido.IdArticulo = int.Parse(ddlArticuloPedido.SelectedValue);
+            //articuloPedido.Precio = int.Parse(ddlPrecioArticuloPedido.SelectedItem.Text);
             articuloPedido.Cantidad = int.Parse(txtCantidadArticuloPedido.Text);
             articuloPedido.Total = articuloPedido.Precio * articuloPedido.Cantidad;
             articuloPedido.IdEstadoArticuloPedido = 1;
@@ -227,8 +235,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
             upArticulosPedido.Update();
 
             limpiarTabs();
-            tabPedidos.Attributes.Add("class", "nav-link active");
-            divPedidos.Attributes.Add("class", "tab-pane active show");
+            //tabPedidos.Attributes.Add("class", "nav-link active");
+            //divPedidos.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnEliminarArticuloPedido_Click(object sender, RepeaterCommandEventArgs e)
@@ -258,8 +266,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 upArticulosPedido.Update();
             }
             limpiarTabs();
-            tabPedidos.Attributes.Add("class", "nav-link active");
-            divPedidos.Attributes.Add("class", "tab-pane active show");
+            //tabPedidos.Attributes.Add("class", "nav-link active");
+            //divPedidos.Attributes.Add("class", "tab-pane active show");
         }
 
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)

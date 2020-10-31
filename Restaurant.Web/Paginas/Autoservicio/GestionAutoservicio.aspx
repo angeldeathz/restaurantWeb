@@ -13,7 +13,6 @@
       <div class="col-12 bg-blanco rounded">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divMenu" role="tabpanel" aria-labelledby="tabMenu" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearPedidos" runat="server" Text="Crear Pedido" OnClick="btnModalCrearPedido_Click" CssClass="btn btn-info float-right"/>
                <asp:UpdatePanel ID="upListaPedidos" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                  <ContentTemplate>
                   <div class="text-center">
@@ -21,7 +20,7 @@
                         Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                   </div>  
                   <div class="table-responsive pt-3">
-                     <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
+                     <asp:Repeater ID="listaPedidos" runat="server" >
                         <HeaderTemplate>
                             <table border="1" class="table">
                             <tr>
@@ -133,19 +132,7 @@
                     </div>
                     <hr />
                     <div class="row">
-                        <div class="col-12 col-md-5">
-                            <asp:Label ID="lblArticuloPedido" runat="server" Text="Artículo"></asp:Label>
-                            <asp:DropDownList ID="ddlArticuloPedido" runat="server" CssClass="form-control" 
-                                OnSelectedIndexChanged="ddlArticuloPedido_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>     
-                        </div>                          
-                        <div class="col-12 col-md-2">
-                            <asp:UpdatePanel ID="upPrecio" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
-                                <ContentTemplate>
-                                    <asp:Label ID="lblPrecioArticuloPedido" runat="server" Text="Precio"></asp:Label>
-                                    <asp:DropDownList ID="ddlPrecioArticuloPedido" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>              
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
+                      
                         <div class="col-12 col-md-2">
                             <asp:Label ID="lblCantidadArticuloPedido" runat="server" Text="Cantidad"></asp:Label>
                             <asp:TextBox ID="txtCantidadArticuloPedido" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
@@ -164,7 +151,7 @@
                                             Text="No han agregado artículos al pedido" CssClass="d-inline-block h5 my-5"></asp:Label>
                                     </div>
                                     <div class="table-responsive pt-3">
-                                        <asp:Repeater ID="listaArticulosPedido" runat="server" OnItemCommand="btnEliminarArticuloPedido_Click">
+                                        <asp:Repeater ID="listaArticulosPedido" runat="server" >
                                         <HeaderTemplate>
                                             <table border="1" class="table">
                                             <tr>
@@ -201,8 +188,6 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnCrearPedido" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearPedido_Click"/>
-                    <asp:Button ID="btnEditarPedido" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarPedido_Click" />
                   </div>
                 </div>
             </ContentTemplate>
@@ -258,8 +243,6 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnCrearArticulo" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearArticulo_Click"/>
-                    <asp:Button ID="btnEditarArticulo" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarArticulo_Click" />
                   </div>
                 </div>
             </ContentTemplate>
@@ -329,7 +312,6 @@
                         </div> 
                         <div class="col-12 col-md-3">
                             <br />
-                            <asp:Button ID="btnAgregarIngredientePlato" runat="server" CssClass="btn btn-info btn-block" Text="Agregar" OnClick="btnAgregarIngredientePlato_Click"/>
                         </div>     
                     </div>   
                     <div class="row">
@@ -341,7 +323,7 @@
                                             Text="No han agregado artículos al pedido" CssClass="d-inline-block h5 my-5"></asp:Label>
                                     </div>
                                     <div class="table-responsive pt-3">
-                                        <asp:Repeater ID="listaIngredientesPlato" runat="server" OnItemCommand="btnEliminarIngredientePlato_Click">
+                                        <asp:Repeater ID="listaIngredientesPlato" runat="server">
                                         <HeaderTemplate>
                                             <table border="1" class="table">
                                             <tr>
@@ -369,8 +351,6 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <asp:Button ID="btnCrearPlato" runat="server" CssClass="btn btn-info" Text="Crear" OnClick="btnCrearPlato_Click"/>
-                    <asp:Button ID="btnEditarPlato" runat="server" visible="false" CssClass="btn btn-info" Text="Editar" OnClick="btnEditarPlato_Click" />
                   </div>
                 </div>
             </ContentTemplate>

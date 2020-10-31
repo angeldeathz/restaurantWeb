@@ -189,7 +189,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     //Buscar artículos del pedido
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
-                    List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)articulos.Where(x => x.IdPedido == pedido.Id);
+                    List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
                     Session["articulosPedidos"] = articulosPedido;
 
                     actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
@@ -576,7 +576,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             Token token = (Token)Session["token"];
             _ingredientePlatoService = new IngredientePlatoService(token.access_token);
             List<IngredientePlato> ingredientes = _ingredientePlatoService.Obtener();
-            List<IngredientePlato> ingredientesPlato = (List<IngredientePlato>)ingredientes.Where(x => x.IdPlato == plato.Id);
+            List<IngredientePlato> ingredientesPlato = ingredientes.Where(x => x.IdPlato == plato.Id).ToList();
             Session["ingredientesPlato"] = ingredientesPlato;
 
             actualizarRepeater(listaIngredientesPlato, ingredientesPlato, listaIngredientesPlatoVacia);

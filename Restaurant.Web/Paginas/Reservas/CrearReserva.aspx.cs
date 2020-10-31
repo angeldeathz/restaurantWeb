@@ -33,8 +33,8 @@ namespace Restaurant.Web.Paginas.Reservas
             reserva.CantidadComensales = int.Parse(txtComensales.Text);
             reserva.IdEstadoReserva = EstadoReserva.creada;
 
-            reserva.IdCliente = int.Parse(ddlClienteReserva.SelectedValue);
-            reserva.IdMesa = int.Parse(ddlMesaReserva.SelectedValue);
+            //reserva.IdCliente = int.Parse(ddlClienteReserva.SelectedValue);
+            // reserva.IdMesa = int.Parse(ddlMesaReserva.SelectedValue);
 
             Token token = (Token)Session["token"];
             _reservaService = new ReservaService(token.access_token);
@@ -44,8 +44,8 @@ namespace Restaurant.Web.Paginas.Reservas
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
-                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
-                    upListaReservas.Update();
+                    //actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    //upListaReservas.Update();
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearReserva", "alert('Reserva creada');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
@@ -91,6 +91,7 @@ namespace Restaurant.Web.Paginas.Reservas
         public List<int> getHorasDisponibles(DateTime fecha)
         {
             int diaSemana = (int)fecha.DayOfWeek;
+            Token token = (Token)Session["token"];
             _horarioReservaService = new HorarioReservaService(token.access_token);
             List<HorarioReserva> horarioReserva = _horarioReservaService.Obtener();
             if (horarioReserva == null || horarioReserva.Count == 0)
@@ -112,8 +113,8 @@ namespace Restaurant.Web.Paginas.Reservas
             {
                 foreach (int hora in horasDisponibles)
                 {
-                    List<Reserva> reservasHora = (List<Reserva>)reservas.Where(x => x.FechaReserva.Date == fecha
-                                                                              && x.FechaReserva.ToString("HH") == hora.ToString());
+                    List<Reserva> reservasHora = reservas.Where(x => x.FechaReserva.Date == fecha
+                                                                              && x.FechaReserva.ToString("HH") == hora.ToString()).ToList(); ;
                     var comensalesHora = reservasHora.Sum(x => x.CantidadComensales);
                     if(comensalesHora >= maximoComensales)
                     {
