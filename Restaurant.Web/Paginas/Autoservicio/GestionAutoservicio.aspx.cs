@@ -45,11 +45,18 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
             _articuloService = new ArticuloService(token.access_token);
             List<Articulo> articulos = _articuloService.Obtener();
-            listaEntradas.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.entradas);
-            //listaPlatosFondo.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo);
-            //listaPostres.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.postres);
-            //listaBebestibles.DataSource = articulos.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles);
+            List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
 
+            listaEntradas.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas);
+            listaEntradas.DataBind();
+            //listaPlatosFondo.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo);
+            //listaPlatosFondo.DataBind();
+            //listaEnsaladas.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.ensaladas);
+            //listaEnsaladas.DataBind();
+            //listaPostres.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.postres);
+            //listaPostres.DataBind();
+            //listaBebestibles.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles);
+            //listaBebestibles.DataBind();
         }
         protected void validarIngreso()
         {

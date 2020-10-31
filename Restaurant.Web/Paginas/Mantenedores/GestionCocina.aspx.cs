@@ -24,6 +24,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
         private PlatoService _platoService;
         private ArticuloConsumoDirectoService _articuloConsumoDirectoService;
         private IngredientePlatoService _ingredientePlatoService;
+        private TipoPreparacionService _tipoPreparacionService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,6 +40,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 _mesaService = new MesaService(token.access_token);
                 _tipoConsumoService = new TipoConsumoService(token.access_token);
                 _insumoService = new InsumoService(token.access_token);
+                _tipoPreparacionService = new TipoPreparacionService(token.access_token);
 
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
@@ -84,8 +86,26 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     ddlTipoConsumoArticulo.DataBind();
                     ddlTipoConsumoArticulo.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlTipoConsumoArticulo.SelectedIndex = 0;
+
+                    ddlTipoConsumoPlato.DataSource = tiposConsumo;
+                    ddlTipoConsumoPlato.DataTextField = "Nombre";
+                    ddlTipoConsumoPlato.DataValueField = "Id";
+                    ddlTipoConsumoPlato.DataBind();
+                    ddlTipoConsumoPlato.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlTipoConsumoPlato.SelectedIndex = 0;
                 }
 
+                List<TipoPreparacion> tiposPreparacion = _tipoPreparacionService.Obtener();
+                if (tiposPreparacion != null && tiposPreparacion.Count > 0)
+                {
+                    ddlTipoPreparacion.DataSource = tiposPreparacion;
+                    ddlTipoPreparacion.DataTextField = "Nombre";
+                    ddlTipoPreparacion.DataValueField = "Id";
+                    ddlTipoPreparacion.DataBind();
+                    ddlTipoPreparacion.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlTipoPreparacion.SelectedIndex = 0;
+                }
+                
                 List<EstadoArticulo> estadoArticulo = _estadoArticuloService.Obtener();
                 if (estadoArticulo != null && estadoArticulo.Count > 0)
                 {
@@ -95,6 +115,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     ddlEstadoArticulo.DataBind();
                     ddlEstadoArticulo.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlEstadoArticulo.SelectedIndex = 0;
+
+                    ddlEstadoPlato.DataSource = estadoArticulo;
+                    ddlEstadoPlato.DataTextField = "Nombre";
+                    ddlEstadoPlato.DataValueField = "Id";
+                    ddlEstadoPlato.DataBind();
+                    ddlEstadoPlato.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlEstadoPlato.SelectedIndex = 0;
                 }
 
 
@@ -540,7 +567,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtPrecioPlato.Text = "";
             ddlTipoConsumoPlato.SelectedValue = "";
             ddlEstadoPlato.SelectedValue = "";
-            txtTiempoPreparacion.Text = "";
+            txtMinutosPreparacion.Text = "";
             ddlTipoPreparacion.SelectedValue = "";
             ddlIngredientePlato.SelectedValue = "";
             txtCantidadIngredientePlato.Text = "";
@@ -566,7 +593,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtPrecioPlato.Text = articulo.Precio.ToString();
             ddlTipoConsumoPlato.SelectedValue = articulo.IdTipoConsumo.ToString();
             ddlEstadoPlato.SelectedValue = articulo.IdEstadoArticulo.ToString();
-            txtTiempoPreparacion.Text = plato.TiempoPreparacion.ToString();
+            txtMinutosPreparacion.Text = plato.MinutosPreparacion.ToString();
             ddlTipoPreparacion.SelectedValue = plato.TipoPreparacion.Nombre;
 
             ddlIngredientePlato.SelectedValue = "";
@@ -609,7 +636,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             if (idArticulo != 0)
             {
                 Plato plato = new Plato();
-                plato.TiempoPreparacion = int.Parse(txtTiempoPreparacion.Text);
+                plato.Nombre = articulo.Nombre;
+                plato.MinutosPreparacion = int.Parse(txtMinutosPreparacion.Text);
                 plato.IdTipoPreparacion = int.Parse(ddlTipoPreparacion.SelectedValue);
                 plato.IdArticulo = idArticulo;
 
@@ -637,7 +665,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al editar pedido');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al crear pedido');", true);
                 }
             }
         }
@@ -660,7 +688,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             {
                 Plato plato = new Plato();
                 plato.Id = int.Parse(txtIdPlato.Text);
-                plato.TiempoPreparacion = int.Parse(txtTiempoPreparacion.Text);
+                plato.MinutosPreparacion = int.Parse(txtMinutosPreparacion.Text);
                 plato.IdTipoPreparacion = int.Parse(ddlTipoPreparacion.SelectedValue);
                 plato.IdArticulo = articulo.Id;
 

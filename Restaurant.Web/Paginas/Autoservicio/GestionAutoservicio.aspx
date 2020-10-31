@@ -18,6 +18,7 @@
                     <div class="nav nav-pills d-flex flex-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
                       <a class="nav-link active" id="tabEntradas" data-toggle="pill" href="#divEntradas" role="tab" aria-controls="divEntradas" aria-selected="false" runat="server">Entradas</a>
                       <a class="nav-link" id="tabPlatosFondo" data-toggle="pill" href="#divPlatosFondo" role="tab" aria-controls="divPlatosFondo" aria-selected="false" runat="server">Platos de Fondo</a>
+                      <a class="nav-link" id="tabEnsaladas" data-toggle="pill" href="#divEnsaladas" role="tab" aria-controls="divEnsaladas" aria-selected="false" runat="server">Postres</a>
                       <a class="nav-link" id="tabPostres" data-toggle="pill" href="#divPostres" role="tab" aria-controls="divPostres" aria-selected="false" runat="server">Postres</a>
                       <a class="nav-link" id="tabBebestibles" data-toggle="pill" href="#divBebestibles" role="tab" aria-controls="divBebestibles" aria-selected="false" runat="server">Bebestibles</a>
                     </div>
@@ -32,7 +33,7 @@
                             <ContentTemplate>
                               <div class="text-center">
                                 <asp:Label ID="lblTituloEntradas" runat="server" 
-                                    Text="No hay artículos disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                                    Text="No hay entradas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
                                 <asp:Repeater ID="listaEntradas" runat="server">
@@ -313,8 +314,8 @@
                       </div>      
                        <div class="row">
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblTiempoPreparacion" runat="server" Text="Minutos preparación"></asp:Label>
-                            <asp:TextBox ID="txtTiempoPreparacion" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:Label ID="lblMinutosPreparacion" runat="server" Text="Minutos preparación"></asp:Label>
+                            <asp:TextBox ID="txtMinutosPreparacion" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                         </div>  
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblTipoPreparacion" runat="server" Text="Tipo de preparación"></asp:Label>

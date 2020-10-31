@@ -645,22 +645,22 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoPlato;
 
         /// <summary>
-        /// lblTiempoPreparacion control.
+        /// lblMinutosPreparacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTiempoPreparacion;
+        protected global::System.Web.UI.WebControls.Label lblMinutosPreparacion;
 
         /// <summary>
-        /// txtTiempoPreparacion control.
+        /// txtMinutosPreparacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTiempoPreparacion;
+        protected global::System.Web.UI.WebControls.TextBox txtMinutosPreparacion;
 
         /// <summary>
         /// lblTipoPreparacion control.

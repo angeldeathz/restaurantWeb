@@ -309,8 +309,8 @@
                       </div>      
                        <div class="row">
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblTiempoPreparacion" runat="server" Text="Minutos preparación"></asp:Label>
-                            <asp:TextBox ID="txtTiempoPreparacion" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:Label ID="lblMinutosPreparacion" runat="server" Text="Minutos preparación"></asp:Label>
+                            <asp:TextBox ID="txtMinutosPreparacion" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                         </div>  
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblTipoPreparacion" runat="server" Text="Tipo de preparación"></asp:Label>
@@ -325,7 +325,7 @@
                         </div>  
                         <div class="col-12 col-md-2">
                             <asp:Label ID="lblCantidadIngredientePlato" runat="server" Text="Cantidad"></asp:Label>
-                            <asp:TextBox ID="txtCantidadIngredientePlato" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
+                            <asp:TextBox ID="txtCantidadIngredientePlato" runat="server" CssClass="form-control"></asp:TextBox>                           
                         </div> 
                         <div class="col-12 col-md-3">
                             <br />
@@ -347,12 +347,13 @@
                                             <tr>
                                                 <td><b>Ingrediente</b></td>
                                                 <td><b>Cantidad</b></td>
+                                                <td></td>
                                             </tr>
                                         </HeaderTemplate>          
                                         <ItemTemplate>
                                             <tr>
                                                 <td> <%# Eval("Insumo.Nombre") %> </td>
-                                                <td> $<%# Eval("Cantidad") %> </td>
+                                                <td> <%# Eval("CantidadInsumo") %> </td>
                                                 <td><asp:LinkButton ID="btnEliminarIngredientePlato" CommandArgument='<%# Eval("IdInsumo") %>' runat="server" >
                                                     Eliminar</asp:LinkButton></td>
                                             </tr>

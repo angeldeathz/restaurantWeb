@@ -99,7 +99,7 @@ namespace Restaurant.Web.Paginas.Reservas
                 return new List<int>();
             }
             HorarioReserva horarioDia = horarioReserva.FirstOrDefault(x => x.DiaSemana == diaSemana);
-            int maximoComensales = horarioDia.MaximoComensales;
+            int maximoComensales = 10; //CONTAR COMENSALES TODAS LAS MESAS
             int horaInicio = Convert.ToInt32(horarioDia.HoraInicio.Substring(0, 2));
             int horaFin = Convert.ToInt32(horarioDia.HoraCierre.Substring(0, 2));
             List<int> horasDisponibles = new List<int>();
