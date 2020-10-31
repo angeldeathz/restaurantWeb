@@ -13,10 +13,5 @@ namespace Restaurant.Web.Paginas.Reservas
         {
 
         }
-
-        protected void btnCancelarReserva_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

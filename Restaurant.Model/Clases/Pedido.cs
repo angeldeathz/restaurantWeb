@@ -4,6 +4,7 @@ namespace Restaurant.Model.Clases
 {
     public class Pedido
     {
+
         public Pedido()
         {
             Id = 0;
