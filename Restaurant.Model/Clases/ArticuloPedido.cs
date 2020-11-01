@@ -6,17 +6,6 @@ namespace Restaurant.Model.Clases
     [Serializable]
     public class ArticuloPedido
     {
-        public ArticuloPedido()
-        {
-            Id = 0;
-            Precio = 0;
-            Cantidad = 0;
-            Total = 0;
-            IdPedido = 0;
-            IdArticulo = 0;
-            IdEstadoArticuloPedido = 0;
-        }
-
         public int Id { get; set; }
         public int Precio { get; set; }
         public int Cantidad { get; set; }

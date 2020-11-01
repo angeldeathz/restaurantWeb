@@ -37,14 +37,15 @@ namespace Restaurant.Services.Shared
                     Message = response.ReasonPhrase,
                     Response = response.StatusCode != HttpStatusCode.OK ?
                         default(T) :
-                        response.Content.ReadAsAsync<T>().Result
+                        JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result)
                 };
 
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error =
+                            JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
@@ -71,14 +72,15 @@ namespace Restaurant.Services.Shared
                     Message = response.ReasonPhrase,
                     Response = response.StatusCode != HttpStatusCode.OK ?
                         default(T) :
-                        response.Content.ReadAsAsync<T>().Result
+                        JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result)
                 };
 
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error =
+                            JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
@@ -90,8 +92,9 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                var response = httpClient.GetAsync(url).Result;
+                var message = new HttpRequestMessage(HttpMethod.Get, url);
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                var response = httpClient.SendAsync(message).Result;
 
                 var restClientResponse = new RestClientResponse<T>
                 {
@@ -100,7 +103,7 @@ namespace Restaurant.Services.Shared
                     Message = response.ReasonPhrase,
                     Response = response.StatusCode != HttpStatusCode.OK ?
                         default(T) :
-                        response.Content.ReadAsAsync<T>().Result
+                        JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result)
                 };
 
                 switch (response.StatusCode)
@@ -109,7 +112,8 @@ namespace Restaurant.Services.Shared
                         throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error =
+                            JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
@@ -144,7 +148,8 @@ namespace Restaurant.Services.Shared
                         throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error =
+                            JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
@@ -166,7 +171,7 @@ namespace Restaurant.Services.Shared
                     Message = response.ReasonPhrase,
                     Response = response.StatusCode != HttpStatusCode.OK ?
                         default(T) :
-                        response.Content.ReadAsAsync<T>().Result
+                        JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result)
                 };
 
                 switch (response.StatusCode)
@@ -175,7 +180,8 @@ namespace Restaurant.Services.Shared
                         throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error =
+                            JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
@@ -201,7 +207,7 @@ namespace Restaurant.Services.Shared
                     Message = response.ReasonPhrase,
                     Response = response.StatusCode != HttpStatusCode.OK ?
                         default(T) :
-                        response.Content.ReadAsAsync<T>().Result
+                        JsonConvert.DeserializeObject<T>(response.Content.ReadAsStringAsync().Result)
                 };
 
                 switch (response.StatusCode)
@@ -210,7 +216,7 @@ namespace Restaurant.Services.Shared
                         throw new Exception("El token está vacio o expirado");
                     case HttpStatusCode.BadRequest:
                     case HttpStatusCode.InternalServerError:
-                        restClientResponse.Error = response.Content.ReadAsAsync<ErrorResponse>().Result;
+                        restClientResponse.Error = JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
                 }
 
