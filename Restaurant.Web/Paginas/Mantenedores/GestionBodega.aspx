@@ -132,10 +132,8 @@
                             <td> <%# Eval("Id") %></td>
                             <td> <%# Eval("FechaHora") %> </td>
                             <td> <%# Eval("Total") %> </td>
-                            <td> Creada </td>
-                            <td> Abarrotes Pepe </td>
-                            <!--<td> <%# Eval("EstadoOrden.Nombre") %> </td>-->
-                            <!--<td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>-->
+                            <td> <%# Eval("EstadoOrden.Nombre") %> </td>
+                            <td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>
                             <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                     Editar</asp:LinkButton></td>
                             </tr>
