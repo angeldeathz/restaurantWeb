@@ -13,7 +13,7 @@ namespace Restaurant.Model.Clases
             IdProveedor = 0;
             IdUsuario = 0;
             IdEstadoOrden = 0;
-            EstadosOrden = new List<EstadoOrden>();
+            EstadosOrdenProveedor = new List<EstadoOrden>();
         }
 
         public int Id { get; set; }
@@ -24,7 +24,6 @@ namespace Restaurant.Model.Clases
         public Proveedor Proveedor { get; set; }
         public Usuario Usuario { get; set; }
         public int IdEstadoOrden { get; set; }
-        public List<EstadoOrden> EstadosOrden { get; set; }
-
+        public List<EstadoOrden> EstadosOrdenProveedor { get; set; }
     }
 }

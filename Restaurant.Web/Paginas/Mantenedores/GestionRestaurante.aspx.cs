@@ -125,15 +125,16 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 Token token = (Token)Session["token"];
                 _reservaService = new ReservaService(token.access_token);
                 Reserva reserva = _reservaService.Obtener(idReserva);
+                EstadoReserva estadoReserva = reserva.EstadosReserva.LastOrDefault();
                 if (reserva != null)
                 {
                     tituloModalReserva.Text = "Editar Reserva";
                     btnCrearReserva.Visible = false;
                     btnEditarReserva.Visible = true;
                     txtIdReserva.Text = reserva.Id.ToString();
-                    txtFechaHoraReserva.Text = reserva.FechaReserva.ToShortTimeString();
+                    txtFechaHoraReserva.Text = reserva.FechaReserva.ToLongDateString();
                     txtCantidadComensalesReserva.Text = reserva.CantidadComensales.ToString();
-                    ddlEstadoReserva.SelectedValue = reserva.IdEstadoReserva.ToString();
+                    ddlEstadoReserva.SelectedValue = estadoReserva.Id.ToString();
                     ddlClienteReserva.SelectedValue = reserva.IdCliente.ToString();
                     ddlMesaReserva.SelectedValue = reserva.IdMesa.ToString();
 
