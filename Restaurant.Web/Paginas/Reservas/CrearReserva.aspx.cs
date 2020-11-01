@@ -114,7 +114,7 @@ namespace Restaurant.Web.Paginas.Reservas
                 foreach (int hora in horasDisponibles)
                 {
                     List<Reserva> reservasHora = reservas.Where(x => x.FechaReserva.Date == fecha
-                                                                              && x.FechaReserva.ToString("HH") == hora.ToString()).ToList(); ;
+                                                                && x.FechaReserva.ToString("HH") == hora.ToString()).ToList(); ;
                     var comensalesHora = reservasHora.Sum(x => x.CantidadComensales);
                     if(comensalesHora >= maximoComensales)
                     {

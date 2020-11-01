@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Restaurant.Model.Clases
 {
@@ -13,8 +15,8 @@ namespace Restaurant.Model.Clases
             Total = 0;
             IdEstadoPedido = 0;
             IdMesa = 0;
+            EstadosPedido = new List<EstadoPedido>();
         }
-
         public int Id { get; set; }
         public DateTime FechaHoraInicio { get; set; }
         public DateTime FechaHoraFin { get; set; }
@@ -22,6 +24,7 @@ namespace Restaurant.Model.Clases
         public int IdEstadoPedido { get; set; }
         public int IdMesa { get; set; }
         public Mesa Mesa { get; set; }
-        public EstadoPedido EstadoPedido { get; set; }
+        public EstadoPedido EstadoPedido { get { return EstadosPedido.LastOrDefault(); } }
+        public List<EstadoPedido> EstadosPedido { get; set; }
     }
 }

@@ -47,16 +47,30 @@ namespace Restaurant.Web.Paginas.Autoservicio
             List<Articulo> articulos = _articuloService.Obtener();
             List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
 
-            listaEntradas.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas);
+            List<Articulo> entradas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas).ToList();
+            listaEntradas.DataSource = entradas;
             listaEntradas.DataBind();
-            listaPlatosFondo.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo);
+            actualizarRepeater(listaEntradas, entradas, listaEntradasVacia);
+
+            List<Articulo> platosFondo = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo).ToList();
+            listaPlatosFondo.DataSource = platosFondo;
             listaPlatosFondo.DataBind();
-            listaEnsaladas.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.ensaladas);
+            actualizarRepeater(listaPlatosFondo, platosFondo, listaPlatosFondoVacia);
+
+            List<Articulo> ensaladas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.ensaladas).ToList();
+            listaEnsaladas.DataSource = ensaladas;
             listaEnsaladas.DataBind();
-            listaPostres.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.postres);
+            actualizarRepeater(listaEnsaladas, ensaladas, listaEnsaladasVacia);
+
+            List<Articulo> postres = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.postres).ToList();
+            listaPostres.DataSource = postres;
             listaPostres.DataBind();
-            listaBebestibles.DataSource = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles);
+            actualizarRepeater(listaPostres, postres, listaPostresVacia);
+
+            List<Articulo> bebestibles = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles).ToList();
+            listaBebestibles.DataSource = bebestibles;
             listaBebestibles.DataBind();
+            actualizarRepeater(listaBebestibles, bebestibles, listaBebestiblesVacia);
         }
         protected void validarIngreso()
         {
@@ -70,6 +84,10 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Session["pedidoCliente"] = pedido;
             _articuloPedidoService = new ArticuloPedidoService(token.access_token);
             List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
+            if(articulos == null || articulos.Count == 0)
+            {
+                return;
+            }
             List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
             Session["articulosPedido"] = articulosPedido;
 

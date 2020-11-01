@@ -46,6 +46,7 @@
     <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\DetalleOrdenProveedor.cs" />
     <Compile Include="Clases\DocumentoPago.cs" />
+    <Compile Include="Clases\EstadoArticuloPedido.cs" />
     <Compile Include="Clases\EstadoArticulo.cs" />
     <Compile Include="Clases\EstadoMesa.cs" />
     <Compile Include="Clases\EstadoOrden.cs" />

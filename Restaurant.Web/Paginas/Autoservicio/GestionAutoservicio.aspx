@@ -10,7 +10,7 @@
           <a class="nav-link" id="tabMiOrden" data-toggle="pill" href="#divMiOrden" role="tab" aria-controls="divMiOrden" aria-selected="false" runat="server">Mi Orden</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divMenu" role="tabpanel" aria-labelledby="tabMenu" runat="server" ClientIDMode="Static">
               <div class="row">
@@ -25,14 +25,14 @@
                   </div> 
 
                   <!-- Tabs menu-->
-                 <div class="col-8 col-md-10">
+                  <div class="col-8 col-md-10">
                     <!-- Tab Entradas -->
                     <div class="tab-content py-3 px-1">
                       <div class="tab-pane show active" id="divEntradas" role="tabpanel" aria-labelledby="tabEntradas" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upMenu" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>
                               <div class="text-center">
-                                <asp:Label ID="lblTituloEntradas" runat="server" 
+                                <asp:Label ID="listaEntradasVacia" runat="server" 
                                     Text="No hay entradas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
@@ -67,15 +67,13 @@
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
-                   </div>
-                   <!-- Fin Tab Entradas -->
-                    <!-- Tab Platos de Fondo -->
-                    <div class="tab-content py-3 px-1">
+                      <!-- Fin Tab Entradas -->
+                      <!-- Tab Platos de Fondo -->
                       <div class="tab-pane fade" id="divPlatosFondo" role="tabpanel" aria-labelledby="tabPlatosFondo" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upPlatosFondo" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>
                               <div class="text-center">
-                                <asp:Label ID="lblTituloPlatosFondo" runat="server" 
+                                <asp:Label ID="listaPlatosFondoVacia" runat="server" 
                                     Text="No hay platos de fondo disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
@@ -110,15 +108,13 @@
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
-                   </div>
                    <!-- Fin Tab Platos de Fondo -->
                     <!-- Tab Ensaldas -->
-                    <div class="tab-content py-3 px-1">
                       <div class="tab-pane fade" id="divEnsaladas" role="tabpanel" aria-labelledby="tabEnsaladas" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upEnsaladas" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>
                               <div class="text-center">
-                                <asp:Label ID="lblTituloEnsaladas" runat="server" 
+                                <asp:Label ID="listaEnsaladasVacia" runat="server" 
                                     Text="No hay ensaladas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
@@ -153,15 +149,13 @@
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
-                   </div>
                    <!-- Fin Tab Ensaladas -->
                     <!-- Tab Postres -->
-                    <div class="tab-content py-3 px-1">
                       <div class="tab-pane fade" id="divPostres" role="tabpanel" aria-labelledby="tabPostres" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upPostres" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>
                               <div class="text-center">
-                                <asp:Label ID="lblTituloPostres" runat="server" 
+                                <asp:Label ID="listaPostresVacia" runat="server" 
                                     Text="No hay postres disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
@@ -196,15 +190,13 @@
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
-                   </div>
                    <!-- Fin Tab Postres -->
                     <!-- Tab Bebestibles -->
-                    <div class="tab-content py-3 px-1">
                       <div class="tab-pane fade" id="divBebestibles" role="tabpanel" aria-labelledby="tabBebestibles" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upBebestibles" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                             <ContentTemplate>
                               <div class="text-center">
-                                <asp:Label ID="lblTituloBebestibles" runat="server" 
+                                <asp:Label ID="listaBebestiblesVacia" runat="server" 
                                     Text="No hay bebestibles disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
                               <div class="table-responsive pt-3">
@@ -239,10 +231,9 @@
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
-                   </div>
                    <!-- Fin Tab Bebestibles -->
                 </div>
-
+                  </div>
              </div>
           </div>
           <!-- Fin tabs menu-->
