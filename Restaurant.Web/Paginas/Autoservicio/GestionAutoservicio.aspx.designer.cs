@@ -132,15 +132,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPlatosFondo;
 
         /// <summary>
-        /// upPlatosFondo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPlatosFondo;
-
-        /// <summary>
         /// listaPlatosFondoVacia control.
         /// </summary>
         /// <remarks>
@@ -166,15 +157,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEnsaladas;
-
-        /// <summary>
-        /// upEnsaladas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upEnsaladas;
 
         /// <summary>
         /// listaEnsaladasVacia control.
@@ -204,15 +186,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPostres;
 
         /// <summary>
-        /// upPostres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPostres;
-
-        /// <summary>
         /// listaPostresVacia control.
         /// </summary>
         /// <remarks>
@@ -240,15 +213,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBebestibles;
 
         /// <summary>
-        /// upBebestibles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upBebestibles;
-
-        /// <summary>
         /// listaBebestiblesVacia control.
         /// </summary>
         /// <remarks>
@@ -274,177 +238,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMiOrden;
-
-        /// <summary>
-        /// upListaArticulos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upListaArticulos;
-
-        /// <summary>
-        /// listaArticulosVacia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label listaArticulosVacia;
-
-        /// <summary>
-        /// listaArticulos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater listaArticulos;
-
-        /// <summary>
-        /// btnHacerPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnHacerPedido;
-
-        /// <summary>
-        /// btnPagarCuenta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPagarCuenta;
-
-        /// <summary>
-        /// upModalPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModalPedido;
-
-        /// <summary>
-        /// tituloModalPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tituloModalPedido;
-
-        /// <summary>
-        /// txtIdPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdPedido;
-
-        /// <summary>
-        /// lblFechaInicioPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInicioPedido;
-
-        /// <summary>
-        /// txtFechaInicioPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaInicioPedido;
-
-        /// <summary>
-        /// lblFechaFinPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaFinPedido;
-
-        /// <summary>
-        /// txtFechaFinPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaFinPedido;
-
-        /// <summary>
-        /// lblEstadoPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstadoPedido;
-
-        /// <summary>
-        /// ddlEstadoPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoPedido;
-
-        /// <summary>
-        /// lblMesaPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMesaPedido;
-
-        /// <summary>
-        /// ddlMesaPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMesaPedido;
-
-        /// <summary>
-        /// lblCantidadArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantidadArticuloPedido;
-
-        /// <summary>
-        /// txtCantidadArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadArticuloPedido;
-
-        /// <summary>
-        /// btnAgregarArticuloPedido control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarArticuloPedido;
 
         /// <summary>
         /// upArticulosPedido control.
@@ -492,6 +285,33 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtTotalPedido;
 
         /// <summary>
+        /// btnVerMenu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnVerMenu;
+
+        /// <summary>
+        /// btnHacerPedido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHacerPedido;
+
+        /// <summary>
+        /// btnPagarCuenta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPagarCuenta;
+
+        /// <summary>
         /// upModalArticulo control.
         /// </summary>
         /// <remarks>
@@ -501,13 +321,13 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.UpdatePanel upModalArticulo;
 
         /// <summary>
-        /// tituloModalArticulo control.
+        /// lblTituloModalArticulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tituloModalArticulo;
+        protected global::System.Web.UI.WebControls.Label lblTituloModalArticulo;
 
         /// <summary>
         /// txtIdArticulo control.
@@ -519,24 +339,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtIdArticulo;
 
         /// <summary>
-        /// lblNombreArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreArticulo;
-
-        /// <summary>
-        /// txtNombreArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreArticulo;
-
-        /// <summary>
         /// lblPrecioArticulo control.
         /// </summary>
         /// <remarks>
@@ -546,309 +348,48 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.Label lblPrecioArticulo;
 
         /// <summary>
-        /// txtPrecioArticulo control.
+        /// lblCantidadArticulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioArticulo;
+        protected global::System.Web.UI.WebControls.Label lblCantidadArticulo;
 
         /// <summary>
-        /// lblDescripcionArticulo control.
+        /// txtCantidadArticulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcionArticulo;
+        protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulo;
 
         /// <summary>
-        /// txtDescripcionArticulo control.
+        /// lblComentarioArticulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionArticulo;
+        protected global::System.Web.UI.WebControls.Label lblComentarioArticulo;
 
         /// <summary>
-        /// lblTipoConsumoArticulo control.
+        /// txtComentarioArticulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipoConsumoArticulo;
+        protected global::System.Web.UI.WebControls.TextBox txtComentarioArticulo;
 
         /// <summary>
-        /// ddlTipoConsumoArticulo control.
+        /// btnAgregarPedido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoConsumoArticulo;
-
-        /// <summary>
-        /// lblEstadoArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstadoArticulo;
-
-        /// <summary>
-        /// ddlEstadoArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoArticulo;
-
-        /// <summary>
-        /// lblInsumoArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInsumoArticulo;
-
-        /// <summary>
-        /// ddlInsumoArticulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlInsumoArticulo;
-
-        /// <summary>
-        /// upModalPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModalPlato;
-
-        /// <summary>
-        /// tituloModalPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tituloModalPlato;
-
-        /// <summary>
-        /// txtIdPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdPlato;
-
-        /// <summary>
-        /// txtIdArticuloPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdArticuloPlato;
-
-        /// <summary>
-        /// lblNombrePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombrePlato;
-
-        /// <summary>
-        /// txtNombrePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombrePlato;
-
-        /// <summary>
-        /// lblPrecioPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPrecioPlato;
-
-        /// <summary>
-        /// txtPrecioPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioPlato;
-
-        /// <summary>
-        /// lblDescripcionPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDescripcionPlato;
-
-        /// <summary>
-        /// txtDescripcionPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionPlato;
-
-        /// <summary>
-        /// lblTipoConsumoPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipoConsumoPlato;
-
-        /// <summary>
-        /// ddlTipoConsumoPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoConsumoPlato;
-
-        /// <summary>
-        /// lblEstadoPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEstadoPlato;
-
-        /// <summary>
-        /// ddlEstadoPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstadoPlato;
-
-        /// <summary>
-        /// lblMinutosPreparacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMinutosPreparacion;
-
-        /// <summary>
-        /// txtMinutosPreparacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMinutosPreparacion;
-
-        /// <summary>
-        /// lblTipoPreparacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipoPreparacion;
-
-        /// <summary>
-        /// ddlTipoPreparacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoPreparacion;
-
-        /// <summary>
-        /// lblIngredientePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIngredientePlato;
-
-        /// <summary>
-        /// ddlIngredientePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlIngredientePlato;
-
-        /// <summary>
-        /// lblCantidadIngredientePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCantidadIngredientePlato;
-
-        /// <summary>
-        /// txtCantidadIngredientePlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCantidadIngredientePlato;
-
-        /// <summary>
-        /// upIngredientesPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upIngredientesPlato;
-
-        /// <summary>
-        /// listaIngredientesPlatoVacia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label listaIngredientesPlatoVacia;
-
-        /// <summary>
-        /// listaIngredientesPlato control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater listaIngredientesPlato;
+        protected global::System.Web.UI.WebControls.Button btnAgregarPedido;
     }
 }
