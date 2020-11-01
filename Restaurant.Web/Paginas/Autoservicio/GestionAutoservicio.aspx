@@ -18,7 +18,7 @@
                     <div class="nav nav-pills d-flex flex-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
                       <a class="nav-link active" id="tabEntradas" data-toggle="pill" href="#divEntradas" role="tab" aria-controls="divEntradas" aria-selected="false" runat="server">Entradas</a>
                       <a class="nav-link" id="tabPlatosFondo" data-toggle="pill" href="#divPlatosFondo" role="tab" aria-controls="divPlatosFondo" aria-selected="false" runat="server">Platos de Fondo</a>
-                      <a class="nav-link" id="tabEnsaladas" data-toggle="pill" href="#divEnsaladas" role="tab" aria-controls="divEnsaladas" aria-selected="false" runat="server">Postres</a>
+                      <a class="nav-link" id="tabEnsaladas" data-toggle="pill" href="#divEnsaladas" role="tab" aria-controls="divEnsaladas" aria-selected="false" runat="server">Ensaladas</a>
                       <a class="nav-link" id="tabPostres" data-toggle="pill" href="#divPostres" role="tab" aria-controls="divPostres" aria-selected="false" runat="server">Postres</a>
                       <a class="nav-link" id="tabBebestibles" data-toggle="pill" href="#divBebestibles" role="tab" aria-controls="divBebestibles" aria-selected="false" runat="server">Bebestibles</a>
                     </div>
@@ -26,7 +26,7 @@
 
                   <!-- Tabs menu-->
                  <div class="col-8 col-md-10">
-                    <!-- Tab Ensaladas -->
+                    <!-- Tab Entradas -->
                     <div class="tab-content py-3 px-1">
                       <div class="tab-pane show active" id="divEntradas" role="tabpanel" aria-labelledby="tabEntradas" runat="server" ClientIDMode="Static">
                           <asp:UpdatePanel ID="upMenu" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
@@ -56,7 +56,93 @@
                                         <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                         <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
                                         <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                                Editar</asp:LinkButton></td>
+                                                Pedir</asp:LinkButton></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                              </div>
+                           </ContentTemplate>
+                         </asp:UpdatePanel>
+                      </div>                  
+                   </div>
+                   <!-- Fin Tab Entradas -->
+                    <!-- Tab Platos de Fondo -->
+                    <div class="tab-content py-3 px-1">
+                      <div class="tab-pane fade" id="divPlatosFondo" role="tabpanel" aria-labelledby="tabPlatosFondo" runat="server" ClientIDMode="Static">
+                          <asp:UpdatePanel ID="upPlatosFondo" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                              <div class="text-center">
+                                <asp:Label ID="lblTituloPlatosFondo" runat="server" 
+                                    Text="No hay platos de fondo disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                              </div>   
+                              <div class="table-responsive pt-3">
+                                <asp:Repeater ID="listaPlatosFondo" runat="server">
+                                     <HeaderTemplate>
+                                        <table border="1" class="table">
+                                        <tr>
+                                            <td><b>Nombre</b></td>
+                                            <td><b>Descripción</b></td>
+                                            <td><b>Precio</b></td>
+                                            <td><b>Tipo de Consumo</b></td>
+                                            <td><b>Estado</b></td>
+                                            <td><b>Acciones</b></td>
+                                        </tr>
+                                    </HeaderTemplate>          
+                                    <ItemTemplate>
+                                        <tr>
+                                        <td> <%# Eval("Nombre") %> </td>
+                                        <td> <%# Eval("Descripcion") %> </td>
+                                        <td> <%# Eval("Precio") %> </td>
+                                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
+                                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                                Pedir</asp:LinkButton></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                              </div>
+                           </ContentTemplate>
+                         </asp:UpdatePanel>
+                      </div>                  
+                   </div>
+                   <!-- Fin Tab Platos de Fondo -->
+                    <!-- Tab Ensaldas -->
+                    <div class="tab-content py-3 px-1">
+                      <div class="tab-pane fade" id="divEnsaladas" role="tabpanel" aria-labelledby="tabEnsaladas" runat="server" ClientIDMode="Static">
+                          <asp:UpdatePanel ID="upEnsaladas" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                              <div class="text-center">
+                                <asp:Label ID="lblTituloEnsaladas" runat="server" 
+                                    Text="No hay ensaladas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                              </div>   
+                              <div class="table-responsive pt-3">
+                                <asp:Repeater ID="listaEnsaladas" runat="server">
+                                     <HeaderTemplate>
+                                        <table border="1" class="table">
+                                        <tr>
+                                            <td><b>Nombre</b></td>
+                                            <td><b>Descripción</b></td>
+                                            <td><b>Precio</b></td>
+                                            <td><b>Tipo de Consumo</b></td>
+                                            <td><b>Estado</b></td>
+                                            <td><b>Acciones</b></td>
+                                        </tr>
+                                    </HeaderTemplate>          
+                                    <ItemTemplate>
+                                        <tr>
+                                        <td> <%# Eval("Nombre") %> </td>
+                                        <td> <%# Eval("Descripcion") %> </td>
+                                        <td> <%# Eval("Precio") %> </td>
+                                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
+                                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                                Pedir</asp:LinkButton></td>
                                         </tr>
                                     </ItemTemplate>
                                     <FooterTemplate>
@@ -69,7 +155,92 @@
                       </div>                  
                    </div>
                    <!-- Fin Tab Ensaladas -->
-
+                    <!-- Tab Postres -->
+                    <div class="tab-content py-3 px-1">
+                      <div class="tab-pane fade" id="divPostres" role="tabpanel" aria-labelledby="tabPostres" runat="server" ClientIDMode="Static">
+                          <asp:UpdatePanel ID="upPostres" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                              <div class="text-center">
+                                <asp:Label ID="lblTituloPostres" runat="server" 
+                                    Text="No hay postres disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                              </div>   
+                              <div class="table-responsive pt-3">
+                                <asp:Repeater ID="listaPostres" runat="server">
+                                     <HeaderTemplate>
+                                        <table border="1" class="table">
+                                        <tr>
+                                            <td><b>Nombre</b></td>
+                                            <td><b>Descripción</b></td>
+                                            <td><b>Precio</b></td>
+                                            <td><b>Tipo de Consumo</b></td>
+                                            <td><b>Estado</b></td>
+                                            <td><b>Acciones</b></td>
+                                        </tr>
+                                    </HeaderTemplate>          
+                                    <ItemTemplate>
+                                        <tr>
+                                        <td> <%# Eval("Nombre") %> </td>
+                                        <td> <%# Eval("Descripcion") %> </td>
+                                        <td> <%# Eval("Precio") %> </td>
+                                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
+                                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                                Pedir</asp:LinkButton></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                              </div>
+                           </ContentTemplate>
+                         </asp:UpdatePanel>
+                      </div>                  
+                   </div>
+                   <!-- Fin Tab Postres -->
+                    <!-- Tab Bebestibles -->
+                    <div class="tab-content py-3 px-1">
+                      <div class="tab-pane fade" id="divBebestibles" role="tabpanel" aria-labelledby="tabBebestibles" runat="server" ClientIDMode="Static">
+                          <asp:UpdatePanel ID="upBebestibles" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                            <ContentTemplate>
+                              <div class="text-center">
+                                <asp:Label ID="lblTituloBebestibles" runat="server" 
+                                    Text="No hay bebestibles disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                              </div>   
+                              <div class="table-responsive pt-3">
+                                <asp:Repeater ID="listaBebestibles" runat="server">
+                                     <HeaderTemplate>
+                                        <table border="1" class="table">
+                                        <tr>
+                                            <td><b>Nombre</b></td>
+                                            <td><b>Descripción</b></td>
+                                            <td><b>Precio</b></td>
+                                            <td><b>Tipo de Consumo</b></td>
+                                            <td><b>Estado</b></td>
+                                            <td><b>Acciones</b></td>
+                                        </tr>
+                                    </HeaderTemplate>          
+                                    <ItemTemplate>
+                                        <tr>
+                                        <td> <%# Eval("Nombre") %> </td>
+                                        <td> <%# Eval("Descripcion") %> </td>
+                                        <td> <%# Eval("Precio") %> </td>
+                                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
+                                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                                Pedir</asp:LinkButton></td>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
+                              </div>
+                           </ContentTemplate>
+                         </asp:UpdatePanel>
+                      </div>                  
+                   </div>
+                   <!-- Fin Tab Bebestibles -->
                 </div>
 
              </div>
