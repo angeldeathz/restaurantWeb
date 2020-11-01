@@ -27,10 +27,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 Session["articulosPedido"] = new List<ArticuloPedido>();
                 _pedidoService = new PedidoService(token.access_token);
 
-                btnVerMenu.Visible = true;
-                btnHacerPedido.Visible = false;
-                btnPagarCuenta.Visible = false;
-
                 if (pedido == null)
                 {
                     List<Pedido> pedidos = _pedidoService.Obtener();
@@ -41,8 +37,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
                                                                       && x.FechaHoraInicio.Date == DateTime.Now.Date);
                         if (pedidoCliente != null)
                         {
-                            btnVerMenu.Visible = false;
-                            btnHacerPedido.Visible = false;
                             btnPagarCuenta.Visible = true;
 
                             cargarPedido(token, pedidoCliente);
@@ -51,6 +45,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     }
                 }
 
+                upArticulosPedido.Update();
                 _articuloService = new ArticuloService(token.access_token);
                 List<Articulo> articulos = _articuloService.Obtener();
                 List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
@@ -88,11 +83,13 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
                 if (articulosPedido != null && articulosPedido.Count > 0)
                 {
-                    btnVerMenu.Visible = false;
                     if (pedido != null)
-                    {
-                        btnHacerPedido.Visible = false;
+                    { 
                         btnPagarCuenta.Visible = true;
+                    }
+                    else
+                    {
+                        btnHacerPedido.Visible = true;
                     }
                 }
             }
@@ -122,13 +119,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
             lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
-
-            if(articulosPedido.Count > 0)
-            {
-                btnVerMenu.Visible = false;
-                btnHacerPedido.Visible = false;
-                btnPagarCuenta.Visible = true;
-            }
         }
         protected void btnEliminarArticulo_Click(object sender, RepeaterCommandEventArgs e)
         {
@@ -177,7 +167,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             limpiarTabs();
             tabMenu.Attributes.Add("class", "nav-link active");
-            tabMenu.Attributes.Add("class", "tab-pane active show");
+            divMenu.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnAgregarArticuloPedido_Click(object sender, EventArgs e)
@@ -309,12 +299,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
             limpiarTabs();
             tabMiOrden.Attributes.Add("class", "nav-link active");
             divMiOrden.Attributes.Add("class", "tab-pane active show");
-        }
-        protected void btnVerMenu_Click(object sender, EventArgs e)
-        {
-            limpiarTabs();
-            tabMenu.Attributes.Add("class", "nav-link active");
-            divMenu.Attributes.Add("class", "tab-pane active show");
         }
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {

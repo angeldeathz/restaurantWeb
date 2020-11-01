@@ -10,7 +10,7 @@
           <a class="nav-link" id="tabArticulos" data-toggle="pill" href="#divArticulos" role="tab" aria-controls="divArticulos" aria-selected="false" runat="server">Artículos</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divPedidos" role="tabpanel" aria-labelledby="tabPedidos" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearPedidos" runat="server" Text="Crear Pedido" OnClick="btnModalCrearPedido_Click" CssClass="btn btn-info float-right"/>

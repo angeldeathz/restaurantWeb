@@ -10,7 +10,7 @@
           <a class="nav-link" id="tabMiOrden" data-toggle="pill" href="#divMiOrden" role="tab" aria-controls="divMiOrden" aria-selected="false" runat="server">Mi Orden</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divMenu" role="tabpanel" aria-labelledby="tabMenu" runat="server" ClientIDMode="Static">
               <div class="row">
@@ -261,15 +261,14 @@
                       <asp:Label ID="lblTotalPedido" runat="server"></asp:Label>
                       <asp:TextBox ID="txtTotalPedido" runat="server" Visible="false"></asp:TextBox>
                     </div>
+                    <div class="row">
+                      <div class="col-12 col-md-4 col-lg-2 m-auto">
+                        <asp:Button ID="btnHacerPedido" runat="server" Text="Hacer Pedido" Visible="false" OnClick="btnHacerPedido_Click" CssClass="btn btn-info"/>              
+                        <asp:Button ID="btnPagarCuenta" runat="server" Text="Pagar Cuenta" Visible="false" OnClick="btnPagarCuenta_Click" CssClass="btn btn-info"/>
+                      </div>
+                    </div>
                 </ContentTemplate>
               </asp:UpdatePanel>
-              <div class="col-12">
-                <div class="text-center">
-                  <asp:Button ID="btnVerMenu" runat="server" Text="Ver Menú" Visible="true" OnClick="btnVerMenu_Click" CssClass="btn btn-info float-right"/>              
-                  <asp:Button ID="btnHacerPedido" runat="server" Text="Hacer Pedido" Visible="false" OnClick="btnHacerPedido_Click" CssClass="btn btn-info float-right"/>              
-                  <asp:Button ID="btnPagarCuenta" runat="server" Text="Pagar Cuenta" Visible="false" OnClick="btnPagarCuenta_Click" CssClass="btn btn-info float-right"/>
-                </div>
-              </div>
           </div>        
         </div>
       </div>
@@ -277,7 +276,7 @@
 
     <!-- Modal Articulos -->
     <div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="tituloModalArticulo" aria-hidden="true">
-      <div class="modal-dialog modal-md" role="document">
+      <div class="modal-dialog" role="document">
           <asp:UpdatePanel ID="upModalArticulo" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
             <ContentTemplate>
                 <div class="modal-content">                    
@@ -291,16 +290,15 @@
                       <asp:TextBox ID="txtIdArticulo" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
                       <div class="row">                        
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio"></asp:Label>
+                            Precio unitario: <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio"></asp:Label>
                         </div>
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label>
-                            <asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                            <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label><asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12">
-                            <asp:Label ID="lblComentarioArticulo" runat="server" Text="Descripción"></asp:Label>
+                            <asp:Label ID="lblComentarioArticulo" runat="server" Text="Comentarios"></asp:Label>
                             <asp:TextBox ID="txtComentarioArticulo" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                         </div>
                       </div>
