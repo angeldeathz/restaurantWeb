@@ -255,9 +255,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
                 foreach (ArticuloPedido articuloPedido in listaArticulos)
                 {
-                    articuloPedido.IdPedido = idPedido;
+                    ArticuloPedido articuloPedidoInsert = new ArticuloPedido();
+                    articuloPedidoInsert.Cantidad = articuloPedido.Cantidad;
+                    articuloPedidoInsert.Precio = articuloPedido.Precio;
+                    articuloPedidoInsert.Total = articuloPedido.Total;
+                    articuloPedidoInsert.IdArticulo = articuloPedido.IdArticulo;
+                    articuloPedidoInsert.IdEstadoArticuloPedido = articuloPedido.IdEstadoArticuloPedido;
+                    articuloPedidoInsert.IdPedido = idPedido;
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
-                    int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
+                    int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedidoInsert);
                 }
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
@@ -333,7 +339,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             articuloPedido.Precio = int.Parse(ddlPrecioArticuloPedido.SelectedItem.Text);
             articuloPedido.Cantidad = int.Parse(txtCantidadArticuloPedido.Text);
             articuloPedido.Total = articuloPedido.Precio * articuloPedido.Cantidad;
-            articuloPedido.IdEstadoArticuloPedido = 1;
+            articuloPedido.IdEstadoArticuloPedido = EstadoArticuloPedido.recibido;
             articuloPedido.Articulo = articulo;
 
             List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];

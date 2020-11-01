@@ -70,6 +70,10 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Session["pedidoCliente"] = pedido;
             _articuloPedidoService = new ArticuloPedidoService(token.access_token);
             List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
+            if(articulos == null || articulos.Count == 0)
+            {
+                return;
+            }
             List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
             Session["articulosPedido"] = articulosPedido;
 
