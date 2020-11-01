@@ -32,7 +32,7 @@ namespace Restaurant.Services.Servicios
 
         public int Guardar(ArticuloPedido articuloPedido)
         {
-            string url = $"http://localhost/restaurant/api/articuloPedidos/";
+            string url = "http://localhost/restaurant/api/articuloPedidos";
             var respuesta = _restClientHttp.Post<int>(url, articuloPedido);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;

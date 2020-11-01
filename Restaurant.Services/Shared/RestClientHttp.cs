@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace Restaurant.Services.Shared
 {
@@ -119,9 +121,12 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PostAsJsonAsync(url, objectToPost).Result;
+                var message = new HttpRequestMessage(HttpMethod.Post, url)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(objectToPost), Encoding.UTF8, "application/json")
+                };
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                var response = httpClient.SendAsync(message).Result;
 
                 var restClientResponse = new RestClientResponse<T>
                 {
@@ -182,9 +187,12 @@ namespace Restaurant.Services.Shared
         {
             using (var httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", _token);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("aplication/json"));
-                var response = httpClient.PutAsJsonAsync(url, objectToPut).Result;
+                var message = new HttpRequestMessage(HttpMethod.Put, url)
+                {
+                    Content = new StringContent(JsonConvert.SerializeObject(objectToPut), Encoding.UTF8, "application/json")
+                };
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+                var response = httpClient.SendAsync(message).Result;
 
                 var restClientResponse = new RestClientResponse<T>
                 {
