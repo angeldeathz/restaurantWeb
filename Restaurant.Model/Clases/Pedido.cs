@@ -20,6 +20,6 @@ namespace Restaurant.Model.Clases
         public int IdEstadoPedido { get; set; }
         public int IdMesa { get; set; }
         public Mesa Mesa { get; set; }
-        public EstadoPedido EstadoPedido;
+        public EstadoPedido EstadoPedido { get; set; }
     }
 }
