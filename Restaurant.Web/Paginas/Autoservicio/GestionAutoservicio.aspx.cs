@@ -23,8 +23,10 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 Token token = (Token)Session["token"];
                 Reserva reserva = (Reserva)Session["reservaCliente"];
                 Pedido pedido = (Pedido)Session["pedidoCliente"];
-
-                Session["articulosPedido"] = new List<ArticuloPedido>();
+                if (Session["articulosPedido"] == null)
+                {
+                    Session["articulosPedido"] = new List<ArticuloPedido>();
+                }
                 _pedidoService = new PedidoService(token.access_token);
 
                 if (pedido == null)
@@ -40,12 +42,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
                             btnPagarCuenta.Visible = true;
 
                             cargarPedido(token, pedidoCliente);
-                            listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
+                            //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
                         }
                     }
                 }
 
-                upArticulosPedido.Update();
                 _articuloService = new ArticuloService(token.access_token);
                 List<Articulo> articulos = _articuloService.Obtener();
                 List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
@@ -93,6 +94,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     }
                 }
             }
+            upArticulosPedido.Update();
         }
         protected void validarIngreso()
         {
@@ -157,6 +159,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
             {
                 List<Articulo> articulosDisponibles = (List<Articulo>)Session["articulosDisponibles"];
                 Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
+                txtIdArticulo.Text = idArticulo.ToString();
+                txtCantidadArticulo.Text = "";
+                txtComentarioArticulo.Text = "";
                 lblTituloModalArticulo.Text = "Pedir " + articulo.Nombre;
                 lblPrecioArticulo.Text = "$" + articulo.Precio.ToString();
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
@@ -179,7 +184,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
             List <Articulo> articulosDisponibles = (List<Articulo>) Session["articulosDisponibles"];
             Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
-            if(articulo != null)
+            if(articulo == null)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "erroArticulo", "alert('Error al agregar artículo');", true);
                 return;
@@ -195,7 +200,18 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             else
             {
-                articulosPedido.Add(articuloPedido);
+                ArticuloPedido nuevoArticuloPedido = new ArticuloPedido();
+                nuevoArticuloPedido.Articulo = articulo;
+                nuevoArticuloPedido.IdArticulo = articulo.Id;
+                nuevoArticuloPedido.Precio = articulo.Precio;
+                nuevoArticuloPedido.Cantidad = cantidad;
+                nuevoArticuloPedido.Total = nuevoArticuloPedido.Precio * cantidad;
+                EstadoArticuloPedido estadoInicialArticuloPedido = new EstadoArticuloPedido();
+                estadoInicialArticuloPedido.Id = EstadoArticuloPedido.recibido;
+                estadoInicialArticuloPedido.Nombre = "Recibido";
+                nuevoArticuloPedido.EstadosArticuloPedido = new List<EstadoArticuloPedido>();
+                nuevoArticuloPedido.EstadosArticuloPedido.Add(estadoInicialArticuloPedido);
+                articulosPedido.Add(nuevoArticuloPedido);
             }
             Session["articulosPedido"] = articulosPedido;
             actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
@@ -203,6 +219,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
             lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "creacionArticulo", "alert('Artículo agregado al pedido');", true);
 
             limpiarTabs();
             tabMiOrden.Attributes.Add("class", "nav-link active");

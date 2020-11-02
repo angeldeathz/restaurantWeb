@@ -234,20 +234,20 @@
                           <table border="1" class="table">
                           <tr>
                               <td><b>Nombre</b></td>
-                              <td><b>Descripción</b></td>
                               <td><b>Precio</b></td>
-                              <td><b>Tipo de Consumo</b></td>
+                              <td><b>Cantidad</b></td>
+                              <td><b>Total</b></td>
                               <td><b>Estado</b></td>
                               <td><b>Acciones</b></td>
                           </tr>
                       </HeaderTemplate>          
                       <ItemTemplate>
                           <tr>
-                          <td> <%# Eval("Nombre") %> </td>
-                          <td> <%# Eval("Descripcion") %> </td>
+                          <td> <%# Eval("Articulo.Nombre") %> </td>
                           <td> <%# Eval("Precio") %> </td>
-                          <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                          <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
+                          <td> <%# Eval("Cantidad") %> </td>
+                          <td> <%# Eval("Total") %> </td>
+                          <td> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
                           <td><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
                           </tr>
