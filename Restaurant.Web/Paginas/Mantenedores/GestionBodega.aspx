@@ -12,7 +12,7 @@
           <a class="nav-link" id="tabOrdenes" data-toggle="pill" href="#divOrdenes" role="tab" aria-controls="divOrdenes" aria-selected="false" runat="server">Órdenes</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1" id="contenido_gestion_inventario">
           <div class="tab-pane fade" id="divInventario" role="tabpanel" aria-labelledby="tabInventario" runat="server" ClientIDMode="Static">
           </div>
