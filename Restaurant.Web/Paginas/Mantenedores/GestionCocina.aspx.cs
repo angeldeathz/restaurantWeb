@@ -214,6 +214,10 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     //Buscar artículos del pedido
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
+                    if(articulos == null || articulos.Count == 0)
+                    {
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al editar pedido');", true);
+                    }
                     List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
                     Session["articulosPedidos"] = articulosPedido;
 
