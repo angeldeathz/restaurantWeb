@@ -1,13 +1,11 @@
-﻿using Restaurant.Model.Clases;
-using Restaurant.Model.Dto;
-using Restaurant.Services.Servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using Restaurant.Model.Clases;
+using Restaurant.Model.Dto;
+using Restaurant.Services.Servicios;
 
 namespace Restaurant.Web.Paginas.Mantenedores
 {
@@ -105,7 +103,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     ddlTipoPreparacion.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlTipoPreparacion.SelectedIndex = 0;
                 }
-                
+
                 List<EstadoArticulo> estadoArticulo = _estadoArticuloService.Obtener();
                 if (estadoArticulo != null && estadoArticulo.Count > 0)
                 {
@@ -204,8 +202,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     btnCrearPedido.Visible = false;
                     btnEditarPedido.Visible = true;
                     txtIdPedido.Text = pedido.Id.ToString();
-                    txtFechaInicioPedido.Text = pedido.FechaHoraInicio.ToShortTimeString();
-                    txtFechaFinPedido.Text = pedido.FechaHoraFin.ToShortTimeString();
+                    txtFechaInicioPedido.Text = pedido.FechaHoraInicio.ToString("yyyy-MM-ddTHH:mm");
+                    txtFechaFinPedido.Text = pedido.FechaHoraFin.ToString("yyyy-MM-ddTHH:mm");
                     txtTotalPedido.Text = pedido.Total.ToString();
                     ddlEstadoPedido.SelectedValue = pedido.IdEstadoPedido.ToString();
                     ddlMesaPedido.SelectedValue = pedido.IdMesa.ToString();
@@ -216,6 +214,10 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     //Buscar artículos del pedido
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
+                    if(articulos == null || articulos.Count == 0)
+                    {
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al editar pedido');", true);
+                    }
                     List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
                     Session["articulosPedidos"] = articulosPedido;
 
@@ -442,7 +444,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         {
                             modalEditarArticuloConsumoDirecto(articulo, articuloConsumoDirecto);
                         }
-                        else if(platos != null)
+                        else if (platos != null)
                         {
                             Plato plato = platos.First(x => x.IdArticulo == articulo.Id);
                             if (plato != null)
@@ -463,7 +465,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             }
         }
         protected void modalEditarArticuloConsumoDirecto(Articulo articulo, ArticuloConsumoDirecto articuloConsumoDirecto)
-        { 
+        {
             tituloModalArticulo.Text = "Editar Artículo de consumo directo";
             btnCrearArticulo.Visible = false;
             btnEditarArticulo.Visible = true;
@@ -478,7 +480,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
             upModalArticulo.Update();
-                  
+
             limpiarTabs();
             tabArticulos.Attributes.Add("class", "nav-link active");
             divArticulos.Attributes.Add("class", "tab-pane active show");
@@ -519,7 +521,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     }
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "alert('Articulo creado');", true);
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
-                 }
+                }
                 else
                 {
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Error al crear articulo');", true);
@@ -586,9 +588,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
             tabArticulos.Attributes.Add("class", "nav-link active");
             divArticulos.Attributes.Add("class", "tab-pane active show");
         }
-     
-         protected void modalEditarPlato(Articulo articulo, Plato plato)
-         { 
+
+        protected void modalEditarPlato(Articulo articulo, Plato plato)
+        {
             tituloModalPlato.Text = "Editar Plato";
             btnCrearPlato.Visible = false;
             btnEditarPlato.Visible = true;
@@ -617,7 +619,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('show');", true);
             upModalPlato.Update();
-        
+
             Session["ingredientesPlato"] = new List<IngredientePlato>();
 
             limpiarTabs();

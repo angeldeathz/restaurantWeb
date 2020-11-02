@@ -35,7 +35,7 @@
             </div>
 
             <div class="my-3">
-                <a class="btn btn-secondary" href="/Paginas/Publica/Reservas"><- Volver</a>
+                <a class="btn btn-secondary" href="/Paginas/Publica/Reservas">Volver</a>
                 <asp:Button ID="btnCrearReserva" runat="server" Text="Crear reserva" CssClass="btn btn-info" OnClick="btnCrearReserva_Click"/>
             </div>          
         </div>

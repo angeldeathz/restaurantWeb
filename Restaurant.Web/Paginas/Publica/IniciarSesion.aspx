@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6 col-lg-5 mx-auto my-5">
-            <div class="p-5 bg-blanco rounded">
+            <div class="p-5 bg-blanco rounded shadow">
                 <h3 class="">¡Bienvenido!</h3>
                 <asp:Label runat="server" for="txtRut" CssClass="">Rut</asp:Label>
                 <asp:TextBox runat="server" ID="txtRut" CssClass="form-control"></asp:TextBox><br />

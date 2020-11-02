@@ -1,13 +1,11 @@
-﻿using Restaurant.Services.Servicios;
-using Restaurant.Model.Clases;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections;
+using Restaurant.Model.Clases;
 using Restaurant.Model.Dto;
+using Restaurant.Services.Servicios;
 
 namespace Restaurant.Web.Paginas.Mantenedores
 {
@@ -25,8 +23,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             if (!IsPostBack)
             {
                 ValidarSesion();
-                
-                Token token = (Token) Session["token"];
+
+                Token token = (Token)Session["token"];
                 _proveedorService = new ProveedorService(token.access_token);
                 _insumoService = new InsumoService(token.access_token);
                 _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
@@ -62,18 +60,18 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     ddlEstadoOrden.DataValueField = "Id";
                     ddlEstadoOrden.DataBind();
                     ddlEstadoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlEstadoOrden.SelectedIndex = 0;                    
+                    ddlEstadoOrden.SelectedIndex = 0;
                 }
 
                 List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
                 if (unidades != null && unidades.Count > 0)
-                { 
+                {
                     ddlUnidadMedida.DataSource = unidades;
                     ddlUnidadMedida.DataTextField = "Nombre";
                     ddlUnidadMedida.DataValueField = "Id";
                     ddlUnidadMedida.DataBind();
                     ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlUnidadMedida.SelectedIndex = 0;                    
+                    ddlUnidadMedida.SelectedIndex = 0;
                 }
             }
         }
@@ -86,9 +84,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
             }
 
             Usuario usuario = (Usuario)Session["usuario"];
-            if (! new int[] { TipoUsuario.administrador, TipoUsuario.bodega }.Contains(usuario.IdTipoUsuario))
+            if (!new int[] { TipoUsuario.administrador, TipoUsuario.bodega }.Contains(usuario.IdTipoUsuario))
             {
-               Response.Redirect("../Mantenedores/Inicio.aspx");
+                Response.Redirect("../Mantenedores/Inicio.aspx");
             }
         }
         public void limpiarTabs()
@@ -209,7 +207,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     upListaInsumos.Update();
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "alert('Insumo editado');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);  
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
             }
             else
             {
@@ -292,7 +290,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             proveedor.Direccion = txtDireccionProveedor.Text;
 
             Token token = (Token)Session["token"];
-            _proveedorService = new ProveedorService(token.access_token);            
+            _proveedorService = new ProveedorService(token.access_token);
             int idProveedor = _proveedorService.Guardar(proveedor);
 
             if (idProveedor != 0)
@@ -367,7 +365,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
             Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
             actualizarRepeater(listaInsumosOrden, new List<DetalleOrdenProveedor>(), listaInsumosOrdenVacia);
-            lblTotalOrden.Text = "";           
+            lblTotalOrden.Text = "";
             txtTotalOrden.Text = "";
             upInsumosOrden.Update();
 
@@ -392,7 +390,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     btnCrearOrden.Visible = false;
                     btnEditarOrden.Visible = true;
                     txtIdOrden.Text = ordenProveedor.Id.ToString();
-                    txtFechaHoraOrden.Text = ordenProveedor.FechaHora.ToShortTimeString();
+                    txtFechaHoraOrden.Text = ordenProveedor.FechaHora.ToString("yyyy-MM-ddTHH:mm");
                     txtTotalOrden.Text = ordenProveedor.Total.ToString();
                     ddlEstadoOrden.SelectedValue = estadoOrden.Id.ToString();
                     ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();

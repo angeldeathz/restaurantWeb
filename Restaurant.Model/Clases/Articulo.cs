@@ -20,5 +20,6 @@
         public int IdTipoConsumo { get; set; }
         public EstadoArticulo EstadoArticulo { get; set; }
         public TipoConsumo TipoConsumo { get; set; }
+        public string UrlImagen { get; set; }
     }
 }
