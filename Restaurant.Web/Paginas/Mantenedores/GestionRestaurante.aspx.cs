@@ -1,12 +1,11 @@
-﻿using Restaurant.Model.Clases;
-using Restaurant.Model.Dto;
-using Restaurant.Services.Servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Restaurant.Model.Clases;
+using Restaurant.Model.Dto;
+using Restaurant.Services.Servicios;
 
 namespace Restaurant.Web.Paginas.Mantenedores
 {
@@ -42,7 +41,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 {
                     actualizarRepeater(listaClientes, clientes, listaClientesVacia);
                     actualizarDdlClientes(clientes);
-                }                
+                }
 
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
@@ -82,7 +81,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 Response.Redirect("../Publica/IniciarSesion.aspx");
             }
             Usuario usuario = (Usuario)Session["usuario"];
-            if (!  new int[] { TipoUsuario.administrador, TipoUsuario.garzon }.Contains(usuario.IdTipoUsuario))
+            if (!new int[] { TipoUsuario.administrador, TipoUsuario.garzon }.Contains(usuario.IdTipoUsuario))
             {
                 Response.Redirect("../Mantenedores/Inicio.aspx");
             }
@@ -132,7 +131,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     btnCrearReserva.Visible = false;
                     btnEditarReserva.Visible = true;
                     txtIdReserva.Text = reserva.Id.ToString();
-                    txtFechaHoraReserva.Text = reserva.FechaReserva.ToLongDateString();
+                    txtFechaHoraReserva.Text = reserva.FechaReserva.ToString("yyyy-MM-ddTHH:mm");
                     txtCantidadComensalesReserva.Text = reserva.CantidadComensales.ToString();
                     ddlEstadoReserva.SelectedValue = estadoReserva.Id.ToString();
                     ddlClienteReserva.SelectedValue = reserva.IdCliente.ToString();
@@ -320,7 +319,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
 
             Token token = (Token)Session["token"];
-            _clienteService = new ClienteService(token.access_token);            
+            _clienteService = new ClienteService(token.access_token);
             bool editar = _clienteService.Modificar(cliente, cliente.Id);
             if (editar)
             {
@@ -468,7 +467,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             ddlClienteReserva.SelectedIndex = 0;
         }
         public void actualizarDdlMesas(List<Mesa> mesas)
-        { 
+        {
             ddlMesaReserva.DataSource = mesas;
             ddlMesaReserva.DataTextField = "Nombre";
             ddlMesaReserva.DataValueField = "Id";
