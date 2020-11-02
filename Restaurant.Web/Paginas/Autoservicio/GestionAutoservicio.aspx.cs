@@ -223,9 +223,10 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 EstadoArticuloPedido estadoInicialArticuloPedido = new EstadoArticuloPedido();
                 estadoInicialArticuloPedido.Id = EstadoArticuloPedido.recibido;
                 estadoInicialArticuloPedido.Nombre = "Recibido";
-                nuevoArticuloPedido.IdEstadoArticuloPedido = estadoInicialArticuloPedido.Id;
                 nuevoArticuloPedido.EstadosArticuloPedido = new List<EstadoArticuloPedido>();
                 nuevoArticuloPedido.EstadosArticuloPedido.Add(estadoInicialArticuloPedido);
+                nuevoArticuloPedido.IdEstadoArticuloPedido = estadoInicialArticuloPedido.Id;
+                nuevoArticuloPedido.EstadoArticuloPedido = nuevoArticuloPedido.EstadosArticuloPedido.LastOrDefault();
                 articulosPedido.Add(nuevoArticuloPedido);
             }
             Session["articulosPedidoCliente"] = articulosPedido;
@@ -294,16 +295,20 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
                 foreach (ArticuloPedido articuloPedido in articulosPedido)
                 {
+                    articuloPedido.IdPedido = idPedido;
+
                     Articulo articuloAux = articuloPedido.Articulo;
                     articuloPedido.Articulo = null;
+                    EstadoArticuloPedido estadoArticuloAux = articuloPedido.EstadoArticuloPedido;
+                    articuloPedido.EstadoArticuloPedido = null;
                     List<EstadoArticuloPedido> estadosAux = articuloPedido.EstadosArticuloPedido;
                     articuloPedido.EstadosArticuloPedido = null;
-                    articuloPedido.IdPedido = idPedido;
 
                     _articuloPedidoService = new ArticuloPedidoService(token.access_token);
                     int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
                     articuloPedido.Articulo = articuloAux;
                     articuloPedido.EstadosArticuloPedido = estadosAux;
+                    articuloPedido.EstadoArticuloPedido = estadoArticuloAux;
                 }
 
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPedido", "alert('Pedido enviado a la cocina');", true);
