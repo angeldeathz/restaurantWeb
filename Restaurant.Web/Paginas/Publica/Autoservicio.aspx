@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="Autoservicio.aspx.cs" Inherits="Restaurant.Web.Paginas.Publica.Autoservicio" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
-        <div class="col-12 col-md-5 mx-auto my-5 text-center bg-light rounded p-5">
+        <div class="col-12 col-md-5 mx-auto my-5 text-center bg-light rounded p-5 shadow">
             <h2>Sistema de Autoservicio</h2>
             <p class="lead text-rosado">
                 Pida platos directo desde su mesa

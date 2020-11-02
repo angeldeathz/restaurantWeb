@@ -9,7 +9,7 @@
           <a class="nav-link active" id="tabUsuarios" data-toggle="pill" href="#divUsuarios" role="tab" aria-controls="divUsuarios" aria-selected="false" runat="server">Usuarios</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
             <div class="tab-pane show active" id="divUsuarios" role="tabpanel" aria-labelledby="tabUsuarios" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearUsuario" runat="server" Text="Crear Usuario" OnClick="btnModalCrearUsuario_Click" CssClass="btn btn-info float-right"/>

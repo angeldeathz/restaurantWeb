@@ -11,7 +11,7 @@
           <a class="nav-link" id="tabMesas" data-toggle="pill" href="#divMesas" role="tab" aria-controls="divMesas" aria-selected="false" runat="server">Mesas</a>
         </div>
       </div>
-      <div class="col-12 bg-blanco rounded contenedor-mantenedores">
+      <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divReservas" role="tabpanel" aria-labelledby="tabReservas" runat="server" ClientIDMode="Static">
               <asp:Button ID="btnModalCrearReservas" runat="server" Text="Crear Reserva" OnClick="btnModalCrearReserva_Click" CssClass="btn btn-info float-right"/>
