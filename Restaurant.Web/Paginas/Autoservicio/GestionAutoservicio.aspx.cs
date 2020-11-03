@@ -17,37 +17,26 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloService _articuloService;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             validarIngreso();
             Token token = (Token)Session["token"];
             Reserva reserva = (Reserva)Session["reservaCliente"];
-            Pedido pedido = (Pedido)Session["pedidoCliente"];
             _pedidoService = new PedidoService(token.access_token);
+            Pedido pedidoCliente = null;
 
-            if (pedido == null)
+            List<Pedido> pedidos = _pedidoService.Obtener();
+            if (pedidos != null && pedidos.Count > 0)
             {
-                List<Pedido> pedidos = _pedidoService.Obtener();
-                if (pedidos != null && pedidos.Count > 0)
+                pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
+                                                        && x.IdMesa == reserva.IdMesa
+                                                        && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                if (pedidoCliente != null)
                 {
-                    Pedido pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
-                                                                    && x.IdMesa == reserva.IdMesa
-                                                                    && x.FechaHoraInicio.Date == DateTime.Now.Date);
-                    if (pedidoCliente != null)
-                    {
-                        btnPagarCuenta.Visible = true;
-
-                        cargarPedido(token, pedidoCliente);
-                        //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
-                    }
+                    btnPagarCuenta.Visible = true;
+                    cargarPedido(token, pedidoCliente);
                 }
-            }
-            else
-            {
-                cargarPedido(token, pedido);
             }
 
             List<ArticuloPedido> articulosPedido = new List<ArticuloPedido>();
-
             if (Session["articulosPedidoCliente"] == null)
             {
                 Session["articulosPedidoCliente"] = articulosPedido;
@@ -60,13 +49,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (articulosPedido != null && articulosPedido.Count > 0)
             {
                 cargarArticulosPedido(articulosPedido);
-                if (pedido != null)
+                if (pedidoCliente != null)
                 {
+                    btnHacerPedido.Visible = false;
                     btnPagarCuenta.Visible = true;
+                    //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
                 }
                 else
                 {
                     btnHacerPedido.Visible = true;
+                    btnPagarCuenta.Visible = false;
                 }
             }
             upArticulosPedido.Update();
@@ -328,6 +320,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
             pedido.IdEstadoPedido = EstadoPedido.pagado;
             var totalPedido = articulosPedido.Sum(x => x.Total);
             pedido.Total = totalPedido;
+            pedido.Mesa = null;
+            pedido.EstadoPedido = null;
 
             Token token = (Token)Session["token"];
             _pedidoService = new PedidoService(token.access_token);
