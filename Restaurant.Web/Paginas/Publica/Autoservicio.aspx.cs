@@ -1,4 +1,5 @@
 ﻿using Restaurant.Model.Clases;
+using Restaurant.Model.Dto;
 using Restaurant.Services.Servicios;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Restaurant.Web.Paginas.Publica
 
         protected void btnAutoservicio_Click(object sender, EventArgs e)
         {
+            //Ingresar al cliente
             string email = txtEmail.Text;
             _usuarioService = new UsuarioService(string.Empty);
             var token = _usuarioService.AutenticarCliente();
@@ -28,8 +30,13 @@ namespace Restaurant.Web.Paginas.Publica
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
                 return;
             }
-            Session["token"] = token;
 
+            //Setear y limpiar sesión
+            Session["token"] = token;
+            Session["pedidoCliente"] = null;
+            Session["articulosPedidoCliente"] = null;
+
+            //Buscar info de la reserva
             _reservaService = new ReservaService(token.access_token);
             List<Reserva> reservas = _reservaService.Obtener();
             if (reservas == null || reservas.Count == 0)
@@ -49,7 +56,6 @@ namespace Restaurant.Web.Paginas.Publica
                 return;
             }
             Session["reservaCliente"] = reservaCliente;
-            Session["pedidoCliente"] = null;
 
             Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
         }

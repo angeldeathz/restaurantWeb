@@ -55,7 +55,7 @@
                                         <td> <%# Eval("Precio") %> </td>
                                         <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                         <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                        <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                        <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
                                                 Pedir</asp:LinkButton></td>
                                         </tr>
                                     </ItemTemplate>
@@ -94,7 +94,7 @@
                                     <td> <%# Eval("Precio") %> </td>
                                     <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                     <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
                                             Pedir</asp:LinkButton></td>
                                     </tr>
                                 </ItemTemplate>
@@ -131,7 +131,7 @@
                                     <td> <%# Eval("Precio") %> </td>
                                     <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                     <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
                                             Pedir</asp:LinkButton></td>
                                     </tr>
                                 </ItemTemplate>
@@ -168,7 +168,7 @@
                                 <td> <%# Eval("Precio") %> </td>
                                 <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                 <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
                                         Pedir</asp:LinkButton></td>
                                 </tr>
                             </ItemTemplate>
@@ -205,7 +205,7 @@
                                     <td> <%# Eval("Precio") %> </td>
                                     <td> <%# Eval("TipoConsumo.Nombre") %> </td>
                                     <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
                                             Pedir</asp:LinkButton></td>
                                     </tr>
                                 </ItemTemplate>
@@ -257,7 +257,7 @@
                       </FooterTemplate>
                       </asp:Repeater>
                     </div>
-                    <div>
+                    <div class="text-right font-weight-bold">
                       <asp:Label ID="lblTotalPedido" runat="server"></asp:Label>
                       <asp:TextBox ID="txtTotalPedido" runat="server" Visible="false"></asp:TextBox>
                     </div>
