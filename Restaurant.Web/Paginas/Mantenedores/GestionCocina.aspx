@@ -41,7 +41,7 @@
                             <td> <%# Eval("FechaHoraInicio") %> </td>
                             <td> <%# Eval("FechaHoraFin") %> </td>
                             <td> <%# Eval("Total") %> </td>
-                            <td> <%# Eval("Mesa.Nombre") %> </td>
+                            <td> <%# Eval("Reserva.Cliente.NombreCliente") %> </td>
                             <td> <%# Eval("EstadoPedido.Nombre") %></td>
                             <td><asp:LinkButton ID="btnModalEditarPedido" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                     Editar</asp:LinkButton></td>
@@ -127,8 +127,8 @@
                             <asp:DropDownList ID="ddlEstadoPedido" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                         <div class="col-12 col-sm-3">
-                            <asp:Label ID="lblMesaPedido" runat="server" Text="Mesa"></asp:Label>
-                            <asp:DropDownList ID="ddlMesaPedido" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:Label ID="lblReservaPedido" runat="server" Text="Reserva"></asp:Label>
+                            <asp:DropDownList ID="ddlReservaPedido" runat="server" CssClass="form-control"></asp:DropDownList>
                         </div>
                     </div>
                     <hr />

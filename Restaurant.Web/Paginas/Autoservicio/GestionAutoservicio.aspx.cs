@@ -13,9 +13,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
     public partial class GestionAutoservicio : System.Web.UI.Page
     {
         private PedidoService _pedidoService;
-        private ReservaService _reservaService;
-        private PersonaService _personaService;
-        private ClienteService _clienteService;
 
         private ArticuloPedidoService _articuloPedidoService;
         private ArticuloService _articuloService;
@@ -25,34 +22,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Token token = (Token)Session["token"];
             Reserva reserva = (Reserva)Session["reservaCliente"];
             _pedidoService = new PedidoService(token.access_token);
-            _reservaService = new ReservaService(token.access_token);
+            List<Pedido> pedidos = _pedidoService.Obtener();
 
             Pedido pedidoCliente = null;
-
-            List<Pedido> pedidos = _pedidoService.Obtener();
-            List<Reserva> reservas = _reservaService.Obtener();
-
-            _personaService = new PersonaService(token.access_token);
-            _clienteService = new ClienteService(token.access_token);
-
-            List<Persona> personas = _personaService.Obtener();
-            List<Cliente> clientes = _clienteService.Obtener();
-
-
             if (pedidos != null && pedidos.Count > 0)
             {
                 pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido == EstadoPedido.enCurso
-                                                        && x.IdMesa == reserva.IdMesa
-                                                        && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                                                         && x.Reserva.Id == reserva.Id
+                                                         && x.FechaHoraInicio.Date == DateTime.Now.Date);
 
-                /*
-                var query1 = from pedidoLq in pedidos
-                             join reservaLq in reservas on pedidoLq.IdMesa equals reservaLq.IdMesa
-                             where reservaLq.Cliente.Persona.Email == reserva.Cliente.Persona.Email
-                                   && pedidoLq.IdEstadoPedido == EstadoPedido.enCurso
-                                   && pedidoLq.FechaHoraInicio.Date == DateTime.Now.Date
-                             select reservaLq;
-                */
                 if (pedidoCliente != null)
                 {
                     btnPagarCuenta.Visible = true;
@@ -332,7 +310,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             pedido.IdEstadoPedido = EstadoPedido.pagado;
             var totalPedido = articulosPedido.Sum(x => x.Total);
             pedido.Total = totalPedido;
-            pedido.Mesa = null;
+            pedido.Reserva = null;
             pedido.EstadoPedido = null;
 
             Token token = (Token)Session["token"];
@@ -428,7 +406,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             pedido.FechaHoraFin = DateTime.Now;
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = EstadoPedido.enCurso;
-            pedido.IdMesa = reserva.IdMesa;
+            pedido.IdReserva = reserva.Id;
 
             Token token = (Token)Session["token"];
             _pedidoService = new PedidoService(token.access_token);
