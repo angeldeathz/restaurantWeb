@@ -29,7 +29,7 @@
                                 <td><b>Fecha Inicio</b></td>
                                 <td><b>Fecha Fin</b></td>
                                 <td><b>Total</b></td>
-                                <td><b>Mesa</b></td>
+                                <td><b>Cliente</b></td>
                                 <td><b>Estado</b></td>
                                 <td><b>Acciones</b></td>
                             </tr>
