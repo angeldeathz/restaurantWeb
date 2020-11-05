@@ -23,7 +23,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
         private ArticuloConsumoDirectoService _articuloConsumoDirectoService;
         private IngredientePlatoService _ingredientePlatoService;
         private TipoPreparacionService _tipoPreparacionService;
-
+        private ReservaService _reservaService;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,6 +39,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 _tipoConsumoService = new TipoConsumoService(token.access_token);
                 _insumoService = new InsumoService(token.access_token);
                 _tipoPreparacionService = new TipoPreparacionService(token.access_token);
+                _reservaService = new ReservaService(token.access_token);
 
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
@@ -53,15 +54,23 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarDdlArticulos(articulos);
                 }
 
-                List<Mesa> mesas = _mesaService.Obtener();
-                if (mesas != null && mesas.Count > 0)
+                List<Reserva> reservas = _reservaService.Obtener();
+                if (reservas != null && reservas.Count > 0)
                 {
-                    ddlMesaPedido.DataSource = mesas;
-                    ddlMesaPedido.DataTextField = "Nombre";
-                    ddlMesaPedido.DataValueField = "Id";
-                    ddlMesaPedido.DataBind();
-                    ddlMesaPedido.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlMesaPedido.SelectedIndex = 0;
+                    var ds = from r in reservas
+                             select new
+                             {
+                                r.Id,
+                                r.Cliente.Persona.Nombre,
+                                r.Cliente.Persona.Apellido,
+                                NombreCliente = String.Format("{0} {1}", r.Cliente.Persona.Nombre, r.Cliente.Persona.Apellido)
+                            };
+                    ddlReservaPedido.DataSource = ds;
+                    ddlReservaPedido.DataTextField = "NombreCliente";
+                    ddlReservaPedido.DataValueField = "Id";
+                    ddlReservaPedido.DataBind();
+                    ddlReservaPedido.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlReservaPedido.SelectedIndex = 0;
                 }
 
                 List<EstadoPedido> estadosPedido = _estadoPedidoService.Obtener();
@@ -173,7 +182,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtFechaFinPedido.Text = "";
             txtTotalPedido.Text = "";
             ddlEstadoPedido.SelectedValue = "";
-            ddlMesaPedido.SelectedValue = "";
+            ddlReservaPedido.SelectedValue = "";
             ddlArticuloPedido.SelectedValue = "";
             ddlPrecioArticuloPedido.SelectedValue = "";
             txtCantidadArticuloPedido.Text = "";
@@ -206,7 +215,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     txtFechaFinPedido.Text = pedido.FechaHoraFin.ToString("yyyy-MM-ddTHH:mm");
                     txtTotalPedido.Text = pedido.Total.ToString();
                     ddlEstadoPedido.SelectedValue = pedido.IdEstadoPedido.ToString();
-                    ddlMesaPedido.SelectedValue = pedido.IdMesa.ToString();
+                    ddlReservaPedido.SelectedValue = pedido.IdReserva.ToString();
                     ddlArticuloPedido.SelectedValue = "";
                     ddlPrecioArticuloPedido.SelectedValue = "";
                     txtCantidadArticuloPedido.Text = "";
@@ -247,7 +256,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPedido.Text);
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = int.Parse(ddlEstadoPedido.SelectedValue);
-            pedido.IdMesa = int.Parse(ddlMesaPedido.SelectedValue);
+            pedido.IdReserva = int.Parse(ddlReservaPedido.SelectedValue);
 
             Token token = (Token)Session["token"];
             _pedidoService = new PedidoService(token.access_token);
@@ -291,7 +300,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPedido.Text);
             pedido.Total = int.Parse(txtTotalPedido.Text);
             pedido.IdEstadoPedido = int.Parse(ddlEstadoPedido.SelectedValue);
-            pedido.IdMesa = int.Parse(ddlMesaPedido.SelectedValue);
+            pedido.IdReserva = int.Parse(ddlReservaPedido.SelectedValue);
 
             Token token = (Token)Session["token"];
             _pedidoService = new PedidoService(token.access_token);

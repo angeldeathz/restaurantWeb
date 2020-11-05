@@ -11,15 +11,15 @@ namespace Restaurant.Model.Clases
             FechaHoraFin = new DateTime();
             Total = 0;
             IdEstadoPedido = 0;
-            IdMesa = 0;
+            IdReserva = 0;
         }
         public int Id { get; set; }
         public DateTime FechaHoraInicio { get; set; }
         public DateTime FechaHoraFin { get; set; }
         public int Total { get; set; }
         public int IdEstadoPedido { get; set; }
-        public int IdMesa { get; set; }
-        public Mesa Mesa { get; set; }
+        public int IdReserva { get; set; }
+        public Reserva Reserva { get; set; }
         public EstadoPedido EstadoPedido { get; set; }
     }
 }
