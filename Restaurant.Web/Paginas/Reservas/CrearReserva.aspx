@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="row">
         <div class="col-12 col-md-10 col-lg-7 mx-auto my-5 text-center bg-light rounded px-5 py-4">
-            <h2>Crear Reserva</h2>
+            <h2>&Crear Reserva</h2>
             <div class="row">
                  <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>

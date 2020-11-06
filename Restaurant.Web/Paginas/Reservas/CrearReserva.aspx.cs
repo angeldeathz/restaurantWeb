@@ -15,6 +15,8 @@ namespace Restaurant.Web.Paginas.Reservas
         private ReservaService _reservaService;
         private HorarioReservaService _horarioReservaService;
         private ClienteService _clienteService;
+        private MesaService _mesaService;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -26,15 +28,21 @@ namespace Restaurant.Web.Paginas.Reservas
             if (idCliente == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "alert('Error al crear cliente');", true);
+                return;
             }
 
             Reserva reserva = new Reserva();
             reserva.FechaReserva = Convert.ToDateTime(txtFecha.Text);
             reserva.CantidadComensales = int.Parse(txtComensales.Text);
             reserva.IdEstadoReserva = EstadoReserva.creada;
-
-            //reserva.IdCliente = int.Parse(ddlClienteReserva.SelectedValue);
-            // reserva.IdMesa = int.Parse(ddlMesaReserva.SelectedValue);
+            reserva.IdCliente = idCliente;
+            int idMesa = buscarMesa(reserva.FechaReserva, reserva.CantidadComensales);
+            if (idCliente == 0)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "alert('No se encontró una mesa disponible. Seleccione otra fecha u hora');", true);
+                return;
+            }
+            reserva.IdMesa = idMesa;
 
             Token token = (Token)Session["token"];
             _reservaService = new ReservaService(token.access_token);
@@ -54,6 +62,35 @@ namespace Restaurant.Web.Paginas.Reservas
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Error al crear reserva');", true);
             }
+        }
+
+        public int buscarMesa(DateTime fechaReserva, int cantidadComensales)
+        {
+            Token token = (Token)Session["token"];
+            _mesaService = new MesaService(token.access_token);
+            List<Mesa> mesas = _mesaService.Obtener();
+            List<Mesa> mesasConCapcidad = mesas.Where(x=> x.CantidadComensales >= cantidadComensales).ToList();
+
+            _reservaService = new ReservaService(token.access_token);
+            List<Reserva> reservas = _reservaService.Obtener();
+            int idMesa = 0;
+            foreach(Mesa mesa in mesasConCapcidad)
+            {
+                DateTime horaDesde = fechaReserva.AddMinutes(-60);
+                DateTime horahasta = fechaReserva.AddMinutes(60*2);
+
+                List<Reserva> reservasMesa = reservas.Where(x => x.IdMesa == mesa.Id
+                                                            && x.FechaReserva.Date == fechaReserva.Date
+                                                            && x.FechaReserva.Date < horaDesde
+                                                            && x.FechaReserva.Date > horahasta
+                                                            ).ToList();
+                if(reservasMesa.Count == 0)
+                {
+                    idMesa = mesa.Id;
+                    break;
+                }
+            }
+            return idMesa;
         }
 
         public int crearCliente()
