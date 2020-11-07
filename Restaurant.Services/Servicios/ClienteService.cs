@@ -37,6 +37,13 @@ namespace Restaurant.Services.Servicios
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }
+        public int GuardarBasico(Persona persona)
+        {
+            string url = $"http://localhost/restaurant/api/clientes/nuevos/";
+            var respuesta = _restClientHttp.Post<int>(url, persona);
+            if (respuesta.StatusName != HttpStatusCode.OK) return 0;
+            return respuesta.Response;
+        }
 
         public bool Modificar(Cliente cliente, int idCliente)
         {
