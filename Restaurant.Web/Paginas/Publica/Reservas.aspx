@@ -10,7 +10,7 @@
                  <a class="btn btn-lg btn-info btn-block" href="/Paginas/Reservas/CrearReserva">Reservar Mesa</a>
             </div>
             <div class="col-10 col-md-8 mx-auto my-4">
-                 <a class="btn btn-lg btn-danger btn-block" href="/Paginas/Reservas/CancelarReserva">Cancelar Mesa</a>
+                 <a class="btn btn-lg btn-danger btn-block" href="/Paginas/Reservas/CancelarReserva">Cancelar Reserva</a>
             </div>
         </div>
       </div>

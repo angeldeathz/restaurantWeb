@@ -30,6 +30,15 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
+        public Cliente ObtenerPorMail(string email)
+        {
+            string url = $"http://localhost/restaurant/api/clientes/filtro?email={email}";
+            var respuesta = _restClientHttp.Get<Cliente>(url);
+            if (respuesta.StatusName != HttpStatusCode.OK) return null;
+            return respuesta.Response;
+        }
+
+
         public int Guardar(Cliente cliente)
         {
             string url = $"http://localhost/restaurant/api/clientes/";

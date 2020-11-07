@@ -54,6 +54,8 @@ namespace Restaurant.Web.Paginas.Reservas
             if (idReserva == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Error al crear reserva');", true);
+                // FALTA ENVIAR A a página de error
+                //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
                 return;
             }
 
