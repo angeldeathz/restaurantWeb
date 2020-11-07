@@ -8,7 +8,7 @@
                  <asp:TextBox ID="txtNumeroReserva" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="form-group">
-                 <asp:Label ID="lblEmailIngreso" runat="server" Text="E-mail de Ingreso"></asp:Label>
+                 <asp:Label ID="lblEmail" runat="server" Text="E-mail de Ingreso"></asp:Label>
                  <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="my-3">

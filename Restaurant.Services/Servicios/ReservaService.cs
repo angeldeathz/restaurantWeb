@@ -45,5 +45,13 @@ namespace Restaurant.Services.Servicios
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }
+
+        public bool ModificarEstado(ReservaCambioEstado reservaCambioEstado)
+        {
+            string url = $"http://localhost/restaurant/api/reservas/NuevoEstado/";
+            var respuesta = _restClientHttp.Post<bool>(url, reservaCambioEstado);
+            if (respuesta.StatusName != HttpStatusCode.OK) return false;
+            return respuesta.Response;
+        }
     }
 }
