@@ -65,6 +65,7 @@
     <Compile Include="Clases\Plato.cs" />
     <Compile Include="Clases\Proveedor.cs" />
     <Compile Include="Clases\Reserva.cs" />
+    <Compile Include="Clases\ReservaCambioEstado.cs" />
     <Compile Include="Clases\TipoConsumo.cs" />
     <Compile Include="Clases\TipoDocumentoPago.cs" />
     <Compile Include="Clases\TipoPreparacion.cs" />

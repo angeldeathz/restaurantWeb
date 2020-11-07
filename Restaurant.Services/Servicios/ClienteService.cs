@@ -30,10 +30,26 @@ namespace Restaurant.Services.Servicios
             return respuesta.Response;
         }
 
+        public Cliente ObtenerPorMail(string email)
+        {
+            string url = $"http://localhost/restaurant/api/clientes/filtro?email={email}";
+            var respuesta = _restClientHttp.Get<Cliente>(url);
+            if (respuesta.StatusName != HttpStatusCode.OK) return null;
+            return respuesta.Response;
+        }
+
+
         public int Guardar(Cliente cliente)
         {
             string url = $"http://localhost/restaurant/api/clientes/";
             var respuesta = _restClientHttp.Post<int>(url, cliente);
+            if (respuesta.StatusName != HttpStatusCode.OK) return 0;
+            return respuesta.Response;
+        }
+        public int GuardarBasico(Persona persona)
+        {
+            string url = $"http://localhost/restaurant/api/clientes/nuevos/";
+            var respuesta = _restClientHttp.Post<int>(url, persona);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
         }

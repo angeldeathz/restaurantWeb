@@ -15,6 +15,9 @@ namespace Restaurant.Web.Paginas.Reservas
         private ReservaService _reservaService;
         private HorarioReservaService _horarioReservaService;
         private ClienteService _clienteService;
+        private MesaService _mesaService;
+        private UsuarioService _usuarioService; 
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,38 +25,73 @@ namespace Restaurant.Web.Paginas.Reservas
 
         protected void btnCrearReserva_Click(object sender, EventArgs e)
         {
+            _usuarioService = new UsuarioService(string.Empty);
+            var token = _usuarioService.AutenticarCliente();
+            if (token == null)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
+                return;
+            }
+            Session["token"] = token;
+
             int idCliente = crearCliente();
             if (idCliente == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "alert('Error al crear cliente');", true);
+                return;
             }
 
-            Reserva reserva = new Reserva();
-            reserva.FechaReserva = Convert.ToDateTime(txtFecha.Text);
-            reserva.CantidadComensales = int.Parse(txtComensales.Text);
-            reserva.IdEstadoReserva = EstadoReserva.creada;
-
-            //reserva.IdCliente = int.Parse(ddlClienteReserva.SelectedValue);
-            // reserva.IdMesa = int.Parse(ddlMesaReserva.SelectedValue);
-
-            Token token = (Token)Session["token"];
-            _reservaService = new ReservaService(token.access_token);
-            int idReserva = _reservaService.Guardar(reserva);
-            if (idReserva != 0)
+            DateTime fechaReserva = Convert.ToDateTime(txtFecha.Text);
+            int cantidadComensales = int.Parse(txtComensales.Text);
+            int idMesa = buscarMesa(fechaReserva, cantidadComensales);
+            if (idMesa == 0)
             {
-                List<Reserva> reservas = _reservaService.Obtener();
-                if (reservas != null && reservas.Count > 0)
-                {
-                    //actualizarRepeater(listaReservas, reservas, listaReservasVacia);
-                    //upListaReservas.Update();
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearReserva", "alert('Reserva creada');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "$('#modalReserva').modal('hide');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "alert('No se encontró una mesa disponible. Seleccione otra fecha u hora');", true);
+                return;
             }
-            else
+
+            int idReserva = guardarReserva(idCliente, idMesa);
+            if (idReserva == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Error al crear reserva');", true);
+                // FALTA ENVIAR A a página de error
+                //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+                return;
             }
+
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearReserva", "alert('Reserva creada con exito');", true);
+
+            // FALTA ENVIAR A a página de exito
+            //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+        }
+
+        public int buscarMesa(DateTime fechaReserva, int cantidadComensales)
+        {
+            Token token = (Token)Session["token"];
+            _mesaService = new MesaService(token.access_token);
+            List<Mesa> mesas = _mesaService.Obtener();
+            List<Mesa> mesasConCapcidad = mesas.Where(x=> x.CantidadComensales >= cantidadComensales).ToList();
+
+            _reservaService = new ReservaService(token.access_token);
+            List<Reserva> reservas = _reservaService.Obtener();
+            int idMesa = 0;
+            foreach(Mesa mesa in mesasConCapcidad)
+            {
+                DateTime horaDesde = fechaReserva.AddMinutes(-60);
+                DateTime horahasta = fechaReserva.AddMinutes(60*2);
+
+                List<Reserva> reservasMesa = reservas.Where(x => x.IdMesa == mesa.Id
+                                                            && x.FechaReserva.Date == fechaReserva.Date
+                                                            && x.FechaReserva.Date < horaDesde
+                                                            && x.FechaReserva.Date > horahasta
+                                                            ).ToList();
+                if(reservasMesa.Count == 0)
+                {
+                    idMesa = mesa.Id;
+                    break;
+                }
+            }
+            return idMesa;
         }
 
         public int crearCliente()
@@ -63,17 +101,28 @@ namespace Restaurant.Web.Paginas.Reservas
 
             persona.Nombre = txtNombre.Text;
             persona.Apellido = txtApellido.Text;
-            //persona.Rut = int.Parse(txtRutCliente.Text);
-            //persona.DigitoVerificador = txtDigitoVerificadorCliente.Text;
             persona.Email = txtEmail.Text;
-            //persona.Telefono = int.Parse(txtTelefonoCliente.Text);
-            persona.EsPersonaNatural = Convert.ToChar(1);
             cliente.Persona = persona;
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
-            int idCliente = _clienteService.Guardar(cliente);
+            int idCliente = _clienteService.GuardarBasico(persona);
             return idCliente;
+        }
+
+        protected int guardarReserva(int idCliente, int idMesa)
+        {
+            Reserva reserva = new Reserva();
+            reserva.FechaReserva = Convert.ToDateTime(txtFecha.Text);
+            reserva.CantidadComensales = int.Parse(txtComensales.Text);
+            reserva.IdEstadoReserva = EstadoReserva.creada;
+            reserva.IdCliente = idCliente;
+            reserva.IdMesa = idMesa;
+
+            Token token = (Token)Session["token"];
+            _reservaService = new ReservaService(token.access_token);
+            int idReserva = _reservaService.Guardar(reserva);
+            return idReserva;
         }
         protected void txtFecha_TextChanged(object sender, EventArgs e)
         {
