@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="MensajeCrearRerservaError.aspx.cs" Inherits="Restaurant.Web.Paginas.Reservas.MensajeRerservaError" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="m-t-md col-xs-12 col-sm-10 col-md-10 col-lg-10 col-centered"> 
+    <div class="m-t-md col-12 col-sm-10 mx-auto"> 
              <div class="separador-sm">&nbsp;</div>
              <div class="text-center"><asp:Image ID="imgReservaOk" runat="server" ImageUrl="~/Images/icono_advertencia.png" /></div>
              <div class="separador-sm">&nbsp;</div>
