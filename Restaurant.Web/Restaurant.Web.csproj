@@ -113,6 +113,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Images\auto_servicio.jpg" />
     <Content Include="Images\auto_servicio_2.jpg" />
+    <Content Include="Images\icono_advertencia.png" />
+    <Content Include="Images\icono_ok.png" />
     <Content Include="Images\logo_sxxi.png" />
     <Content Include="Images\logo_sxxi_long.png" />
     <Content Include="Images\logo_sxxi_sm.png" />
@@ -150,6 +152,10 @@
     <Content Include="Paginas\Publica\Reservas.aspx" />
     <Content Include="Paginas\Reservas\CancelarReserva.aspx" />
     <Content Include="Paginas\Reservas\CrearReserva.aspx" />
+    <Content Include="Paginas\Reservas\MensajeCancelarReservaError.aspx" />
+    <Content Include="Paginas\Reservas\MensajeCrearRerservaError.aspx" />
+    <Content Include="Paginas\Reservas\MensajeCancelarReservaExito.aspx" />
+    <Content Include="Paginas\Reservas\MensajeCrearReservaExito.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -309,6 +315,34 @@
     </Compile>
     <Compile Include="Paginas\Reservas\CrearReserva.aspx.designer.cs">
       <DependentUpon>CrearReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCancelarReservaError.aspx.cs">
+      <DependentUpon>MensajeCancelarReservaError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCancelarReservaError.aspx.designer.cs">
+      <DependentUpon>MensajeCancelarReservaError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCrearRerservaError.aspx.cs">
+      <DependentUpon>MensajeCrearRerservaError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCrearRerservaError.aspx.designer.cs">
+      <DependentUpon>MensajeCrearRerservaError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCancelarReservaExito.aspx.cs">
+      <DependentUpon>MensajeCancelarReservaExito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCancelarReservaExito.aspx.designer.cs">
+      <DependentUpon>MensajeCancelarReservaExito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCrearReservaExito.aspx.cs">
+      <DependentUpon>MensajeCrearReservaExito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Reservas\MensajeCrearReservaExito.aspx.designer.cs">
+      <DependentUpon>MensajeCrearReservaExito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Master\Site.Master.cs">
