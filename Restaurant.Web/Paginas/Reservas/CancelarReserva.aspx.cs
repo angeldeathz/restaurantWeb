@@ -13,13 +13,11 @@ namespace Restaurant.Web.Paginas.Reservas
     public partial class CancelarReserva : System.Web.UI.Page
     {
         private ReservaService _reservaService;
-        private HorarioReservaService _horarioReservaService;
         private ClienteService _clienteService;
-        private MesaService _mesaService;
         private UsuarioService _usuarioService;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["reservaCancelada"] = null;
         }
 
         protected void btnCancelarReserva_Click(object sender, EventArgs e)
@@ -64,15 +62,12 @@ namespace Restaurant.Web.Paginas.Reservas
             bool editar = _reservaService.ModificarEstado(reservaCambioEstado);
             if (!editar)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCancelar", "alert('Ocurrió un error al cancelar la reserva. Inténtelo nuevamente');", true);
-                // FALTA ENVIAR A a página de error
-                //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+                Response.Redirect("/Paginas/Reservas/MensajeCancelarReservaError.aspx");
                 return;
             }
 
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cancelarReserva", "alert('Reserva cancelada');", true);
-            // FALTA ENVIAR A a página de exito
-            //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+            Session["reservaCancelada"] = reservaCliente;
+            Response.Redirect("/Paginas/Reservas/MensajeCancelarReservaExito.aspx");
         }
     }
 }

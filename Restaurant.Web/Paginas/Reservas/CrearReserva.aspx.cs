@@ -20,7 +20,7 @@ namespace Restaurant.Web.Paginas.Reservas
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["reservaCreada"] = null;
         }
 
         protected void btnCrearReserva_Click(object sender, EventArgs e)
@@ -53,16 +53,10 @@ namespace Restaurant.Web.Paginas.Reservas
             int idReserva = guardarReserva(idCliente, idMesa);
             if (idReserva == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('Error al crear reserva');", true);
-                // FALTA ENVIAR A a página de error
-                //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+                Response.Redirect("/Paginas/Reservas/MensajeCrearReservaError.aspx");
                 return;
             }
-
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearReserva", "alert('Reserva creada con exito');", true);
-
-            // FALTA ENVIAR A a página de exito
-            //Response.Redirect("/Paginas/Reservas/CrearReserva.aspx");
+            Response.Redirect("/Paginas/Reservas/MensajeCrearReservaExito.aspx");
         }
 
         public int buscarMesa(DateTime fechaReserva, int cantidadComensales)
@@ -122,6 +116,8 @@ namespace Restaurant.Web.Paginas.Reservas
             Token token = (Token)Session["token"];
             _reservaService = new ReservaService(token.access_token);
             int idReserva = _reservaService.Guardar(reserva);
+            reserva.Id = idReserva;
+            Session["reservaCreada"] = reserva;
             return idReserva;
         }
         protected void txtFecha_TextChanged(object sender, EventArgs e)
