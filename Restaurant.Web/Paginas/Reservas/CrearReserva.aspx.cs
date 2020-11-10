@@ -16,7 +16,7 @@ namespace Restaurant.Web.Paginas.Reservas
         private HorarioReservaService _horarioReservaService;
         private ClienteService _clienteService;
         private MesaService _mesaService;
-        private UsuarioService _usuarioService; 
+        private UsuarioService _usuarioService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -76,8 +76,8 @@ namespace Restaurant.Web.Paginas.Reservas
 
                 List<Reserva> reservasMesa = reservas.Where(x => x.IdMesa == mesa.Id
                                                             && x.FechaReserva.Date == fechaReserva.Date
-                                                            && x.FechaReserva.Date < horaDesde
-                                                            && x.FechaReserva.Date > horahasta
+                                                            && x.FechaReserva >= horaDesde
+                                                            && x.FechaReserva <= horahasta
                                                             ).ToList();
                 if(reservasMesa.Count == 0)
                 {
@@ -100,6 +100,11 @@ namespace Restaurant.Web.Paginas.Reservas
 
             Token token = (Token)Session["token"];
             _clienteService = new ClienteService(token.access_token);
+            Cliente clienteExiste = _clienteService.ObtenerPorMail(txtEmail.Text);
+            if(clienteExiste != null)
+            {
+                return clienteExiste.Id;
+            }
             int idCliente = _clienteService.GuardarBasico(persona);
             return idCliente;
         }
