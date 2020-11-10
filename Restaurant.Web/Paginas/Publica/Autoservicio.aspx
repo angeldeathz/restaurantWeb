@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 col-md-5 mx-auto my-5 text-center bg-light rounded p-5 shadow">
             <h2>Sistema de Autoservicio</h2>
-            <p class="lead text-rosado">
+            <p class="lead text-gris">
                 Pida platos directo desde su mesa
             </p>
             <div class="form-group my-4 text-left">

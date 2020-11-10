@@ -56,13 +56,6 @@
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/nosotros">Nosotros</a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
-                    </li>
-
-                    <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/reservas">Reservas</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Carta
                         </a>
@@ -73,10 +66,16 @@
                         </div>
                     </li>
                     <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/reservas">Reservas</a>
+                    </li>
+                    <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/Autoservicio">Autoservicio</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="btn btn-outline-secondary" id="btnIniciarSesion" visible="true" runat="server" href="../Paginas/Publica/iniciarsesion">Iniciar Sesión</a>
+                        <a class="btn btn-outline-secondary" id="btnIniciarSesion" visible="true" runat="server" href="../Paginas/Publica/iniciarsesion">Intranet</a>
                         <a class="btn btn-outline-secondary" id="btnCerrarSesion" visible="false" runat="server" onserverclick="btnCerrarSesion_OnServerClick">Cerrar Sesión</a>
                     </li>
                 </ul>
