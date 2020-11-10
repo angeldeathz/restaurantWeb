@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="MensajeCrearRerservaError.aspx.cs" Inherits="Restaurant.Web.Paginas.Reservas.MensajeRerservaError" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="MensajeCrearReservaError.aspx.cs" Inherits="Restaurant.Web.Paginas.Reservas.MensajeRerservaError" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="m-t-md col-12 col-sm-10 mx-auto"> 
              <div class="separador-sm">&nbsp;</div>

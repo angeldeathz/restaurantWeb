@@ -153,7 +153,7 @@
     <Content Include="Paginas\Reservas\CancelarReserva.aspx" />
     <Content Include="Paginas\Reservas\CrearReserva.aspx" />
     <Content Include="Paginas\Reservas\MensajeCancelarReservaError.aspx" />
-    <Content Include="Paginas\Reservas\MensajeCrearRerservaError.aspx" />
+    <Content Include="Paginas\Reservas\MensajeCrearReservaError.aspx" />
     <Content Include="Paginas\Reservas\MensajeCancelarReservaExito.aspx" />
     <Content Include="Paginas\Reservas\MensajeCrearReservaExito.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -323,12 +323,12 @@
     <Compile Include="Paginas\Reservas\MensajeCancelarReservaError.aspx.designer.cs">
       <DependentUpon>MensajeCancelarReservaError.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\Reservas\MensajeCrearRerservaError.aspx.cs">
-      <DependentUpon>MensajeCrearRerservaError.aspx</DependentUpon>
+    <Compile Include="Paginas\Reservas\MensajeCrearReservaError.aspx.cs">
+      <DependentUpon>MensajeCrearReservaError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Paginas\Reservas\MensajeCrearRerservaError.aspx.designer.cs">
-      <DependentUpon>MensajeCrearRerservaError.aspx</DependentUpon>
+    <Compile Include="Paginas\Reservas\MensajeCrearReservaError.aspx.designer.cs">
+      <DependentUpon>MensajeCrearReservaError.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Reservas\MensajeCancelarReservaExito.aspx.cs">
       <DependentUpon>MensajeCancelarReservaExito.aspx</DependentUpon>
