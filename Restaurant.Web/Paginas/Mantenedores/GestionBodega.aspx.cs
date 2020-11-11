@@ -175,12 +175,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     upListaInsumos.Update();
                     actualizarDdlInsumos(insumos);
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "alert('Insumo creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "Swal.fire('Insumo creado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Error al crear insumo');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al crear insumo', '', 'error');", true);
             }
         }
         protected void btnEditarInsumo_Click(object sender, EventArgs e)
@@ -206,12 +206,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                     upListaInsumos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "alert('Insumo editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "Swal.fire('Insumo editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "alert('Error al editar insumo');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al editar insumo', '', 'error');", true);
             }
         }
 
@@ -303,12 +303,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarDdlProveedoresInsumos(proveedores);
                     actualizarDdlProveedoresOrdenes(proveedores);
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "alert('Proveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "Swal.fire('Proveedor creado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al crear proveedor');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al crear proveedor', '', 'error');", true);
             }
         }
 
@@ -338,12 +338,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
                     upListaProveedores.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarProveedor", "alert('Proveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarProveedor", "Swal.fire('Proveedor editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "alert('Error al editar proveedor');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al editar proveedor', '', 'error');", true);
             }
         }
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
@@ -449,12 +449,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
                     upListaOrdenes.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearOrden", "alert('OrdenProveedor creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearOrden", "Swal.fire('Orden al Proveedor creada', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('Error al crear OrdenProveedor');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al crear Orden al Proveedor', '', 'error');", true);
             }
         }
 
@@ -487,12 +487,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
                     upListaOrdenes.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarOrden", "alert('OrdenProveedor editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarOrden", "Swal.fire('Orden al Proveedor editada', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "alert('Error al editar OrdenProveedor');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al editar Orden al Proveedor', '', 'error');", true);
             }
         }
         protected void btnAgregarInsumoOrden_Click(object sender, EventArgs e)

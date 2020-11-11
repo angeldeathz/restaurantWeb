@@ -27,7 +27,7 @@ namespace Restaurant.Web.Paginas.Publica
             var token = _usuarioService.AutenticarCliente();
             if (token == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "Swal.fire('Error',  'Ocurrió un error inesperado. Solicite atención del personal.', 'error');", true);
                 return;
             }
 
@@ -41,7 +41,7 @@ namespace Restaurant.Web.Paginas.Publica
             List<Reserva> reservas = _reservaService.Obtener();
             if (reservas == null || reservas.Count == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "Swal.fire('Debe registrarse en la entrada', '', 'warning');", true);
                 return;
             }
             List<int> idsEstadosReservas = new List<int>() {EstadoReserva.cancelada};
@@ -52,7 +52,7 @@ namespace Restaurant.Web.Paginas.Publica
                                                              && x.EstadosReserva.Any(y => y.Id == EstadoReserva.enCurso));
             if (reservaCliente == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "alert('Debe registrarse en la entrada');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorPedido", "Swal.fire('Debe registrarse en la entrada', '', 'warning');", true);
                 return;
             }
             Session["reservaCliente"] = reservaCliente;
