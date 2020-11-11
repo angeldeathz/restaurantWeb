@@ -43,12 +43,13 @@ namespace Restaurant.Web.Paginas.Reservas
 
             DateTime fechaReserva = Convert.ToDateTime(txtFecha.Text);
             int cantidadComensales = int.Parse(txtComensales.Text);
-
+            
+            _mesaService = new MesaService(token.access_token);
             List<Mesa> mesas = _mesaService.Obtener();
             int maximoComensales = mesas.Max(x => x.CantidadComensales); 
             if(cantidadComensales > maximoComensales)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorComensales", "Swal.fire('El número máximo de comensales por reserva es " + maximoComensales + "', '', 'warning');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorComensales", "Swal.fire('El número máximo de comensales por reserva es " + maximoComensales + "', 'Para agregar más comensales puede crear otra reserva', 'warning');", true);
                 return;
             }
 
