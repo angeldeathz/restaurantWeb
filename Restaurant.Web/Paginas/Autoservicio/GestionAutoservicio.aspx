@@ -264,7 +264,7 @@
                     <div class="row">
                       <div class="col-12 col-md-4 col-lg-2 m-auto">
                         <asp:Button ID="btnHacerPedido" runat="server" Text="Hacer Pedido" Visible="false" OnClick="btnHacerPedido_Click" CssClass="btn btn-info"/>              
-                        <asp:Button ID="btnPagarCuenta" runat="server" Text="Pagar Cuenta" Visible="false" OnClick="btnPagarCuenta_Click" CssClass="btn btn-info"/>
+                        <asp:Button ID="btnCerrarCuenta" runat="server" Text="Cerrar Cuenta" Visible="false" OnClick="btnCerrarCuenta_Click" CssClass="btn btn-info"/>
                       </div>
                     </div>
                 </ContentTemplate>
@@ -313,4 +313,72 @@
       </div>
     </div><!-- Fin modal Articulos -->
 
+   <!-- Modal Cerrar cuenta -->
+    <div class="modal fade" id="modalCerrarCuenta" tabindex="-1" role="dialog" aria-labelledby="lblCerrarCuenta" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <asp:UpdatePanel ID="upModalCerrarCuenta" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+          <ContentTemplate>  
+            <div class="modal-content">                    
+              <div class="modal-header">
+                <asp:Label ID="lblCerrarCuenta" class="modal-title h5" runat="server" Text="Cerrar la cuenta"></asp:Label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+					    <div class="modal-body py-4">
+                <div class="text-center">
+                  <p class="lead font-weight-bold">¡Atención!</p>
+				   	      <p> Al cerrar la cuenta no podrá pedir más productos</p>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <br />
+                <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
+                <asp:Label ID="lblTotalPagar" runat="server" CssClass="h5 d-inline-block"></asp:Label>
+                <p>Seleccione un medio de pago</p>
+              
+						    <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-3" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
+						    <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
+                <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-3" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
+					     </div>
+              </div>
+            </div>
+           </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div><!-- Fin modal Cerrar Cuenta -->
+
+     <!-- Modal Pago mixto -->
+    <div class="modal fade" id="modalPagoMixto" tabindex="-1" role="dialog" aria-labelledby="lblSeleccionarPago" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <asp:UpdatePanel ID="upModalPagoMixto" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+          <ContentTemplate>  
+            <div class="modal-content">                    
+              <div class="modal-header">
+                <asp:Label ID="lblSeleccionarPago" class="modal-title h5" runat="server" Text="Ingrese montos a pagar"></asp:Label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+					    <div class="modal-body py-4">
+                <p class="lead d-inline-block">Total a pagar:</p>
+                <asp:Label ID="lblTotalPagarCuenta" runat="server" CssClass="lead d-inline-block"></asp:Label>
+                <div class="row">
+                  <div class="col-12 col-md-6 form-group">
+                    <asp:Label ID="lblMontoEfectivo" runat="server" CssClass="h5 d-inline-block">En efectivo:</asp:Label>
+						        <asp:TextBox ID="txtMontoEfectivo" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
+                   </div>
+                    <div class="col-12 col-md-6 form-group">
+                      <asp:Label ID="lblMontoTarjeta" runat="server" CssClass="h5 d-inline-block">Con tarjeta:</asp:Label>
+						          <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
+                    </div>
+                    <div class="col-12 text-right">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <asp:Button ID="btnMontosPagoMixto" runat="server" CssClass="btn btn-info" Text="Pagar" OnClick="btnMontosPagoMixto_Click" />
+                    </div>
+					      </div>
+              </div>
+             </div>
+          </ContentTemplate>
+        </asp:UpdatePanel>
+      </div>
+    </div><!-- Fin modal Pago mixto -->
 </asp:Content>

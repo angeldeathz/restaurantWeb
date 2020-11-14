@@ -120,7 +120,11 @@
     <Content Include="Images\logo_sxxi_sm.png" />
     <Content Include="Images\paste_choclo.PNG" />
     <Content Include="Images\paste_choclo_2.png" />
+    <Content Include="Images\transbank_pagado_sxxi.png" />
+    <Content Include="Images\transbank_pagar_sxxi.png" />
     <Content Include="Paginas\Autoservicio\GestionAutoservicio.aspx" />
+    <Content Include="Paginas\Autoservicio\PagoTarjeta.aspx" />
+    <Content Include="Paginas\Autoservicio\PagoTarjetaFinalizado.aspx" />
     <Content Include="Paginas\Mantenedores\GestionCocina.aspx" />
     <Content Include="Paginas\Mantenedores\GestionBodega.aspx" />
     <Content Include="Paginas\Mantenedores\GestionUsuarios.aspx" />
@@ -207,6 +211,20 @@
     </Compile>
     <Compile Include="Paginas\Autoservicio\GestionAutoservicio.aspx.designer.cs">
       <DependentUpon>GestionAutoservicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PagoTarjeta.aspx.cs">
+      <DependentUpon>PagoTarjeta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PagoTarjeta.aspx.designer.cs">
+      <DependentUpon>PagoTarjeta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PagoTarjetaFinalizado.aspx.cs">
+      <DependentUpon>PagoTarjetaFinalizado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PagoTarjetaFinalizado.aspx.designer.cs">
+      <DependentUpon>PagoTarjetaFinalizado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Mantenedores\GestionCocina.aspx.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>
