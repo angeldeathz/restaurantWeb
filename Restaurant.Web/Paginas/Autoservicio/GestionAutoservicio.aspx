@@ -370,7 +370,7 @@
                       <asp:Label ID="lblMontoTarjeta" runat="server" CssClass="h5 d-inline-block">Con tarjeta:</asp:Label>
 						          <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                     </div>
-                    <div class="col-12 mx-auto">
+                    <div class="col-12 text-right">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                       <asp:Button ID="btnMontosPagoMixto" runat="server" CssClass="btn btn-info" Text="Pagar" OnClick="btnMontosPagoMixto_Click" />
                     </div>
