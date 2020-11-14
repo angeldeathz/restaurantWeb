@@ -97,6 +97,16 @@
     background-color: #d99280;
 }
 
+.imagen-pagar {
+    background-image: url("../Images/transbank_pagar_sxxi.png");
+    color: #333333;
+}
+
+.imagen-pagado {
+    background-image: url("../Images/transbank_pagado_sxxi.png");
+    color: #333333;
+}
+
 .texto-blanco {
     color: #ffffff;
 }
