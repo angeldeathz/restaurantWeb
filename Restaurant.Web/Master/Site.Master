@@ -40,6 +40,7 @@
             </Scripts>
         </asp:ScriptManager>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" runat="server" href="../Paginas/inicio">
@@ -56,13 +57,6 @@
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/nosotros">Nosotros</a>
                     </li>
-                    <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
-                    </li>
-
-                    <li class="nav-item px-2">
-                        <a class="nav-link" runat="server" href="/Paginas/Publica/reservas">Reservas</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Carta
                         </a>
@@ -73,10 +67,16 @@
                         </div>
                     </li>
                     <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/reservas">Reservas</a>
+                    </li>
+                    <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/Autoservicio">Autoservicio</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a class="btn btn-outline-secondary" id="btnIniciarSesion" visible="true" runat="server" href="../Paginas/Publica/iniciarsesion">Iniciar Sesión</a>
+                        <a class="btn btn-outline-secondary" id="btnIniciarSesion" visible="true" runat="server" href="../Paginas/Publica/iniciarsesion">Intranet</a>
                         <a class="btn btn-outline-secondary" id="btnCerrarSesion" visible="false" runat="server" onserverclick="btnCerrarSesion_OnServerClick">Cerrar Sesión</a>
                     </li>
                 </ul>

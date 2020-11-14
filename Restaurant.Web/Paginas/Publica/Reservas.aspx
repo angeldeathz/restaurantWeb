@@ -3,7 +3,7 @@
      <div class="row">
         <div class="col-12 col-md-5 mx-auto my-5 text-center bg-light rounded py-4 shadow">
             <h2>Sistema de Reservas</h2>
-            <p class="lead text-rosado">
+            <p class="lead text-gris">
                 Puedes reservar tu mesa con antelación o cancelar una reserva
             </p>
             <div class="col-10 col-md-8 mx-auto my-4">

@@ -129,7 +129,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
             if (contrasena != contrasenaRepetir)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Las contraseñas no coinciden');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "Swal.fire('Las contraseñas no coinciden', '', 'error');", true);
                 return;
             }
 
@@ -157,12 +157,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaUsuarios, usuarios, listaUsuariosVacia);
                     upListaUsuarios.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearUsuario", "alert('Usuario creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearUsuario", "Swal.fire('Usuario creado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Error al crear usuario');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "Swal.fire('Error al crear usuario', '', 'error');", true);
             }
         }
 
@@ -174,7 +174,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
             if (contrasena != contrasenaRepetir)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Las contraseñas no coinciden');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "Swal.fire('Las contraseñas no coinciden', '', 'error');", true);
                 return;
             }
 
@@ -201,12 +201,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaUsuarios, usuarios, listaUsuariosVacia);
                     upListaUsuarios.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarUsuario", "alert('Usuario editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarUsuario", "Swal.fire('Usuario editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "$('#modalUsuario').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "alert('Error al editar usuario');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalUsuario", "Swal.fire('Error al editar usuario', '', 'error');", true);
             }
         }
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)

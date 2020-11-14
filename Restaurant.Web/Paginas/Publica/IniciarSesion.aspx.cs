@@ -28,17 +28,19 @@ namespace Restaurant.Web.Paginas.Publica
         {
             _usuarioService = new UsuarioService(string.Empty);
             var token = _usuarioService.Autenticar(txtRut.Text, txtContrasena.Text);
-            if (token != null)
+            if (token == null)
             {
-                _usuarioService = new UsuarioService(token.access_token);
-                Session["token"] = token;
-                var usuario = _usuarioService.ObtenerPorRut(txtRut.Text);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorToken", "Swal.fire('Error','El usuario y contraseña no coinciden', 'error');", true);
+                return;
+            }
+            _usuarioService = new UsuarioService(token.access_token);
+            Session["token"] = token;
+            var usuario = _usuarioService.ObtenerPorRut(txtRut.Text);
 
-                if (usuario != null)
-                {
-                    Session["usuario"] = usuario;
-                    Response.Redirect("../Mantenedores/inicio");
-                }
+            if (usuario != null)
+            {
+                Session["usuario"] = usuario;
+                Response.Redirect("../Mantenedores/inicio");
             }
         }
     }

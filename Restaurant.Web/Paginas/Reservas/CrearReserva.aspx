@@ -20,7 +20,7 @@
                 </div> 
                 <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblComensales" runat="server" Text="Cantidad de Comensales"></asp:Label>
-                    <asp:TextBox ID="txtComensales" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtComensales" runat="server" TextMode="Number" CssClass="form-control" min="1"></asp:TextBox>
                 </div> 
             </div>
             <div class="row">

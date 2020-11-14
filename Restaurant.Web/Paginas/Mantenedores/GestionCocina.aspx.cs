@@ -225,7 +225,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     List<ArticuloPedido> articulos = _articuloPedidoService.Obtener();
                     if(articulos == null || articulos.Count == 0)
                     {
-                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al editar pedido');", true);
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "Swal.fire('Error al editar pedido', '', 'error');", true);
                     }
                     List<ArticuloPedido> articulosPedido = articulos.Where(x => x.IdPedido == pedido.Id).ToList();
                     Session["articulosPedidos"] = articulosPedido;
@@ -282,12 +282,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
                     upListaPedidos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPedido", "alert('Pedido creado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPedido", "Swal.fire('Pedido creado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al crear pedido');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "Swal.fire('Error al crear pedido', '', 'error');", true);
             }
         }
 
@@ -321,12 +321,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
                     upListaPedidos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPedido", "alert('Pedido editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPedido", "Swal.fire('Pedido editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "alert('Error al editar pedido');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "Swal.fire('Error al editar pedido', '', 'error');", true);
             }
         }
         protected void ddlArticuloPedido_SelectedIndexChanged(object sender, EventArgs e)
@@ -528,17 +528,17 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         upListaArticulos.Update();
                         actualizarDdlArticulos(articulos);
                     }
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "alert('Articulo creado');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "Swal.fire('Articulo creado', '', 'success');", true);
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Error al crear articulo');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al crear articulo', '', 'error');", true);
                 }
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Error al crear articulo');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al crear articulo', '', 'error');", true);
             }
         }
 
@@ -564,12 +564,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
                     upListaArticulos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarArticulo", "alert('Articulo editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarArticulo", "Swal.fire('Articulo editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "alert('Error al editar articulo');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al editar articulo', '', 'error');", true);
             }
         }
         protected void btnModalCrearPlato_Click(object sender, EventArgs e)
@@ -677,12 +677,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
                         upListaArticulos.Update();
                     }
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPlato", "alert('Plato creado');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearPlato", "Swal.fire('Plato creado', '', 'success');", true);
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('hide');", true);
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al crear pedido');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "Swal.fire('Error al crear pedido', '', 'error');", true);
                 }
             }
         }
@@ -729,12 +729,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     actualizarRepeater(listaArticulos, articulos, listaArticulosVacia);
                     upListaArticulos.Update();
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPlato", "alert('Plato editado');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarPlato", "Swal.fire('Plato editado', '', 'success');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('hide');", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "alert('Error al editar pedido');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "Swal.fire('Error al editar pedido', '', 'error');", true);
             }
         }
         protected void btnAgregarIngredientePlato_Click(object sender, EventArgs e)

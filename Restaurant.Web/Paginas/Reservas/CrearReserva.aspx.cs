@@ -29,7 +29,7 @@ namespace Restaurant.Web.Paginas.Reservas
             var token = _usuarioService.AutenticarCliente();
             if (token == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "Swal.fire('Error', 'Ocurrió un error inesperado. Solicite atención del personal.', 'error');", true);
                 return;
             }
             Session["token"] = token;
@@ -37,16 +37,26 @@ namespace Restaurant.Web.Paginas.Reservas
             int idCliente = crearCliente();
             if (idCliente == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "alert('Error al crear cliente');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "Swal.fire('Error al crear cliente', 'Inténtelo nuevamente', 'error');", true);
                 return;
             }
 
             DateTime fechaReserva = Convert.ToDateTime(txtFecha.Text);
             int cantidadComensales = int.Parse(txtComensales.Text);
+            
+            _mesaService = new MesaService(token.access_token);
+            List<Mesa> mesas = _mesaService.Obtener();
+            int maximoComensales = mesas.Max(x => x.CantidadComensales); 
+            if(cantidadComensales > maximoComensales)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorComensales", "Swal.fire('El número máximo de comensales por reserva es " + maximoComensales + "', 'Para agregar más comensales puede crear otra reserva', 'warning');", true);
+                return;
+            }
+
             int idMesa = buscarMesa(fechaReserva, cantidadComensales);
             if (idMesa == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "alert('No se encontró una mesa disponible. Seleccione otra fecha u hora');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "Swal.fire('No se encontró una mesa disponible. Seleccione otra fecha u hora', '', 'error');", true);
                 return;
             }
 
@@ -131,7 +141,7 @@ namespace Restaurant.Web.Paginas.Reservas
             List<int> horasDisponibilidad = getHorasDisponibles(fecha);
             if (horasDisponibilidad.Count == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "alert('No hay horarios disponibles para reservar');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "Swal.fire('No hay horarios disponibles para reservar', '', 'error');", true);
                 return;
             }
             ddlHora.DataSource = horasDisponibilidad;

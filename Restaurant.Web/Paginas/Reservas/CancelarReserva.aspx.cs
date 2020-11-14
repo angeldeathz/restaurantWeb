@@ -26,7 +26,7 @@ namespace Restaurant.Web.Paginas.Reservas
             var token = _usuarioService.AutenticarCliente();
             if (token == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "alert('Ocurrió un error inesperado. Solicite atención del personal.');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "Swal.fire('Error', 'Ocurrió un error inesperado. Solicite atención del personal', 'error');", true);
                 return;
             }
             Session["token"] = token;
@@ -40,20 +40,20 @@ namespace Restaurant.Web.Paginas.Reservas
             List<Reserva> reservas = _reservaService.Obtener();
             if (cliente == null || reservas == null || reservas.Count == 0)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "alert('No se encontró ninguna reserva asociada al e-mail ingresado.');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "Swal.fire('No se encontró ninguna reserva asociada al e-mail ingresado', '', 'error');", true);
                 return;
             }
             Reserva reservaCliente = reservas.FirstOrDefault(x => x.IdCliente == cliente.Id
                                                             && x.Id == idReserva);
             if(reservaCliente == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorReserva", "alert('No se encontró la reserva con el Número ingresado.');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorReserva", "Swal.fire('No se encontró la reserva con el Número ingresado', '', 'error');", true);
                 return;
             }
             EstadoReserva ultimoEstado = reservaCliente.EstadosReserva.OrderByDescending(x => x.Fecha).FirstOrDefault(); 
             if(ultimoEstado != null && ultimoEstado.Id == EstadoReserva.cancelada)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCancelada", "alert('Esta reserva ya fue cancelada');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCancelada", "Swal.fire('Esta reserva ya fue cancelada', '', 'warning');", true);
                 return;
             }
             ReservaCambioEstado reservaCambioEstado = new ReservaCambioEstado();
