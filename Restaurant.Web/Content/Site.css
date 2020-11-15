@@ -97,14 +97,44 @@
     background-color: #d99280;
 }
 
-.imagen-pagar {
-    background-image: url("../Images/transbank_pagar_sxxi.png");
-    color: #333333;
+.imagen-transbank {
+    background-repeat: no-repeat;
+    color: #353535;
+    background-position-x: center;
+    background-size: contain;
 }
 
-.imagen-pagado {
+.imagen-transbank.pagar {
+    background-image: url("../Images/transbank_pagar_sxxi.png");
+    height: 538px;
+}
+
+.imagen-transbank.pagado {
     background-image: url("../Images/transbank_pagado_sxxi.png");
-    color: #333333;
+    height: 632px;
+}
+
+.monto-transbank {
+    font-size: 1.5rem;
+}
+
+.monto-transbank.pagar {
+    padding-top: 158px;
+    padding-left: 295px;
+}
+
+.monto-transbank.pagado {
+    padding-top: 202px;
+    padding-left: 355px;
+}
+
+.fecha-transbank {
+    padding-left: 830px;
+    padding-top: 155px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    color: #5f5c6b;
+    font-family: helvetica;
 }
 
 .texto-blanco {
