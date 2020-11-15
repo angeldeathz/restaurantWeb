@@ -14,6 +14,8 @@ namespace Restaurant.Web.Paginas.Publica
     {
         private ReservaService _reservaService;
         private UsuarioService _usuarioService;
+        private PedidoService _pedidoService;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -35,6 +37,7 @@ namespace Restaurant.Web.Paginas.Publica
             Session["token"] = token;
             Session["pedidoCliente"] = null;
             Session["articulosPedidoCliente"] = null;
+            Session["montoTarjeta"] = null;
 
             //Buscar info de la reserva
             _reservaService = new ReservaService(token.access_token);
@@ -56,8 +59,30 @@ namespace Restaurant.Web.Paginas.Publica
                 return;
             }
             Session["reservaCliente"] = reservaCliente;
+            _pedidoService = new PedidoService(token.access_token);
+            List<Pedido> pedidos = _pedidoService.Obtener();
+            Pedido pedidoCliente = null;
+            if (pedidos != null && pedidos.Count > 0)
+            {
+                pedidoCliente = pedidos.FirstOrDefault(x => x.Reserva.Id == reservaCliente.Id
+                                                            && x.FechaHoraInicio.Date == DateTime.Now.Date);
 
-            Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
+                if (pedidoCliente != null)
+                {
+                    switch(pedidoCliente.IdEstadoPedido)
+                    {
+                        case EstadoPedido.cancelado:
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pedidoCancelado", "Swal.fire('Su pedido fue cancelado. Contacte a un miembro del personal', '', 'warning');", true);
+                            break;
+                        case EstadoPedido.pagado:
+                            Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
+                            break;
+                        default:
+                            Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
+                            break;
+                    }
+                }
+            }
         }
     }
 }

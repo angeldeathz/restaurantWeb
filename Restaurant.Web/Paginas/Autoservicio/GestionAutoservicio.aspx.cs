@@ -13,7 +13,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
     public partial class GestionAutoservicio : System.Web.UI.Page
     {
         private PedidoService _pedidoService;
-
         private ArticuloPedidoService _articuloPedidoService;
         private ArticuloService _articuloService;
         protected void Page_Load(object sender, EventArgs e)
@@ -28,12 +27,17 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (pedidos != null && pedidos.Count > 0)
             {
                 pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
-                                                         && x.IdEstadoPedido != EstadoPedido.pagado
                                                          && x.Reserva.Id == reserva.Id
                                                          && x.FechaHoraInicio.Date == DateTime.Now.Date);
 
                 if (pedidoCliente != null)
-                {                  
+                {
+                    
+                    if(pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
+                    {
+                        Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
+                        return;
+                    }
                     cargarPedido(token, pedidoCliente);
                 }
             }
@@ -457,15 +461,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             Session["pedidoCliente"] = pedido;
             btnHacerPedido.Visible = false;
-            btnCerrarCuenta.Visible = false;
 
             switch (estadoPedido)
             {
                 case EstadoPedido.cerradoConEfectivo:
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Por favor espere. Un garzón acudirá para realizar el pago', '', 'warning');", true);
+                    btnCerrarCuenta.Visible = false;
                     break;
                 case EstadoPedido.cerradoConTarjeta:
                     Response.Redirect("/Paginas/Autoservicio/PagoTarjeta.aspx");
+                    btnCerrarCuenta.Visible = false;
                     break;
                 case EstadoPedido.cerradoMixto:
                     lblTotalPagarCuenta.Text = pedido.Total.ToString();
@@ -473,8 +478,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPagoMixto", "$('#modalPagoMixto').modal('show');", true);
                     break;
             }
-
-            //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Pedido pagado exitosamente', '', 'success');", true);
 
             limpiarTabs();
             tabMiOrden.Attributes.Add("class", "nav-link active");
@@ -508,6 +511,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al cerrar la cuenta', '', 'error');", true);
             }
             Session["pedidoCliente"] = pedido;
+            Session["montoTarjeta"] = montoTarjeta;
             btnHacerPedido.Visible = false;
             btnCerrarCuenta.Visible = false;
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Realice el pago con tarjeta mientras un garzón acude a su mesa para hacer el pago en efectivo', '', 'warning').then(function(){location.replace('/Paginas/Autoservicio/PagoTarjeta.aspx');});", true);

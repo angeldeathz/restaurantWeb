@@ -327,18 +327,19 @@
               </div>
 					    <div class="modal-body py-4">
                 <div class="text-center">
-                  <p class="lead font-weight-bold">¡Atención!</p>
-				   	      <p> Al cerrar la cuenta no podrá pedir más productos</p>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <div class="alert alert-warning"><p class="lead font-weight-bold">¡Atención!</p>
+				   	        <p> Al cerrar la cuenta no podrá pedir más productos</p>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  </div>
                   <br />
-                <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
-                <asp:Label ID="lblTotalPagar" runat="server" CssClass="h5 d-inline-block"></asp:Label>
-                <p>Seleccione un medio de pago</p>
+                  <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
+                  <asp:Label ID="lblTotalPagar" runat="server" CssClass="h5 d-inline-block"></asp:Label>
+                  <p>Seleccione un medio de pago</p>
               
-						    <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-3" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
-						    <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
-                <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-3" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
-					     </div>
+						      <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-3" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
+						      <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
+                  <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-3" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
+					      </div> 
               </div>
             </div>
            </ContentTemplate>
@@ -353,14 +354,18 @@
           <ContentTemplate>  
             <div class="modal-content">                    
               <div class="modal-header">
-                <asp:Label ID="lblSeleccionarPago" class="modal-title h5" runat="server" Text="Ingrese montos a pagar"></asp:Label>
+                <asp:Label ID="lblSeleccionarPago" class="modal-title h5" runat="server" Text="Pago Mixto"></asp:Label>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
 					    <div class="modal-body py-4">
-                <p class="lead d-inline-block">Total a pagar:</p>
-                <asp:Label ID="lblTotalPagarCuenta" runat="server" CssClass="lead d-inline-block"></asp:Label>
+                <div class="text-center">
+                  <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
+                  <asp:Label ID="lblTotalPagarCuenta" runat="server" CssClass="h5 d-inline-block"></asp:Label>
+                  <br />
+                  <p> Ingrese montos a pagar:</p>
+                </div>
                 <div class="row">
                   <div class="col-12 col-md-6 form-group">
                     <asp:Label ID="lblMontoEfectivo" runat="server" CssClass="h5 d-inline-block">En efectivo:</asp:Label>

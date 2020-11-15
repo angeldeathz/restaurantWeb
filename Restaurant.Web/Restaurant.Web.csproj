@@ -125,6 +125,7 @@
     <Content Include="Paginas\Autoservicio\GestionAutoservicio.aspx" />
     <Content Include="Paginas\Autoservicio\PagoTarjeta.aspx" />
     <Content Include="Paginas\Autoservicio\PagoTarjetaFinalizado.aspx" />
+    <Content Include="Paginas\Autoservicio\PedidoPagado.aspx" />
     <Content Include="Paginas\Mantenedores\GestionCocina.aspx" />
     <Content Include="Paginas\Mantenedores\GestionBodega.aspx" />
     <Content Include="Paginas\Mantenedores\GestionUsuarios.aspx" />
@@ -225,6 +226,13 @@
     </Compile>
     <Compile Include="Paginas\Autoservicio\PagoTarjetaFinalizado.aspx.designer.cs">
       <DependentUpon>PagoTarjetaFinalizado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PedidoPagado.aspx.cs">
+      <DependentUpon>PedidoPagado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Autoservicio\PedidoPagado.aspx.designer.cs">
+      <DependentUpon>PedidoPagado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Mantenedores\GestionCocina.aspx.cs">
       <DependentUpon>GestionCocina.aspx</DependentUpon>

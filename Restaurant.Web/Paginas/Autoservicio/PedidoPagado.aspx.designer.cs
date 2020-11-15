@@ -11,43 +11,61 @@ namespace Restaurant.Web.Paginas.Autoservicio
 {
 
 
-    public partial class PagoTarjetaFinalizado
+    public partial class PedidoPagado
     {
 
         /// <summary>
-        /// form1 control.
+        /// imgReservaOk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Image imgReservaOk;
 
         /// <summary>
-        /// divPagado control.
+        /// upArticulosPedido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton divPagado;
+        protected global::System.Web.UI.UpdatePanel upArticulosPedido;
 
         /// <summary>
-        /// lblMontoPagado control.
+        /// listaArticulosPedidoVacia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMontoPagado;
+        protected global::System.Web.UI.WebControls.Label listaArticulosPedidoVacia;
 
         /// <summary>
-        /// lblFecha control.
+        /// listaArticulosPedido control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFecha;
+        protected global::System.Web.UI.WebControls.Repeater listaArticulosPedido;
+
+        /// <summary>
+        /// lblTotalPedido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalPedido;
+
+        /// <summary>
+        /// txtTotalPedido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotalPedido;
     }
 }
