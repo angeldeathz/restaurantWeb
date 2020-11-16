@@ -411,6 +411,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.Label lblTotalPagar;
 
         /// <summary>
+        /// ddlTipoDocumentoPago control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumentoPago;
+
+        /// <summary>
         /// btnPagarEfectivo control.
         /// </summary>
         /// <remarks>

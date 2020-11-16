@@ -15,6 +15,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private PedidoService _pedidoService;
         private ArticuloPedidoService _articuloPedidoService;
         private ArticuloService _articuloService;
+        private TipoDocumentoPagoService _tipoDocumentoPagoService;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             validarIngreso();
@@ -103,6 +105,18 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 listaBebestibles.DataSource = bebestibles;
                 listaBebestibles.DataBind();
                 actualizarRepeater(listaBebestibles, bebestibles, listaBebestiblesVacia);
+
+                _tipoDocumentoPagoService = new TipoDocumentoPagoService(token.access_token);
+                List<TipoDocumentoPago> tiposDocumento = _tipoDocumentoPagoService.Obtener();
+                if(tiposDocumento != null && tiposDocumento.Count > 0)
+                {
+                    ddlTipoDocumentoPago.DataSource = tiposDocumento;
+                    ddlTipoDocumentoPago.DataTextField = "Nombre";
+                    ddlTipoDocumentoPago.DataValueField = "Id";
+                    ddlTipoDocumentoPago.DataBind();
+                    ddlTipoDocumentoPago.Items.Insert(0, new ListItem("Seleccionar", ""));
+                    ddlTipoDocumentoPago.SelectedIndex = 0;
+                }
             }
         }
         protected void validarIngreso()
@@ -438,7 +452,13 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected void generarPago(int estadoPedido)
         {
             validarIngreso();
+            if(ddlTipoDocumentoPago.SelectedValue == "")
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "documentoPago", "Swal.fire('Debe seleccionar el tipo de documento de pago', '', 'warning');", true);
+                return;
+            }
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalCerrarCuenta').modal('hide');", true);
+            Session["tipoDocumentoPago"] = Convert.ToInt32(ddlTipoDocumentoPago.SelectedValue);
 
             Pedido pedido = (Pedido)Session["pedidoCliente"];
             List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
