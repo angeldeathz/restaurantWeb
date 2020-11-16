@@ -1,8 +1,12 @@
 ﻿namespace Restaurant.Model.Clases
 {
-    public class MetodoPago
+    public class MedioPago
     {
-        public MetodoPago()
+        public const int debito = 1;
+        public const int credito = 2;
+        public const int efectivo = 3;
+
+        public MedioPago()
         {
             Id = 0;
             Nombre = string.Empty;

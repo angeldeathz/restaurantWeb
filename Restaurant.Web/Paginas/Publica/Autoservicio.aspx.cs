@@ -38,6 +38,7 @@ namespace Restaurant.Web.Paginas.Publica
             Session["pedidoCliente"] = null;
             Session["articulosPedidoCliente"] = null;
             Session["montoTarjeta"] = null;
+            Session["tipoDocumentoPago"] = null;
 
             //Buscar info de la reserva
             _reservaService = new ReservaService(token.access_token);
@@ -49,7 +50,7 @@ namespace Restaurant.Web.Paginas.Publica
             }
             List<int> idsEstadosReservas = new List<int>() {EstadoReserva.cancelada};
 
-            Reserva reservaCliente = reservas.FirstOrDefault(x => x.Cliente.Persona.Email == email
+            Reserva reservaCliente = reservas.LastOrDefault(x => x.Cliente.Persona.Email == email
                                                              && x.FechaReserva.Date == DateTime.Now.Date
                                                              && x.EstadosReserva.Any(y => !idsEstadosReservas.Contains(y.Id))
                                                              && x.EstadosReserva.Any(y => y.Id == EstadoReserva.enCurso));
@@ -82,6 +83,14 @@ namespace Restaurant.Web.Paginas.Publica
                             break;
                     }
                 }
+                else
+                {
+                    Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
             }
         }
     }

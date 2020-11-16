@@ -334,12 +334,26 @@
                   <br />
                   <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
                   <asp:Label ID="lblTotalPagar" runat="server" CssClass="h5 d-inline-block"></asp:Label>
-                  <p>Seleccione un medio de pago</p>
-              
-						      <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-3" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
-						      <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
-                  <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-3" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
-					      </div> 
+                </div> 
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                      <asp:Label runat="server" Text="Tipo de documento de pago" CssClass="text-left"></asp:Label>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                        <asp:DropDownList ID="ddlTipoDocumentoPago" runat="server" CssClass="form-control"></asp:DropDownList>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <asp:Label runat="server" Text="Medio de pago"></asp:Label>
+                    <br />
+                    <div class="d-flex justify-content-between">
+						          <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-4" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
+						          <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
+                      <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-4" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
+                    </div>
+                  </div>
+                </div> 
               </div>
             </div>
            </ContentTemplate>

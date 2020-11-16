@@ -2,6 +2,9 @@
 {
     public class TipoDocumentoPago
     {
+        public const int boleta = 1;
+        public const int factura = 2;
+
         public TipoDocumentoPago()
         {
             Id = 0;
