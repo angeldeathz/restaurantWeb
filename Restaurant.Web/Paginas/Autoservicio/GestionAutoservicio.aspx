@@ -35,35 +35,22 @@
                                 <asp:Label ID="listaEntradasVacia" runat="server" 
                                     Text="No hay entradas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                               </div>   
-                              <div class="table-responsive pt-3">
-                                <asp:Repeater ID="listaEntradas" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
-                                     <HeaderTemplate>
-                                        <table border="1" class="table">
-                                        <tr>
-                                            <td><b>Nombre</b></td>
-                                            <td><b>Descripción</b></td>
-                                            <td><b>Precio</b></td>
-                                            <td><b>Tipo de Consumo</b></td>
-                                            <td><b>Estado</b></td>
-                                            <td><b>Acciones</b></td>
-                                        </tr>
-                                    </HeaderTemplate>          
-                                    <ItemTemplate>
-                                        <tr>
-                                        <td> <%# Eval("Nombre") %> </td>
-                                        <td> <%# Eval("Descripcion") %> </td>
-                                        <td> <%# Eval("Precio") %> </td>
-                                        <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                                        <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                        <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                                Pedir</asp:LinkButton></td>
-                                        </tr>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                        </table>
-                                    </FooterTemplate>
-                                </asp:Repeater>
-                              </div>
+                              <asp:Repeater ID="listaEntradas" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
+                                <ItemTemplate>
+                                  <div class="row">
+                                    <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
+                                  </div>
+                                  <div class="row mb-4">
+                                    <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" src="<%# Eval("UrlImagen") %>"/></div>
+                                    <div class="col-12 col-md-7 col-lg-9">
+                                      <p class="text-justify"><%# Eval("Descripcion") %></p>
+                                      <h5>$ <%# Eval("Precio") %></h5>
+                                      <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                        runat="server">Pedir</asp:LinkButton>
+                                    </div>
+                                  </div>
+                                </ItemTemplate>
+                              </asp:Repeater>
                            </ContentTemplate>
                          </asp:UpdatePanel>
                       </div>                  
@@ -71,38 +58,25 @@
                       <!-- Tab Platos de Fondo -->
                       <div class="tab-pane fade" id="divPlatosFondo" role="tabpanel" aria-labelledby="tabPlatosFondo" runat="server" ClientIDMode="Static">
                         <div class="text-center">
-                            <asp:Label ID="listaPlatosFondoVacia" runat="server" 
-                                Text="No hay platos de fondo disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
+                          <asp:Label ID="listaPlatosFondoVacia" runat="server" 
+                              Text="No hay platos de fondo disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                         </div>   
-                        <div class="table-responsive pt-3">
-                            <asp:Repeater ID="listaPlatosFondo" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
-                                <HeaderTemplate>
-                                    <table border="1" class="table">
-                                    <tr>
-                                        <td><b>Nombre</b></td>
-                                        <td><b>Descripción</b></td>
-                                        <td><b>Precio</b></td>
-                                        <td><b>Tipo de Consumo</b></td>
-                                        <td><b>Estado</b></td>
-                                        <td><b>Acciones</b></td>
-                                    </tr>
-                                </HeaderTemplate>          
-                                <ItemTemplate>
-                                    <tr>
-                                    <td> <%# Eval("Nombre") %> </td>
-                                    <td> <%# Eval("Descripcion") %> </td>
-                                    <td> <%# Eval("Precio") %> </td>
-                                    <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                                    <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                            Pedir</asp:LinkButton></td>
-                                    </tr>
-                                </ItemTemplate>
-                                <FooterTemplate>
-                                    </table>
-                                </FooterTemplate>
-                            </asp:Repeater>
-                        </div>
+                        <asp:Repeater ID="listaPlatosFondo" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">                                      
+                            <ItemTemplate>
+                              <div class="row">
+                                <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
+                              </div>
+                              <div class="row mb-4">
+                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" src="<%# Eval("UrlImagen") %>"/></div>
+                                <div class="col-12 col-md-7 col-lg-9">
+                                  <p class="text-justify"><%# Eval("Descripcion") %></p>
+                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                    runat="server">Pedir</asp:LinkButton>
+                                </div>
+                              </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
                       </div>                  
                       <!-- Fin Tab Platos de Fondo -->
                       <!-- Tab Ensaldas -->
@@ -111,35 +85,22 @@
                         <asp:Label ID="listaEnsaladasVacia" runat="server" 
                             Text="No hay ensaladas disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                         </div>   
-                        <div class="table-responsive pt-3">
-                            <asp:Repeater ID="listaEnsaladas" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
-                               <HeaderTemplate>
-                                    <table border="1" class="table">
-                                    <tr>
-                                        <td><b>Nombre</b></td>
-                                        <td><b>Descripción</b></td>
-                                        <td><b>Precio</b></td>
-                                        <td><b>Tipo de Consumo</b></td>
-                                        <td><b>Estado</b></td>
-                                        <td><b>Acciones</b></td>
-                                    </tr>
-                                </HeaderTemplate>          
-                                <ItemTemplate>
-                                    <tr>
-                                    <td> <%# Eval("Nombre") %> </td>
-                                    <td> <%# Eval("Descripcion") %> </td>
-                                    <td> <%# Eval("Precio") %> </td>
-                                    <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                                    <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                            Pedir</asp:LinkButton></td>
-                                    </tr>
-                                </ItemTemplate>
-                                <FooterTemplate>
-                                    </table>
-                                </FooterTemplate>
-                            </asp:Repeater>
-                        </div>
+                        <asp:Repeater ID="listaEnsaladas" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
+                          <ItemTemplate>
+                            <div class="row">
+                              <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
+                            </div>
+                            <div class="row mb-4">
+                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" src="<%# Eval("UrlImagen") %>"/></div>
+                              <div class="col-12 col-md-7 col-lg-9">
+                                <p class="text-justify"><%# Eval("Descripcion") %></p>
+                                <h5>$ <%# Eval("Precio") %></h5>
+                                <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                  runat="server">Pedir</asp:LinkButton>
+                              </div>
+                            </div>
+                          </ItemTemplate>
+                        </asp:Repeater>
                       </div>                  
                       <!-- Fin Tab Ensaladas -->
                       <!-- Tab Postres -->
@@ -148,35 +109,22 @@
                             <asp:Label ID="listaPostresVacia" runat="server" 
                                 Text="No hay postres disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                         </div>   
-                        <div class="table-responsive pt-3">
                         <asp:Repeater ID="listaPostres" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
-                           <HeaderTemplate>
-                             <table border="1" class="table">
-                                <tr>
-                                    <td><b>Nombre</b></td>
-                                    <td><b>Descripción</b></td>
-                                    <td><b>Precio</b></td>
-                                    <td><b>Tipo de Consumo</b></td>
-                                    <td><b>Estado</b></td>
-                                    <td><b>Acciones</b></td>
-                                </tr>
-                            </HeaderTemplate>          
-                            <ItemTemplate>
-                                <tr>
-                                <td> <%# Eval("Nombre") %> </td>
-                                <td> <%# Eval("Descripcion") %> </td>
-                                <td> <%# Eval("Precio") %> </td>
-                                <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                                <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                        Pedir</asp:LinkButton></td>
-                                </tr>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                </table>
-                            </FooterTemplate>
+                          <ItemTemplate>
+                            <div class="row">
+                              <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
+                            </div>
+                            <div class="row mb-4">
+                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" src="<%# Eval("UrlImagen") %>"/></div>
+                              <div class="col-12 col-md-7 col-lg-9">
+                                <p class="text-justify"><%# Eval("Descripcion") %></p>
+                                <h5>$ <%# Eval("Precio") %></h5>
+                                <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                  runat="server">Pedir</asp:LinkButton>
+                              </div>
+                            </div>
+                          </ItemTemplate>
                         </asp:Repeater>
-                      </div>
                      </div>                  
                      <!-- Fin Tab Postres -->
                      <!-- Tab Bebestibles -->
@@ -185,35 +133,22 @@
                             <asp:Label ID="listaBebestiblesVacia" runat="server" 
                                 Text="No hay bebestibles disponibles" CssClass="d-inline-block h5 my-5"></asp:Label>
                         </div>   
-                        <div class="table-responsive pt-3">
-                            <asp:Repeater ID="listaBebestibles" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
-                                <HeaderTemplate>
-                                    <table border="1" class="table">
-                                    <tr>
-                                        <td><b>Nombre</b></td>
-                                        <td><b>Descripción</b></td>
-                                        <td><b>Precio</b></td>
-                                        <td><b>Tipo de Consumo</b></td>
-                                        <td><b>Estado</b></td>
-                                        <td><b>Acciones</b></td>
-                                    </tr>
-                                </HeaderTemplate>          
-                                <ItemTemplate>
-                                    <tr>
-                                    <td> <%# Eval("Nombre") %> </td>
-                                    <td> <%# Eval("Descripcion") %> </td>
-                                    <td> <%# Eval("Precio") %> </td>
-                                    <td> <%# Eval("TipoConsumo.Nombre") %> </td>
-                                    <td> <%# Eval("EstadoArticulo.Nombre") %> </td>
-                                    <td><asp:LinkButton  CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                            Pedir</asp:LinkButton></td>
-                                    </tr>
-                                </ItemTemplate>
-                                <FooterTemplate>
-                                    </table>
-                                </FooterTemplate>
-                            </asp:Repeater>
-                          </div>
+                        <asp:Repeater ID="listaBebestibles" runat="server" OnItemCommand="btnModalAgregarArticulo_Click">
+                            <ItemTemplate>
+                              <div class="row">
+                                <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
+                              </div>
+                              <div class="row mb-4">
+                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" src="<%# Eval("UrlImagen") %>"/></div>
+                                <div class="col-12 col-md-7 col-lg-9">
+                                  <p class="text-justify"><%# Eval("Descripcion") %></p>
+                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                    runat="server">Pedir</asp:LinkButton>
+                                </div>
+                              </div>
+                            </ItemTemplate>
+                          </asp:Repeater>
                       </div>                  
                       <!-- Fin Tab Bebestibles -->
                 </div>

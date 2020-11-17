@@ -16,7 +16,7 @@ namespace Restaurant.Services.Servicios
 
         public List<IngredientePlato> Obtener()
         {
-            string url = $"http://localhost/restaurant/api/IngredientesPlato/";
+            string url = $"http://localhost/restaurant/api/ingredientePlatos/";
             var respuesta = _restClientHttp.Get<List<IngredientePlato>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
@@ -24,7 +24,7 @@ namespace Restaurant.Services.Servicios
 
         public IngredientePlato Obtener(int id)
         {
-            string url = $"http://localhost/restaurant/api/IngredientePlatos/{id}";
+            string url = $"http://localhost/restaurant/api/ingredientePlatos/{id}";
             var respuesta = _restClientHttp.Get<IngredientePlato>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
@@ -32,7 +32,7 @@ namespace Restaurant.Services.Servicios
 
         public int Guardar(IngredientePlato IngredientePlato)
         {
-            string url = $"http://localhost/restaurant/api/IngredientePlatos/";
+            string url = $"http://localhost/restaurant/api/ingredientePlatos/";
             var respuesta = _restClientHttp.Post<int>(url, IngredientePlato);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
@@ -40,7 +40,7 @@ namespace Restaurant.Services.Servicios
 
         public bool Modificar(IngredientePlato IngredientePlato, int id)
         {
-            string url = $"http://localhost/restaurant/api/IngredientePlatos/{id}";
+            string url = $"http://localhost/restaurant/api/ingredientePlatos/{id}";
             var respuesta = _restClientHttp.Put<bool>(url, IngredientePlato);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;

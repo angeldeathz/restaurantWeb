@@ -448,7 +448,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
                     if (articulosConsumoDirecto != null)
                     {
-                        ArticuloConsumoDirecto articuloConsumoDirecto = articulosConsumoDirecto.First(x => x.IdArticulo == articulo.Id);
+                        ArticuloConsumoDirecto articuloConsumoDirecto = articulosConsumoDirecto.FirstOrDefault(x => x.IdArticulo == articulo.Id);
                         if (articuloConsumoDirecto != null)
                         {
                             modalEditarArticuloConsumoDirecto(articulo, articuloConsumoDirecto);
@@ -464,7 +464,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     }
                     else if (platos != null)
                     {
-                        Plato plato = platos.First(x => x.IdArticulo == articulo.Id);
+                        Plato plato = platos.FirstOrDefault(x => x.IdArticulo == articulo.Id);
                         if (plato != null)
                         {
                             modalEditarPlato(articulo, plato);
@@ -611,7 +611,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             ddlTipoConsumoPlato.SelectedValue = articulo.IdTipoConsumo.ToString();
             ddlEstadoPlato.SelectedValue = articulo.IdEstadoArticulo.ToString();
             txtMinutosPreparacion.Text = plato.MinutosPreparacion.ToString();
-            ddlTipoPreparacion.SelectedValue = plato.TipoPreparacion.Nombre;
+            ddlTipoPreparacion.SelectedValue = plato.TipoPreparacion.Id.ToString();
 
             ddlIngredientePlato.SelectedValue = "";
             txtCantidadIngredientePlato.Text = "";
@@ -620,6 +620,11 @@ namespace Restaurant.Web.Paginas.Mantenedores
             Token token = (Token)Session["token"];
             _ingredientePlatoService = new IngredientePlatoService(token.access_token);
             List<IngredientePlato> ingredientes = _ingredientePlatoService.Obtener();
+            if(ingredientes == null)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "Swal.fire('Error al cargar información del articulo', '', 'error');", true);
+                return;
+            }
             List<IngredientePlato> ingredientesPlato = ingredientes.Where(x => x.IdPlato == plato.Id).ToList();
             Session["ingredientesPlato"] = ingredientesPlato;
 
@@ -665,6 +670,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     List<IngredientePlato> listaIngredientes = (List<IngredientePlato>)Session["ingredientesPlato"];
                     foreach (IngredientePlato ingredientePlato in listaIngredientes)
                     {
+                        ingredientePlato.Insumo = null;
                         ingredientePlato.IdPlato = idPlato;
 
                         _ingredientePlatoService = new IngredientePlatoService(token.access_token);
@@ -745,7 +751,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             Insumo insumo = new Insumo();
             insumo.Nombre = ddlIngredientePlato.SelectedItem.Text;
             ingredientePlato.IdInsumo = int.Parse(ddlIngredientePlato.SelectedValue);
-            ingredientePlato.CantidadInsumo = int.Parse(txtCantidadIngredientePlato.Text);
+            string cantidadInsumo = txtCantidadIngredientePlato.Text.Replace(".", ",");
+            ingredientePlato.CantidadInsumo = Convert.ToDouble(cantidadInsumo);
             ingredientePlato.Insumo = insumo;
 
             List<IngredientePlato> listaInsumos = (List<IngredientePlato>)Session["ingredientesPlato"];

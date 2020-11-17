@@ -62,7 +62,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             DocumentoPago documentoPago= new DocumentoPago();
             documentoPago.IdPedido = idPedido;
             documentoPago.Total = total;
-            documentoPago.FechaPago = DateTime.Now;
+            documentoPago.FechaHora = DateTime.Now;
             documentoPago.IdTipoDocumentoPago = (int)Session["tipoDocumentoPago"];
             Token token = (Token)Session["token"];
             _documentoPagoService = new DocumentoPagoService(token.access_token);
