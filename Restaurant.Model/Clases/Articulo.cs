@@ -10,6 +10,7 @@
             Precio = 0;
             IdEstadoArticulo = 0;
             IdTipoConsumo = 0;
+            UrlImagen = "";
         }
 
         public int Id { get; set; }
