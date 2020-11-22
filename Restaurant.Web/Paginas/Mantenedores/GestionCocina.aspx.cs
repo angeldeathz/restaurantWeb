@@ -455,7 +455,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         }
                         else if (platos != null)
                         {
-                            Plato plato = platos.First(x => x.IdArticulo == articulo.Id);
+                            Plato plato = platos.FirstOrDefault(x => x.IdArticulo == articulo.Id);
                             if (plato != null)
                             {
                                 modalEditarPlato(articulo, plato);
@@ -484,7 +484,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtPrecioArticulo.Text = articulo.Precio.ToString();
             ddlTipoConsumoArticulo.SelectedValue = articulo.IdTipoConsumo.ToString();
             ddlEstadoArticulo.SelectedValue = articulo.IdEstadoArticulo.ToString();
-            ddlInsumoArticulo.SelectedValue = articuloConsumoDirecto.Id.ToString();
+            ddlInsumoArticulo.SelectedValue = articuloConsumoDirecto.IdInsumo.ToString();
             ddlInsumoArticulo.Enabled = false;
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);

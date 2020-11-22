@@ -24,7 +24,7 @@ namespace Restaurant.Services.Servicios
 
         public ArticuloConsumoDirecto Obtener(int id)
         {
-            string url = $"http://localhost/restaurant/api/ArticuloConsumoDirectos/{id}";
+            string url = $"http://localhost/restaurant/api/ArticulosConsumoDirecto/{id}";
             var respuesta = _restClientHttp.Get<ArticuloConsumoDirecto>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
             return respuesta.Response;
@@ -32,7 +32,7 @@ namespace Restaurant.Services.Servicios
 
         public int Guardar(ArticuloConsumoDirecto ArticuloConsumoDirecto)
         {
-            string url = $"http://localhost/restaurant/api/ArticuloConsumoDirectos/";
+            string url = $"http://localhost/restaurant/api/ArticulosConsumoDirecto/";
             var respuesta = _restClientHttp.Post<int>(url, ArticuloConsumoDirecto);
             if (respuesta.StatusName != HttpStatusCode.OK) return 0;
             return respuesta.Response;
@@ -40,7 +40,7 @@ namespace Restaurant.Services.Servicios
 
         public bool Modificar(ArticuloConsumoDirecto ArticuloConsumoDirecto, int idArticuloConsumoDirecto)
         {
-            string url = $"http://localhost/restaurant/api/ArticuloConsumoDirectos/{idArticuloConsumoDirecto}";
+            string url = $"http://localhost/restaurant/api/ArticulosConsumoDirecto/{idArticuloConsumoDirecto}";
             var respuesta = _restClientHttp.Put<bool>(url, ArticuloConsumoDirecto);
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
