@@ -132,6 +132,7 @@
     <Content Include="Paginas\Mantenedores\GestionRestaurante.aspx" />
     <Content Include="Paginas\Mantenedores\Inicio.aspx" />
     <Content Include="Paginas\Mantenedores\Reporteria.aspx" />
+    <Content Include="Paginas\Mantenedores\VerReporte.aspx" />
     <Content Include="Paginas\Publica\Autoservicio.aspx" />
     <Content Include="Paginas\Publica\Menu.aspx" />
     <Content Include="Paginas\Publica\Nosotros.aspx" />
@@ -202,6 +203,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Master\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
@@ -275,6 +277,13 @@
     </Compile>
     <Compile Include="Paginas\Mantenedores\Reporteria.aspx.designer.cs">
       <DependentUpon>Reporteria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\Mantenedores\VerReporte.aspx.cs">
+      <DependentUpon>VerReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Paginas\Mantenedores\VerReporte.aspx.designer.cs">
+      <DependentUpon>VerReporte.aspx</DependentUpon>
     </Compile>
     <Compile Include="Paginas\Publica\Autoservicio.aspx.cs">
       <DependentUpon>Autoservicio.aspx</DependentUpon>
