@@ -117,6 +117,12 @@ namespace Restaurant.Services.Shared
                         break;
                 }
 
+                if(restClientResponse.Error != null && restClientResponse.Error.Errores != null && restClientResponse.Error.Errores.Count > 0)
+                {
+                    string errores = String.Join(", ", restClientResponse.Error.Errores.ToArray());
+                    throw new Exception(errores);
+                }
+
                 return restClientResponse;
             }
         }
@@ -153,6 +159,12 @@ namespace Restaurant.Services.Shared
                         break;
                 }
 
+                if (restClientResponse.Error != null && restClientResponse.Error.Errores != null && restClientResponse.Error.Errores.Count > 0)
+                {
+                    string errores = String.Join(", ", restClientResponse.Error.Errores.ToArray());
+                    throw new Exception(errores);
+                }
+
                 return restClientResponse;
             }
         }
@@ -183,6 +195,12 @@ namespace Restaurant.Services.Shared
                         restClientResponse.Error =
                             JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
+                }
+
+                if (restClientResponse.Error != null && restClientResponse.Error.Errores != null && restClientResponse.Error.Errores.Count > 0)
+                {
+                    string errores = String.Join(", ", restClientResponse.Error.Errores.ToArray());
+                    throw new Exception(errores);
                 }
 
                 return restClientResponse;
@@ -218,6 +236,12 @@ namespace Restaurant.Services.Shared
                     case HttpStatusCode.InternalServerError:
                         restClientResponse.Error = JsonConvert.DeserializeObject<ErrorResponse>(response.Content.ReadAsStringAsync().Result);
                         break;
+                }
+
+                if (restClientResponse.Error != null && restClientResponse.Error.Errores != null && restClientResponse.Error.Errores.Count > 0)
+                {
+                    string errores = String.Join(", ", restClientResponse.Error.Errores.ToArray());
+                    throw new Exception(errores);
                 }
 
                 return restClientResponse;
