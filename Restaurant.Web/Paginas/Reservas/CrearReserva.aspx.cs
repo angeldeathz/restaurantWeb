@@ -21,10 +21,21 @@ namespace Restaurant.Web.Paginas.Reservas
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["reservaCreada"] = null;
+            if(!IsPostBack)
+            {
+                DateTime fecha = DateTime.Now;
+                txtFecha.Text = fecha.ToString("yyyy-MM-dd");
+                txtFecha.Attributes["min"] = fecha.ToString("yyyy-MM-dd");
+            }
         }
 
         protected void btnCrearReserva_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+            {
+                return;
+            }
             _usuarioService = new UsuarioService(string.Empty);
             var token = _usuarioService.AutenticarCliente();
             if (token == null)
@@ -34,33 +45,61 @@ namespace Restaurant.Web.Paginas.Reservas
             }
             Session["token"] = token;
 
-            int idCliente = crearCliente();
+            int idCliente = 0;
+            try
+            {
+                 idCliente = crearCliente();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
+
             if (idCliente == 0)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCliente", "Swal.fire('Error al crear cliente', 'Inténtelo nuevamente', 'error');", true);
                 return;
             }
 
-            DateTime fechaReserva = Convert.ToDateTime(txtFecha.Text);
+            int idReserva = 0;
+            DateTime fechaReserva;
+            try
+            {
+                 fechaReserva = Convert.ToDateTime(txtFecha.Text);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', 'Debe seleccionar una fecha válida', 'error');", true);
+                return;
+            }
             int cantidadComensales = int.Parse(txtComensales.Text);
-            
-            _mesaService = new MesaService(token.access_token);
-            List<Mesa> mesas = _mesaService.Obtener();
-            int maximoComensales = mesas.Max(x => x.CantidadComensales); 
-            if(cantidadComensales > maximoComensales)
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorComensales", "Swal.fire('El número máximo de comensales por reserva es " + maximoComensales + "', 'Para agregar más comensales puede crear otra reserva', 'warning');", true);
+                _mesaService = new MesaService(token.access_token);
+                List<Mesa> mesas = _mesaService.Obtener();
+
+                int maximoComensales = mesas.Max(x => x.CantidadComensales);
+                if (cantidadComensales > maximoComensales)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorComensales", "Swal.fire('El número máximo de comensales por reserva es " + maximoComensales + "', 'Para agregar más comensales puede crear otra reserva', 'warning');", true);
+                    return;
+                }
+
+                int idMesa = buscarMesa(fechaReserva, cantidadComensales);
+                if (idMesa == 0)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "Swal.fire('No se encontró una mesa disponible. Seleccione otra fecha u hora', '', 'error');", true);
+                    return;
+                }
+                idReserva = guardarReserva(idCliente, idMesa);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
                 return;
             }
 
-            int idMesa = buscarMesa(fechaReserva, cantidadComensales);
-            if (idMesa == 0)
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "Swal.fire('No se encontró una mesa disponible. Seleccione otra fecha u hora', '', 'error');", true);
-                return;
-            }
-
-            int idReserva = guardarReserva(idCliente, idMesa);
             if (idReserva == 0)
             {
                 Response.Redirect("/Paginas/Reservas/MensajeCrearReservaError.aspx");

@@ -33,6 +33,15 @@ namespace Restaurant.Web.Paginas.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
+        /// ValidacionNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionNombre;
+
+        /// <summary>
         /// lblApellido control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace Restaurant.Web.Paginas.Reservas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
+
+        /// <summary>
+        /// ValidacionApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionApellido;
 
         /// <summary>
         /// lblEmailIngreso control.
@@ -69,6 +87,24 @@ namespace Restaurant.Web.Paginas.Reservas
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// ValidacionEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionEmail;
+
+        /// <summary>
+        /// ValidacionEmailValido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidacionEmailValido;
+
+        /// <summary>
         /// lblComensales control.
         /// </summary>
         /// <remarks>
@@ -85,6 +121,15 @@ namespace Restaurant.Web.Paginas.Reservas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtComensales;
+
+        /// <summary>
+        /// ValidacionComensales control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionComensales;
 
         /// <summary>
         /// lblFecha control.
@@ -112,6 +157,15 @@ namespace Restaurant.Web.Paginas.Reservas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
+
+        /// <summary>
+        /// ValidacionFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionFecha;
 
         /// <summary>
         /// lblHora control.
