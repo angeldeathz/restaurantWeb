@@ -33,219 +33,48 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divReportes;
 
         /// <summary>
-        /// txtFechaDiario control.
+        /// ddlTipoReporte control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaDiario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoReporte;
 
         /// <summary>
-        /// btnReporteDiario control.
+        /// lblFecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReporteDiario;
+        protected global::System.Web.UI.WebControls.Label lblFecha;
 
         /// <summary>
-        /// txtFechaMensual control.
+        /// txtFechaInicio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaMensual;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
 
         /// <summary>
-        /// btnReporteMensual control.
+        /// txtFechaFin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReporteMensual;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFin;
 
         /// <summary>
-        /// upModalUsuario control.
+        /// btnObtenerReporte control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upModalUsuario;
-
-        /// <summary>
-        /// tituloModalUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label tituloModalUsuario;
-
-        /// <summary>
-        /// txtIdUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdUsuario;
-
-        /// <summary>
-        /// lblRutUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRutUsuario;
-
-        /// <summary>
-        /// txtRutUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRutUsuario;
-
-        /// <summary>
-        /// txtDigitoVerificadorUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDigitoVerificadorUsuario;
-
-        /// <summary>
-        /// lblTipoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipoUsuario;
-
-        /// <summary>
-        /// ddlTipoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuario;
-
-        /// <summary>
-        /// lblNombreUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
-
-        /// <summary>
-        /// txtNombreUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
-
-        /// <summary>
-        /// lblApellidoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblApellidoUsuario;
-
-        /// <summary>
-        /// txtApellidoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
-
-        /// <summary>
-        /// lblEmailUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmailUsuario;
-
-        /// <summary>
-        /// txtEmailUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmailUsuario;
-
-        /// <summary>
-        /// lblTelefonoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTelefonoUsuario;
-
-        /// <summary>
-        /// txtTelefonoUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTelefonoUsuario;
-
-        /// <summary>
-        /// lblContrasena control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContrasena;
-
-        /// <summary>
-        /// txtContrasena control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContrasena;
-
-        /// <summary>
-        /// lblContrasenaRepetir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContrasenaRepetir;
-
-        /// <summary>
-        /// txtContrasenaRepetir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContrasenaRepetir;
+        protected global::System.Web.UI.WebControls.Button btnObtenerReporte;
     }
 }

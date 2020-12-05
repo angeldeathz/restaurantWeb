@@ -10,7 +10,6 @@
             <p class="lead">Mesas ocupadas: 7</p>
             <p class="lead">Mesas disponibles: 5</p>
             <p class="lead">Cantidad de comensales: 20</p>
-            <p class="lead">Garzones trabajando: 4</p>
         </div>
         <div class="col-12 col-md-6">
             <ul class="list-group">
@@ -39,7 +38,7 @@
                     </ul>
                 </li>
                 <li class="list-group-item" runat="server" id="linkUsuarios"><a runat="server" href="/Paginas/Mantenedores/GestionUsuarios.aspx" class="font-weight-bold">Gestión de Usuarios</a></li>
-                <li class="list-group-item" runat="server" id="linkReporteria"><a runat="server" href="/Paginas/Mantenedores/Reporteria.aspx" class="font-weight-bold">Informes y Reportería</a></li>
+                <li class="list-group-item" runat="server" id="linkReporteria"><a runat="server" href="/Paginas/Mantenedores/Reporteria.aspx" class="font-weight-bold">Reportería</a></li>
             </ul>
         </div>
     </div>
