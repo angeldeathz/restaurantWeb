@@ -12,7 +12,7 @@
       <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divReportes" role="tabpanel" aria-labelledby="tabReportes" runat="server" ClientIDMode="Static">
-             <div class="col-12 col-md-8 col-lg-6 mx-auto">
+             <div class="col-12 col-md-8 col-lg-6 mx-auto pt-4">
                 <div class="form-group">
                   <asp:label runat="server" CssClass="lead">Seleccione el tipo de reporte</asp:label>
                   <asp:DropDownList ID="ddlTipoReporte" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlTipoReporte_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
