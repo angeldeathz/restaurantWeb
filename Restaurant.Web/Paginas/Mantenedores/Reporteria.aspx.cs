@@ -59,7 +59,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
             switch (idTipoReporte)
             {
                 case Reporte.reporteDiario:
-                case Reporte.reporteMensual:
                     lblFecha.Text = "Seleccione una fecha";
                     txtFechaFin.Enabled = false;
                     break;
@@ -92,7 +91,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "fecha", "Swal.fire('Debe seleccionar una fecha', '', 'error');", true);
                 return;
             }
-            if(idTipoReporte != Reporte.reporteDiario && idTipoReporte != Reporte.reporteMensual && fechaInicio > fechaFin)
+            if(idTipoReporte != Reporte.reporteDiario && fechaInicio > fechaFin)
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "fecha", "Swal.fire('La fecha de inicio debe ser anterior a la fecha de término', '', 'error');", true);
                 return;
@@ -107,10 +106,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 case Reporte.reporteDiario:
                     reporte.FechaDesde = fechaInicio;
                     reporte.FechaHasta = fechaInicio;
-                    break;
-                case Reporte.reporteMensual:
-                    reporte.FechaDesde = fechaInicio.Date.AddDays(1 - fechaInicio.Day);
-                    reporte.FechaHasta = reporte.FechaDesde.AddMonths(1).AddDays(-1);
                     break;
                 default:
                     reporte.FechaDesde = fechaInicio;
@@ -130,8 +125,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 string base64 = _reporteService.Obtener(reporte);
                 byte[] pdfBytes = Convert.FromBase64String(base64);
 
+                string tipoInforme = Reporte.GetTiposReporte()[reporte.IdReporte];
                 string pdflocation = "C:\\Storage\\";
-                string nombrePDF = $"reporte-{DateTime.Now:yyyy-MM-dd}.pdf";
+                string nombrePDF = $"Reporte de {tipoInforme} - {DateTime.Now:yyyy-MM-dd}.pdf";
                 string ruta = Path.Combine(pdflocation, nombrePDF);
 
                 FileStream file = File.Create(ruta);
