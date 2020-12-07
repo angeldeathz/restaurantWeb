@@ -265,6 +265,7 @@
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblImagenArticulo" runat="server" Text="Imagen"></asp:Label>
                                     <asp:FileUpload runat="server" ID="fileImagenArticulo" AllowMultiple="False" accept="image/*"/>
+                                    <asp:HiddenField runat="server" id="hdnUrlImagen" Visible="False"/>
                                 </div>
                             </div>
                         </div>
