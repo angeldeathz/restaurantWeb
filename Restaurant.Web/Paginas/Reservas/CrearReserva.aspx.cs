@@ -17,15 +17,24 @@ namespace Restaurant.Web.Paginas.Reservas
         private ClienteService _clienteService;
         private MesaService _mesaService;
         private UsuarioService _usuarioService;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["reservaCreada"] = null;
             if(!IsPostBack)
             {
+                _usuarioService = new UsuarioService(string.Empty);
+                var token = _usuarioService.AutenticarCliente();
+                if (token == null)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "Swal.fire('Error', 'Ocurrió un error inesperado. Solicite atención del personal.', 'error');", true);
+                    return;
+                }
+                Session["token"] = token;
+
                 DateTime fecha = DateTime.Now;
                 txtFecha.Text = fecha.ToString("yyyy-MM-dd");
-                txtFecha.Attributes["min"] = fecha.AddDays(-1).ToString("yyyy-MM-dd");
+                txtFecha.Attributes["min"] = fecha.ToString("yyyy-MM-dd");
+                cargarHoras(fecha);
             }
         }
 
@@ -36,14 +45,7 @@ namespace Restaurant.Web.Paginas.Reservas
             {
                 return;
             }
-            _usuarioService = new UsuarioService(string.Empty);
-            var token = _usuarioService.AutenticarCliente();
-            if (token == null)
-            {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAutenticar", "Swal.fire('Error', 'Ocurrió un error inesperado. Solicite atención del personal.', 'error');", true);
-                return;
-            }
-            Session["token"] = token;
+            Token token = (Token)Session["token"];
 
             int idCliente = 0;
             try
@@ -66,7 +68,11 @@ namespace Restaurant.Web.Paginas.Reservas
             DateTime fechaReserva;
             try
             {
-                 fechaReserva = Convert.ToDateTime(txtFecha.Text);
+                fechaReserva = Convert.ToDateTime(txtFecha.Text);
+                int hora = int.Parse(ddlHora.Text);
+                int minuto = int.Parse(ddlMinuto.Text);
+                TimeSpan tsHora = new TimeSpan(hora, minuto, 0);
+                fechaReserva = fechaReserva.Date + tsHora;
             }
             catch (Exception ex)
             {
@@ -92,7 +98,7 @@ namespace Restaurant.Web.Paginas.Reservas
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "Swal.fire('No se encontró una mesa disponible. Seleccione otra fecha u hora', '', 'error');", true);
                     return;
                 }
-                idReserva = guardarReserva(idCliente, idMesa);
+                idReserva = guardarReserva(idCliente, idMesa, fechaReserva);
             }
             catch (Exception ex)
             {
@@ -158,10 +164,10 @@ namespace Restaurant.Web.Paginas.Reservas
             return idCliente;
         }
 
-        protected int guardarReserva(int idCliente, int idMesa)
+        protected int guardarReserva(int idCliente, int idMesa, DateTime fecha)
         {
             Reserva reserva = new Reserva();
-            reserva.FechaReserva = Convert.ToDateTime(txtFecha.Text);
+            reserva.FechaReserva = fecha;
             reserva.CantidadComensales = int.Parse(txtComensales.Text);
             reserva.IdEstadoReserva = EstadoReserva.creada;
             reserva.IdCliente = idCliente;
@@ -176,15 +182,44 @@ namespace Restaurant.Web.Paginas.Reservas
         }
         protected void txtFecha_TextChanged(object sender, EventArgs e)
         {
-            DateTime fecha = Convert.ToDateTime(txtFecha.Text).Date;
-            List<int> horasDisponibilidad = getHorasDisponibles(fecha);
-            if (horasDisponibilidad.Count == 0)
+            DateTime fecha = Convert.ToDateTime(txtFecha.Text);
+            cargarHoras(fecha);
+        }
+
+        protected void cargarHoras(DateTime fecha)
+        {
+            int diaSemana = (int)fecha.DayOfWeek;
+            Token token = (Token)Session["token"];
+            _horarioReservaService = new HorarioReservaService(token.access_token);
+            List<HorarioReserva> listaHorarioReserva = _horarioReservaService.Obtener();
+            HorarioReserva horarioReserva = listaHorarioReserva.FirstOrDefault(x => x.DiaSemana == diaSemana);
+
+            if (horarioReserva == null)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "Swal.fire('No hay horarios disponibles para reservar', '', 'error');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalReserva", "Swal.fire('No hay horarios disponibles para reservar en la fecha seleccionada', '', 'error');", true);
                 return;
             }
-            ddlHora.DataSource = horasDisponibilidad;
+            int horaInicioHora = int.Parse(horarioReserva.HoraInicioTime.Substring(0, 2));
+            int horaFinHora = int.Parse(horarioReserva.HoraFinTime.Substring(0, 2));
+
+            List<string> horas = new List<string>();
+            for (int i = horaInicioHora; i <= horaFinHora; i++)
+            {
+                string x = i < 10 ? "0" + i.ToString() : i.ToString();
+                horas.Add(x);
+            }
+            ddlHora.DataSource = horas;
             ddlHora.DataBind();
+            int horaInicioMinuto = int.Parse(horarioReserva.HoraInicioTime.Substring(3, 2));
+            int horaFinMinuto = int.Parse(horarioReserva.HoraFinTime.Substring(3, 2));
+            List<string> minutos = new List<string>();
+            for (int i = 0; i < 60; i++)
+            {
+                string x = i < 10 ? "0" + i.ToString() : i.ToString();
+                minutos.Add(x);
+            }
+            ddlMinuto.DataSource = minutos;
+            ddlMinuto.DataBind();
         }
 
         public List<int> getHorasDisponibles(DateTime fecha)
