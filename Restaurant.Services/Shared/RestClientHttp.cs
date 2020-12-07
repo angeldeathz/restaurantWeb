@@ -95,7 +95,7 @@ namespace Restaurant.Services.Shared
                 var message = new HttpRequestMessage(HttpMethod.Get, url);
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
                 var response = httpClient.SendAsync(message).Result;
-                var e = response.Content.ReadAsStringAsync().Result;
+
                 var restClientResponse = new RestClientResponse<T>
                 {
                     StatusCode = (int)response.StatusCode,
