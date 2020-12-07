@@ -25,7 +25,7 @@ namespace Restaurant.Web.Paginas.Reservas
             {
                 DateTime fecha = DateTime.Now;
                 txtFecha.Text = fecha.ToString("yyyy-MM-dd");
-                txtFecha.Attributes["min"] = fecha.ToString("yyyy-MM-dd");
+                txtFecha.Attributes["min"] = fecha.AddDays(-1).ToString("yyyy-MM-dd");
             }
         }
 
@@ -199,8 +199,8 @@ namespace Restaurant.Web.Paginas.Reservas
             }
             HorarioReserva horarioDia = horarioReserva.FirstOrDefault(x => x.DiaSemana == diaSemana);
             int maximoComensales = 10; //CONTAR COMENSALES TODAS LAS MESAS
-            int horaInicio = Convert.ToInt32(horarioDia.HoraInicio.Substring(0, 2));
-            int horaFin = Convert.ToInt32(horarioDia.HoraCierre.Substring(0, 2));
+            int horaInicio = Convert.ToInt32(horarioDia.HoraInicio.ToShortTimeString().Substring(0, 2));
+            int horaFin = Convert.ToInt32(horarioDia.HoraFin.ToShortTimeString().Substring(0, 2));
             List<int> horasDisponibles = new List<int>();
             for (int i = horaInicio; i < horaFin; i++)
             {

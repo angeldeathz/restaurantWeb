@@ -357,6 +357,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulo;
 
         /// <summary>
+        /// ValidacionCantidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionCantidad;
+
+        /// <summary>
         /// lblComentarioArticulo control.
         /// </summary>
         /// <remarks>
@@ -418,6 +427,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumentoPago;
+
+        /// <summary>
+        /// ValidadorTipoDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorTipoDocumento;
 
         /// <summary>
         /// btnPagarEfectivo control.
@@ -492,6 +510,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtMontoEfectivo;
 
         /// <summary>
+        /// ValidacionMontoEfectivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionMontoEfectivo;
+
+        /// <summary>
         /// lblMontoTarjeta control.
         /// </summary>
         /// <remarks>
@@ -508,6 +535,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMontoTarjeta;
+
+        /// <summary>
+        /// ValidacionMontoTarjeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionMontoTarjeta;
 
         /// <summary>
         /// btnMontosPagoMixto control.

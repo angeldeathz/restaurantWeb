@@ -38,7 +38,7 @@
                  <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblFecha" runat="server" Text="Fecha"></asp:Label>
                     <!--<asp:TextBox ID="txtFechaF" runat="server" TextMode="Date" CssClass="form-control" OnTextChanged="txtFecha_TextChanged"></asp:TextBox>-->
-                    <asp:TextBox ID="txtFecha" runat="server" TextMode="DateTimeLocal" CssClass="form-control" min="2020-11-07T10:00"></asp:TextBox>
+                    <asp:TextBox ID="txtFecha" runat="server" TextMode="DateTimeLocal" CssClass="form-control"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="ValidacionFecha" runat="server" ControlToValidate="txtFecha" Display="Dynamic"
                     CssClass="text-danger" ErrorMessage="Debe seleccionar una fecha" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
 

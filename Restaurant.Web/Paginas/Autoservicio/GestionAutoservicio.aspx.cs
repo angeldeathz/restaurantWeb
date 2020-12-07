@@ -19,103 +19,120 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            validarIngreso();
-            Token token = (Token)Session["token"];
-            Reserva reserva = (Reserva)Session["reservaCliente"];
-            _pedidoService = new PedidoService(token.access_token);
-            List<Pedido> pedidos = _pedidoService.Obtener();
-
-            Pedido pedidoCliente = null;
-            if (pedidos != null && pedidos.Count > 0)
+            try
             {
-                pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
-                                                         && x.Reserva.Id == reserva.Id
-                                                         && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                validarIngreso();
+                Token token = (Token)Session["token"];
+                Reserva reserva = (Reserva)Session["reservaCliente"];
+                _pedidoService = new PedidoService(token.access_token);
 
-                if (pedidoCliente != null)
+                List<Pedido> pedidos = _pedidoService.Obtener();
+
+                Pedido pedidoCliente = null;
+                if (pedidos != null && pedidos.Count > 0)
                 {
-                    
-                    if(pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
+                    pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
+                                                             && x.Reserva.Id == reserva.Id
+                                                             && x.FechaHoraInicio.Date == DateTime.Now.Date);
+
+                    if (pedidoCliente != null)
                     {
-                        Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
-                        return;
+
+                        if (pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
+                        {
+                            Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
+                            return;
+                        }
+                        cargarPedido(token, pedidoCliente);
                     }
-                    cargarPedido(token, pedidoCliente);
                 }
-            }
 
-            List<ArticuloPedido> articulosPedido = new List<ArticuloPedido>();
-            if (Session["articulosPedidoCliente"] == null)
-            {
-                Session["articulosPedidoCliente"] = articulosPedido;
-            }
-            else
-            {
-                articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-            }
-
-            if (articulosPedido != null && articulosPedido.Count > 0)
-            {
-                recargarArticulosPedido(articulosPedido);
-                if (pedidoCliente != null)
+                List<ArticuloPedido> articulosPedido = new List<ArticuloPedido>();
+                if (Session["articulosPedidoCliente"] == null)
                 {
-                    btnHacerPedido.Visible = false;
-                    if (pedidoCliente.IdEstadoPedido == EstadoPedido.enCurso)
-                    {
-                        btnCerrarCuenta.Visible = true;
-                    }
-                    //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
+                    Session["articulosPedidoCliente"] = articulosPedido;
                 }
                 else
                 {
-                    btnHacerPedido.Visible = true;
-                    btnCerrarCuenta.Visible = false;
+                    articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
                 }
-            }
-            upArticulosPedido.Update();
 
+                if (articulosPedido != null && articulosPedido.Count > 0)
+                {
+                    recargarArticulosPedido(articulosPedido);
+                    if (pedidoCliente != null)
+                    {
+                        btnHacerPedido.Visible = false;
+                        if (pedidoCliente.IdEstadoPedido == EstadoPedido.enCurso)
+                        {
+                            btnCerrarCuenta.Visible = true;
+                        }
+                        //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
+                    }
+                    else
+                    {
+                        btnHacerPedido.Visible = true;
+                        btnCerrarCuenta.Visible = false;
+                    }
+                }
+                upArticulosPedido.Update();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', 'No se pudo cargar la página, intente nuevamente', 'error');", true);
+                return;
+            }
             if (!IsPostBack)
             {
-                _articuloService = new ArticuloService(token.access_token);
-                List<Articulo> articulos = _articuloService.Obtener();
-                List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
-                Session["articulosDisponibles"] = articulosDisponibles;
-
-                List<Articulo> entradas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas).ToList();
-                listaEntradas.DataSource = entradas;
-                listaEntradas.DataBind();
-                actualizarRepeater(listaEntradas, entradas, listaEntradasVacia);
-
-                List<Articulo> platosFondo = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo).ToList();
-                listaPlatosFondo.DataSource = platosFondo;
-                listaPlatosFondo.DataBind();
-                actualizarRepeater(listaPlatosFondo, platosFondo, listaPlatosFondoVacia);
-
-                List<Articulo> ensaladas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.ensaladas).ToList();
-                listaEnsaladas.DataSource = ensaladas;
-                listaEnsaladas.DataBind();
-                actualizarRepeater(listaEnsaladas, ensaladas, listaEnsaladasVacia);
-
-                List<Articulo> postres = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.postres).ToList();
-                listaPostres.DataSource = postres;
-                listaPostres.DataBind();
-                actualizarRepeater(listaPostres, postres, listaPostresVacia);
-
-                List<Articulo> bebestibles = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles).ToList();
-                listaBebestibles.DataSource = bebestibles;
-                listaBebestibles.DataBind();
-                actualizarRepeater(listaBebestibles, bebestibles, listaBebestiblesVacia);
-
-                _tipoDocumentoPagoService = new TipoDocumentoPagoService(token.access_token);
-                List<TipoDocumentoPago> tiposDocumento = _tipoDocumentoPagoService.Obtener();
-                if(tiposDocumento != null && tiposDocumento.Count > 0)
+                try
                 {
-                    ddlTipoDocumentoPago.DataSource = tiposDocumento;
-                    ddlTipoDocumentoPago.DataTextField = "Nombre";
-                    ddlTipoDocumentoPago.DataValueField = "Id";
-                    ddlTipoDocumentoPago.DataBind();
-                    ddlTipoDocumentoPago.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlTipoDocumentoPago.SelectedIndex = 0;
+                    Token token = (Token)Session["token"];
+                    _articuloService = new ArticuloService(token.access_token);
+                    List<Articulo> articulos = _articuloService.Obtener();
+                    List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
+                    Session["articulosDisponibles"] = articulosDisponibles;
+
+                    List<Articulo> entradas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas).ToList();
+                    listaEntradas.DataSource = entradas;
+                    listaEntradas.DataBind();
+                    actualizarRepeater(listaEntradas, entradas, listaEntradasVacia);
+
+                    List<Articulo> platosFondo = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.platosFondo).ToList();
+                    listaPlatosFondo.DataSource = platosFondo;
+                    listaPlatosFondo.DataBind();
+                    actualizarRepeater(listaPlatosFondo, platosFondo, listaPlatosFondoVacia);
+
+                    List<Articulo> ensaladas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.ensaladas).ToList();
+                    listaEnsaladas.DataSource = ensaladas;
+                    listaEnsaladas.DataBind();
+                    actualizarRepeater(listaEnsaladas, ensaladas, listaEnsaladasVacia);
+
+                    List<Articulo> postres = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.postres).ToList();
+                    listaPostres.DataSource = postres;
+                    listaPostres.DataBind();
+                    actualizarRepeater(listaPostres, postres, listaPostresVacia);
+
+                    List<Articulo> bebestibles = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.bebestibles).ToList();
+                    listaBebestibles.DataSource = bebestibles;
+                    listaBebestibles.DataBind();
+                    actualizarRepeater(listaBebestibles, bebestibles, listaBebestiblesVacia);
+
+                    _tipoDocumentoPagoService = new TipoDocumentoPagoService(token.access_token);
+                    List<TipoDocumentoPago> tiposDocumento = _tipoDocumentoPagoService.Obtener();
+                    if (tiposDocumento != null && tiposDocumento.Count > 0)
+                    {
+                        ddlTipoDocumentoPago.DataSource = tiposDocumento;
+                        ddlTipoDocumentoPago.DataTextField = "Nombre";
+                        ddlTipoDocumentoPago.DataValueField = "Id";
+                        ddlTipoDocumentoPago.DataBind();
+                        ddlTipoDocumentoPago.Items.Insert(0, new ListItem("Seleccionar", ""));
+                        ddlTipoDocumentoPago.SelectedIndex = 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', 'No se pudo cargar la página, intente nuevamente', 'error');", true);
+                    return;
                 }
             }
         }
@@ -158,122 +175,151 @@ namespace Restaurant.Web.Paginas.Autoservicio
         }
         protected void btnEliminarArticulo_Click(object sender, RepeaterCommandEventArgs e)
         {
-            int idArticulo;
-            if (int.TryParse((string)e.CommandArgument, out idArticulo))
+            try
             {
-                List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-                var articuloEliminar = listaArticulos.FirstOrDefault(a => a.IdArticulo == idArticulo);
-                if (articuloEliminar != null)
+                int idArticulo;
+                if (int.TryParse((string)e.CommandArgument, out idArticulo))
                 {
-                    listaArticulos.Remove(articuloEliminar);
+                    List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
+                    var articuloEliminar = listaArticulos.FirstOrDefault(a => a.IdArticulo == idArticulo);
+                    if (articuloEliminar != null)
+                    {
+                        listaArticulos.Remove(articuloEliminar);
+                    }
+                    Session["articulosPedidoCliente"] = listaArticulos;
+                    actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
+                    var totalPedido = listaArticulos.Sum(x => x.Total);
+                    if (totalPedido == 0)
+                    {
+                        lblTotalPedido.Text = "";
+                    }
+                    else
+                    {
+                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                    }
+                    txtTotalPedido.Text = totalPedido.ToString();
+                    upArticulosPedido.Update();
                 }
-                Session["articulosPedidoCliente"] = listaArticulos;
-                actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
-                var totalPedido = listaArticulos.Sum(x => x.Total);
-                if (totalPedido == 0)
-                {
-                    lblTotalPedido.Text = "";
-                }
-                else
-                {
-                    lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
-                }
-                txtTotalPedido.Text = totalPedido.ToString();
-                upArticulosPedido.Update();
+                limpiarTabs();
+                tabMiOrden.Attributes.Add("class", "nav-link active");
+                divMiOrden.Attributes.Add("class", "tab-pane active show");
             }
-            limpiarTabs();
-            tabMiOrden.Attributes.Add("class", "nav-link active");
-            divMiOrden.Attributes.Add("class", "tab-pane active show");
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
         protected void btnModalAgregarArticulo_Click(object sender, RepeaterCommandEventArgs e)
         {
-            validarIngreso();
-            int idArticulo;
-            if (int.TryParse((string)e.CommandArgument, out idArticulo))
+            try
             {
-                List<Articulo> articulosDisponibles = (List<Articulo>)Session["articulosDisponibles"];
-                Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
-                txtIdArticulo.Text = idArticulo.ToString();
-                txtCantidadArticulo.Text = "";
-                txtComentarioArticulo.Text = "";
-                lblTituloModalArticulo.Text = "Pedir " + articulo.Nombre;
-                lblPrecioArticulo.Text = "$" + articulo.Precio.ToString();
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
+                validarIngreso();
+                int idArticulo;
+                if (int.TryParse((string)e.CommandArgument, out idArticulo))
+                {
+                    List<Articulo> articulosDisponibles = (List<Articulo>)Session["articulosDisponibles"];
+                    Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
+                    txtIdArticulo.Text = idArticulo.ToString();
+                    txtCantidadArticulo.Text = "";
+                    txtComentarioArticulo.Text = "";
+                    lblTituloModalArticulo.Text = "Pedir " + articulo.Nombre;
+                    lblPrecioArticulo.Text = "$" + articulo.Precio.ToString();
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
+                }
+                limpiarTabs();
+                tabMenu.Attributes.Add("class", "nav-link active");
+                divMenu.Attributes.Add("class", "tab-pane active show");
             }
-            else
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
-            limpiarTabs();
-            tabMenu.Attributes.Add("class", "nav-link active");
-            divMenu.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnAgregarArticuloPedido_Click(object sender, EventArgs e)
         {
             validarIngreso();
-            int cantidad = Convert.ToInt32(txtCantidadArticulo.Text);
-            string comentarios = txtComentarioArticulo.Text;
-            int idArticulo = Convert.ToInt32(txtIdArticulo.Text);
-
-            // Info de artículos disponibles para pedir
-            List <Articulo> articulosDisponibles = (List<Articulo>) Session["articulosDisponibles"];
-            Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
-            if(articulo == null)
+            Page.Validate("ValidacionArticulo");
+            if (!Page.IsValid)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "erroArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
                 return;
             }
-            // Info de artículos en el pedido
-            List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-            ArticuloPedido articuloPedido = articulosPedido.FirstOrDefault(a => a.IdArticulo == idArticulo);
-            Pedido pedidoCliente = (Pedido) Session["pedidoCliente"];
-
-            if (articuloPedido != null)
+            try
             {
-                articuloPedido.Cantidad = articuloPedido.Cantidad + cantidad;
-                articuloPedido.Total = articulo.Precio * articuloPedido.Cantidad;
-                if (pedidoCliente != null)
+                int cantidad = Convert.ToInt32(txtCantidadArticulo.Text);
+                string comentarios = txtComentarioArticulo.Text;
+                int idArticulo = Convert.ToInt32(txtIdArticulo.Text);
+
+                // Info de artículos disponibles para pedir
+                List<Articulo> articulosDisponibles = (List<Articulo>)Session["articulosDisponibles"];
+                Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
+                if (articulo == null)
                 {
-                    editarArticuloPedido(articuloPedido);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "erroArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
+                    return;
+                }
+                // Info de artículos en el pedido
+                List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
+                ArticuloPedido articuloPedido = articulosPedido.FirstOrDefault(a => a.IdArticulo == idArticulo);
+                Pedido pedidoCliente = (Pedido)Session["pedidoCliente"];
+
+                if (articuloPedido != null)
+                {
+                    articuloPedido.Cantidad = articuloPedido.Cantidad + cantidad;
+                    articuloPedido.Total = articulo.Precio * articuloPedido.Cantidad;
+                    if (pedidoCliente != null)
+                    {
+                        editarArticuloPedido(articuloPedido);
+                    }
+                    else
+                    {
+                        btnHacerPedido.Visible = true;
+                    }
                 }
                 else
                 {
-                    btnHacerPedido.Visible = true;
+                    ArticuloPedido nuevoArticuloPedido = crearArticuloPedido(articulo, cantidad, comentarios);
+                    articulosPedido.Add(nuevoArticuloPedido);
+                    if (pedidoCliente != null)
+                    {
+                        guardarArticuloPedido(nuevoArticuloPedido, pedidoCliente.Id);
+                    }
+                    else
+                    {
+                        btnHacerPedido.Visible = true;
+                    }
                 }
-            }
-            else
-            {
-                ArticuloPedido nuevoArticuloPedido = crearArticuloPedido(articulo, cantidad, comentarios);
-                articulosPedido.Add(nuevoArticuloPedido);
+
+                recargarArticulosPedido(articulosPedido);
+
                 if (pedidoCliente != null)
                 {
-                    guardarArticuloPedido(nuevoArticuloPedido, pedidoCliente.Id);
+                    pedidoCliente.Total = articulosPedido.Sum(x => x.Total);
+                    Token token = (Token)Session["token"];
+                    _pedidoService = new PedidoService(token.access_token);
+                    bool editar = _pedidoService.Modificar(pedidoCliente, pedidoCliente.Id);
                 }
-                else
-                {
-                    btnHacerPedido.Visible = true;
-                }
+
+                Session["pedidoCliente"] = pedidoCliente;
+
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "creacionArticulo", "Swal.fire('Artículo agregado al pedido', '', 'success');", true);
+
+                limpiarTabs();
+                tabMiOrden.Attributes.Add("class", "nav-link active");
+                divMiOrden.Attributes.Add("class", "tab-pane active show");
             }
-
-            recargarArticulosPedido(articulosPedido);
-
-            if (pedidoCliente != null)
+            catch (Exception ex)
             {
-                pedidoCliente.Total = articulosPedido.Sum(x => x.Total); 
-                Token token = (Token)Session["token"];
-                _pedidoService = new PedidoService(token.access_token);
-                bool editar = _pedidoService.Modificar(pedidoCliente, pedidoCliente.Id);                
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
-
-            Session["pedidoCliente"] = pedidoCliente;
-
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "creacionArticulo", "Swal.fire('Artículo agregado al pedido', '', 'success');", true);
-
-            limpiarTabs();
-            tabMiOrden.Attributes.Add("class", "nav-link active");
-            divMiOrden.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnEliminarArticuloPedido_Click(object sender, RepeaterCommandEventArgs e)
@@ -419,16 +465,24 @@ namespace Restaurant.Web.Paginas.Autoservicio
         }
         protected void btnCerrarCuenta_Click(object sender, EventArgs e)
         {
-            validarIngreso();
-            Pedido pedido = (Pedido)Session["pedidoCliente"];
-            List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-            var totalPedido = articulosPedido.Sum(x => x.Total);
-            lblTotalPagar.Text = totalPedido.ToString();
-            upModalCerrarCuenta.Update();
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalCerrarCuenta').modal('show');", true);
-            limpiarTabs();
-            tabMiOrden.Attributes.Add("class", "nav-link active");
-            divMiOrden.Attributes.Add("class", "tab-pane active show");
+            try
+            {
+                validarIngreso();
+                Pedido pedido = (Pedido)Session["pedidoCliente"];
+                List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
+                var totalPedido = articulosPedido.Sum(x => x.Total);
+                lblTotalPagar.Text = totalPedido.ToString();
+                upModalCerrarCuenta.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalCerrarCuenta').modal('show');", true);
+                limpiarTabs();
+                tabMiOrden.Attributes.Add("class", "nav-link active");
+                divMiOrden.Attributes.Add("class", "tab-pane active show");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         protected void btnPagarEfectivo_Click(object sender, EventArgs e)
@@ -452,89 +506,115 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected void generarPago(int estadoPedido)
         {
             validarIngreso();
-            if(ddlTipoDocumentoPago.SelectedValue == "")
+            Page.Validate("ValidacionTipoDocumento");
+            if (!Page.IsValid)
+            {
+                return;
+            }
+            if (ddlTipoDocumentoPago.SelectedValue == "")
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "documentoPago", "Swal.fire('Debe seleccionar el tipo de documento de pago', '', 'warning');", true);
                 return;
             }
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalCerrarCuenta').modal('hide');", true);
-            Session["tipoDocumentoPago"] = Convert.ToInt32(ddlTipoDocumentoPago.SelectedValue);
-
-            Pedido pedido = (Pedido)Session["pedidoCliente"];
-            List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-            if(estadoPedido != EstadoPedido.cerradoMixto)
+            try
             {
-                pedido.IdEstadoPedido = estadoPedido;
+                Session["tipoDocumentoPago"] = Convert.ToInt32(ddlTipoDocumentoPago.SelectedValue);
+
+                Pedido pedido = (Pedido)Session["pedidoCliente"];
+                List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
+                if (estadoPedido != EstadoPedido.cerradoMixto)
+                {
+                    pedido.IdEstadoPedido = estadoPedido;
+                }
+                var totalPedido = articulosPedido.Sum(x => x.Total);
+                pedido.Total = totalPedido;
+                pedido.Reserva = null;
+                pedido.EstadoPedido = null;
+
+                Token token = (Token)Session["token"];
+                _pedidoService = new PedidoService(token.access_token);
+                bool editar = _pedidoService.Modificar(pedido, pedido.Id);
+
+                if (!editar)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al cerrar la cuenta', '', 'error');", true);
+                }
+                Session["pedidoCliente"] = pedido;
+                btnHacerPedido.Visible = false;
+
+                switch (estadoPedido)
+                {
+                    case EstadoPedido.cerradoConEfectivo:
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Por favor espere. Un garzón acudirá para realizar el pago', '', 'warning');", true);
+                        btnCerrarCuenta.Visible = false;
+                        break;
+                    case EstadoPedido.cerradoConTarjeta:
+                        Response.Redirect("/Paginas/Autoservicio/PagoTarjeta.aspx");
+                        btnCerrarCuenta.Visible = false;
+                        break;
+                    case EstadoPedido.cerradoMixto:
+                        lblTotalPagarCuenta.Text = pedido.Total.ToString();
+                        upModalPagoMixto.Update();
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPagoMixto", "$('#modalPagoMixto').modal('show');", true);
+                        break;
+                }
+
+                limpiarTabs();
+                tabMiOrden.Attributes.Add("class", "nav-link active");
+                divMiOrden.Attributes.Add("class", "tab-pane active show");
             }
-            var totalPedido = articulosPedido.Sum(x => x.Total);
-            pedido.Total = totalPedido;
-            pedido.Reserva = null;
-            pedido.EstadoPedido = null;
-
-            Token token = (Token)Session["token"];
-            _pedidoService = new PedidoService(token.access_token);
-            bool editar = _pedidoService.Modificar(pedido, pedido.Id);
-
-            if (!editar)
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al cerrar la cuenta', '', 'error');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
-            Session["pedidoCliente"] = pedido;
-            btnHacerPedido.Visible = false;
-
-            switch (estadoPedido)
-            {
-                case EstadoPedido.cerradoConEfectivo:
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Por favor espere. Un garzón acudirá para realizar el pago', '', 'warning');", true);
-                    btnCerrarCuenta.Visible = false;
-                    break;
-                case EstadoPedido.cerradoConTarjeta:
-                    Response.Redirect("/Paginas/Autoservicio/PagoTarjeta.aspx");
-                    btnCerrarCuenta.Visible = false;
-                    break;
-                case EstadoPedido.cerradoMixto:
-                    lblTotalPagarCuenta.Text = pedido.Total.ToString();
-                    upModalPagoMixto.Update();
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPagoMixto", "$('#modalPagoMixto').modal('show');", true);
-                    break;
-            }
-
-            limpiarTabs();
-            tabMiOrden.Attributes.Add("class", "nav-link active");
-            divMiOrden.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnMontosPagoMixto_Click(object sender, EventArgs e)
         {
             validarIngreso();
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalPagoMixto').modal('hide');", true);
-
-            Pedido pedido = (Pedido)Session["pedidoCliente"];
-            int montoEfectivo = Convert.ToInt32(txtMontoEfectivo.Text);
-            int montoTarjeta = Convert.ToInt32(txtMontoTarjeta.Text);
-            if ((montoEfectivo + montoTarjeta) != pedido.Total)
+            Page.Validate("ValidacionMontoPago");
+            if(!Page.IsValid)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('La suma de los montos ingresados debe ser igual al total a pagar', '', 'error').then(function(){$('#modalPagoMixto').modal('show');});", true);
                 return;
             }
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalPagoMixto').modal('hide');", true);
 
-            pedido.IdEstadoPedido = EstadoPedido.cerradoMixto;
-            pedido.Reserva = null;
-            pedido.EstadoPedido = null;
-
-            Token token = (Token)Session["token"];
-            _pedidoService = new PedidoService(token.access_token);
-            bool editar = _pedidoService.Modificar(pedido, pedido.Id);
-
-            if (!editar)
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al cerrar la cuenta', '', 'error');", true);
+                Pedido pedido = (Pedido)Session["pedidoCliente"];
+                int montoEfectivo = Convert.ToInt32(txtMontoEfectivo.Text);
+                int montoTarjeta = Convert.ToInt32(txtMontoTarjeta.Text);
+                if ((montoEfectivo + montoTarjeta) != pedido.Total)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('La suma de los montos ingresados debe ser igual al total a pagar', '', 'error').then(function(){$('#modalPagoMixto').modal('show');});", true);
+                    return;
+                }
+
+                pedido.IdEstadoPedido = EstadoPedido.cerradoMixto;
+                pedido.Reserva = null;
+                pedido.EstadoPedido = null;
+
+                Token token = (Token)Session["token"];
+                _pedidoService = new PedidoService(token.access_token);
+                bool editar = _pedidoService.Modificar(pedido, pedido.Id);
+
+                if (!editar)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al cerrar la cuenta', '', 'error');", true);
+                }
+                Session["pedidoCliente"] = pedido;
+                Session["montoTarjeta"] = montoTarjeta;
+                btnHacerPedido.Visible = false;
+                btnCerrarCuenta.Visible = false;
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Realice el pago con tarjeta mientras un garzón acude a su mesa para hacer el pago en efectivo', '', 'warning').then(function(){location.replace('/Paginas/Autoservicio/PagoTarjeta.aspx');});", true);
             }
-            Session["pedidoCliente"] = pedido;
-            Session["montoTarjeta"] = montoTarjeta;
-            btnHacerPedido.Visible = false;
-            btnCerrarCuenta.Visible = false;
-            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "pagarPedido", "Swal.fire('Realice el pago con tarjeta mientras un garzón acude a su mesa para hacer el pago en efectivo', '', 'warning').then(function(){location.replace('/Paginas/Autoservicio/PagoTarjeta.aspx');});", true);
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
