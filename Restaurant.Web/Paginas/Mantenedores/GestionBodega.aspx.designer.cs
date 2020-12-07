@@ -15,15 +15,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
     {
 
         /// <summary>
-        /// tabInventario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabInventario;
-
-        /// <summary>
         /// tabInsumos control.
         /// </summary>
         /// <remarks>
@@ -553,24 +544,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIdOrden;
-
-        /// <summary>
-        /// lblFechaHoraOrden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaHoraOrden;
-
-        /// <summary>
-        /// txtFechaHoraOrden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaHoraOrden;
 
         /// <summary>
         /// lblEstadoOrden control.

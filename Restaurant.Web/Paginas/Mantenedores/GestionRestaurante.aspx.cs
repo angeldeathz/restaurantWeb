@@ -16,6 +16,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
         private MesaService _mesaService;
         private EstadoReservaService _estadoReservaService;
         private EstadoMesaService _estadoMesaService;
+        private HorarioReservaService _horarioReservaService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,7 +30,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 _mesaService = new MesaService(token.access_token);
                 _estadoReservaService = new EstadoReservaService(token.access_token);
                 _estadoMesaService = new EstadoMesaService(token.access_token);
-
+                _horarioReservaService = new HorarioReservaService(token.access_token);
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
@@ -71,6 +72,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     ddlEstadoMesa.Items.Insert(0, new ListItem("Seleccionar", ""));
                     ddlEstadoMesa.SelectedIndex = 0;
                 }
+                List<HorarioReserva> horarioReserva = _horarioReservaService.Obtener();
+                if (horarioReserva != null && horarioReserva.Count > 0)
+                {
+                    listaHorariosReserva.DataSource = horarioReserva;
+                    listaHorariosReserva.DataBind();
+                }
             }
         }
 
@@ -91,9 +98,11 @@ namespace Restaurant.Web.Paginas.Mantenedores
             tabReservas.Attributes.Add("class", "nav-link");
             tabClientes.Attributes.Add("class", "nav-link");
             tabMesas.Attributes.Add("class", "nav-link");
+            tabHorarioReservas.Attributes.Add("class", "nav-link");
             divReservas.Attributes.Add("class", "tab-pane fade");
             divClientes.Attributes.Add("class", "tab-pane fade");
             divMesas.Attributes.Add("class", "tab-pane fade");
+            divHorarioReservas.Attributes.Add("class", "tab-pane fade");
         }
         protected void btnModalCrearReserva_Click(object sender, EventArgs e)
         {
@@ -301,8 +310,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarCliente_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
-
             Cliente cliente = new Cliente();
             Persona persona = new Persona();
 
@@ -440,6 +447,45 @@ namespace Restaurant.Web.Paginas.Mantenedores
             {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalMesa", "Swal.fire('Error al editar mesa', '', 'error');", true);
             }
+        }
+        protected void btnEditarHorarioReserva_Click(object sender, RepeaterCommandEventArgs e)
+        {      
+            int idHorario;
+            if (int.TryParse((string)e.CommandArgument, out idHorario))
+            {
+                TextBox txtDiaSemana = (TextBox)e.Item.FindControl("txtDiaSemana");
+                TextBox txtHoraInicio = (TextBox)e.Item.FindControl("txtHoraInicioHorario");
+                TextBox txtHoraFin = (TextBox)e.Item.FindControl("txtHoraFinHorario");
+                DateTime horaInicio = DateTime.Now;
+                DateTime horaFin = DateTime.Now;
+
+                int horaInicioHora = int.Parse(txtHoraInicio.Text.Substring(0, 2));
+                int horaInicioMinuto = int.Parse(txtHoraInicio.Text.Substring(3, 2));
+                TimeSpan tsHoraInicio = new TimeSpan(horaInicioHora, horaInicioMinuto, 0);
+                horaInicio = horaInicio.Date + tsHoraInicio;
+
+                int horaFinHora = int.Parse(txtHoraFin.Text.Substring(0, 2));
+                int horaFinMinuto = int.Parse(txtHoraFin.Text.Substring(3, 2));
+                TimeSpan tsHoraFin = new TimeSpan(horaFinHora, horaFinMinuto, 0);
+                horaFin = horaFin.Date + tsHoraFin;
+
+                HorarioReserva horario = new HorarioReserva();
+                horario.Id = idHorario;
+                horario.DiaSemana = int.Parse(txtDiaSemana.Text);
+                horario.HoraInicio = horaInicio;
+                horario.HoraFin = horaFin;
+
+                Token token = (Token)Session["token"];
+                _horarioReservaService = new HorarioReservaService(token.access_token);
+                bool editar = _horarioReservaService.Modificar(horario, idHorario);
+                if (editar)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarHorario", "Swal.fire('Horario guardado correctamente', '', 'success');", true);
+                }
+            }
+            limpiarTabs();
+            tabHorarioReservas.Attributes.Add("class", "nav-link active");
+            divHorarioReservas.Attributes.Add("class", "tab-pane fade active show");           
         }
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {

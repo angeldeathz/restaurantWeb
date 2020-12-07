@@ -357,7 +357,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtCantidadArticulo;
 
         /// <summary>
-        /// Control lblComentarioArticulo.
+        /// ValidacionCantidad control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionCantidad;
+
+        /// <summary>
+        /// lblComentarioArticulo control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -420,7 +429,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumentoPago;
 
         /// <summary>
-        /// Control btnPagarEfectivo.
+        /// ValidadorTipoDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidadorTipoDocumento;
+
+        /// <summary>
+        /// btnPagarEfectivo control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -492,7 +510,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtMontoEfectivo;
 
         /// <summary>
-        /// Control lblMontoTarjeta.
+        /// ValidacionMontoEfectivo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionMontoEfectivo;
+
+        /// <summary>
+        /// lblMontoTarjeta control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -510,7 +537,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.WebControls.TextBox txtMontoTarjeta;
 
         /// <summary>
-        /// Control btnMontosPagoMixto.
+        /// ValidacionMontoTarjeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionMontoTarjeta;
+
+        /// <summary>
+        /// btnMontosPagoMixto control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

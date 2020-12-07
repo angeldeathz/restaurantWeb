@@ -9,6 +9,7 @@
           <a class="nav-link active" id="tabReservas" data-toggle="pill" href="#divReservas" role="tab" aria-controls="divReservas" aria-selected="false" runat="server">Reservas</a>
           <a class="nav-link" id="tabClientes" data-toggle="pill" href="#divClientes" role="tab" aria-controls="divClientes" aria-selected="false" runat="server">Clientes</a>
           <a class="nav-link" id="tabMesas" data-toggle="pill" href="#divMesas" role="tab" aria-controls="divMesas" aria-selected="false" runat="server">Mesas</a>
+          <a class="nav-link" id="tabHorarioReservas" data-toggle="pill" href="#divHorarioReservas" role="tab" aria-controls="divHorarioReservas" aria-selected="false" runat="server">Horario de reservas</a>
         </div>
       </div>
       <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
@@ -132,6 +133,44 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
           </div>
+
+           <div class="tab-pane fade" id="divHorarioReservas" role="tabpanel" aria-labelledby="tabHorarioReservas" runat="server" ClientIDMode="Static">
+              <asp:UpdatePanel ID="upHorarioReserva" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
+                 <ContentTemplate> 
+                  <div class="table-responsive pt-3">
+                      <asp:Repeater ID="listaHorariosReserva" runat="server"  OnItemCommand="btnEditarHorarioReserva_Click">
+                          <HeaderTemplate>
+                                <table border="1" class="table">
+                                <tr>
+                                    <td><b>Día de la semana</b></td>
+                                    <td><b>Hora inicio</b></td>
+                                    <td><b>Hora cierre</b></td>
+                                    <td><b>Acciones</b></td>
+                                </tr>
+                            </HeaderTemplate>          
+                            <ItemTemplate>
+                                <tr>
+                                <td> <%# Eval("NombreDiaSemana") %> </td>
+                                   <asp:TextBox ID="txtDiaSemana" runat="server" Text='<%# Eval("DiaSemana") %>' Visible="false"></asp:TextBox>
+                                <td>
+                                  <asp:TextBox ID="txtHoraInicioHorario" runat="server" Text='<%# Eval("HoraInicioTime") %>' TextMode="Time"></asp:TextBox>
+                                </td>
+                                <td> 
+                                  <asp:TextBox ID="txtHoraFinHorario" runat="server" Text='<%# Eval("HoraFinTime") %>' TextMode="Time"></asp:TextBox>
+                                </td>
+                                <td><asp:LinkButton ID="btnEditarHorarioReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                        Guardar cambios</asp:LinkButton></td>
+                                </tr>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </table>
+                            </FooterTemplate>
+                      </asp:Repeater>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+          </div>
+
         </div>
       </div>
     </div>

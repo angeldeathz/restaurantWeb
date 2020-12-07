@@ -228,7 +228,10 @@
                             Precio unitario: <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio"></asp:Label>
                         </div>
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label><asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label>
+                          <asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="ValidacionCantidad" runat="server" ControlToValidate="txtCantidadArticulo" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
@@ -272,10 +275,12 @@
                 </div> 
                 <div class="row">
                   <div class="col-12 col-sm-6">
-                      <asp:Label runat="server" Text="Tipo de documento de pago" CssClass="text-left"></asp:Label>
+                      <asp:Label runat="server" Text="Tipo de documento de pago" CssClass="text-left"></asp:Label>                    
                   </div>
                   <div class="col-12 col-sm-6">
-                        <asp:DropDownList ID="ddlTipoDocumentoPago" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlTipoDocumentoPago" runat="server" CssClass="form-control"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="ValidadorTipoDocumento" runat="server" ControlToValidate="ddlTipoDocumentoPago" Display="Dynamic"
+                    CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de documento" ValidationGroup="ValidacionTipoDocumento"></asp:RequiredFieldValidator>
                   </div>
                 </div>
                 <div class="row">
@@ -318,16 +323,20 @@
                 <div class="row">
                   <div class="col-12 col-md-6 form-group">
                     <asp:Label ID="lblMontoEfectivo" runat="server" CssClass="h5 d-inline-block">En efectivo:</asp:Label>
-						        <asp:TextBox ID="txtMontoEfectivo" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
-                   </div>
-                    <div class="col-12 col-md-6 form-group">
-                      <asp:Label ID="lblMontoTarjeta" runat="server" CssClass="h5 d-inline-block">Con tarjeta:</asp:Label>
-						          <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
-                    </div>
-                    <div class="col-12 text-right">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                      <asp:Button ID="btnMontosPagoMixto" runat="server" CssClass="btn btn-info" Text="Pagar" OnClick="btnMontosPagoMixto_Click" />
-                    </div>
+						        <asp:TextBox ID="txtMontoEfectivo" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="ValidacionMontoEfectivo" runat="server" ControlToValidate="txtMontoEfectivo" Display="Dynamic"
+                    CssClass="text-danger" ErrorMessage="Debe ingresar el monto con efectivo" ValidationGroup="ValidacionMontoPago"></asp:RequiredFieldValidator>
+                  </div>
+                  <div class="col-12 col-md-6 form-group">
+                    <asp:Label ID="lblMontoTarjeta" runat="server" CssClass="h5 d-inline-block">Con tarjeta:</asp:Label>
+						        <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="ValidacionMontoTarjeta" runat="server" ControlToValidate="txtMontoTarjeta" Display="Dynamic"
+                    CssClass="text-danger" ErrorMessage="Debe ingresar el monto con tarjeta " ValidationGroup="ValidacionMontoPago"></asp:RequiredFieldValidator>
+                  </div>
+                  <div class="col-12 text-right">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <asp:Button ID="btnMontosPagoMixto" runat="server" CssClass="btn btn-info" Text="Pagar" OnClick="btnMontosPagoMixto_Click" />
+                  </div>
 					      </div>
               </div>
              </div>

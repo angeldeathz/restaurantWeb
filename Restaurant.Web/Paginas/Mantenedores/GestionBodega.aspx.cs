@@ -91,7 +91,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
         }
         public void limpiarTabs()
         {
-            tabInventario.Attributes.Add("class", "nav-link");
             tabInsumos.Attributes.Add("class", "nav-link");
             tabProveedores.Attributes.Add("class", "nav-link");
             tabOrdenes.Attributes.Add("class", "nav-link");
@@ -352,7 +351,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
             tituloModalOrden.Text = "Crear Orden Proveedor";
             btnCrearOrden.Visible = true;
             btnEditarOrden.Visible = false;
-            txtFechaHoraOrden.Text = "";
             txtTotalOrden.Text = "";
             ddlEstadoOrden.SelectedValue = "";
             ddlProveedorOrden.SelectedValue = "";
@@ -390,7 +388,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     btnCrearOrden.Visible = false;
                     btnEditarOrden.Visible = true;
                     txtIdOrden.Text = ordenProveedor.Id.ToString();
-                    txtFechaHoraOrden.Text = ordenProveedor.FechaHora.ToString("yyyy-MM-ddTHH:mm");
                     txtTotalOrden.Text = ordenProveedor.Total.ToString();
                     ddlEstadoOrden.SelectedValue = estadoOrden.Id.ToString();
                     ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
@@ -424,7 +421,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             var usuario = (Usuario)Session["usuario"];
 
             OrdenProveedor ordenProveedor = new OrdenProveedor();
-            ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.FechaHora = DateTime.Now;
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
@@ -463,7 +460,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             ValidarSesion();
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.Id = int.Parse(txtIdOrden.Text);
-            ordenProveedor.FechaHora = Convert.ToDateTime(txtFechaHoraOrden.Text);
+            ordenProveedor.FechaHora = DateTime.Now;
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
             ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
             ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
