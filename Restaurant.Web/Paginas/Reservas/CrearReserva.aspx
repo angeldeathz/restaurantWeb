@@ -37,15 +37,21 @@
             <div class="row">
                  <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblFecha" runat="server" Text="Fecha"></asp:Label>
-                    <!--<asp:TextBox ID="txtFechaF" runat="server" TextMode="Date" CssClass="form-control" OnTextChanged="txtFecha_TextChanged"></asp:TextBox>-->
-                    <asp:TextBox ID="txtFecha" runat="server" TextMode="DateTimeLocal" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtFecha" runat="server" TextMode="Date" CssClass="form-control" OnTextChanged="txtFecha_TextChanged" AutoPostBack="true"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="ValidacionFecha" runat="server" ControlToValidate="txtFecha" Display="Dynamic"
                     CssClass="text-danger" ErrorMessage="Debe seleccionar una fecha" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
 
                 </div> 
                 <div class="col-12 col-md-6 form-group my-1 text-left">
-                   <!-- <asp:Label ID="lblHora" runat="server" Text="Hora"></asp:Label>
-                    <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-control"></asp:DropDownList>-->
+                    <asp:Label ID="lblHora" runat="server" Text="Hora"></asp:Label>
+                    <div class="row">
+                      <div class="col">
+                        <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-control"></asp:DropDownList>
+                      </div>
+                      <div class="col">
+                        <asp:DropDownList ID="ddlMinuto" runat="server" CssClass="form-control"></asp:DropDownList>
+                      </div>
+                    </div>
                 </div> 
             </div>
 
