@@ -203,9 +203,17 @@ namespace Restaurant.Web.Paginas.Reservas
             int horaFinHora = int.Parse(horarioReserva.HoraFinTime.Substring(0, 2));
 
             List<string> horas = new List<string>();
+            DateTime hoy = DateTime.Now;
             for (int i = horaInicioHora; i <= horaFinHora; i++)
             {
                 string x = i < 10 ? "0" + i.ToString() : i.ToString();
+                if(fecha.Date == hoy.Date)
+                {
+                    if(int.Parse(x) <= int.Parse(hoy.ToShortTimeString().Substring(0,2)))
+                    {
+                        continue;
+                    }
+                }
                 horas.Add(x);
             }
             ddlHora.DataSource = horas;
@@ -220,43 +228,6 @@ namespace Restaurant.Web.Paginas.Reservas
             }
             ddlMinuto.DataSource = minutos;
             ddlMinuto.DataBind();
-        }
-
-        public List<int> getHorasDisponibles(DateTime fecha)
-        {
-            int diaSemana = (int)fecha.DayOfWeek;
-            Token token = (Token)Session["token"];
-            _horarioReservaService = new HorarioReservaService(token.access_token);
-            List<HorarioReserva> horarioReserva = _horarioReservaService.Obtener();
-            if (horarioReserva == null || horarioReserva.Count == 0)
-            {
-                return new List<int>();
-            }
-            HorarioReserva horarioDia = horarioReserva.FirstOrDefault(x => x.DiaSemana == diaSemana);
-            int maximoComensales = 10; //CONTAR COMENSALES TODAS LAS MESAS
-            int horaInicio = Convert.ToInt32(horarioDia.HoraInicio.ToShortTimeString().Substring(0, 2));
-            int horaFin = Convert.ToInt32(horarioDia.HoraFin.ToShortTimeString().Substring(0, 2));
-            List<int> horasDisponibles = new List<int>();
-            for (int i = horaInicio; i < horaFin; i++)
-            {
-                horasDisponibles.Add(i);
-            }
-              
-            List<Reserva> reservas = _reservaService.Obtener();
-            if (reservas != null && reservas.Count > 0)
-            {
-                foreach (int hora in horasDisponibles)
-                {
-                    List<Reserva> reservasHora = reservas.Where(x => x.FechaReserva.Date == fecha
-                                                                && x.FechaReserva.ToString("HH") == hora.ToString()).ToList(); ;
-                    var comensalesHora = reservasHora.Sum(x => x.CantidadComensales);
-                    if(comensalesHora >= maximoComensales)
-                    {
-                        horasDisponibles.Remove(hora);
-                    }
-                }
-            }
-            return horasDisponibles;
-        }
+        }        
     }
 }
