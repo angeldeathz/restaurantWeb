@@ -68,7 +68,11 @@ namespace Restaurant.Web.Paginas.Reservas
             DateTime fechaReserva;
             try
             {
-                 fechaReserva = Convert.ToDateTime(txtFecha.Text);
+                fechaReserva = Convert.ToDateTime(txtFecha.Text);
+                int hora = int.Parse(ddlHora.Text);
+                int minuto = int.Parse(ddlMinuto.Text);
+                TimeSpan tsHora = new TimeSpan(hora, minuto, 0);
+                fechaReserva = fechaReserva.Date + tsHora;
             }
             catch (Exception ex)
             {
@@ -94,7 +98,7 @@ namespace Restaurant.Web.Paginas.Reservas
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorMesa", "Swal.fire('No se encontró una mesa disponible. Seleccione otra fecha u hora', '', 'error');", true);
                     return;
                 }
-                idReserva = guardarReserva(idCliente, idMesa);
+                idReserva = guardarReserva(idCliente, idMesa, fechaReserva);
             }
             catch (Exception ex)
             {
@@ -160,14 +164,8 @@ namespace Restaurant.Web.Paginas.Reservas
             return idCliente;
         }
 
-        protected int guardarReserva(int idCliente, int idMesa)
+        protected int guardarReserva(int idCliente, int idMesa, DateTime fecha)
         {
-            DateTime fecha = Convert.ToDateTime(txtFecha.Text);
-            int hora = int.Parse(ddlHora.Text);
-            int minuto = int.Parse(ddlMinuto.Text);
-            TimeSpan tsHora = new TimeSpan(hora, minuto, 0);
-            fecha = fecha.Date + tsHora;
-
             Reserva reserva = new Reserva();
             reserva.FechaReserva = fecha;
             reserva.CantidadComensales = int.Parse(txtComensales.Text);

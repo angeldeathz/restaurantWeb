@@ -51,6 +51,9 @@
                       <div class="col">
                         <asp:DropDownList ID="ddlMinuto" runat="server" CssClass="form-control"></asp:DropDownList>
                       </div>
+                      <div class="col">
+                         Hrs
+                      </div>
                     </div>
                 </div> 
             </div>
