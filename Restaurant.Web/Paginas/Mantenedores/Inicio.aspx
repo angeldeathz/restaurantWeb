@@ -28,6 +28,7 @@
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Reservas</a></li>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Clientes</a></li>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Mesas</a></li>
+                        <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Horario de Reservas</a></li>
                     </ul>
                 </li>
                 <li class="list-group-item" runat="server" id="linkCocina">
