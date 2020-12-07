@@ -6,7 +6,6 @@
       </div>
       <div class="col-12">
         <div class="nav nav-tabs flex-column flex-md-row" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
-          <!--<a class="nav-link active" id="tabInventario" data-toggle="pill" href="#divInventario" role="tab" aria-controls="divInventario" aria-selected="true" runat="server">Inventario</a>-->
           <a class="nav-link active" id="tabInsumos" data-toggle="pill" href="#divInsumos" role="tab" aria-controls="divInsumos" aria-selected="false" runat="server">Insumos</a>
           <a class="nav-link" id="tabProveedores" data-toggle="pill" href="#divProveedores" role="tab" aria-controls="divProveedores" aria-selected="false" runat="server">Proveedores</a>
           <a class="nav-link" id="tabOrdenes" data-toggle="pill" href="#divOrdenes" role="tab" aria-controls="divOrdenes" aria-selected="false" runat="server">Órdenes</a>
@@ -281,10 +280,6 @@
                   <div class="modal-body py-4">                      
                     <asp:TextBox ID="txtIdOrden" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
                     <div class="row">
-                        <div class="col-12 col-md-3">
-                            <asp:Label ID="lblFechaHoraOrden" runat="server" Text="Fecha"></asp:Label>
-                            <asp:TextBox ID="txtFechaHoraOrden" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
-                        </div>  
                         <div class="col-12 col-sm-3">
                             <asp:Label ID="lblEstadoOrden" runat="server" Text="Estado"></asp:Label>
                             <asp:DropDownList ID="ddlEstadoOrden" runat="server" CssClass="form-control"></asp:DropDownList>

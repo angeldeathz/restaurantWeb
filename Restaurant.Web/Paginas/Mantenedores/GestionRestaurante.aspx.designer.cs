@@ -42,6 +42,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.HtmlControls.HtmlAnchor tabMesas;
 
         /// <summary>
+        /// tabHorarioReservas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor tabHorarioReservas;
+
+        /// <summary>
         /// divReservas control.
         /// </summary>
         /// <remarks>
@@ -175,6 +184,33 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater listaMesas;
+
+        /// <summary>
+        /// divHorarioReservas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divHorarioReservas;
+
+        /// <summary>
+        /// upHorarioReserva control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upHorarioReserva;
+
+        /// <summary>
+        /// listaHorariosReserva control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater listaHorariosReserva;
 
         /// <summary>
         /// upModalReserva control.
