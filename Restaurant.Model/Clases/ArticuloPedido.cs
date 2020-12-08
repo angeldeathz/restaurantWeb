@@ -16,7 +16,7 @@ namespace Restaurant.Model.Clases
         public int IdEstadoArticuloPedido { get; set; }
         public Pedido Pedido { get; set; }
         public Articulo Articulo { get; set; }
-        public EstadoArticuloPedido EstadoArticuloPedido { get { return EstadosArticuloPedido.LastOrDefault(); } }
+        public EstadoArticuloPedido EstadoArticuloPedido { get { return EstadosArticuloPedido != null ? EstadosArticuloPedido.LastOrDefault() : null; } }
         public List<EstadoArticuloPedido> EstadosArticuloPedido { get; set; }
         public string Comentarios { get; set; }
     }

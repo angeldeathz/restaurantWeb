@@ -25,7 +25,7 @@ namespace Restaurant.Model.Clases
         public Proveedor Proveedor { get; set; }
         public Usuario Usuario { get; set; }
         public int IdEstadoOrden { get; set; }
-        public EstadoOrden EstadoOrden { get { return EstadosOrdenProveedor.LastOrDefault(); } }
+        public EstadoOrden EstadoOrden { get { return EstadosOrdenProveedor != null ? EstadosOrdenProveedor.LastOrDefault() : null; } }
         public List<EstadoOrden> EstadosOrdenProveedor { get; set; }
     }
 }
