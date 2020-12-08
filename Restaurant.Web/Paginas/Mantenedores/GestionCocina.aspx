@@ -22,18 +22,20 @@
                                     Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                             </div>
                             <div class="table-responsive pt-3">
-                                <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
-                                    <HeaderTemplate>
-                                        <table border="1" class="table">
-                                            <tr>
-                                                <td><b>Id</b></td>
-                                                <td><b>Fecha Inicio</b></td>
-                                                <td><b>Fecha Fin</b></td>
-                                                <td><b>Total</b></td>
-                                                <td><b>Cliente</b></td>
-                                                <td><b>Estado</b></td>
-                                                <td><b>Acciones</b></td>
-                                            </tr>
+                              <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
+                                <HeaderTemplate>
+                                  <table class="table styled-table">
+                                    <thead>
+                                      <tr>
+                                          <th><b>Id</b></th>
+                                          <th><b>Fecha Inicio</b></th>
+                                          <th><b>Fecha Fin</b></th>
+                                          <th><b>Total</b></th>
+                                          <th><b>Cliente</b></th>
+                                          <th><b>Estado</b></th>
+                                          <th><b>Acciones</b></th>
+                                      </tr>
+                                      </thead>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:HiddenField ID="idPedido" runat="server" Value='<%# Eval("Id") %>' />
@@ -67,34 +69,36 @@
                                     Text="No existen Artículos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                             </div>
                             <div class="table-responsive pt-3">
-                                <asp:Repeater ID="listaArticulos" runat="server" OnItemCommand="btnModalEditarArticulo_Click">
-                                    <HeaderTemplate>
-                                        <table border="1" class="table">
-                                            <tr>
-                                                <td><b>Nombre</b></td>
-                                                <td><b>Descripción</b></td>
-                                                <td><b>Precio</b></td>
-                                                <td><b>Tipo de Consumo</b></td>
-                                                <td><b>Estado</b></td>
-                                                <td><b>Acciones</b></td>
-                                            </tr>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td><%# Eval("Nombre") %> </td>
-                                            <td><%# Eval("Descripcion") %> </td>
-                                            <td><%# Eval("Precio") %> </td>
-                                            <td><%# Eval("TipoConsumo.Nombre") %> </td>
-                                            <td><%# Eval("EstadoArticulo.Nombre") %> </td>
-                                            <td>
-                                                <asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server">
-                                    Editar</asp:LinkButton></td>
-                                        </tr>
-                                    </ItemTemplate>
-                                    <FooterTemplate>
-                                        </table>
-                                    </FooterTemplate>
-                                </asp:Repeater>
+                              <asp:Repeater ID="listaArticulos" runat="server" OnItemCommand="btnModalEditarArticulo_Click">
+                                <HeaderTemplate>
+                                  <table class="table styled-table">
+                                    <thead>
+                                      <tr>
+                                          <th><b>Nombre</b></th>
+                                          <th><b>Descripción</b></th>
+                                          <th><b>Precio</b></th>
+                                          <th><b>Tipo de Consumo</b></th>
+                                          <th><b>Estado</b></th>
+                                          <th><b>Acciones</b></th>
+                                      </tr>
+                                      </thead>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td><%# Eval("Nombre") %> </td>
+                                        <td><%# Eval("Descripcion") %> </td>
+                                        <td><%# Eval("Precio") %> </td>
+                                        <td><%# Eval("TipoConsumo.Nombre") %> </td>
+                                        <td><%# Eval("EstadoArticulo.Nombre") %> </td>
+                                        <td>
+                                            <asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server">
+                                Editar</asp:LinkButton></td>
+                                    </tr>
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                    </table>
+                                </FooterTemplate>
+                              </asp:Repeater>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>

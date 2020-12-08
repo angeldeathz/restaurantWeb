@@ -609,7 +609,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         public string GetImage(string file)
         {
             if (string.IsNullOrEmpty(file))
-                return null;
+               file = "sin_imagen.jpg";
 
             var path = Server.MapPath("~/Images/LocalStorage/");
             var exists = Directory.Exists(path);
@@ -617,12 +617,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (!exists)
                 Directory.CreateDirectory(path);
 
-            var fileInfo = new FileInfo(file);
-            var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
-
-            File.Copy(file, pathToCreateFile, true);
-
-            return $"../../Images/LocalStorage/{fileInfo.Name}";
+            return $"../../Images/LocalStorage/{file}";
         }
     }
 }

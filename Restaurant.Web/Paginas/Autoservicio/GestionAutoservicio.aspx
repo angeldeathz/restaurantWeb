@@ -41,7 +41,7 @@
                                     <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                                   </div>
                                   <div class="row mb-4">
-                                    <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                                    <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                     <div class="col-12 col-md-7 col-lg-9">
                                       <p class="text-justify"><%# Eval("Descripcion") %></p>
                                       <h5>$ <%# Eval("Precio") %></h5>
@@ -67,7 +67,7 @@
                                 <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                               </div>
                               <div class="row mb-4">
-                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                                <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
                                   <h5>$ <%# Eval("Precio") %></h5>
@@ -91,7 +91,7 @@
                               <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                             </div>
                             <div class="row mb-4">
-                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                              <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
                                 <h5>$ <%# Eval("Precio") %></h5>
@@ -115,7 +115,7 @@
                               <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                             </div>
                             <div class="row mb-4">
-                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                              <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
                                 <h5>$ <%# Eval("Precio") %></h5>
@@ -139,7 +139,7 @@
                                 <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                               </div>
                               <div class="row mb-4">
-                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                                <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
                                   <h5>$ <%# Eval("Precio") %></h5>
@@ -166,15 +166,17 @@
                     <div class="table-responsive pt-3">
                       <asp:Repeater ID="listaArticulosPedido" runat="server" OnItemCommand="btnEliminarArticulo_Click">
                       <HeaderTemplate>
-                          <table border="1" class="table">
-                          <tr>
-                              <td><b>Nombre</b></td>
-                              <td><b>Precio</b></td>
-                              <td><b>Cantidad</b></td>
-                              <td><b>Total</b></td>
-                              <td><b>Estado</b></td>
-                              <td><b>Acciones</b></td>
-                          </tr>
+                        <table class="table styled-table">
+                          <thead>
+                            <tr>
+                                <th><b>Artículo</b></th>
+                                <th><b>Precio</b></th>
+                                <th><b>Cantidad</b></th>
+                                <th><b>Total</b></th>
+                                <th><b>Estado</b></th>
+                                <th><b>Acciones</b></th>
+                            </tr>
+                          </thead>
                       </HeaderTemplate>          
                       <ItemTemplate>
                           <tr>

@@ -837,7 +837,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         private string UploadFileToStorage(FileUpload file)
         {
-            var path = "C:\\Storage\\Images";
+            var path = Server.MapPath("~/Images/LocalStorage/");
             var exists = Directory.Exists(path);
 
             if (!exists)
@@ -846,9 +846,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             var pathFile = $"{path}\\{file.FileName}";
             file.PostedFile.SaveAs(pathFile);
 
-            //pathFile = pathFile.Replace("\\", "/");
-
-            return pathFile;
+            return file.FileName;
         }
     }
 }

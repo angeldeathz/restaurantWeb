@@ -23,17 +23,19 @@
                         Text="No existen Reservas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                   </div>    
                   <div class="table-responsive pt-3">
-                     <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
-                        <HeaderTemplate>
-                            <table border="1" class="table">
+                    <asp:Repeater ID="listaReservas" runat="server" OnItemCommand="btnModalEditarReserva_Click">
+                      <HeaderTemplate>
+                        <table class="table styled-table">
+                          <thead>
                             <tr>
-                                <td><b>Id</b></td>
-                                <td><b>Fecha y Hora</b></td>
-                                <td><b>Mesa</b></td>
-                                <td><b>Comensales</b></td>
-                                <td><b>Cliente</b></td>
-                                <td><b>Acciones</b></td>
+                                <th><b>Id</b></th>
+                                <th><b>Fecha y Hora</b></th>
+                                <th><b>Mesa</b></th>
+                                <th><b>Comensales</b></th>
+                                <th><b>Cliente</b></th>
+                                <th><b>Acciones</b></th>
                             </tr>
+                           </thead>
                         </HeaderTemplate>          
                         <ItemTemplate>
                             <asp:HiddenField ID="idReserva" runat="server"  Value='<%# Eval("Id") %>'/>
@@ -66,16 +68,18 @@
                   <div class="table-responsive pt-3">
                    <asp:Repeater ID="listaClientes" runat="server"  OnItemCommand="btnModalEditarCliente_Click">
                     <HeaderTemplate>
-                        <table border="1" class="table">
-                        <tr>
-                            <td><b>Rut</b></td>
-                            <td><b>Nombre</b></td>
-                            <td><b>Apellido</b></td>
-                            <td><b>Email</b></td>
-                            <td><b>Teléfono</b></td>
-                            <td><b>Es persona natural</b></td>
-                            <td><b>Acciones</b></td>
-                        </tr>
+                      <table class="table styled-table">
+                        <thead>
+                          <tr>
+                              <th><b>Rut</b></th>
+                              <th><b>Nombre</b></th>
+                              <th><b>Apellido</b></th>
+                              <th><b>Email</b></th>
+                              <th><b>Teléfono</b></th>
+                              <th><b>Es persona natural</b></th>
+                              <th><b>Acciones</b></th>
+                          </tr>
+                        </thead>
                     </HeaderTemplate>          
                     <ItemTemplate>
                         <tr>
@@ -106,28 +110,30 @@
                         Text="No existen Mesas para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                   </div>   
                   <div class="table-responsive pt-3">
-                      <asp:Repeater ID="listaMesas" runat="server"  OnItemCommand="btnModalEditarMesa_Click">
-                          <HeaderTemplate>
-                                <table border="1" class="table">
-                                <tr>
-                                    <td><b>Nombre</b></td>
-                                    <td><b>Comensales</b></td>
-                                    <td><b>Estado</b></td>
-                                    <td><b>Acciones</b></td>
-                                </tr>
-                            </HeaderTemplate>          
-                            <ItemTemplate>
-                                <tr>
-                                <td> <%# Eval("Nombre") %> </td>
-                                <td> <%# Eval("CantidadComensales") %> </td>
-                                <td> <%# Eval("EstadoMesa.Nombre") %> </td>
-                                <td><asp:LinkButton ID="btnModalEditarMesa" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                        Editar</asp:LinkButton></td>
-                                </tr>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                </table>
-                            </FooterTemplate>
+                     <asp:Repeater ID="listaMesas" runat="server"  OnItemCommand="btnModalEditarMesa_Click">
+                       <HeaderTemplate>
+                          <table class="table styled-table">
+                            <thead>
+                              <tr>
+                                  <th><b>Nombre</b></th>
+                                  <th><b>Comensales</b></th>
+                                  <th><b>Estado</b></th>
+                                  <th><b>Acciones</b></th>
+                              </tr>
+                            </thead>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                            <tr>
+                            <td> <%# Eval("Nombre") %> </td>
+                            <td> <%# Eval("CantidadComensales") %> </td>
+                            <td> <%# Eval("EstadoMesa.Nombre") %> </td>
+                            <td><asp:LinkButton ID="btnModalEditarMesa" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                    Editar</asp:LinkButton></td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
                       </asp:Repeater>
                     </div>
                 </ContentTemplate>
@@ -138,35 +144,37 @@
               <asp:UpdatePanel ID="upHorarioReserva" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                  <ContentTemplate> 
                   <div class="table-responsive pt-3">
-                      <asp:Repeater ID="listaHorariosReserva" runat="server"  OnItemCommand="btnEditarHorarioReserva_Click">
-                          <HeaderTemplate>
-                                <table border="1" class="table">
-                                <tr>
-                                    <td><b>Día de la semana</b></td>
-                                    <td><b>Hora inicio</b></td>
-                                    <td><b>Hora cierre</b></td>
-                                    <td><b>Acciones</b></td>
-                                </tr>
-                            </HeaderTemplate>          
-                            <ItemTemplate>
-                                <tr>
-                                <td> <%# Eval("NombreDiaSemana") %> </td>
-                                   <asp:TextBox ID="txtDiaSemana" runat="server" Text='<%# Eval("DiaSemana") %>' Visible="false"></asp:TextBox>
-                                <td>
-                                  <asp:TextBox ID="txtHoraInicioHorario" runat="server" Text='<%# Eval("HoraInicioTime") %>' TextMode="Time"></asp:TextBox>
-                                </td>
-                                <td> 
-                                  <asp:TextBox ID="txtHoraFinHorario" runat="server" Text='<%# Eval("HoraFinTime") %>' TextMode="Time"></asp:TextBox>
-                                </td>
-                                <td><asp:LinkButton ID="btnEditarHorarioReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
-                                        Guardar cambios</asp:LinkButton></td>
-                                </tr>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                </table>
-                            </FooterTemplate>
-                      </asp:Repeater>
-                    </div>
+                    <asp:Repeater ID="listaHorariosReserva" runat="server"  OnItemCommand="btnEditarHorarioReserva_Click">
+                      <HeaderTemplate>
+                        <table class="table styled-table">
+                          <thead>
+                            <tr>
+                                <th><b>Día de la semana</b></th>
+                                <th><b>Hora inicio</b></th>
+                                <th><b>Hora cierre</b></th>
+                                <th><b>Acciones</b></th>
+                            </tr>
+                          </thead>
+                        </HeaderTemplate>          
+                        <ItemTemplate>
+                          <tr>
+                          <td> <%# Eval("NombreDiaSemana") %> </td>
+                              <asp:TextBox ID="txtDiaSemana" runat="server" Text='<%# Eval("DiaSemana") %>' Visible="false"></asp:TextBox>
+                          <td>
+                            <asp:TextBox ID="txtHoraInicioHorario" runat="server" Text='<%# Eval("HoraInicioTime") %>' TextMode="Time"></asp:TextBox>
+                          </td>
+                          <td> 
+                            <asp:TextBox ID="txtHoraFinHorario" runat="server" Text='<%# Eval("HoraFinTime") %>' TextMode="Time"></asp:TextBox>
+                          </td>
+                          <td><asp:LinkButton ID="btnEditarHorarioReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                                  Guardar cambios</asp:LinkButton></td>
+                          </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                  </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
           </div>
