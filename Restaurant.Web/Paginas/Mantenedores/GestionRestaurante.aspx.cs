@@ -67,7 +67,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<EstadoMesa> estadoMesa = _estadoMesaService.Obtener();
                 if (estadoMesa != null && estadoMesa.Count > 0)
                 {
-
                     ddlEstadoMesa.DataSource = estadoMesa;
                     ddlEstadoMesa.DataTextField = "Nombre";
                     ddlEstadoMesa.DataValueField = "Id";
@@ -78,6 +77,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<HorarioReserva> horarioReserva = _horarioReservaService.Obtener();
                 if (horarioReserva != null && horarioReserva.Count > 0)
                 {
+                    var horarioDomingo = horarioReserva.FirstOrDefault(x => x.DiaSemana == 0);
+                    horarioReserva.RemoveAt(horarioReserva.FindIndex(x => x.DiaSemana == 0));
+                    horarioReserva.Add(horarioDomingo);
                     listaHorariosReserva.DataSource = horarioReserva;
                     listaHorariosReserva.DataBind();
                 }
