@@ -107,11 +107,15 @@
 .imagen-transbank.pagar {
     background-image: url("../Images/transbank_pagar_sxxi.png");
     height: 538px;
+    width: 1030px;
+    margin: auto;
 }
 
 .imagen-transbank.pagado {
     background-image: url("../Images/transbank_pagado_sxxi.png");
     height: 632px;
+    width: 900px;
+    margin: auto;
 }
 
 .monto-transbank {
@@ -119,13 +123,13 @@
 }
 
 .monto-transbank.pagar {
-    padding-top: 158px;
+    padding-top: 135px;
     padding-left: 295px;
 }
 
 .monto-transbank.pagado {
     padding-top: 202px;
-    padding-left: 355px;
+    padding-left: 135px;
 }
 
 .fecha-transbank {
