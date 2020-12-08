@@ -20,60 +20,68 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                ValidarSesion();
-
-                Token token = (Token)Session["token"];
-                _proveedorService = new ProveedorService(token.access_token);
-                _insumoService = new InsumoService(token.access_token);
-                _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
-                _ordenProveedorService = new OrdenProveedorService(token.access_token);
-                _estadoOrdenService = new EstadoOrdenService(token.access_token);
-
-                List<Insumo> insumos = _insumoService.Obtener();
-                if (insumos != null && insumos.Count > 0)
+                if (!IsPostBack)
                 {
-                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
-                    actualizarDdlInsumos(insumos);
-                }
+                    ValidarSesion();
 
-                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
-                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
-                {
-                    var ordenesProveedorOrdenados = ordenesProveedor.OrderByDescending(x => x.Id).ToList();
-                    actualizarRepeater(listaOrdenes, ordenesProveedorOrdenados, listaOrdenesVacia);
-                }
+                    Token token = (Token)Session["token"];
+                    _proveedorService = new ProveedorService(token.access_token);
+                    _insumoService = new InsumoService(token.access_token);
+                    _unidadDeMedidaService = new UnidadDeMedidaService(token.access_token);
+                    _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                    _estadoOrdenService = new EstadoOrdenService(token.access_token);
 
-                List<Proveedor> proveedores = _proveedorService.Obtener();
-                if (proveedores != null && proveedores.Count > 0)
-                {
-                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
-                    actualizarDdlProveedoresInsumos(proveedores);
-                    actualizarDdlProveedoresOrdenes(proveedores);
-                }
+                    List<Insumo> insumos = _insumoService.Obtener();
+                    if (insumos != null && insumos.Count > 0)
+                    {
+                        actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                        actualizarDdlInsumos(insumos);
+                    }
 
-                List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
-                if (estadosOrden != null && estadosOrden.Count > 0)
-                {
-                    ddlEstadoOrden.DataSource = estadosOrden;
-                    ddlEstadoOrden.DataTextField = "Nombre";
-                    ddlEstadoOrden.DataValueField = "Id";
-                    ddlEstadoOrden.DataBind();
-                    ddlEstadoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlEstadoOrden.SelectedIndex = 0;
-                }
+                    List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                    if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                    {
+                        var ordenesProveedorOrdenados = ordenesProveedor.OrderByDescending(x => x.Id).ToList();
+                        actualizarRepeater(listaOrdenes, ordenesProveedorOrdenados, listaOrdenesVacia);
+                    }
 
-                List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
-                if (unidades != null && unidades.Count > 0)
-                {
-                    ddlUnidadMedida.DataSource = unidades;
-                    ddlUnidadMedida.DataTextField = "Nombre";
-                    ddlUnidadMedida.DataValueField = "Id";
-                    ddlUnidadMedida.DataBind();
-                    ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
-                    ddlUnidadMedida.SelectedIndex = 0;
+                    List<Proveedor> proveedores = _proveedorService.Obtener();
+                    if (proveedores != null && proveedores.Count > 0)
+                    {
+                        actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                        actualizarDdlProveedoresInsumos(proveedores);
+                        actualizarDdlProveedoresOrdenes(proveedores);
+                    }
+
+                    List<EstadoOrden> estadosOrden = _estadoOrdenService.Obtener();
+                    if (estadosOrden != null && estadosOrden.Count > 0)
+                    {
+                        ddlEstadoOrden.DataSource = estadosOrden;
+                        ddlEstadoOrden.DataTextField = "Nombre";
+                        ddlEstadoOrden.DataValueField = "Id";
+                        ddlEstadoOrden.DataBind();
+                        ddlEstadoOrden.Items.Insert(0, new ListItem("Seleccionar", ""));
+                        ddlEstadoOrden.SelectedIndex = 0;
+                    }
+
+                    List<UnidadMedida> unidades = _unidadDeMedidaService.Obtener();
+                    if (unidades != null && unidades.Count > 0)
+                    {
+                        ddlUnidadMedida.DataSource = unidades;
+                        ddlUnidadMedida.DataTextField = "Nombre";
+                        ddlUnidadMedida.DataValueField = "Id";
+                        ddlUnidadMedida.DataBind();
+                        ddlUnidadMedida.Items.Insert(0, new ListItem("Seleccionar", ""));
+                        ddlUnidadMedida.SelectedIndex = 0;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
 
@@ -123,95 +131,133 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         protected void btnModalEditarInsumo_Click(object sender, RepeaterCommandEventArgs e)
         {
-            ValidarSesion();
-            int idInsumo;
-            if (int.TryParse((string)e.CommandArgument, out idInsumo))
+            try
             {
-                Token token = (Token)Session["token"];
-                _insumoService = new InsumoService(token.access_token);
-                Insumo insumo = _insumoService.Obtener(idInsumo);
-                if (insumo != null)
+                ValidarSesion();
+                int idInsumo;
+                if (int.TryParse((string)e.CommandArgument, out idInsumo))
                 {
-                    tituloModalInsumo.Text = "Editar Insumo";
-                    btnCrearInsumo.Visible = false;
-                    btnEditarInsumo.Visible = true;
-                    txtIdInsumo.Text = insumo.Id.ToString();
-                    txtNombreInsumo.Text = insumo.Nombre;
-                    txtStockActual.Text = insumo.StockActual.ToString();
-                    txtStockCritico.Text = insumo.StockCritico.ToString();
-                    txtStockOptimo.Text = insumo.StockOptimo.ToString();
-                    ddlProveedorInsumo.SelectedValue = insumo.IdProveedor.ToString();
-                    ddlUnidadMedida.SelectedValue = insumo.IdUnidadDeMedida.ToString();
+                    Token token = (Token)Session["token"];
+                    _insumoService = new InsumoService(token.access_token);
+                    Insumo insumo = _insumoService.Obtener(idInsumo);
+                    if (insumo != null)
+                    {
+                        tituloModalInsumo.Text = "Editar Insumo";
+                        btnCrearInsumo.Visible = false;
+                        btnEditarInsumo.Visible = true;
+                        txtIdInsumo.Text = insumo.Id.ToString();
+                        txtNombreInsumo.Text = insumo.Nombre;
+                        txtStockActual.Text = insumo.StockActual.ToString();
+                        txtStockCritico.Text = insumo.StockCritico.ToString();
+                        txtStockOptimo.Text = insumo.StockOptimo.ToString();
+                        ddlProveedorInsumo.SelectedValue = insumo.IdProveedor.ToString();
+                        ddlUnidadMedida.SelectedValue = insumo.IdUnidadDeMedida.ToString();
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
-                    upModalInsumo.Update();
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
+                        upModalInsumo.Update();
+                    }
                 }
+                limpiarTabs();
+                tabInsumos.Attributes.Add("class", "nav-link active");
+                divInsumos.Attributes.Add("class", "tab-pane fade active show");
             }
-            limpiarTabs();
-            tabInsumos.Attributes.Add("class", "nav-link active");
-            divInsumos.Attributes.Add("class", "tab-pane fade active show");
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         protected void btnCrearInsumo_Click(object sender, EventArgs e)
         {
-            ValidarSesion();
-            Insumo insumo = new Insumo();
-            insumo.Nombre = txtNombreInsumo.Text;
-            insumo.StockActual = int.Parse(txtStockActual.Text);
-            insumo.StockCritico = int.Parse(txtStockCritico.Text);
-            insumo.StockOptimo = int.Parse(txtStockOptimo.Text);
-            insumo.IdProveedor = int.Parse(ddlProveedorInsumo.SelectedValue);
-            insumo.IdUnidadDeMedida = int.Parse(ddlUnidadMedida.SelectedValue);
-
-            Token token = (Token)Session["token"];
-            _insumoService = new InsumoService(token.access_token);
-            int idInsumo = _insumoService.Guardar(insumo);
-            if (idInsumo != 0)
+            Page.Validate("ValidacionInsumo");
+            if (!Page.IsValid)
             {
-                List<Insumo> insumos = _insumoService.Obtener();
-                if (insumos != null && insumos.Count > 0)
-                {
-                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
-                    upListaInsumos.Update();
-                    actualizarDdlInsumos(insumos);
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "Swal.fire('Insumo creado', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
+                upModalInsumo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al crear insumo', '', 'error');", true);
+                ValidarSesion();
+                Insumo insumo = new Insumo();
+                insumo.Nombre = txtNombreInsumo.Text;
+                insumo.StockActual = int.Parse(txtStockActual.Text);
+                insumo.StockCritico = int.Parse(txtStockCritico.Text);
+                insumo.StockOptimo = int.Parse(txtStockOptimo.Text);
+                insumo.IdProveedor = int.Parse(ddlProveedorInsumo.SelectedValue);
+                insumo.IdUnidadDeMedida = int.Parse(ddlUnidadMedida.SelectedValue);
+
+                Token token = (Token)Session["token"];
+                _insumoService = new InsumoService(token.access_token);
+                int idInsumo = _insumoService.Guardar(insumo);
+                if (idInsumo != 0)
+                {
+                    List<Insumo> insumos = _insumoService.Obtener();
+                    if (insumos != null && insumos.Count > 0)
+                    {
+                        actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                        upListaInsumos.Update();
+                        actualizarDdlInsumos(insumos);
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearInsumo", "Swal.fire('Insumo creado', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al crear insumo', '', 'error');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
         protected void btnEditarInsumo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            Insumo insumo = new Insumo();
-            insumo.Id = int.Parse(txtIdInsumo.Text);
-            insumo.Nombre = txtNombreInsumo.Text;
-            insumo.StockActual = int.Parse(txtStockActual.Text);
-            insumo.StockCritico = int.Parse(txtStockCritico.Text);
-            insumo.StockOptimo = int.Parse(txtStockOptimo.Text);
-            insumo.IdProveedor = int.Parse(ddlProveedorInsumo.SelectedValue);
-            insumo.IdUnidadDeMedida = int.Parse(ddlUnidadMedida.SelectedValue);
-
-            Token token = (Token)Session["token"];
-            _insumoService = new InsumoService(token.access_token);
-            bool editar = _insumoService.Modificar(insumo, insumo.Id);
-            if (editar)
+            Page.Validate("ValidacionInsumo");
+            if (!Page.IsValid)
             {
-                List<Insumo> insumos = _insumoService.Obtener();
-                if (insumos != null && insumos.Count > 0)
-                {
-                    actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
-                    upListaInsumos.Update();
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "Swal.fire('Insumo editado', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
+                upModalInsumo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al editar insumo', '', 'error');", true);
+                Insumo insumo = new Insumo();
+                insumo.Id = int.Parse(txtIdInsumo.Text);
+                insumo.Nombre = txtNombreInsumo.Text;
+                insumo.StockActual = int.Parse(txtStockActual.Text);
+                insumo.StockCritico = int.Parse(txtStockCritico.Text);
+                insumo.StockOptimo = int.Parse(txtStockOptimo.Text);
+                insumo.IdProveedor = int.Parse(ddlProveedorInsumo.SelectedValue);
+                insumo.IdUnidadDeMedida = int.Parse(ddlUnidadMedida.SelectedValue);
+
+                Token token = (Token)Session["token"];
+                _insumoService = new InsumoService(token.access_token);
+                bool editar = _insumoService.Modificar(insumo, insumo.Id);
+                if (editar)
+                {
+                    List<Insumo> insumos = _insumoService.Obtener();
+                    if (insumos != null && insumos.Count > 0)
+                    {
+                        actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
+                        upListaInsumos.Update();
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarInsumo", "Swal.fire('Insumo editado', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('hide');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "Swal.fire('Error al editar insumo', '', 'error');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
 
@@ -240,110 +286,147 @@ namespace Restaurant.Web.Paginas.Mantenedores
         }
         protected void btnModalEditarProveedor_Click(object source, RepeaterCommandEventArgs e)
         {
-            ValidarSesion();
-            int idProveedor;
-            if (int.TryParse((string)e.CommandArgument, out idProveedor))
+            try
             {
-                Token token = (Token)Session["token"];
-                _proveedorService = new ProveedorService(token.access_token);
-                Proveedor proveedor = _proveedorService.Obtener(idProveedor);
-                if (proveedor != null)
+                ValidarSesion();
+                int idProveedor;
+                if (int.TryParse((string)e.CommandArgument, out idProveedor))
                 {
-                    tituloModalProveedor.Text = "Editar Proveedor";
-                    btnCrearProveedor.Visible = false;
-                    btnEditarProveedor.Visible = true;
-                    txtIdProveedor.Text = proveedor.Id.ToString();
-                    txtNombreProveedor.Text = proveedor.Persona.Nombre;
-                    txtApellidoProveedor.Text = proveedor.Persona.Apellido;
-                    txtRutProveedor.Text = proveedor.Persona.Rut.ToString();
-                    txtDigitoVerificadorProveedor.Text = proveedor.Persona.DigitoVerificador.ToString();
-                    txtEmailProveedor.Text = proveedor.Persona.Email;
-                    txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
-                    txtDireccionProveedor.Text = proveedor.Direccion;
-                    chkEsPersonaJuridica.Checked = true;
-                    if (proveedor.Persona.EsPersonaNatural == '0')
+                    Token token = (Token)Session["token"];
+                    _proveedorService = new ProveedorService(token.access_token);
+                    Proveedor proveedor = _proveedorService.Obtener(idProveedor);
+                    if (proveedor != null)
                     {
-                        chkEsPersonaJuridica.Checked = false;
+                        tituloModalProveedor.Text = "Editar Proveedor";
+                        btnCrearProveedor.Visible = false;
+                        btnEditarProveedor.Visible = true;
+                        txtIdProveedor.Text = proveedor.Id.ToString();
+                        txtNombreProveedor.Text = proveedor.Persona.Nombre;
+                        txtApellidoProveedor.Text = proveedor.Persona.Apellido;
+                        txtRutProveedor.Text = proveedor.Persona.Rut.ToString();
+                        txtDigitoVerificadorProveedor.Text = proveedor.Persona.DigitoVerificador.ToString();
+                        txtEmailProveedor.Text = proveedor.Persona.Email;
+                        txtTelefonoProveedor.Text = proveedor.Persona.Telefono.ToString();
+                        txtDireccionProveedor.Text = proveedor.Direccion;
+                        chkEsPersonaJuridica.Checked = true;
+                        if (proveedor.Persona.EsPersonaNatural == '0')
+                        {
+                            chkEsPersonaJuridica.Checked = false;
+                        }
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
+                        upModalProveedor.Update();
                     }
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
-                    upModalProveedor.Update();
                 }
+                limpiarTabs();
+                tabProveedores.Attributes.Add("class", "nav-link active");
+                divProveedores.Attributes.Add("class", "tab-pane fade active show");
             }
-            limpiarTabs();
-            tabProveedores.Attributes.Add("class", "nav-link active");
-            divProveedores.Attributes.Add("class", "tab-pane fade active show");
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         protected void btnCrearProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
-            Proveedor proveedor = new Proveedor();
-            proveedor.Persona = new Persona();
-            proveedor.Persona.Nombre = txtNombreProveedor.Text;
-            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
-            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
-            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
-            proveedor.Persona.Email = txtEmailProveedor.Text;
-            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
-            proveedor.Direccion = txtDireccionProveedor.Text;
-
-            Token token = (Token)Session["token"];
-            _proveedorService = new ProveedorService(token.access_token);
-            int idProveedor = _proveedorService.Guardar(proveedor);
-
-            if (idProveedor != 0)
+            Page.Validate("ValidacionProveedor");
+            if (!Page.IsValid)
             {
-                List<Proveedor> proveedores = _proveedorService.Obtener();
-                if (proveedores != null && proveedores.Count > 0)
-                {
-                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
-                    upListaProveedores.Update();
-                    actualizarDdlProveedoresInsumos(proveedores);
-                    actualizarDdlProveedoresOrdenes(proveedores);
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "Swal.fire('Proveedor creado', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                upModalProveedor.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al crear proveedor', '', 'error');", true);
+                Proveedor proveedor = new Proveedor();
+                proveedor.Persona = new Persona();
+                proveedor.Persona.Nombre = txtNombreProveedor.Text;
+                proveedor.Persona.Apellido = txtApellidoProveedor.Text;
+                proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
+                proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+                proveedor.Persona.Email = txtEmailProveedor.Text;
+                proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+                proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
+                proveedor.Direccion = txtDireccionProveedor.Text;
+
+                Token token = (Token)Session["token"];
+                _proveedorService = new ProveedorService(token.access_token);
+                int idProveedor = _proveedorService.Guardar(proveedor);
+
+                if (idProveedor != 0)
+                {
+                    List<Proveedor> proveedores = _proveedorService.Obtener();
+                    if (proveedores != null && proveedores.Count > 0)
+                    {
+                        actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                        upListaProveedores.Update();
+                        actualizarDdlProveedoresInsumos(proveedores);
+                        actualizarDdlProveedoresOrdenes(proveedores);
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearProveedor", "Swal.fire('Proveedor creado', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al crear proveedor', '', 'error');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
 
         protected void btnEditarProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            Proveedor proveedor = new Proveedor();
-            proveedor.Persona = new Persona();
-            proveedor.Id = int.Parse(txtIdProveedor.Text);
-            proveedor.Persona.Nombre = txtNombreProveedor.Text;
-            proveedor.Persona.Apellido = txtApellidoProveedor.Text;
-            proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
-            proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
-            proveedor.Persona.Email = txtEmailProveedor.Text;
-            proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
-            proveedor.Direccion = txtDireccionProveedor.Text;
-            proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
-
-            Token token = (Token)Session["token"];
-            _proveedorService = new ProveedorService(token.access_token);
-            bool editar = _proveedorService.Modificar(proveedor, proveedor.Id);
-            if (editar)
+            Page.Validate("ValidacionProveedor");
+            if (!Page.IsValid)
             {
-                List<Proveedor> proveedores = _proveedorService.Obtener();
-                if (proveedores != null && proveedores.Count > 0)
-                {
-                    actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
-                    upListaProveedores.Update();
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarProveedor", "Swal.fire('Proveedor editado', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                upModalProveedor.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al editar proveedor', '', 'error');", true);
+                Proveedor proveedor = new Proveedor();
+                proveedor.Persona = new Persona();
+                proveedor.Id = int.Parse(txtIdProveedor.Text);
+                proveedor.Persona.Nombre = txtNombreProveedor.Text;
+                proveedor.Persona.Apellido = txtApellidoProveedor.Text;
+                proveedor.Persona.Rut = int.Parse(txtRutProveedor.Text);
+                proveedor.Persona.DigitoVerificador = txtDigitoVerificadorProveedor.Text;
+                proveedor.Persona.Email = txtEmailProveedor.Text;
+                proveedor.Persona.Telefono = int.Parse(txtTelefonoProveedor.Text);
+                proveedor.Direccion = txtDireccionProveedor.Text;
+                proveedor.Persona.EsPersonaNatural = chkEsPersonaJuridica.Checked ? '0' : '1';
+
+                Token token = (Token)Session["token"];
+                _proveedorService = new ProveedorService(token.access_token);
+                bool editar = _proveedorService.Modificar(proveedor, proveedor.Id);
+                if (editar)
+                {
+                    List<Proveedor> proveedores = _proveedorService.Obtener();
+                    if (proveedores != null && proveedores.Count > 0)
+                    {
+                        actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
+                        upListaProveedores.Update();
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarProveedor", "Swal.fire('Proveedor editado', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('hide');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "Swal.fire('Error al editar proveedor', '', 'error');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
         protected void btnModalCrearOrden_Click(object sender, EventArgs e)
@@ -375,158 +458,208 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         protected void btnModalEditarOrden_Click(object sender, RepeaterCommandEventArgs e)
         {
-            ValidarSesion();
-            int idOrdenProveedor;
-            if (int.TryParse((string)e.CommandArgument, out idOrdenProveedor))
+            try
             {
-                Token token = (Token)Session["token"];
-                _ordenProveedorService = new OrdenProveedorService(token.access_token);
-                OrdenProveedor ordenProveedor = _ordenProveedorService.Obtener(idOrdenProveedor);
-                EstadoOrden estadoOrden = ordenProveedor.EstadosOrdenProveedor.LastOrDefault();
-                if (ordenProveedor != null)
+                ValidarSesion();
+                int idOrdenProveedor;
+                if (int.TryParse((string)e.CommandArgument, out idOrdenProveedor))
                 {
-                    tituloModalOrden.Text = "Editar OrdenProveedor";
-                    btnCrearOrden.Visible = false;
-                    btnEditarOrden.Visible = true;
-                    txtIdOrden.Text = ordenProveedor.Id.ToString();
-                    txtTotalOrden.Text = ordenProveedor.Total.ToString();
-                    ddlEstadoOrden.SelectedValue = estadoOrden.Id.ToString();
-                    ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
-                    ddlInsumoOrden.SelectedValue = "";
-                    txtPrecioInsumoOrden.Text = "";
-                    txtCantidadInsumoOrden.Text = "";
+                    Token token = (Token)Session["token"];
+                    _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                    OrdenProveedor ordenProveedor = _ordenProveedorService.Obtener(idOrdenProveedor);
+                    EstadoOrden estadoOrden = ordenProveedor.EstadosOrdenProveedor.LastOrDefault();
+                    if (ordenProveedor != null)
+                    {
+                        tituloModalOrden.Text = "Editar OrdenProveedor";
+                        btnCrearOrden.Visible = false;
+                        btnEditarOrden.Visible = true;
+                        txtIdOrden.Text = ordenProveedor.Id.ToString();
+                        txtTotalOrden.Text = ordenProveedor.Total.ToString();
+                        ddlEstadoOrden.SelectedValue = estadoOrden.Id.ToString();
+                        ddlProveedorOrden.SelectedValue = ordenProveedor.IdProveedor.ToString();
+                        ddlInsumoOrden.SelectedValue = "";
+                        txtPrecioInsumoOrden.Text = "";
+                        txtCantidadInsumoOrden.Text = "";
 
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
-                    upModalOrden.Update();
-
-                    /*
-                    Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
-                    actualizarRepeater(listaInsumosOrden, new List<DetalleOrdenProveedor>(), listaInsumosOrdenVacia);
-                    lblTotalOrden.Text = "";           
-                    txtTotalOrden.Text = "";
-                    upInsumosOrden.Update();
-                    */
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                        upModalOrden.Update();
+                    }
                 }
-            }
-            Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
+                Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
 
-            limpiarTabs();
-            tabOrdenes.Attributes.Add("class", "nav-link active");
-            divOrdenes.Attributes.Add("class", "tab-pane active show");
+                limpiarTabs();
+                tabOrdenes.Attributes.Add("class", "nav-link active");
+                divOrdenes.Attributes.Add("class", "tab-pane active show");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         protected void btnCrearOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
-            var usuario = (Usuario)Session["usuario"];
-
-            OrdenProveedor ordenProveedor = new OrdenProveedor();
-            ordenProveedor.FechaHora = DateTime.Now;
-            ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
-            ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
-            ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
-            ordenProveedor.IdUsuario = usuario.Id;
-
-            Token token = (Token)Session["token"];
-            _ordenProveedorService = new OrdenProveedorService(token.access_token);
-            int idOrdenProveedor = _ordenProveedorService.Guardar(ordenProveedor);
-            if (idOrdenProveedor != 0)
+            Page.Validate("ValidacionOrden");
+            if (!Page.IsValid)
+            {
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
+            }
+            try
             {
                 List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
-                foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
+                if(listaInsumos != null && listaInsumos.Count == 0)
                 {
-                    detalleOrdenProveedor.IdOrdenProveedor = idOrdenProveedor;
-                    _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
-                    int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "insumosOrden", "Swal.fire('Debe agregar al menos un insumo', '', 'error');", true);
+                    return;
                 }
+                var usuario = (Usuario)Session["usuario"];
+                OrdenProveedor ordenProveedor = new OrdenProveedor();
+                ordenProveedor.FechaHora = DateTime.Now;
+                ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
+                ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
+                ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
+                ordenProveedor.IdUsuario = usuario.Id;
 
-                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
-                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                Token token = (Token)Session["token"];
+                _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                int idOrdenProveedor = _ordenProveedorService.Guardar(ordenProveedor);
+                if (idOrdenProveedor != 0)
                 {
-                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
-                    upListaOrdenes.Update();
+                    foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
+                    {
+                        detalleOrdenProveedor.IdOrdenProveedor = idOrdenProveedor;
+                        detalleOrdenProveedor.Insumo = null;
+                        detalleOrdenProveedor.OrdenProveedor = null;
+                        _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
+                        int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
+                    }
+
+                    List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                    if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                    {
+                        actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
+                        upListaOrdenes.Update();
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearOrden", "Swal.fire('Orden al Proveedor creada', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
                 }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearOrden", "Swal.fire('Orden al Proveedor creada', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al crear Orden al Proveedor', '', 'error');", true);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al crear Orden al Proveedor', '', 'error');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
 
         protected void btnEditarOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-            OrdenProveedor ordenProveedor = new OrdenProveedor();
-            ordenProveedor.Id = int.Parse(txtIdOrden.Text);
-            ordenProveedor.FechaHora = DateTime.Now;
-            ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
-            ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
-            ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
-
-            Token token = (Token)Session["token"];
-            _ordenProveedorService = new OrdenProveedorService(token.access_token);
-            bool editar = _ordenProveedorService.Modificar(ordenProveedor, ordenProveedor.Id);
-            if (editar)
+            Page.Validate("ValidacionOrden");
+            if (!Page.IsValid)
             {
-                List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
-                //SE DEBERÍAN ELIMINAR LOS insumosOrdenProveedor que ya existen, asociados?
-                foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
-                {
-                    detalleOrdenProveedor.IdOrdenProveedor = ordenProveedor.Id;
-                    _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
-                    int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
-                }
-                List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
-                if (ordenesProveedor != null && ordenesProveedor.Count > 0)
-                {
-                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
-                    upListaOrdenes.Update();
-                }
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarOrden", "Swal.fire('Orden al Proveedor editada', '', 'success');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al editar Orden al Proveedor', '', 'error');", true);
+                OrdenProveedor ordenProveedor = new OrdenProveedor();
+                ordenProveedor.Id = int.Parse(txtIdOrden.Text);
+                ordenProveedor.FechaHora = DateTime.Now;
+                ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
+                ordenProveedor.IdEstadoOrden = int.Parse(ddlEstadoOrden.SelectedValue);
+                ordenProveedor.IdProveedor = int.Parse(ddlProveedorOrden.SelectedValue);
+
+                Token token = (Token)Session["token"];
+                _ordenProveedorService = new OrdenProveedorService(token.access_token);
+                bool editar = _ordenProveedorService.Modificar(ordenProveedor, ordenProveedor.Id);
+                if (editar)
+                {
+                    List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+                    //SE DEBERÍAN ELIMINAR LOS insumosOrdenProveedor que ya existen, asociados?
+                    foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
+                    {
+                        detalleOrdenProveedor.IdOrdenProveedor = ordenProveedor.Id;
+                        detalleOrdenProveedor.Insumo = null;
+                        detalleOrdenProveedor.OrdenProveedor = null;
+                        _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
+                        int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
+                    }
+                    List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
+                    if (ordenesProveedor != null && ordenesProveedor.Count > 0)
+                    {
+                        actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
+                        upListaOrdenes.Update();
+                    }
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarOrden", "Swal.fire('Orden al Proveedor editada', '', 'success');", true);
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('hide');", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "Swal.fire('Error al editar Orden al Proveedor', '', 'error');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
             }
         }
         protected void btnAgregarInsumoOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
-            DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
-            detalleOrdenProveedor.Insumo = new Insumo();
-
-            detalleOrdenProveedor.Insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
-            detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
-            detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);
-            detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
-            detalleOrdenProveedor.Total = detalleOrdenProveedor.Precio * detalleOrdenProveedor.Cantidad;
-
-            List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
-            var insumoExiste = listaInsumos.FirstOrDefault(a => a.IdInsumo == detalleOrdenProveedor.IdInsumo);
-            if (insumoExiste != null)
+            Page.Validate("ValidacionInsumoOrden");
+            if (!Page.IsValid)
             {
-                insumoExiste.Cantidad = insumoExiste.Cantidad + detalleOrdenProveedor.Cantidad;
-                insumoExiste.Total = insumoExiste.Precio * insumoExiste.Cantidad;
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
             }
-            else
+            try
             {
-                listaInsumos.Add(detalleOrdenProveedor);
-            }
-            Session["detalleOrdenProveedor"] = listaInsumos;
-            actualizarRepeater(listaInsumosOrden, listaInsumos, listaInsumosOrdenVacia);
-            var totalOrdenProveedor = listaInsumos.Sum(x => x.Total);
-            lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
-            txtTotalOrden.Text = totalOrdenProveedor.ToString();
-            upInsumosOrden.Update();
+                DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
+                detalleOrdenProveedor.Insumo = new Insumo();
+                detalleOrdenProveedor.Insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
+                detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
+                detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);
+                detalleOrdenProveedor.Cantidad = int.Parse(txtCantidadInsumoOrden.Text);
+                detalleOrdenProveedor.Total = detalleOrdenProveedor.Precio * detalleOrdenProveedor.Cantidad;
 
-            limpiarTabs();
-            tabOrdenes.Attributes.Add("class", "nav-link active");
-            divOrdenes.Attributes.Add("class", "tab-pane active show");
+                List<DetalleOrdenProveedor> listaInsumos = (List<DetalleOrdenProveedor>)Session["detalleOrdenProveedor"];
+                var insumoExiste = listaInsumos.FirstOrDefault(a => a.IdInsumo == detalleOrdenProveedor.IdInsumo);
+                if (insumoExiste != null)
+                {
+                    insumoExiste.Cantidad = insumoExiste.Cantidad + detalleOrdenProveedor.Cantidad;
+                    insumoExiste.Total = insumoExiste.Precio * insumoExiste.Cantidad;
+                }
+                else
+                {
+                    listaInsumos.Add(detalleOrdenProveedor);
+                }
+                Session["detalleOrdenProveedor"] = listaInsumos;
+                actualizarRepeater(listaInsumosOrden, listaInsumos, listaInsumosOrdenVacia);
+                var totalOrdenProveedor = listaInsumos.Sum(x => x.Total);
+                lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
+                txtTotalOrden.Text = totalOrdenProveedor.ToString();
+                upInsumosOrden.Update();
+
+                limpiarTabs();
+                tabOrdenes.Attributes.Add("class", "nav-link active");
+                divOrdenes.Attributes.Add("class", "tab-pane active show");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                return;
+            }
         }
 
         protected void btnEliminarInsumoOrden_Click(object sender, RepeaterCommandEventArgs e)

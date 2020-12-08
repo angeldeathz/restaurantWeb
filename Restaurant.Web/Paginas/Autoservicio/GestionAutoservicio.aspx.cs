@@ -17,7 +17,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloService _articuloService;
         private TipoDocumentoPagoService _tipoDocumentoPagoService;
         private DocumentoPagoService _documentoPagoService;
-
+        private MedioPagoDocumentoService _medioPagoDocumentoService;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -608,8 +608,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Token token = (Token)Session["token"];
             _documentoPagoService = new DocumentoPagoService(token.access_token);
             List<DocumentoPago> listaDocumentoPago = _documentoPagoService.Obtener();
-            DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido && x.IdTipoDocumentoPago != MedioPago.efectivo);
+            DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido);
             if(documentoPago == null)
+            {
+                return false;
+            }
+            _medioPagoDocumentoService = new MedioPagoDocumentoService(token.access_token);
+            List<MedioPagoDocumento> listaMedioPagoDocumentos = _medioPagoDocumentoService.Obtener();
+            MedioPagoDocumento medioPagoDocumento = listaMedioPagoDocumentos.FirstOrDefault(x => x.IdDocumentoPago == documentoPago.Id
+                                                                                              && x.IdMedioPago != MedioPago.efectivo);
+            if (medioPagoDocumento == null)
             {
                 return false;
             }
@@ -641,7 +649,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         public string GetImage(string file)
         {
             if (string.IsNullOrEmpty(file))
-               file = "sin_imagen.jpg";
+               file = "C:\\Storage\\Images\\sin_imagen.jpg";
 
             var path = Server.MapPath("~/Images/LocalStorage/");
             var exists = Directory.Exists(path);
@@ -649,7 +657,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (!exists)
                 Directory.CreateDirectory(path);
 
-            return $"../../Images/LocalStorage/{file}";
+            var fileInfo = new FileInfo(file);
+            var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
+
+            File.Copy(file, pathToCreateFile, true);
+            return $"../../Images/LocalStorage/{fileInfo.Name}";
         }
     }
 }

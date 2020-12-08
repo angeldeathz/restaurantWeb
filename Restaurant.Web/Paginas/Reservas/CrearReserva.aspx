@@ -20,11 +20,11 @@
             <div class="row">
                  <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblEmailIngreso" runat="server" Text="E-mail"></asp:Label>
-                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" CssClass="form-control" ></asp:TextBox>
                     <asp:RequiredFieldValidator ID="ValidacionEmail" runat="server" ControlToValidate="txtEmail" Display="Dynamic"
                     CssClass="text-danger" ErrorMessage="Debe ingresar su e-mail" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="ValidacionEmailValido" runat="server" CssClass="text-danger"
-                    ErrorMessage="El e-mail ingresado es inválido"  ControlToValidate="txtEmail" Display="Dynamic"
+                    ErrorMessage="El e-mail ingresado es inválido" ControlToValidate="txtEmail" Display="Dynamic" ValidationGroup="Validacion"
                     ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></asp:RegularExpressionValidator>
                 </div> 
                 <div class="col-12 col-md-6 form-group my-1 text-left">

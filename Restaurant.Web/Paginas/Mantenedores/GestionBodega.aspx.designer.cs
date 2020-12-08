@@ -231,6 +231,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtNombreInsumo;
 
         /// <summary>
+        /// ValidacionNombreInsumo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionNombreInsumo;
+
+        /// <summary>
         /// lblStockActual control.
         /// </summary>
         /// <remarks>
@@ -247,6 +256,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStockActual;
+
+        /// <summary>
+        /// ValidacionStockActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionStockActual;
 
         /// <summary>
         /// lblStockCritico control.
@@ -267,6 +285,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtStockCritico;
 
         /// <summary>
+        /// ValidacionStockCritico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionStockCritico;
+
+        /// <summary>
         /// lblStockOptimo control.
         /// </summary>
         /// <remarks>
@@ -283,6 +310,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStockOptimo;
+
+        /// <summary>
+        /// ValidacionStockOptimo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionStockOptimo;
 
         /// <summary>
         /// lblProveedorInsumo control.
@@ -303,6 +339,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.DropDownList ddlProveedorInsumo;
 
         /// <summary>
+        /// ValidacionProveedorInsumo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionProveedorInsumo;
+
+        /// <summary>
         /// lblUnidadMedida control.
         /// </summary>
         /// <remarks>
@@ -319,6 +364,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlUnidadMedida;
+
+        /// <summary>
+        /// ValidacionUnidadMedida control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionUnidadMedida;
 
         /// <summary>
         /// btnCrearInsumo control.
@@ -393,6 +447,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtDigitoVerificadorProveedor;
 
         /// <summary>
+        /// ValidacionRut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionRut;
+
+        /// <summary>
+        /// ValidacionDigitoVerificador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionDigitoVerificador;
+
+        /// <summary>
         /// chkEsPersonaJuridica control.
         /// </summary>
         /// <remarks>
@@ -429,6 +501,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtNombreProveedor;
 
         /// <summary>
+        /// ValidacionNombreProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionNombreProveedor;
+
+        /// <summary>
         /// lblApellidoProveedor control.
         /// </summary>
         /// <remarks>
@@ -445,6 +526,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellidoProveedor;
+
+        /// <summary>
+        /// ValidacionApellidoProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionApellidoProveedor;
 
         /// <summary>
         /// lblEmailProveedor control.
@@ -465,6 +555,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtEmailProveedor;
 
         /// <summary>
+        /// ValidacionEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionEmail;
+
+        /// <summary>
+        /// ValidacionEmailValido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidacionEmailValido;
+
+        /// <summary>
         /// lblTelefonoProveedor control.
         /// </summary>
         /// <remarks>
@@ -483,6 +591,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoProveedor;
 
         /// <summary>
+        /// ValidacionTelefonoProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionTelefonoProveedor;
+
+        /// <summary>
+        /// ValidacionTelefonoFormato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidacionTelefonoFormato;
+
+        /// <summary>
         /// lblDireccionProveedor control.
         /// </summary>
         /// <remarks>
@@ -499,6 +625,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDireccionProveedor;
+
+        /// <summary>
+        /// ValidacionDireccionProveedor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionDireccionProveedor;
 
         /// <summary>
         /// btnCrearProveedor control.
@@ -564,6 +699,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.DropDownList ddlEstadoOrden;
 
         /// <summary>
+        /// ValidacionEstadoOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionEstadoOrden;
+
+        /// <summary>
         /// lblProveedorOrden control.
         /// </summary>
         /// <remarks>
@@ -580,6 +724,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProveedorOrden;
+
+        /// <summary>
+        /// ValidacionProveedorOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionProveedorOrden;
 
         /// <summary>
         /// lblInsumoOrden control.
@@ -600,6 +753,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.DropDownList ddlInsumoOrden;
 
         /// <summary>
+        /// ValidacionSelectInsumoOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionSelectInsumoOrden;
+
+        /// <summary>
         /// lblPrecioInsumoOrden control.
         /// </summary>
         /// <remarks>
@@ -618,6 +780,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtPrecioInsumoOrden;
 
         /// <summary>
+        /// ValidacionPrecioInsumoOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionPrecioInsumoOrden;
+
+        /// <summary>
         /// lblCantidadInsumoOrden control.
         /// </summary>
         /// <remarks>
@@ -634,6 +805,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadInsumoOrden;
+
+        /// <summary>
+        /// ValidacionCantidadInsumoOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionCantidadInsumoOrden;
 
         /// <summary>
         /// btnAgregarInsumoOrden control.
