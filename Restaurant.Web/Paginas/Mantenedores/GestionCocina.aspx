@@ -389,7 +389,7 @@
                                     <asp:Label ID="lblCantidadIngredientePlato" runat="server" Text="Cantidad"></asp:Label>
                                     <asp:TextBox ID="txtCantidadIngredientePlato" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionCantidadIngredientePlato" runat="server" ControlToValidate="txtCantidadIngredientePlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la cantidad del ingrediente" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
+                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la cantidad" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <br />
