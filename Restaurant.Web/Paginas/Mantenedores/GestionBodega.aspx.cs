@@ -154,6 +154,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         protected void btnCrearInsumo_Click(object sender, EventArgs e)
         {
+            Page.Validate("ValidacionInsumo");
+            if (!Page.IsValid)
+            {
+                upModalInsumo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
+                return;
+            }
             ValidarSesion();
             Insumo insumo = new Insumo();
             insumo.Nombre = txtNombreInsumo.Text;
@@ -186,6 +193,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarInsumo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionInsumo");
+            if (!Page.IsValid)
+            {
+                upModalInsumo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalInsumo", "$('#modalInsumo').modal('show');", true);
+                return;
+            }
             Insumo insumo = new Insumo();
             insumo.Id = int.Parse(txtIdInsumo.Text);
             insumo.Nombre = txtNombreInsumo.Text;
@@ -277,7 +291,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionProveedor");
+            if (!Page.IsValid)
+            {
+                upModalProveedor.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
+                return;
+            }
             Proveedor proveedor = new Proveedor();
             proveedor.Persona = new Persona();
             proveedor.Persona.Nombre = txtNombreProveedor.Text;
@@ -315,6 +335,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarProveedor_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionProveedor");
+            if (!Page.IsValid)
+            {
+                upModalProveedor.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalProveedor", "$('#modalProveedor').modal('show');", true);
+                return;
+            }
             Proveedor proveedor = new Proveedor();
             proveedor.Persona = new Persona();
             proveedor.Id = int.Parse(txtIdProveedor.Text);
@@ -398,14 +425,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
                     upModalOrden.Update();
-
-                    /*
-                    Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
-                    actualizarRepeater(listaInsumosOrden, new List<DetalleOrdenProveedor>(), listaInsumosOrdenVacia);
-                    lblTotalOrden.Text = "";           
-                    txtTotalOrden.Text = "";
-                    upInsumosOrden.Update();
-                    */
                 }
             }
             Session["detalleOrdenProveedor"] = new List<DetalleOrdenProveedor>();
@@ -418,9 +437,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionOrden");
+            if (!Page.IsValid)
+            {
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
+            }
 
             var usuario = (Usuario)Session["usuario"];
-
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.FechaHora = DateTime.Now;
             ordenProveedor.Total = int.Parse(txtTotalOrden.Text);
@@ -437,6 +462,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
                 {
                     detalleOrdenProveedor.IdOrdenProveedor = idOrdenProveedor;
+                    detalleOrdenProveedor.Insumo = null;
+                    detalleOrdenProveedor.OrdenProveedor = null;
                     _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
                     int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
                 }
@@ -459,6 +486,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionOrden");
+            if (!Page.IsValid)
+            {
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
+            }
             OrdenProveedor ordenProveedor = new OrdenProveedor();
             ordenProveedor.Id = int.Parse(txtIdOrden.Text);
             ordenProveedor.FechaHora = DateTime.Now;
@@ -476,6 +510,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 foreach (DetalleOrdenProveedor detalleOrdenProveedor in listaInsumos)
                 {
                     detalleOrdenProveedor.IdOrdenProveedor = ordenProveedor.Id;
+                    detalleOrdenProveedor.Insumo = null;
+                    detalleOrdenProveedor.OrdenProveedor = null;
                     _detalleOrdenProveedorService = new DetalleOrdenProveedorService(token.access_token);
                     int idDetalleOrdenProveedor = _detalleOrdenProveedorService.Guardar(detalleOrdenProveedor);
                 }
@@ -496,10 +532,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnAgregarInsumoOrden_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionInsumoOrden");
+            if (!Page.IsValid)
+            {
+                upModalOrden.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalOrden", "$('#modalOrden').modal('show');", true);
+                return;
+            }
             DetalleOrdenProveedor detalleOrdenProveedor = new DetalleOrdenProveedor();
             detalleOrdenProveedor.Insumo = new Insumo();
-
             detalleOrdenProveedor.Insumo.Nombre = ddlInsumoOrden.SelectedItem.Text;
             detalleOrdenProveedor.IdInsumo = int.Parse(ddlInsumoOrden.SelectedValue);
             detalleOrdenProveedor.Precio = int.Parse(txtPrecioInsumoOrden.Text);

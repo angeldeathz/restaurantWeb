@@ -110,7 +110,7 @@
                             <asp:TextBox ID="txtEmailUsuario" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="ValidacionEmail" runat="server" ControlToValidate="txtEmailUsuario" Display="Dynamic"
                             CssClass="text-danger" ErrorMessage="Debe ingresar el e-mail" ValidationGroup="Validacion" ></asp:RequiredFieldValidator>
-                           <asp:RegularExpressionValidator ID="ValidacionEmailValido" runat="server" CssClass="text-danger"
+                            <asp:RegularExpressionValidator ID="ValidacionEmailValido" runat="server" CssClass="text-danger"
                             ErrorMessage="El e-mail ingresado es inválido" ControlToValidate="txtEmailUsuario" Display="Dynamic" ValidationGroup="Validacion"
                             ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></asp:RegularExpressionValidator>
                           </div>

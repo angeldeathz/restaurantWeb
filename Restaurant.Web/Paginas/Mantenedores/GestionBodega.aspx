@@ -169,28 +169,40 @@
                       <asp:TextBox ID="txtIdInsumo" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
                       <asp:Label ID="lblNombreInsumo" runat="server" Text="Nombre"></asp:Label>
                       <asp:TextBox ID="txtNombreInsumo" runat="server" CssClass="form-control"></asp:TextBox>
+                      <asp:RequiredFieldValidator ID="ValidacionNombreInsumo" runat="server" ControlToValidate="txtNombreInsumo" Display="Dynamic"
+                      CssClass="text-danger" ErrorMessage="Debe seleccionar el nombre" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                       <div class="row">
                         <div class="col-12 col-sm-4">
                           <asp:Label ID="lblStockActual" runat="server" Text="Stock actual"></asp:Label>
                           <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="ValidacionStockActual" runat="server" ControlToValidate="txtStockActual" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar el stock actual" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-4">
-                            <asp:Label ID="lblStockCritico" runat="server" Text="Stock crítico"></asp:Label>
-                            <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:Label ID="lblStockCritico" runat="server" Text="Stock crítico"></asp:Label>
+                          <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="ValidacionStockCritico" runat="server" ControlToValidate="txtStockCritico" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar el stock critico" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-4">
-                            <asp:Label ID="lblStockOptimo" runat="server" Text="Stock óptimo"></asp:Label>
-                            <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:Label ID="lblStockOptimo" runat="server" Text="Stock óptimo"></asp:Label>
+                          <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:RequiredFieldValidator ID="ValidacionStockOptimo" runat="server" ControlToValidate="txtStockOptimo" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar el stock óptimo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-sm-6">
-                            <asp:Label ID="lblProveedorInsumo" runat="server" Text="Proveedor"></asp:Label>
-                            <asp:DropDownList ID="ddlProveedorInsumo" runat="server" CssClass="form-control"></asp:DropDownList>
+                          <asp:Label ID="lblProveedorInsumo" runat="server" Text="Proveedor"></asp:Label>
+                          <asp:DropDownList ID="ddlProveedorInsumo" runat="server" CssClass="form-control"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="ValidacionProveedorInsumo" runat="server" ControlToValidate="ddlProveedorInsumo" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe seleccionar al proveedor" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-6">
                             <asp:Label ID="lblUnidadMedida" runat="server" Text="Unidad Medida"></asp:Label>
                             <asp:DropDownList ID="ddlUnidadMedida" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionUnidadMedida" runat="server" ControlToValidate="ddlUnidadMedida" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar la unidad de medida" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                   </div>
@@ -224,7 +236,11 @@
                             <asp:Label ID="lblRutProveedor" runat="server" Text="Rut" CssClass="d-block"></asp:Label>
                             <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
                             &nbsp;-&nbsp;
-                            <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>                           
+                            <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>         
+                            <asp:RequiredFieldValidator ID="ValidacionRut" runat="server" ControlToValidate="txtRutProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el RUT" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator><br />
+                            <asp:RequiredFieldValidator ID="ValidacionDigitoVerificador" runat="server" ControlToValidate="txtDigitoVerificadorProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el dígito verificador" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator>
                         </div>                      
                         <div class="col-12 col-md-6">
                           <br />
@@ -236,26 +252,41 @@
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblNombreProveedor" runat="server" Text="Nombre"></asp:Label>
                             <asp:TextBox ID="txtNombreProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionNombreProveedor" runat="server" ControlToValidate="txtNombreProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblApellidoProveedor" runat="server" Text="Apellido"></asp:Label>
                             <asp:TextBox ID="txtApellidoProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionApellidoProveedor" runat="server" ControlToValidate="txtApellidoProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el apellido" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblEmailProveedor" runat="server" Text="E-mail"></asp:Label>
                             <asp:TextBox ID="txtEmailProveedor" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionEmail" runat="server" ControlToValidate="txtEmailProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el e-mail" ValidationGroup="ValidacionProveedor" ></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="ValidacionEmailValido" runat="server" CssClass="text-danger"
+                            ErrorMessage="El e-mail ingresado es inválido" ControlToValidate="txtEmailProveedor" Display="Dynamic" ValidationGroup="ValidacionProveedor"
+                            ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></asp:RegularExpressionValidator>
                         </div>
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblTelefonoProveedor" runat="server" Text="Teléfono"></asp:Label>
                             <asp:TextBox ID="txtTelefonoProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionTelefonoProveedor" runat="server" ControlToValidate="txtTelefonoProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el telefono" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="ValidacionTelefonoFormato" runat="server" ControlToValidate="txtTelefonoProveedor"  CssClass="text-danger" 
+                            ErrorMessage="El telefono debe tener 9 dígitos" ValidationExpression=".{9}.*" ValidationGroup="ValidacionProveedor" Display="Dynamic"/>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12">
                             <asp:Label ID="lblDireccionProveedor" runat="server" Text="Dirección"></asp:Label>
                             <asp:TextBox ID="txtDireccionProveedor" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionDireccionProveedor" runat="server" ControlToValidate="txtDireccionProveedor" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar la dirección" ValidationGroup="ValidacionProveedor"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                   </div>
@@ -278,7 +309,7 @@
                 <div class="modal-content">                    
                   <div class="modal-header">
                     <asp:Label ID="tituloModalOrden" class="modal-title h5" runat="server" Text="Crear Orden"></asp:Label>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <button type="button" class="close" data-dismiss="modalValidacionInsumoOrden aria-label="Cerrar">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -288,25 +319,35 @@
                         <div class="col-12 col-sm-3">
                             <asp:Label ID="lblEstadoOrden" runat="server" Text="Estado"></asp:Label>
                             <asp:DropDownList ID="ddlEstadoOrden" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionEstadoOrden" runat="server" ControlToValidate="ddlEstadoOrden" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar el estado de la orden" ValidationGroup="ValidacionOrden"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-3">
                             <asp:Label ID="lblProveedorOrden" runat="server" Text="Proveedor"></asp:Label>
                             <asp:DropDownList ID="ddlProveedorOrden" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionProveedorOrden" runat="server" ControlToValidate="ddlProveedorOrden" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar al proveedor" ValidationGroup="ValidacionOrden"></asp:RequiredFieldValidator>
                         </div>
                     </div>
                     <hr />
                     <div class="row">
                         <div class="col-12 col-md-5">
                             <asp:Label ID="lblInsumoOrden" runat="server" Text="Insumo"></asp:Label>
-                            <asp:DropDownList ID="ddlInsumoOrden" runat="server" CssClass="form-control"></asp:DropDownList>     
+                            <asp:DropDownList ID="ddlInsumoOrden" runat="server" CssClass="form-control"></asp:DropDownList>  
+                            <asp:RequiredFieldValidator ID="ValidacionSelectInsumoOrden" runat="server" ControlToValidate="ddlInsumoOrden" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar al insumi" ValidationGroup="ValidacionInsumoOrden"></asp:RequiredFieldValidator>
                         </div>                          
                         <div class="col-12 col-md-2">
                             <asp:Label ID="lblPrecioInsumoOrden" runat="server" Text="Precio"></asp:Label>
                             <asp:TextBox ID="txtPrecioInsumoOrden" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox> 
+                            <asp:RequiredFieldValidator ID="ValidacionPrecioInsumoOrden" runat="server" ControlToValidate="txtPrecioInsumoOrden" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar al precio" ValidationGroup="ValidacionInsumoOrden"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-md-2">
                             <asp:Label ID="lblCantidadInsumoOrden" runat="server" Text="Cantidad"></asp:Label>
-                            <asp:TextBox ID="txtCantidadInsumoOrden" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>                           
+                            <asp:TextBox ID="txtCantidadInsumoOrden" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>          
+                            <asp:RequiredFieldValidator ID="ValidacionCantidadInsumoOrden" runat="server" ControlToValidate="txtCantidadInsumoOrden" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad" ValidationGroup="ValidacionInsumoOrden"></asp:RequiredFieldValidator>
                         </div> 
                         <div class="col-12 col-md-3">
                             <br />
