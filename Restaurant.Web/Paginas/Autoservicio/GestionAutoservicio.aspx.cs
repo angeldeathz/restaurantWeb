@@ -68,6 +68,12 @@ namespace Restaurant.Web.Paginas.Autoservicio
                             || (pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto && ! PagoTarjetaListo(pedidoCliente.Id)))
                         {
                             btnCerrarCuenta.Visible = true;
+
+                            if(pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoConTarjeta
+                               || pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto)
+                            {
+                                btnCerrarCuenta.Text = "Ir a pagar";
+                            }
                         }
 
                         if (pedidoCliente.IdEstadoPedido != EstadoPedido.enCurso)
