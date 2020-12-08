@@ -20,19 +20,21 @@
                             Text="No existen Usuarios para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                     </div>  
                     <div class="table-responsive pt-3">
-                        <asp:Repeater ID="listaUsuarios" runat="server"  OnItemCommand="btnModalEditarUsuario_Click">
+                      <asp:Repeater ID="listaUsuarios" runat="server"  OnItemCommand="btnModalEditarUsuario_Click">
                         <HeaderTemplate>
-                            <table border="1" class="table">
-                            <tr>
-                                <td><b>Rut</b></td>
-                                <td><b>Nombre</b></td>
-                                <td><b>Apellido</b></td>
-                                <td><b>Email</b></td>
-                                <td><b>Teléfono</b></td>
-                                <td><b>Tipo de usuario</b></td>
-                                <td><b>Acciones</b></td>
-                            </tr>
-                        </HeaderTemplate>          
+                          <table class="table styled-table">
+                            <thead>
+                              <tr>
+                                  <th><b>Rut</b></th>
+                                  <th><b>Nombre</b></th>
+                                  <th><b>Apellido</b></th>
+                                  <th><b>Email</b></th>
+                                  <th><b>Teléfono</b></th>
+                                  <th><b>Tipo de usuario</b></th>
+                                  <th><b>Acciones</b></th>
+                              </tr>
+                            </thead>
+                          </HeaderTemplate>          
                         <ItemTemplate>
                             <tr>
                             <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
