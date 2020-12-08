@@ -123,7 +123,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearUsuario_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("Validacion");
+            if (!Page.IsValid)
+            {
+                upModalUsuario.Update();
+                return;
+            }
             string contrasena = txtContrasena.Text;
             string contrasenaRepetir = txtContrasenaRepetir.Text;
 
@@ -169,6 +174,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarUsuario_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("Validacion");
+            if (!Page.IsValid)
+            {
+                upModalUsuario.Update();
+                return;
+            }
             string contrasena = txtContrasena.Text;
             string contrasenaRepetir = txtContrasenaRepetir.Text;
 

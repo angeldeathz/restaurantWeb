@@ -123,6 +123,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtDigitoVerificadorUsuario;
 
         /// <summary>
+        /// ValidacionRut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionRut;
+
+        /// <summary>
+        /// ValidacionDigitoVerificador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionDigitoVerificador;
+
+        /// <summary>
         /// lblTipoUsuario control.
         /// </summary>
         /// <remarks>
@@ -139,6 +157,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuario;
+
+        /// <summary>
+        /// ValidacionTipoUsuario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionTipoUsuario;
 
         /// <summary>
         /// lblNombreUsuario control.
@@ -159,6 +186,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
 
         /// <summary>
+        /// ValidacionNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionNombre;
+
+        /// <summary>
         /// lblApellidoUsuario control.
         /// </summary>
         /// <remarks>
@@ -175,6 +211,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtApellidoUsuario;
+
+        /// <summary>
+        /// ValidacionApellido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionApellido;
 
         /// <summary>
         /// lblEmailUsuario control.
@@ -195,6 +240,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtEmailUsuario;
 
         /// <summary>
+        /// ValidacionEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionEmail;
+
+        /// <summary>
+        /// ValidacionEmailValido control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidacionEmailValido;
+
+        /// <summary>
         /// lblTelefonoUsuario control.
         /// </summary>
         /// <remarks>
@@ -211,6 +274,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTelefonoUsuario;
+
+        /// <summary>
+        /// ValidacionTelefono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionTelefono;
+
+        /// <summary>
+        /// ValidacionTelefonoFormato control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidacionTelefonoFormato;
 
         /// <summary>
         /// lblContrasena control.
@@ -231,6 +312,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.TextBox txtContrasena;
 
         /// <summary>
+        /// ValidacionContrasena control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionContrasena;
+
+        /// <summary>
         /// lblContrasenaRepetir control.
         /// </summary>
         /// <remarks>
@@ -247,6 +337,24 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContrasenaRepetir;
+
+        /// <summary>
+        /// ValidacionContrasenaRepetir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionContrasenaRepetir;
+
+        /// <summary>
+        /// ValidacionContrasenaIguales control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator ValidacionContrasenaIguales;
 
         /// <summary>
         /// btnCrearUsuario control.
