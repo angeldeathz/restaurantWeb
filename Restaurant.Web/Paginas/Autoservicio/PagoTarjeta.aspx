@@ -20,13 +20,15 @@
 </head>
 <body>
     <form id="form1" runat="server">
-      <asp:LinkButton ID="divPagar" runat="server" OnClick="divPagar_Click" CssClass="text-decoration-none">
+      <div>
         <div class="imagen-transbank pagar">
           <div class="monto-transbank pagar">
             <asp:Label ID="lblMontoPagar" runat="server"></asp:Label>
           </div>
+			  	<asp:Button ID="btnPagoCredito" runat="server" Text="" CssClass="metodo-pago-credito" OnClick="btnPagoCredito_Click"/>
+        	<asp:Button ID="btnPagoDebito" runat="server" Text="" CssClass="metodo-pago-debito" OnClick="btnPagoDebito_Click"/>
         </div>
-      </asp:LinkButton>
+      </div>
     </form>
 </body>
 </html>

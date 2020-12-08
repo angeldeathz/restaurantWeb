@@ -34,20 +34,23 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
-                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    var reservasOrdenadas = reservas.OrderByDescending(x => x.FechaReserva).ToList();
+                    actualizarRepeater(listaReservas, reservasOrdenadas, listaReservasVacia);
                 }
 
                 List<Cliente> clientes = _clienteService.Obtener();
                 if (clientes != null && clientes.Count > 0)
                 {
-                    actualizarRepeater(listaClientes, clientes, listaClientesVacia);
+                    var clientesOrdenados = clientes.OrderBy(x => x.Id).ToList();
+                    actualizarRepeater(listaClientes, clientesOrdenados, listaClientesVacia);
                     actualizarDdlClientes(clientes);
                 }
 
                 List<Mesa> mesas = _mesaService.Obtener();
                 if (mesas != null && mesas.Count > 0)
                 {
-                    actualizarRepeater(listaMesas, mesas, listaMesasVacia);
+                    var mesasOrdenadas = mesas.OrderBy(x => x.Id).ToList();
+                    actualizarRepeater(listaMesas, mesasOrdenadas, listaMesasVacia);
                     actualizarDdlMesas(mesas);
                 }
 
@@ -174,7 +177,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
-                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    var reservasOrdenadas = reservas.OrderByDescending(x => x.FechaReserva).ToList();
+                    actualizarRepeater(listaReservas, reservasOrdenadas, listaReservasVacia);
                     upListaReservas.Update();
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearReserva", "Swal.fire('Reserva creada', '', 'success');", true);
@@ -205,7 +209,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<Reserva> reservas = _reservaService.Obtener();
                 if (reservas != null && reservas.Count > 0)
                 {
-                    actualizarRepeater(listaReservas, reservas, listaReservasVacia);
+                    var reservasOrdenadas = reservas.OrderByDescending(x => x.FechaReserva).ToList();
+                    actualizarRepeater(listaReservas, reservasOrdenadas, listaReservasVacia);
                     upListaReservas.Update();
                 }
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarReserva", "Swal.fire('Reserva editada', '', 'success');", true);

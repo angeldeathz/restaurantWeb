@@ -41,7 +41,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<OrdenProveedor> ordenesProveedor = _ordenProveedorService.Obtener();
                 if (ordenesProveedor != null && ordenesProveedor.Count > 0)
                 {
-                    actualizarRepeater(listaOrdenes, ordenesProveedor, listaOrdenesVacia);
+                    var ordenesProveedorOrdenados = ordenesProveedor.OrderByDescending(x => x.Id).ToList();
+                    actualizarRepeater(listaOrdenes, ordenesProveedorOrdenados, listaOrdenesVacia);
                 }
 
                 List<Proveedor> proveedores = _proveedorService.Obtener();

@@ -16,6 +16,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloPedidoService _articuloPedidoService;
         private ArticuloService _articuloService;
         private TipoDocumentoPagoService _tipoDocumentoPagoService;
+        private DocumentoPagoService _documentoPagoService;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,7 +35,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
                                                              && x.Reserva.Id == reserva.Id
                                                              && x.FechaHoraInicio.Date == DateTime.Now.Date);
-
                     if (pedidoCliente != null)
                     {
 
@@ -63,9 +63,19 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     if (pedidoCliente != null)
                     {
                         btnHacerPedido.Visible = false;
-                        if (pedidoCliente.IdEstadoPedido == EstadoPedido.enCurso)
+                        if (pedidoCliente.IdEstadoPedido == EstadoPedido.enCurso
+                            || pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoConTarjeta
+                            || (pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto && ! PagoTarjetaListo(pedidoCliente.Id)))
                         {
                             btnCerrarCuenta.Visible = true;
+                        }
+
+                        if (pedidoCliente.IdEstadoPedido != EstadoPedido.enCurso)
+                        {
+                            tabMenu.Attributes.Add("class", "nav-link d-none");
+                            divMenu.Attributes.Add("class", "tab-pane fade d-none");
+                            tabMiOrden.Attributes.Add("class", "nav-link active");
+                            divMiOrden.Attributes.Add("class", "tab-pane active show");
                         }
                         //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
                     }
@@ -471,10 +481,13 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
         protected void generarPago(int estadoPedido)
         {
+            tabMenu.Attributes.Add("class", "nav-link d-none");
+            divMenu.Attributes.Add("class", "tab-pane fade d-none");
             validarIngreso();
             Page.Validate("ValidacionTipoDocumento");
             if (!Page.IsValid)
             {
+                upModalCerrarCuenta.Update();
                 return;
             }
             if (ddlTipoDocumentoPago.SelectedValue == "")
@@ -543,6 +556,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Page.Validate("ValidacionMontoPago");
             if(!Page.IsValid)
             {
+                upModalPagoMixto.Update();
                 return;
             }
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalPagoMixto').modal('hide');", true);
@@ -583,6 +597,18 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
         }
 
+        public bool PagoTarjetaListo(int idPedido)
+        {
+            Token token = (Token)Session["token"];
+            _documentoPagoService = new DocumentoPagoService(token.access_token);
+            List<DocumentoPago> listaDocumentoPago = _documentoPagoService.Obtener();
+            DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido && x.IdTipoDocumentoPago != MedioPago.efectivo);
+            if(documentoPago == null)
+            {
+                return false;
+            }
+            return true;
+        }
         public void actualizarRepeater<T>(Repeater repeater, List<T> listaData, Label mensajeListaVacia)
         {
             repeater.DataSource = listaData;

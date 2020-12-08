@@ -45,7 +45,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 List<Pedido> pedidos = _pedidoService.Obtener();
                 if (pedidos != null && pedidos.Count > 0)
                 {
-                    actualizarRepeater(listaPedidos, pedidos, listaPedidosVacia);
+                    var pedidosOrdenados = pedidos.OrderByDescending(x => x.Id).ToList();
+                    actualizarRepeater(listaPedidos, pedidosOrdenados, listaPedidosVacia);
                 }
 
                 List<Articulo> articulos = _articuloService.Obtener();

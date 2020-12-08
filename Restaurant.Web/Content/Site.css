@@ -120,11 +120,13 @@
 
 .monto-transbank {
     font-size: 1.5rem;
+    display: inline-block;
 }
 
 .monto-transbank.pagar {
-    padding-top: 135px;
-    padding-left: 295px;
+    padding-top: 158px;
+    padding-left: 135px;
+    width:240px;
 }
 
 .monto-transbank.pagado {
@@ -132,10 +134,30 @@
     padding-left: 135px;
 }
 
+.metodo-pago-credito {
+    display: inline-block;
+    width: 377px;
+    height: 80px;
+    margin-left: 275px;
+    margin-bottom: -50px;
+    background: transparent;
+    border: transparent;
+}
+
+.metodo-pago-debito {
+    margin-left: 520px;
+    width: 375px;
+    height: 80px;
+    display: block;
+    margin-top: 62px;
+    background: transparent;
+    border: transparent;
+}
+
 .fecha-transbank {
-    padding-left: 830px;
+    padding-left: 650px;
     padding-top: 155px;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 0.7rem;
     color: #5f5c6b;
     font-family: helvetica;
