@@ -67,7 +67,7 @@
                                 <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                               </div>
                               <div class="row mb-4">
-                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                                <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
                                   <h5>$ <%# Eval("Precio") %></h5>
@@ -91,7 +91,7 @@
                               <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                             </div>
                             <div class="row mb-4">
-                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                              <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
                                 <h5>$ <%# Eval("Precio") %></h5>
@@ -115,7 +115,7 @@
                               <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                             </div>
                             <div class="row mb-4">
-                              <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                              <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
                                 <h5>$ <%# Eval("Precio") %></h5>
@@ -139,7 +139,7 @@
                                 <div class="col-12"><h4><%# Eval("Nombre") %></h4></div>
                               </div>
                               <div class="row mb-4">
-                                <div class="col-12 col-md-5 col-lg-3"><img class="img-fluid" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
+                                <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
                                   <h5>$ <%# Eval("Precio") %></h5>
