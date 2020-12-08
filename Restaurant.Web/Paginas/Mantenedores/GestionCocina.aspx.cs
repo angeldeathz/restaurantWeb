@@ -989,7 +989,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         private string UploadFileToStorage(FileUpload file)
         {
-            var path = Server.MapPath("~/Images/LocalStorage/");
+            var path = "C:\\Storage\\Images";
             var exists = Directory.Exists(path);
 
             if (!exists)
@@ -998,7 +998,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             var pathFile = $"{path}\\{file.FileName}";
             file.PostedFile.SaveAs(pathFile);
 
-            return file.FileName;
+             return pathFile;
         }
     }
 }
