@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Restaurant.Model.Clases;
 using Restaurant.Services.Shared;
@@ -19,7 +20,7 @@ namespace Restaurant.Services.Servicios
             string url = $"http://localhost/restaurant/api/articuloPedidos/";
             var respuesta = _restClientHttp.Get<List<ArticuloPedido>>(url);
             if (respuesta.StatusName != HttpStatusCode.OK) return null;
-            return respuesta.Response;
+            return respuesta.Response.OrderByDescending(x => x.Id).ToList();
         }
 
         public ArticuloPedido Obtener(int id)

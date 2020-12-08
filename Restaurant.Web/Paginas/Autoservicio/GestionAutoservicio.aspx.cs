@@ -687,6 +687,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 Directory.CreateDirectory(path);
 
             var fileInfo = new FileInfo(file);
+            
+            if (!File.Exists(fileInfo.FullName)) return null;
+
             var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
 
             File.Copy(file, pathToCreateFile, true);
