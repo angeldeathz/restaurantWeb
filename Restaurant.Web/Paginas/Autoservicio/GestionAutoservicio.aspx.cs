@@ -17,7 +17,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloService _articuloService;
         private TipoDocumentoPagoService _tipoDocumentoPagoService;
         private DocumentoPagoService _documentoPagoService;
-
+        private MedioPagoDocumentoService _medioPagoDocumentoService;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -608,8 +608,16 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Token token = (Token)Session["token"];
             _documentoPagoService = new DocumentoPagoService(token.access_token);
             List<DocumentoPago> listaDocumentoPago = _documentoPagoService.Obtener();
-            DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido && x.IdTipoDocumentoPago != MedioPago.efectivo);
+            DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido);
             if(documentoPago == null)
+            {
+                return false;
+            }
+            _medioPagoDocumentoService = new MedioPagoDocumentoService(token.access_token);
+            List<MedioPagoDocumento> listaMedioPagoDocumentos = _medioPagoDocumentoService.Obtener();
+            MedioPagoDocumento medioPagoDocumento = listaMedioPagoDocumentos.FirstOrDefault(x => x.IdDocumentoPago == documentoPago.Id
+                                                                                              && x.IdMedioPago != MedioPago.efectivo);
+            if (medioPagoDocumento == null)
             {
                 return false;
             }
