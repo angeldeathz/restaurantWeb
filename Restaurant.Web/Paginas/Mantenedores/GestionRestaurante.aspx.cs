@@ -163,7 +163,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearReserva_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionReserva");
+            if (!Page.IsValid)
+            {
+                upModalReserva.Update();
+                return;
+            }
             Reserva reserva = new Reserva();
             reserva.FechaReserva = Convert.ToDateTime(txtFechaHoraReserva.Text);
             reserva.CantidadComensales = int.Parse(txtCantidadComensalesReserva.Text);
@@ -195,6 +200,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarReserva_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionReserva");
+            if (!Page.IsValid)
+            {
+                upModalReserva.Update();
+                return;
+            }
             Reserva reserva = new Reserva();
             reserva.Id = int.Parse(txtIdReserva.Text);
             reserva.FechaReserva = Convert.ToDateTime(txtFechaHoraReserva.Text);
@@ -279,10 +290,14 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearCliente_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionCliente");
+            if (!Page.IsValid)
+            {
+                upModalCliente.Update();
+                return;
+            }
             Cliente cliente = new Cliente();
             Persona persona = new Persona();
-
             persona.Nombre = txtNombreCliente.Text;
             persona.Apellido = txtApellidoCliente.Text;
             persona.Rut = int.Parse(txtRutCliente.Text);
@@ -317,9 +332,14 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarCliente_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionCliente");
+            if (!Page.IsValid)
+            {
+                upModalCliente.Update();
+                return;
+            }
             Cliente cliente = new Cliente();
             Persona persona = new Persona();
-
             persona.Nombre = txtNombreCliente.Text;
             persona.Apellido = txtApellidoCliente.Text;
             persona.Rut = int.Parse(txtRutCliente.Text);
@@ -400,6 +420,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearMesa_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionMesa");
+            if (!Page.IsValid)
+            {
+                upModalMesa.Update();
+                return;
+            }
             Mesa mesa = new Mesa();
             mesa.Nombre = txtNombreMesa.Text;
             mesa.CantidadComensales = int.Parse(txtCantidadComensalesMesa.Text);
@@ -429,6 +455,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarMesa_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionMesa");
+            if (!Page.IsValid)
+            {
+                upModalMesa.Update();
+                return;
+            }
             Mesa mesa = new Mesa();
             mesa.Id = int.Parse(txtIdMesa.Text);
             mesa.Nombre = txtNombreMesa.Text;
@@ -463,9 +495,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 TextBox txtDiaSemana = (TextBox)e.Item.FindControl("txtDiaSemana");
                 TextBox txtHoraInicio = (TextBox)e.Item.FindControl("txtHoraInicioHorario");
                 TextBox txtHoraFin = (TextBox)e.Item.FindControl("txtHoraFinHorario");
+                if(txtHoraInicio.Text.Trim() == string.Empty || txtHoraFin.Text.Trim() == string.Empty)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "editarHorario", "Swal.fire('Debe seleccionar la hora de inicio y la de fin', '', 'error');", true);
+                    return;
+                }
                 DateTime horaInicio = DateTime.Now;
                 DateTime horaFin = DateTime.Now;
-
                 int horaInicioHora = int.Parse(txtHoraInicio.Text.Substring(0, 2));
                 int horaInicioMinuto = int.Parse(txtHoraInicio.Text.Substring(3, 2));
                 TimeSpan tsHoraInicio = new TimeSpan(horaInicioHora, horaInicioMinuto, 0);

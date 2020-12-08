@@ -120,7 +120,7 @@
                             <asp:RequiredFieldValidator ID="ValidacionTelefono" runat="server" ControlToValidate="txtTelefonoUsuario" Display="Dynamic"
                             CssClass="text-danger" ErrorMessage="Debe ingresar el telefono" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="ValidacionTelefonoFormato" runat="server" ControlToValidate="txtTelefonoUsuario"  CssClass="text-danger" 
-                            ErrorMessage="El telefono debe tener 9 dígitos" ValidationExpression=".{9}.*" ValidationGroup="Validacion" Display="Dynamic"/>
+                            ErrorMessage="El teléfono debe tener 9 dígitos" ValidationExpression=".{9}.*" ValidationGroup="Validacion" Display="Dynamic"/>
                         </div>
                       </div>
                       <div class="row">
