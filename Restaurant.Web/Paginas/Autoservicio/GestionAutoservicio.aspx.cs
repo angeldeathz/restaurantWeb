@@ -225,6 +225,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     txtComentarioArticulo.Text = "";
                     lblTituloModalArticulo.Text = "Pedir " + articulo.Nombre;
                     lblPrecioArticulo.Text = "$" + articulo.Precio.ToString();
+                    upModalArticulo.Update();
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
                 }
                 else
@@ -248,6 +249,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Page.Validate("ValidacionArticulo");
             if (!Page.IsValid)
             {
+                upModalArticulo.Update();
                 return;
             }
             try
@@ -264,36 +266,19 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "erroArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
                     return;
                 }
-                // Info de artículos en el pedido
+
                 List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
-                ArticuloPedido articuloPedido = articulosPedido.FirstOrDefault(a => a.IdArticulo == idArticulo);
                 Pedido pedidoCliente = (Pedido)Session["pedidoCliente"];
 
-                if (articuloPedido != null)
+                ArticuloPedido nuevoArticuloPedido = crearArticuloPedido(articulo, cantidad, comentarios);
+                articulosPedido.Add(nuevoArticuloPedido);
+                if (pedidoCliente != null)
                 {
-                    articuloPedido.Cantidad = articuloPedido.Cantidad + cantidad;
-                    articuloPedido.Total = articulo.Precio * articuloPedido.Cantidad;
-                    if (pedidoCliente != null)
-                    {
-                        editarArticuloPedido(articuloPedido);
-                    }
-                    else
-                    {
-                        btnHacerPedido.Visible = true;
-                    }
+                    guardarArticuloPedido(nuevoArticuloPedido, pedidoCliente.Id);
                 }
                 else
                 {
-                    ArticuloPedido nuevoArticuloPedido = crearArticuloPedido(articulo, cantidad, comentarios);
-                    articulosPedido.Add(nuevoArticuloPedido);
-                    if (pedidoCliente != null)
-                    {
-                        guardarArticuloPedido(nuevoArticuloPedido, pedidoCliente.Id);
-                    }
-                    else
-                    {
-                        btnHacerPedido.Visible = true;
-                    }
+                    btnHacerPedido.Visible = true;
                 }
 
                 recargarArticulosPedido(articulosPedido);
@@ -303,6 +288,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     pedidoCliente.Total = articulosPedido.Sum(x => x.Total);
                     Token token = (Token)Session["token"];
                     _pedidoService = new PedidoService(token.access_token);
+                    pedidoCliente.EstadoPedido = null;
+                    pedidoCliente.Reserva = null;
                     bool editar = _pedidoService.Modificar(pedidoCliente, pedidoCliente.Id);
                 }
 
@@ -310,16 +297,15 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "creacionArticulo", "Swal.fire('Artículo agregado al pedido', '', 'success');", true);
-
-                limpiarTabs();
-                tabMiOrden.Attributes.Add("class", "nav-link active");
-                divMiOrden.Attributes.Add("class", "tab-pane active show");
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorAgregar", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
                 return;
             }
+            limpiarTabs();
+            tabMiOrden.Attributes.Add("class", "nav-link active");
+            divMiOrden.Attributes.Add("class", "tab-pane active show");
         }
 
         protected void btnEliminarArticuloPedido_Click(object sender, RepeaterCommandEventArgs e)
@@ -394,7 +380,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
             nuevoArticuloPedido.EstadosArticuloPedido = new List<EstadoArticuloPedido>();
             nuevoArticuloPedido.EstadosArticuloPedido.Add(estadoInicialArticuloPedido);
             nuevoArticuloPedido.IdEstadoArticuloPedido = estadoInicialArticuloPedido.Id;
-            nuevoArticuloPedido.EstadoArticuloPedido = nuevoArticuloPedido.EstadosArticuloPedido.LastOrDefault();
 
             return nuevoArticuloPedido;
         }
@@ -407,7 +392,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
             EstadoArticuloPedido estadoArticuloAux = articuloPedido.EstadoArticuloPedido;
             List<EstadoArticuloPedido> estadosAux = articuloPedido.EstadosArticuloPedido;
             articuloPedido.Articulo = null;
-            articuloPedido.EstadoArticuloPedido = null;
             articuloPedido.EstadosArticuloPedido = null;
 
             Token token = (Token)Session["token"];
@@ -421,27 +405,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
             articuloPedido.Id = idArticuloPedido;
             articuloPedido.Articulo = articuloAux;
             articuloPedido.EstadosArticuloPedido = estadosAux;
-            articuloPedido.EstadoArticuloPedido = estadoArticuloAux;
             return true;
         }
-        protected bool editarArticuloPedido(ArticuloPedido articuloPedido)
-        {
-            Articulo articuloAux = articuloPedido.Articulo;
-            EstadoArticuloPedido estadoArticuloAux = articuloPedido.EstadoArticuloPedido;
-            List<EstadoArticuloPedido> estadosAux = articuloPedido.EstadosArticuloPedido;
-            articuloPedido.Articulo = null;
-            articuloPedido.EstadoArticuloPedido = null;
-            articuloPedido.EstadosArticuloPedido = null;
-
-            Token token = (Token)Session["token"];
-            _articuloPedidoService = new ArticuloPedidoService(token.access_token);
-            bool editar = _articuloPedidoService.Modificar(articuloPedido, articuloPedido.Id);
-
-            articuloPedido.Articulo = articuloAux;
-            articuloPedido.EstadosArticuloPedido = estadosAux;
-            articuloPedido.EstadoArticuloPedido = estadoArticuloAux;
-            return editar;
-        }
+        
         protected int guardarPedido()
         {
             Reserva reserva = (Reserva)Session["reservaCliente"];
