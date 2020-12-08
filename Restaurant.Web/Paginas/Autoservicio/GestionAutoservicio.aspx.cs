@@ -17,6 +17,34 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloService _articuloService;
         private TipoDocumentoPagoService _tipoDocumentoPagoService;
         private DocumentoPagoService _documentoPagoService;
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Token token = (Token)Session["token"];
+            Reserva reserva = (Reserva)Session["reservaCliente"];
+            _pedidoService = new PedidoService(token.access_token);
+
+            List<Pedido> pedidos = _pedidoService.Obtener();
+
+            if (pedidos != null && pedidos.Count > 0)
+            {
+                var pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
+                                                                && x.Reserva.Id == reserva.Id
+                                                                && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                if (pedidoCliente != null)
+                {
+
+                    if (pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
+                    {
+                        Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
+                        return;
+                    }
+
+                    cargarPedido(token, pedidoCliente);
+                }
+            }
+        }
+
         private MedioPagoDocumentoService _medioPagoDocumentoService;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,6 +71,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                             Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
                             return;
                         }
+
                         cargarPedido(token, pedidoCliente);
                     }
                 }
