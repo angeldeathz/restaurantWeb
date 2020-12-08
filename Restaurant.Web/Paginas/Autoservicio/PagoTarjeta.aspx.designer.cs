@@ -24,15 +24,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// divPagar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton divPagar;
-
-        /// <summary>
         /// lblMontoPagar control.
         /// </summary>
         /// <remarks>
@@ -40,5 +31,23 @@ namespace Restaurant.Web.Paginas.Autoservicio
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMontoPagar;
+
+        /// <summary>
+        /// btnPagoCredito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPagoCredito;
+
+        /// <summary>
+        /// btnPagoDebito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPagoDebito;
     }
 }

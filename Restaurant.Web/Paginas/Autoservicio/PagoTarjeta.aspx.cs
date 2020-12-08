@@ -31,10 +31,24 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 lblMontoPagar.Text = pedido.Total.ToString();
             }
         }
+        protected void btnPagoCredito_Click(object sender, EventArgs e)
+        {
+            int medioPago = MedioPago.credito;
+            Pagar(medioPago);
+        }
 
-        protected void divPagar_Click(object sender, EventArgs e)
+        protected void btnPagoDebito_Click(object sender, EventArgs e)
+        {
+            int medioPago = MedioPago.debito;
+            Pagar(medioPago);
+        }
+        protected void Pagar(int medioPago)
         {
             validarIngreso();
+            if(Session["tipoDocumentoPago"] == null) //No se guardó la info del tipo de pago
+            {
+                Response.Redirect("/Paginas/Autoservicio/GestionAutoservicio.aspx");
+            }
             Pedido pedido = (Pedido)Session["pedidoCliente"];
             
             if (Session["montoTarjeta"] == null) //Pago solo con tarjeta, se completa el pago
@@ -52,12 +66,12 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al realizar el pago', '', 'error');", true);
                 }
             }
-            crearDocumentoPago(pedido.Id, pedido.Total);
+            crearDocumentoPago(pedido.Id, pedido.Total, medioPago);
             Session["pedidoCliente"] = pedido;
             Response.Redirect("/Paginas/Autoservicio/PagoTarjetaFinalizado.aspx");
         }
 
-        public void crearDocumentoPago(int idPedido, int total)
+        public void crearDocumentoPago(int idPedido, int total, int medioPago)
         {
             DocumentoPago documentoPago= new DocumentoPago();
             documentoPago.IdPedido = idPedido;
@@ -73,7 +87,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             MedioPagoDocumento medioPagoDocumento = new MedioPagoDocumento();
             medioPagoDocumento.IdDocumentoPago = idDocumentoPago;
-            medioPagoDocumento.IdMedioPago = MedioPago.debito;
+            medioPagoDocumento.IdMedioPago = medioPago;
             medioPagoDocumento.Monto = Convert.ToInt32(lblMontoPagar.Text);
             _medioPagoDocumentoService = new MedioPagoDocumentoService(token.access_token);
             int idMedioPago = _medioPagoDocumentoService.Guardar(medioPagoDocumento);
@@ -89,7 +103,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
             _reservaService = new ReservaService(token.access_token);
             bool editar = _reservaService.ModificarEstado(cambioEstado);
         }
-
         protected void validarIngreso()
         {
             if (Session["reservaCliente"] == null || Session["token"] == null)
