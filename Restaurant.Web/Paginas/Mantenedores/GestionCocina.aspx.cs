@@ -252,7 +252,18 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearPedido_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionPedido");
+            if(!Page.IsValid)
+            {
+                upModalPedido.Update();
+                return;
+            }
+            List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
+            if(listaArticulos == null || listaArticulos.Count == 0)
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "Swal.fire('Debe agregar al menos un artículo', '', 'error');", true);
+                return;
+            }
             Pedido pedido = new Pedido();
             pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
             pedido.FechaHoraFin = Convert.ToDateTime(txtFechaFinPedido.Text);
@@ -265,7 +276,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
             int idPedido = _pedidoService.Guardar(pedido);
             if (idPedido != 0)
             {
-                List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
                 foreach (ArticuloPedido articuloPedido in listaArticulos)
                 {
                     ArticuloPedido articuloPedidoInsert = new ArticuloPedido();
@@ -296,6 +306,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarPedido_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionPedido");
+            if (!Page.IsValid)
+            {
+                upModalPedido.Update();
+                return;
+            }
             Pedido pedido = new Pedido();
             pedido.Id = int.Parse(txtIdPedido.Text);
             pedido.FechaHoraInicio = Convert.ToDateTime(txtFechaInicioPedido.Text);
@@ -344,7 +360,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnAgregarArticuloPedido_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionArticuloPedido");
+            if (!Page.IsValid)
+            {
+                upModalPedido.Update();
+                return;
+            }
             ArticuloPedido articuloPedido = new ArticuloPedido();
             Articulo articulo = new Articulo();
             articulo.Nombre = ddlArticuloPedido.SelectedItem.Text;
@@ -501,7 +522,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearArticulo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionArticulo");
+            if (!Page.IsValid)
+            {
+                upModalArticulo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
+                return;
+            }
             Articulo articulo = new Articulo();
             articulo.Nombre = txtNombreArticulo.Text;
             articulo.Descripcion = txtDescripcionArticulo.Text;
@@ -552,6 +579,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarArticulo_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionArticulo");
+            if (!Page.IsValid)
+            {
+                upModalArticulo.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
+                return;
+            }
             Articulo articulo = new Articulo();
             articulo.Id = int.Parse(txtIdArticulo.Text);
             articulo.Nombre = txtNombreArticulo.Text;
@@ -618,7 +652,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtPrecioPlato.Text = articulo.Precio.ToString();
             ddlTipoConsumoPlato.SelectedValue = articulo.IdTipoConsumo.ToString();
             ddlEstadoPlato.SelectedValue = articulo.IdEstadoArticulo.ToString();
-            txtMinutosPreparacion.Text = plato.MinutosPreparacion.ToString();
+            txtMinutosPreparacion.Text = Convert.ToInt32(plato.MinutosPreparacion).ToString();
             ddlTipoPreparacion.SelectedValue = plato.TipoPreparacion.Id.ToString();
 
             ddlIngredientePlato.SelectedValue = "";
@@ -652,6 +686,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnCrearPlato_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionPlato");
+            if (!Page.IsValid)
+            {
+                upModalPlato.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('show');", true);
+                return;
+            }
             Articulo articulo = new Articulo();
             articulo.Nombre = txtNombrePlato.Text;
             articulo.Descripcion = txtDescripcionPlato.Text;
@@ -703,6 +744,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnEditarPlato_Click(object sender, EventArgs e)
         {
             ValidarSesion();
+            Page.Validate("ValidacionPlato");
+            if (!Page.IsValid)
+            {
+                upModalPlato.Update();
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPlato", "$('#modalPlato').modal('show');", true);
+                return;
+            }
             Articulo articulo = new Articulo();
             articulo.Id = int.Parse(txtIdArticuloPlato.Text);
             articulo.Nombre = txtNombrePlato.Text;
@@ -719,6 +767,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             {
                 Plato plato = new Plato();
                 plato.Id = int.Parse(txtIdPlato.Text);
+                plato.Nombre = txtNombrePlato.Text;
                 plato.MinutosPreparacion = int.Parse(txtMinutosPreparacion.Text);
                 plato.IdTipoPreparacion = int.Parse(ddlTipoPreparacion.SelectedValue);
                 plato.IdArticulo = articulo.Id;
@@ -754,7 +803,12 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected void btnAgregarIngredientePlato_Click(object sender, EventArgs e)
         {
             ValidarSesion();
-
+            Page.Validate("ValidacionIngrediente");
+            if (!Page.IsValid)
+            {
+                upModalPlato.Update();
+                return;
+            }
             IngredientePlato ingredientePlato = new IngredientePlato();
             Insumo insumo = new Insumo();
             insumo.Nombre = ddlIngredientePlato.SelectedItem.Text;
