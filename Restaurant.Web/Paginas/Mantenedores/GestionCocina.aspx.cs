@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -486,6 +487,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             ddlEstadoArticulo.SelectedValue = articulo.IdEstadoArticulo.ToString();
             ddlInsumoArticulo.SelectedValue = articuloConsumoDirecto.IdInsumo.ToString();
             ddlInsumoArticulo.Enabled = false;
+            hdnUrlImagen.Value = articulo.UrlImagen;
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
             upModalArticulo.Update();
@@ -505,6 +507,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
             articulo.Precio = int.Parse(txtPrecioArticulo.Text);
             articulo.IdTipoConsumo = int.Parse(ddlTipoConsumoArticulo.SelectedValue);
             articulo.IdEstadoArticulo = int.Parse(ddlEstadoArticulo.SelectedValue);
+            articulo.UrlImagen = !string.IsNullOrEmpty(fileImagenArticulo.PostedFile.FileName)
+                ? UploadFileToStorage(fileImagenArticulo)
+                : string.Empty;
 
             Token token = (Token)Session["token"];
             _articuloService = new ArticuloService(token.access_token);
@@ -528,6 +533,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         upListaArticulos.Update();
                         actualizarDdlArticulos(articulos);
                     }
+
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "crearArticulo", "Swal.fire('Articulo creado', '', 'success');", true);
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
                 }
@@ -552,6 +558,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             articulo.Precio = int.Parse(txtPrecioArticulo.Text);
             articulo.IdTipoConsumo = int.Parse(ddlTipoConsumoArticulo.Text);
             articulo.IdEstadoArticulo = int.Parse(ddlEstadoArticulo.Text);
+            articulo.UrlImagen = !string.IsNullOrEmpty(fileImagenArticulo.PostedFile.FileName) ? UploadFileToStorage(fileImagenArticulo) : hdnUrlImagen.Value;
 
             Token token = (Token)Session["token"];
             _articuloService = new ArticuloService(token.access_token);
@@ -826,6 +833,22 @@ namespace Restaurant.Web.Paginas.Mantenedores
             ddlPrecioArticuloPedido.DataBind();
             ddlPrecioArticuloPedido.Items.Insert(0, new ListItem("", ""));
             ddlPrecioArticuloPedido.SelectedIndex = 0;
+        }
+
+        private string UploadFileToStorage(FileUpload file)
+        {
+            var path = "C:\\Storage\\Images";
+            var exists = Directory.Exists(path);
+
+            if (!exists)
+                Directory.CreateDirectory(path);
+
+            var pathFile = $"{path}\\{file.FileName}";
+            file.PostedFile.SaveAs(pathFile);
+
+            //pathFile = pathFile.Replace("\\", "/");
+
+            return pathFile;
         }
     }
 }

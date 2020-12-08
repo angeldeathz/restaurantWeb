@@ -1,12 +1,12 @@
-﻿using Restaurant.Model.Clases;
-using Restaurant.Model.Dto;
-using Restaurant.Services.Servicios;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Restaurant.Model.Clases;
+using Restaurant.Model.Dto;
+using Restaurant.Services.Servicios;
 
 namespace Restaurant.Web.Paginas.Autoservicio
 {
@@ -606,5 +606,23 @@ namespace Restaurant.Web.Paginas.Autoservicio
             divMiOrden.Attributes.Add("class", "tab-pane fade");
         }
 
+        public string GetImage(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+                return null;
+
+            var path = Server.MapPath("~/Images/LocalStorage/");
+            var exists = Directory.Exists(path);
+
+            if (!exists)
+                Directory.CreateDirectory(path);
+
+            var fileInfo = new FileInfo(file);
+            var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
+
+            File.Copy(file, pathToCreateFile, true);
+
+            return $"../../Images/LocalStorage/{fileInfo.Name}";
+        }
     }
 }
