@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Reportería</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs flex-column flex-md-row" id="tabsGestionUsuario" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-row" id="tabsGestionUsuario" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabReportes" data-toggle="pill" href="#divReportes" role="tab" aria-controls="divReportes" aria-selected="false" runat="server">Reportes</a>
         </div>
       </div>

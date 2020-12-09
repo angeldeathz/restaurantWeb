@@ -214,7 +214,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             else
             {
-                lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
             }
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
@@ -246,7 +246,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     }
                     else
                     {
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
                     }
                     txtTotalPedido.Text = totalPedido.ToString();
                     upArticulosPedido.Update();
@@ -275,7 +275,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     txtCantidadArticulo.Text = "";
                     txtComentarioArticulo.Text = "";
                     lblTituloModalArticulo.Text = "Pedir " + articulo.Nombre;
-                    lblPrecioArticulo.Text = "$" + articulo.Precio.ToString();
+                    lblPrecioArticulo.Text = string.Format("${0:N0}", articulo.Precio);
                     upModalArticulo.Update();
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
                 }

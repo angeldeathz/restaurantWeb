@@ -24,11 +24,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if(Session["montoTarjeta"] != null)
             {
                 int montoTarjeta = (int)Session["montoTarjeta"];
-                lblMontoPagar.Text = montoTarjeta.ToString();
+                lblMontoPagar.Text = string.Format("${0:N0}", montoTarjeta);
             }
             else
             {
-                lblMontoPagar.Text = pedido.Total.ToString();
+                lblMontoPagar.Text = string.Format("${0:N0}", pedido.Total);
             }
         }
         protected void btnPagoCredito_Click(object sender, EventArgs e)

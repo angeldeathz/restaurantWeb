@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Autoservicio</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs flex-column flex-md-row" id="tabsAutoservicio" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-row" id="tabsAutoservicio" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabMenu" data-toggle="pill" href="#divMenu" role="tab" aria-controls="divMenu" aria-selected="false" runat="server">Menú</a>
           <a class="nav-link" id="tabMiOrden" data-toggle="pill" href="#divMiOrden" role="tab" aria-controls="divMiOrden" aria-selected="false" runat="server">Mi Orden</a>
         </div>
@@ -14,8 +14,8 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divMenu" role="tabpanel" aria-labelledby="tabMenu" runat="server" ClientIDMode="Static">
               <div class="row">
-                  <div class="col-4 col-md-2">
-                    <div class="nav nav-pills d-flex flex-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
+                  <div class="col-12 col-md-2">
+                    <div class="nav nav-pills d-flex flex-row flex-md-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
                       <a class="nav-link active" id="tabEntradas" data-toggle="pill" href="#divEntradas" role="tab" aria-controls="divEntradas" aria-selected="false" runat="server">Entradas</a>
                       <a class="nav-link" id="tabPlatosFondo" data-toggle="pill" href="#divPlatosFondo" role="tab" aria-controls="divPlatosFondo" aria-selected="false" runat="server">Platos de Fondo</a>
                       <a class="nav-link" id="tabEnsaladas" data-toggle="pill" href="#divEnsaladas" role="tab" aria-controls="divEnsaladas" aria-selected="false" runat="server">Ensaladas</a>
@@ -25,7 +25,7 @@
                   </div> 
 
                   <!-- Tabs menu-->
-                  <div class="col-8 col-md-10">
+                  <div class="col-12 col-md-10">
                     <!-- Tab Entradas -->
                     <div class="tab-content py-3 px-1">
                       <div class="tab-pane show active" id="divEntradas" role="tabpanel" aria-labelledby="tabEntradas" runat="server" ClientIDMode="Static">

@@ -244,7 +244,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
                         actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
                         var totalPedido = articulosPedido.Sum(x => x.Total);
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
                         txtTotalPedido.Text = totalPedido.ToString();
                         upArticulosPedido.Update();
 
@@ -422,7 +422,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             Session["articulosPedidos"] = listaArticulos;
             actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
             var totalPedido = listaArticulos.Sum(x => x.Total);
-            lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+            lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
 
@@ -454,7 +454,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     }
                     else
                     {
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
                     }
                     txtTotalPedido.Text = totalPedido.ToString();
                     upArticulosPedido.Update();
