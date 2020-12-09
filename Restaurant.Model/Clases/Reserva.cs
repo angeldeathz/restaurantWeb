@@ -25,7 +25,7 @@ namespace Restaurant.Model.Clases
         public int IdEstadoReserva { get; set; }
         public Cliente Cliente { get; set; }
         public Mesa Mesa { get; set; }
-        public EstadoReserva EstadoReserva { get { return EstadosReserva.LastOrDefault(); } }
+        public EstadoReserva EstadoReserva { get { return EstadosReserva != null ? EstadosReserva.LastOrDefault() : null; } }
         public List<EstadoReserva> EstadosReserva { get; set; }
     }
 }

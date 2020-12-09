@@ -16,7 +16,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private DocumentoPagoService _documentoPagoService;
         private MedioPagoDocumentoService _medioPagoDocumentoService;
         private ReservaService _reservaService;
-        
+        private MesaService _mesaService;
         protected void Page_Load(object sender, EventArgs e)
         {
             validarIngreso();
@@ -53,14 +53,24 @@ namespace Restaurant.Web.Paginas.Autoservicio
             
             if (Session["montoTarjeta"] == null) //Pago solo con tarjeta, se completa el pago
             {
+                Token token = (Token)Session["token"];
+                 _mesaService = new MesaService(token.access_token);
+                Reserva reserva = (Reserva)Session["reservaCliente"];
+                Mesa mesa = reserva.Mesa;
+                mesa.IdEstadoMesa = EstadoMesa.disponible;
+                mesa.EstadoMesa = null;
+                bool editarMesa = _mesaService.Modificar(mesa, mesa.Id);
+                if (!editarMesa)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al realizar el pago', '', 'error');", true);
+                    return;
+                }
                 pedido.IdEstadoPedido = EstadoPedido.pagado;
                 pedido.Reserva = null;
                 pedido.EstadoPedido = null;
 
-                Token token = (Token)Session["token"];
                 _pedidoService = new PedidoService(token.access_token);
                 bool editar = _pedidoService.Modificar(pedido, pedido.Id);
-
                 if (!editar)
                 {
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "cerrarCuenta", "Swal.fire('Error al realizar el pago', '', 'error');", true);

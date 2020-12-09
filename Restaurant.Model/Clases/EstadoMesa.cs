@@ -2,6 +2,9 @@
 {
     public class EstadoMesa
     {
+        public const int disponible = 1;
+        public const int ocupada = 2;
+        public const int noDisponible = 3;
 
         public EstadoMesa()
         {
