@@ -199,27 +199,37 @@
                       <div class="row">
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblFechaHoraReserva" runat="server" Text="Fecha"></asp:Label>
-                            <asp:TextBox ID="txtFechaHoraReserva" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>                           
+                            <asp:TextBox ID="txtFechaHoraReserva" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>   
+                            <asp:RequiredFieldValidator ID="ValidacionFechaHoraReserva" runat="server" ControlToValidate="txtFechaHoraReserva" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar la fecha" ValidationGroup="ValidacionReserva"></asp:RequiredFieldValidator>
                         </div>                      
                         <div class="col-12 col-md-6">
                            <asp:Label ID="lblCantidadComensalesReserva" runat="server" Text="Comensales"></asp:Label>
-                            <asp:TextBox ID="txtCantidadComensalesReserva" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>              
+                            <asp:TextBox ID="txtCantidadComensalesReserva" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox> 
+                            <asp:RequiredFieldValidator ID="ValidacionesCantidadComensalesReserva" runat="server" ControlToValidate="txtCantidadComensalesReserva" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar la cantidad de comensales" ValidationGroup="ValidacionReserva"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-sm-6">
                             <asp:Label ID="lblClienteReserva" runat="server" Text="Cliente"></asp:Label>
                             <asp:DropDownList ID="ddlClienteReserva" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionClienteReserva" runat="server" ControlToValidate="ddlClienteReserva" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar al cliente" ValidationGroup="ValidacionReserva"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-6">
                             <asp:Label ID="lblMesaReserva" runat="server" Text="Mesa"></asp:Label>
                             <asp:DropDownList ID="ddlMesaReserva" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionMesaReserva" runat="server" ControlToValidate="ddlMesaReserva" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar la mesa" ValidationGroup="ValidacionReserva"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-sm-6">
                             <asp:Label ID="lblEstadoReserva" runat="server" Text="Estado"></asp:Label>
                             <asp:DropDownList ID="ddlEstadoReserva" runat="server" CssClass="form-control"></asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="ValidacionEstadoReserva" runat="server" ControlToValidate="ddlEstadoReserva" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe seleccionar el estado" ValidationGroup="ValidacionReserva"></asp:RequiredFieldValidator>
                         </div>
                       </div>                      
                   </div>
@@ -252,7 +262,11 @@
                             <asp:Label ID="lblRutCliente" runat="server" Text="Rut" CssClass="d-block"></asp:Label>
                             <asp:TextBox ID="txtRutCliente" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
                             &nbsp;-&nbsp;
-                            <asp:TextBox ID="txtDigitoVerificadorCliente" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>                           
+                            <asp:TextBox ID="txtDigitoVerificadorCliente" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>    
+                            <asp:RequiredFieldValidator ID="ValidacionRut" runat="server" ControlToValidate="txtRutCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el RUT" ValidationGroup="ValidacionCliente"></asp:RequiredFieldValidator><br />
+                            <asp:RequiredFieldValidator ID="ValidacionDigitoVerificador" runat="server" ControlToValidate="txtDigitoVerificadorCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el dígito verificador" ValidationGroup="ValidacionCliente"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-md-6">
                           <br />
@@ -264,20 +278,33 @@
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblNombreCliente" runat="server" Text="Nombre"></asp:Label>
                             <asp:TextBox ID="txtNombreCliente" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionNombreCliente" runat="server" ControlToValidate="txtNombreCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionCliente"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblApellidoCliente" runat="server" Text="Apellido"></asp:Label>
                             <asp:TextBox ID="txtApellidoCliente" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionApellidoCliente" runat="server" ControlToValidate="txtApellidoCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el apellido" ValidationGroup="ValidacionCliente"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblEmailCliente" runat="server" Text="E-mail"></asp:Label>
                             <asp:TextBox ID="txtEmailCliente" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionEmail" runat="server" ControlToValidate="txtEmailCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el e-mail" ValidationGroup="ValidacionCliente" ></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="ValidacionEmailValido" runat="server" CssClass="text-danger"
+                            ErrorMessage="El e-mail ingresado es inválido" ControlToValidate="txtEmailCliente" Display="Dynamic" ValidationGroup="ValidacionCliente"
+                            ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"></asp:RegularExpressionValidator>
                         </div>
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblTelefonoCliente" runat="server" Text="Teléfono"></asp:Label>
-                            <asp:TextBox ID="txtTelefonoCliente" runat="server" CssClass="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtTelefonoCliente" runat="server" CssClass="form-control" min="1"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="ValidacionTelefono" runat="server" ControlToValidate="txtTelefonoCliente" Display="Dynamic"
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el telefono" ValidationGroup="ValidacionCliente"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="ValidacionTelefonoFormato" runat="server" ControlToValidate="txtTelefonoCliente"  CssClass="text-danger" 
+                            ErrorMessage="El teléfono debe tener 9 dígitos" ValidationExpression=".{9}.*" ValidationGroup="ValidacionCliente" Display="Dynamic"/>
                         </div>
                       </div>
                   </div>
@@ -307,18 +334,24 @@
                       <asp:TextBox ID="txtIdMesa" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>                      
                       <div class="row">
                         <div class="col-12 col-md-6">
-                            <asp:Label ID="lblNombreMesa" runat="server" Text="Nombre"></asp:Label>
-                            <asp:TextBox ID="txtNombreMesa" runat="server" CssClass="form-control"></asp:TextBox>                           
+                          <asp:Label ID="lblNombreMesa" runat="server" Text="Nombre"></asp:Label>
+                          <asp:TextBox ID="txtNombreMesa" runat="server" CssClass="form-control"></asp:TextBox>   
+                          <asp:RequiredFieldValidator ID="ValidacionNombreMesa" runat="server" ControlToValidate="txtNombreMesa" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionMesa"></asp:RequiredFieldValidator>
                         </div>                      
                         <div class="col-12 col-md-6">
-                           <asp:Label ID="lblCantidadComensalesMesa" runat="server" Text="Comensales"></asp:Label>
-                            <asp:TextBox ID="txtCantidadComensalesMesa" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>              
+                          <asp:Label ID="lblCantidadComensalesMesa" runat="server" Text="Comensales"></asp:Label>
+                          <asp:TextBox ID="txtCantidadComensalesMesa" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>    
+                          <asp:RequiredFieldValidator ID="ValidacionCantidadComensalesMesa" runat="server" ControlToValidate="txtCantidadComensalesMesa" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad de comensales" ValidationGroup="ValidacionMesa"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-sm-6">
-                            <asp:Label ID="lblEstadoMesa" runat="server" Text="Estado"></asp:Label>
-                            <asp:DropDownList ID="ddlEstadoMesa" runat="server" CssClass="form-control"></asp:DropDownList>
+                          <asp:Label ID="lblEstadoMesa" runat="server" Text="Estado"></asp:Label>
+                          <asp:DropDownList ID="ddlEstadoMesa" runat="server" CssClass="form-control"></asp:DropDownList>
+                          <asp:RequiredFieldValidator ID="ValidacionEstadoMesa" runat="server" ControlToValidate="ddlEstadoMesa" Display="Dynamic"
+                          CssClass="text-danger" ErrorMessage="Debe ingresar el estado" ValidationGroup="ValidacionMesa"></asp:RequiredFieldValidator>
                         </div>
                       </div>
                   </div>
