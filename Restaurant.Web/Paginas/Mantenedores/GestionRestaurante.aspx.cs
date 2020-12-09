@@ -84,7 +84,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         horarioReserva.Add(horarioDomingo);
                         listaHorariosReserva.DataSource = horarioReserva;
                         listaHorariosReserva.DataBind();
-                    }
+                    }                    
                 }
             }
             catch (Exception ex)
@@ -123,7 +123,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
             tituloModalReserva.Text = "Crear Reserva";
             btnCrearReserva.Visible = true;
             btnEditarReserva.Visible = false;
-            txtFechaHoraReserva.Text = "";
+            DateTime hoy = DateTime.Now;
+            txtFechaHoraReserva.Attributes["min"] = hoy.ToString("yyyy-MM-dd HH:mm").Replace(' ', 'T');
+            txtFechaHoraReserva.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ', 'T');
             txtCantidadComensalesReserva.Text = "";
             ddlEstadoReserva.SelectedValue = "";
             ddlClienteReserva.SelectedValue = "";

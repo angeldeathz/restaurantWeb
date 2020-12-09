@@ -234,7 +234,7 @@
                       <div class="row">
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblRutProveedor" runat="server" Text="Rut" CssClass="d-block"></asp:Label>
-                            <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtRutProveedor" runat="server" CssClass="form-control w-75 d-inline-block" TextMode="Number" min="1"></asp:TextBox>
                             &nbsp;-&nbsp;
                             <asp:TextBox ID="txtDigitoVerificadorProveedor" runat="server" CssClass="form-control w-15 d-inline-block" MaxLength="1"></asp:TextBox>         
                             <asp:RequiredFieldValidator ID="ValidacionRut" runat="server" ControlToValidate="txtRutProveedor" Display="Dynamic"
