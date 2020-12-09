@@ -182,7 +182,7 @@
                       <ItemTemplate>
                           <tr>
                           <td> <%# Eval("Articulo.Nombre") %> </td>
-                          <td class="text-center"> <%# Eval("Comentarios").ToString() != string.Empty ? Eval("Comentarios") : "-" %> </td>
+                          <td class="text-center"> <%# Eval("Comentarios") != null && Eval("Comentarios").ToString() != string.Empty ? Eval("Comentarios") : "-" %> </td>
                           <td class="text-right"> <%# Eval("Precio") %> </td>
                           <td class="text-center"> <%# Eval("Cantidad") %> </td>
                           <td class="text-right"> <%# Eval("Total") %> </td>
