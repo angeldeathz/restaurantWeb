@@ -164,7 +164,7 @@
                           Text="No ha agregado ningún artículo al pedido" CssClass="d-inline-block h5 my-5"></asp:Label>
                     </div>   
                     <div class="table-responsive pt-3">
-                      <asp:Repeater ID="listaArticulosPedido" runat="server" OnItemCommand="btnEliminarArticulo_Click">
+                      <asp:Repeater ID="listaArticulosPedido" runat="server" OnItemCommand="btnEliminarArticulo_Click" OnItemDataBound="listaArticulosPedido_OnItemDataBound">
                       <HeaderTemplate>
                         <table class="table styled-table">
                           <thead>
@@ -185,9 +185,10 @@
                           <td> <%# Eval("Cantidad") %> </td>
                           <td> <%# Eval("Total") %> </td>
                           <td> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
-                          <td><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                          <td><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
                           </tr>
+                          <asp:HiddenField runat="server" id="hdnIdEstado" Visible="False" Value='<%# Eval("EstadoArticuloPedido.Id") %>'/>
                       </ItemTemplate>
                       <FooterTemplate>
                           </table>
@@ -209,7 +210,7 @@
                       <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
                   </Triggers> 
               </asp:UpdatePanel>
-              <asp:Timer ID="Timer1" runat="server" Interval="7000" OnTick="Timer1_Tick"></asp:Timer>
+              <asp:Timer ID="Timer1" runat="server" Interval="3000" OnTick="Timer1_Tick"></asp:Timer>
           </div>        
         </div>
       </div>
