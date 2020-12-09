@@ -721,7 +721,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 ddlEstadoPlato.SelectedValue = articulo.IdEstadoArticulo.ToString();
                 txtMinutosPreparacion.Text = Convert.ToInt32(plato.MinutosPreparacion).ToString();
                 ddlTipoPreparacion.SelectedValue = plato.TipoPreparacion.Id.ToString();
-
+                hdnUrlImagenPlato.Value = plato.Articulo.UrlImagen;
+                
                 ddlIngredientePlato.SelectedValue = "";
                 txtCantidadIngredientePlato.Text = "";
 
@@ -774,6 +775,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 articulo.Precio = int.Parse(txtPrecioPlato.Text);
                 articulo.IdTipoConsumo = int.Parse(ddlTipoConsumoPlato.SelectedValue);
                 articulo.IdEstadoArticulo = int.Parse(ddlEstadoPlato.SelectedValue);
+                articulo.UrlImagen = !string.IsNullOrEmpty(fileImagenPlato.PostedFile.FileName)
+                    ? UploadFileToStorage(fileImagenPlato)
+                    : string.Empty;
 
                 Token token = (Token)Session["token"];
                 _articuloService = new ArticuloService(token.access_token);
@@ -841,6 +845,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 articulo.Precio = int.Parse(txtPrecioPlato.Text);
                 articulo.IdTipoConsumo = int.Parse(ddlTipoConsumoPlato.SelectedValue);
                 articulo.IdEstadoArticulo = int.Parse(ddlEstadoPlato.SelectedValue);
+                articulo.UrlImagen = !string.IsNullOrEmpty(fileImagenPlato.PostedFile.FileName)
+                    ? UploadFileToStorage(fileImagenPlato)
+                    : hdnUrlImagenPlato.Value;
 
                 Token token = (Token)Session["token"];
                 _articuloService = new ArticuloService(token.access_token);

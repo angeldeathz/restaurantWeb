@@ -22,20 +22,20 @@
                                     Text="No existen Pedidos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                             </div>
                             <div class="table-responsive pt-3">
-                              <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
-                                <HeaderTemplate>
-                                  <table class="table styled-table">
-                                    <thead>
-                                      <tr>
-                                          <th><b>Id</b></th>
-                                          <th><b>Fecha Inicio</b></th>
-                                          <th><b>Fecha Fin</b></th>
-                                          <th><b>Total</b></th>
-                                          <th><b>Cliente</b></th>
-                                          <th><b>Estado</b></th>
-                                          <th><b>Acciones</b></th>
-                                      </tr>
-                                      </thead>
+                                <asp:Repeater ID="listaPedidos" runat="server" OnItemCommand="btnModalEditarPedido_Click">
+                                    <HeaderTemplate>
+                                        <table class="table styled-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><b>Id</b></th>
+                                                    <th><b>Fecha Inicio</b></th>
+                                                    <th><b>Fecha Fin</b></th>
+                                                    <th><b>Total</b></th>
+                                                    <th><b>Cliente</b></th>
+                                                    <th><b>Estado</b></th>
+                                                    <th><b>Acciones</b></th>
+                                                </tr>
+                                            </thead>
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:HiddenField ID="idPedido" runat="server" Value='<%# Eval("Id") %>' />
@@ -69,36 +69,36 @@
                                     Text="No existen Artículos para listar" CssClass="d-inline-block h5 my-5"></asp:Label>
                             </div>
                             <div class="table-responsive pt-3">
-                              <asp:Repeater ID="listaArticulos" runat="server" OnItemCommand="btnModalEditarArticulo_Click">
-                                <HeaderTemplate>
-                                  <table class="table styled-table">
-                                    <thead>
-                                      <tr>
-                                          <th><b>Nombre</b></th>
-                                          <th><b>Descripción</b></th>
-                                          <th><b>Precio</b></th>
-                                          <th><b>Tipo de Consumo</b></th>
-                                          <th><b>Estado</b></th>
-                                          <th><b>Acciones</b></th>
-                                      </tr>
-                                      </thead>
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <tr>
-                                        <td><%# Eval("Nombre") %> </td>
-                                        <td><%# Eval("Descripcion") %> </td>
-                                        <td><%# Eval("Precio") %> </td>
-                                        <td><%# Eval("TipoConsumo.Nombre") %> </td>
-                                        <td><%# Eval("EstadoArticulo.Nombre") %> </td>
-                                        <td>
-                                            <asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server">
+                                <asp:Repeater ID="listaArticulos" runat="server" OnItemCommand="btnModalEditarArticulo_Click">
+                                    <HeaderTemplate>
+                                        <table class="table styled-table">
+                                            <thead>
+                                                <tr>
+                                                    <th><b>Nombre</b></th>
+                                                    <th><b>Descripción</b></th>
+                                                    <th><b>Precio</b></th>
+                                                    <th><b>Tipo de Consumo</b></th>
+                                                    <th><b>Estado</b></th>
+                                                    <th><b>Acciones</b></th>
+                                                </tr>
+                                            </thead>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%# Eval("Nombre") %> </td>
+                                            <td><%# Eval("Descripcion") %> </td>
+                                            <td><%# Eval("Precio") %> </td>
+                                            <td><%# Eval("TipoConsumo.Nombre") %> </td>
+                                            <td><%# Eval("EstadoArticulo.Nombre") %> </td>
+                                            <td>
+                                                <asp:LinkButton ID="btnModalEditarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server">
                                 Editar</asp:LinkButton></td>
-                                    </tr>
-                                </ItemTemplate>
-                                <FooterTemplate>
-                                    </table>
-                                </FooterTemplate>
-                              </asp:Repeater>
+                                        </tr>
+                                    </ItemTemplate>
+                                    <FooterTemplate>
+                                        </table>
+                                    </FooterTemplate>
+                                </asp:Repeater>
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -125,25 +125,25 @@
                                     <asp:Label ID="lblFechaInicioPedido" runat="server" Text="Fecha Inicio"></asp:Label>
                                     <asp:TextBox ID="txtFechaInicioPedido" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionFechaInicio" runat="server" ControlToValidate="txtFechaInicioPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la fecha de inicio" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar la fecha de inicio" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <asp:Label ID="lblFechaFinPedido" runat="server" Text="Fecha Fin"></asp:Label>
                                     <asp:TextBox ID="txtFechaFinPedido" runat="server" CssClass="form-control" TextMode="DateTimeLocal"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionFechaFin" runat="server" ControlToValidate="txtFechaFinPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la fecha de fin" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar la fecha de fin" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-sm-3">
                                     <asp:Label ID="lblEstadoPedido" runat="server" Text="Estado"></asp:Label>
                                     <asp:DropDownList ID="ddlEstadoPedido" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionEstadoPedido" runat="server" ControlToValidate="ddlEstadoPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del pedido" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del pedido" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-sm-3">
                                     <asp:Label ID="lblReservaPedido" runat="server" Text="Reserva"></asp:Label>
                                     <asp:DropDownList ID="ddlReservaPedido" runat="server" CssClass="form-control"></asp:DropDownList>
-                                   <asp:RequiredFieldValidator ID="ValidacionReservaPedido" runat="server" ControlToValidate="ddlReservaPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la reserva asociada" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="ValidacionReservaPedido" runat="server" ControlToValidate="ddlReservaPedido" Display="Dynamic"
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar la reserva asociada" ValidationGroup="ValidacionPedido"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <hr />
@@ -153,8 +153,8 @@
                                     <asp:DropDownList ID="ddlArticuloPedido" runat="server" CssClass="form-control"
                                         OnSelectedIndexChanged="ddlArticuloPedido_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
-                                   <asp:RequiredFieldValidator ID="ValidacionArticuloPedido" runat="server" ControlToValidate="ddlArticuloPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar un artículo" ValidationGroup="ValidacionArticuloPedido"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="ValidacionArticuloPedido" runat="server" ControlToValidate="ddlArticuloPedido" Display="Dynamic"
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar un artículo" ValidationGroup="ValidacionArticuloPedido"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-2">
                                     <asp:UpdatePanel ID="upPrecio" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
@@ -168,7 +168,7 @@
                                     <asp:Label ID="lblCantidadArticuloPedido" runat="server" Text="Cantidad"></asp:Label>
                                     <asp:TextBox ID="txtCantidadArticuloPedido" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionCantidadArticuloPedido" runat="server" ControlToValidate="txtCantidadArticuloPedido" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad" ValidationGroup="ValidacionArticuloPedido"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad" ValidationGroup="ValidacionArticuloPedido"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <br />
@@ -250,13 +250,13 @@
                                     <asp:Label ID="lblNombreArticulo" runat="server" Text="Nombre"></asp:Label>
                                     <asp:TextBox ID="txtNombreArticulo" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionNombreArticulo" runat="server" ControlToValidate="txtNombreArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio"></asp:Label>
                                     <asp:TextBox ID="txtPrecioArticulo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionPrecioArticulo" runat="server" ControlToValidate="txtPrecioArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar el precio" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar el precio" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -264,7 +264,7 @@
                                     <asp:Label ID="lblDescripcionArticulo" runat="server" Text="Descripción"></asp:Label>
                                     <asp:TextBox ID="txtDescripcionArticulo" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionDescripcionArticulo" runat="server" ControlToValidate="txtDescripcionArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar la descripción" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar la descripción" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -272,13 +272,13 @@
                                     <asp:Label ID="lblTipoConsumoArticulo" runat="server" Text="Tipo de Consumo"></asp:Label>
                                     <asp:DropDownList ID="ddlTipoConsumoArticulo" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionTipoConsumoArticulo" runat="server" ControlToValidate="ddlTipoConsumoArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de consumo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de consumo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblEstadoArticulo" runat="server" Text="Estado"></asp:Label>
                                     <asp:DropDownList ID="ddlEstadoArticulo" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionEstadoArticulo" runat="server" ControlToValidate="ddlEstadoArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del artículo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del artículo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -286,14 +286,14 @@
                                     <asp:Label ID="lblInsumoArticulo" runat="server" Text="Insumo"></asp:Label>
                                     <asp:DropDownList ID="ddlInsumoArticulo" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionInsumoArticulo" runat="server" ControlToValidate="ddlInsumoArticulo" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el insumo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el insumo" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblImagenArticulo" runat="server" Text="Imagen"></asp:Label>
-                                    <asp:FileUpload runat="server" ID="fileImagenArticulo" AllowMultiple="False" accept="image/*"/>
-                                    <asp:HiddenField runat="server" id="hdnUrlImagen" Visible="False"/>
+                                    <asp:FileUpload runat="server" ID="fileImagenArticulo" AllowMultiple="False" accept="image/*" />
+                                    <asp:HiddenField runat="server" ID="hdnUrlImagen" Visible="False" />
                                 </div>
                             </div>
                         </div>
@@ -332,13 +332,13 @@
                                     <asp:Label ID="lblNombrePlato" runat="server" Text="Nombre"></asp:Label>
                                     <asp:TextBox ID="txtNombrePlato" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidaciontNombrePlato" runat="server" ControlToValidate="txtNombrePlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar el nombre" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblPrecioPlato" runat="server" Text="Precio"></asp:Label>
                                     <asp:TextBox ID="txtPrecioPlato" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionPrecioPlato" runat="server" ControlToValidate="txtPrecioPlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar el precio" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar el precio" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -346,7 +346,7 @@
                                     <asp:Label ID="lblDescripcionPlato" runat="server" Text="Descripción"></asp:Label>
                                     <asp:TextBox ID="txtDescripcionPlato" runat="server" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionDescripcionPlato" runat="server" ControlToValidate="txtDescripcionPlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar la descripción" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar la descripción" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -354,13 +354,13 @@
                                     <asp:Label ID="lblTipoConsumoPlato" runat="server" Text="Tipo de Consumo"></asp:Label>
                                     <asp:DropDownList ID="ddlTipoConsumoPlato" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionTipoConsumoPlato" runat="server" ControlToValidate="ddlTipoConsumoPlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de consumo" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de consumo" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblEstadoPlato" runat="server" Text="Estado"></asp:Label>
                                     <asp:DropDownList ID="ddlEstadoPlato" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionEstadoPlato" runat="server" ControlToValidate="ddlEstadoPlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del plato" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el estado del plato" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row">
@@ -368,14 +368,21 @@
                                     <asp:Label ID="lblMinutosPreparacion" runat="server" Text="Minutos preparación"></asp:Label>
                                     <asp:TextBox ID="txtMinutosPreparacion" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionMinutosPreparacion" runat="server" ControlToValidate="txtMinutosPreparacion" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe ingresar los minutos de preparación" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe ingresar los minutos de preparación" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <asp:Label ID="lblTipoPreparacion" runat="server" Text="Tipo de preparación"></asp:Label>
                                     <asp:DropDownList ID="ddlTipoPreparacion" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionTipoPreparacion" runat="server" ControlToValidate="ddlTipoPreparacion" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de preparación" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el tipo de preparación" ValidationGroup="ValidacionPlato"></asp:RequiredFieldValidator>
                                 </div>
+
+                                <div class="col-12 col-md-6">
+                                    <asp:Label ID="lblImagenPlato" runat="server" Text="Imagen"></asp:Label>
+                                    <asp:FileUpload runat="server" ID="fileImagenPlato" AllowMultiple="False" accept="image/*" />
+                                    <asp:HiddenField runat="server" ID="hdnUrlImagenPlato" Visible="False" />
+                                </div>
+
                             </div>
                             <hr />
                             <div class="row">
@@ -383,13 +390,13 @@
                                     <asp:Label ID="lblIngredientePlato" runat="server" Text="Ingrediente"></asp:Label>
                                     <asp:DropDownList ID="ddlIngredientePlato" runat="server" CssClass="form-control"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ValidacionIngredientePlato" runat="server" ControlToValidate="ddlIngredientePlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar el ingrediente" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar el ingrediente" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-2">
                                     <asp:Label ID="lblCantidadIngredientePlato" runat="server" Text="Cantidad"></asp:Label>
                                     <asp:TextBox ID="txtCantidadIngredientePlato" runat="server" CssClass="form-control"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="ValidacionCantidadIngredientePlato" runat="server" ControlToValidate="txtCantidadIngredientePlato" Display="Dynamic"
-                                    CssClass="text-danger" ErrorMessage="Debe seleccionar la cantidad" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
+                                        CssClass="text-danger" ErrorMessage="Debe seleccionar la cantidad" ValidationGroup="ValidacionIngrediente"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-12 col-md-3">
                                     <br />
@@ -440,6 +447,10 @@
                         </div>
                     </div>
                 </ContentTemplate>
+                <Triggers>
+                    <asp:PostBackTrigger ControlID="btnCrearPlato" />
+                    <asp:PostBackTrigger ControlID="btnEditarPlato" />
+                </Triggers>
             </asp:UpdatePanel>
         </div>
     </div>
