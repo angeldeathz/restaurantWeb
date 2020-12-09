@@ -43,7 +43,7 @@
                                             <td><%# Eval("Id") %></td>
                                             <td><%# Eval("FechaHoraInicio") %> </td>
                                             <td><%# Eval("FechaHoraFin") %> </td>
-                                            <td><%# Eval("Total") %> </td>
+                                            <td><%# Eval("Total", "${0:N0}") %></td>
                                             <td><%# Eval("Reserva.Cliente.NombreCliente") %> </td>
                                             <td><%# Eval("EstadoPedido.Nombre") %></td>
                                             <td>
@@ -74,9 +74,10 @@
                                         <table class="table styled-table">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center"><b>Imagen</b></th>
                                                     <th><b>Nombre</b></th>
                                                     <th><b>Descripción</b></th>
-                                                    <th><b>Precio</b></th>
+                                                    <th class="text-right"><b>Precio</b></th>
                                                     <th><b>Tipo de Consumo</b></th>
                                                     <th><b>Estado</b></th>
                                                     <th><b>Acciones</b></th>
@@ -85,9 +86,10 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr>
+                                            <td class="text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></td>
                                             <td><%# Eval("Nombre") %> </td>
                                             <td><%# Eval("Descripcion") %> </td>
-                                            <td><%# Eval("Precio") %> </td>
+                                            <td class="text-right"><%# Eval("Precio", "${0:N0}") %></td>
                                             <td><%# Eval("TipoConsumo.Nombre") %> </td>
                                             <td><%# Eval("EstadoArticulo.Nombre") %> </td>
                                             <td>

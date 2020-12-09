@@ -135,7 +135,7 @@
                             <tr>
                             <td> <%# Eval("Id") %></td>
                             <td> <%# Eval("FechaHora") %> </td>
-                            <td> <%# Eval("Total") %> </td>
+                            <td> <%# Eval("Total", "${0:N0}") %> </td>
                             <td> <%# Eval("EstadoOrden.Nombre") %> </td>
                             <td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>
                             <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
@@ -376,7 +376,7 @@
                                         <ItemTemplate>
                                             <tr>
                                             <td> <%# Eval("Insumo.Nombre") %> </td>
-                                            <td> $<%# Eval("Precio") %> </td>
+                                            <td> <%# Eval("Precio", "${0:N0}") %> </td>
                                             <td> <%# Eval("Cantidad") %> </td>
                                                 <td><asp:LinkButton ID="btnEliminarInsumoOrden" CommandArgument='<%# Eval("IdInsumo") %>' runat="server" >
                                                     Eliminar</asp:LinkButton></td>

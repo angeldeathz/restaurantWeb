@@ -28,10 +28,10 @@
               </HeaderTemplate>          
               <ItemTemplate>
                   <tr>
-                  <td> <%# Eval("Articulo.Nombre") %> </td>
-                  <td> <%# Eval("Precio") %> </td>
-                  <td> <%# Eval("Cantidad") %> </td>
-                  <td> <%# Eval("Total") %> </td>
+                  <td><%# Eval("Articulo.Nombre") %></td>
+                  <td><%# Eval("Precio", "${0:N0}") %></td>
+                  <td><%# Eval("Cantidad") %></td>
+                  <td><%# Eval("Total", "${0:N0}") %></td>
                   </tr>
               </ItemTemplate>
               <FooterTemplate>

@@ -1007,5 +1007,26 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
              return pathFile;
         }
+
+        public string GetImage(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+                file = "C:\\Storage\\Images\\sin_imagen.jpg";
+
+            var path = Server.MapPath("~/Images/LocalStorage/");
+            var exists = Directory.Exists(path);
+
+            if (!exists)
+                Directory.CreateDirectory(path);
+
+            var fileInfo = new FileInfo(file);
+
+            if (!File.Exists(fileInfo.FullName)) return null;
+
+            var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
+
+            File.Copy(file, pathToCreateFile, true);
+            return $"../../Images/LocalStorage/{fileInfo.Name}";
+        }
     }
 }

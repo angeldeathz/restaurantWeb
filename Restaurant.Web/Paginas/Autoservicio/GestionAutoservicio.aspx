@@ -44,7 +44,7 @@
                                     <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                     <div class="col-12 col-md-7 col-lg-9">
                                       <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                      <h5>$ <%# Eval("Precio") %></h5>
+                                      <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                       <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                         runat="server">Pedir</asp:LinkButton>
                                     </div>
@@ -70,7 +70,7 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                   <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
                                 </div>
@@ -94,7 +94,7 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5>$ <%# Eval("Precio") %></h5>
+                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                 <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
                               </div>
@@ -118,7 +118,7 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5>$ <%# Eval("Precio") %></h5>
+                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                 <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
                               </div>
@@ -142,7 +142,7 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                   <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
                                 </div>
@@ -183,9 +183,9 @@
                           <tr>
                           <td> <%# Eval("Articulo.Nombre") %> </td>
                           <td class="text-center"> <%# Eval("Comentarios") != null ? Eval("Comentarios") : "-" %> </td>
-                          <td class="text-right"> <%# Eval("Precio") %> </td>
+                          <td class="text-right"><%# Eval("Precio", "${0:N0}") %></td>
                           <td class="text-center"> <%# Eval("Cantidad") %> </td>
-                          <td class="text-right"> <%# Eval("Total") %> </td>
+                          <td class="text-right"><%# Eval("Total", "${0:N0}") %></td>
                           <td class="text-center"> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
                           <td class="text-center"><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
