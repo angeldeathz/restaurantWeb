@@ -231,7 +231,12 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     if (articuloEliminar != null)
                     {
                         listaArticulos.Remove(articuloEliminar);
+
+                        Token token = (Token)Session["token"];
+                        _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                        _articuloPedidoService.Eliminar(articuloEliminar.Id);
                     }
+
                     Session["articulosPedidoCliente"] = listaArticulos;
                     actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
                     var totalPedido = listaArticulos.Sum(x => x.Total);
@@ -695,6 +700,30 @@ namespace Restaurant.Web.Paginas.Autoservicio
 
             File.Copy(file, pathToCreateFile, true);
             return $"../../Images/LocalStorage/{fileInfo.Name}";
+        }
+
+        protected void listaArticulosPedido_OnItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || 
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                var hdnIdEstado = (HiddenField)e.Item.FindControl("hdnIdEstado");
+
+                if (btnCerrarCuenta.Visible)
+                {
+                    if (!hdnIdEstado.Value.Equals("1"))
+                    {
+                        var btnEliminarArticulo = (LinkButton)e.Item.FindControl("btnEliminarArticulo");
+                        btnEliminarArticulo.Visible = false;
+                    }
+                }
+
+                if (!btnCerrarCuenta.Visible && !btnHacerPedido.Visible)
+                {
+                    var btnEliminarArticulo = (LinkButton)e.Item.FindControl("btnEliminarArticulo");
+                    btnEliminarArticulo.Visible = false;
+                }
+            }
         }
     }
 }

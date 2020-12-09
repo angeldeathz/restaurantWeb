@@ -46,5 +46,13 @@ namespace Restaurant.Services.Servicios
             if (respuesta.StatusName != HttpStatusCode.OK) return false;
             return respuesta.Response;
         }
+
+        public bool Eliminar(int id)
+        {
+            string url = $"http://localhost/restaurant/api/articuloPedidos/{id}";
+            var respuesta = _restClientHttp.Delete<bool>(url);
+            if (respuesta.StatusName != HttpStatusCode.OK) return false;
+            return respuesta.Response;
+        }
     }
 }
