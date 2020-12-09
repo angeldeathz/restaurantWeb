@@ -201,6 +201,7 @@
 
 .imagen-articulo {
     max-height: 140px;
+    border-radius: 7px;
 }
 .styled-table {
     border-collapse: collapse;

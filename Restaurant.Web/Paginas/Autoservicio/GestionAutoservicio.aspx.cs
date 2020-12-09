@@ -135,6 +135,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     _articuloService = new ArticuloService(token.access_token);
                     List<Articulo> articulos = _articuloService.Obtener();
                     List<Articulo> articulosDisponibles = articulos.Where(x => x.IdEstadoArticulo == EstadoArticulo.disponible).ToList();
+                    articulosDisponibles = articulosDisponibles.OrderBy(x => x.Nombre).ToList();
                     Session["articulosDisponibles"] = articulosDisponibles;
 
                     List<Articulo> entradas = articulosDisponibles.Where(x => x.IdTipoConsumo == TipoConsumo.entradas).ToList();

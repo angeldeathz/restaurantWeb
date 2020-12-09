@@ -170,22 +170,24 @@
                           <thead>
                             <tr>
                                 <th><b>Artículo</b></th>
-                                <th><b>Precio</b></th>
-                                <th><b>Cantidad</b></th>
-                                <th><b>Total</b></th>
-                                <th><b>Estado</b></th>
-                                <th><b>Acciones</b></th>
+                                <th class="text-center"><b>Comentarios</b></th>
+                                <th class="text-right"><b>Precio</b></th>
+                                <th class="text-center"><b>Cantidad</b></th>
+                                <th class="text-right"><b>Total</b></th>
+                                <th class="text-center"><b>Estado</b></th>
+                                <th class="text-center"><b>Acciones</b></th>
                             </tr>
                           </thead>
                       </HeaderTemplate>          
                       <ItemTemplate>
                           <tr>
                           <td> <%# Eval("Articulo.Nombre") %> </td>
-                          <td> <%# Eval("Precio") %> </td>
-                          <td> <%# Eval("Cantidad") %> </td>
-                          <td> <%# Eval("Total") %> </td>
-                          <td> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
-                          <td><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                          <td class="text-center"> <%# Eval("Comentarios").ToString() != string.Empty ? Eval("Comentarios") : "-" %> </td>
+                          <td class="text-right"> <%# Eval("Precio") %> </td>
+                          <td class="text-center"> <%# Eval("Cantidad") %> </td>
+                          <td class="text-right"> <%# Eval("Total") %> </td>
+                          <td class="text-center"> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
+                          <td class="text-center"><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
                           </tr>
                       </ItemTemplate>
