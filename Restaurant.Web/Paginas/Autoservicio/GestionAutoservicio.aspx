@@ -182,12 +182,12 @@
                       <ItemTemplate>
                           <tr>
                           <td> <%# Eval("Articulo.Nombre") %> </td>
-                          <td class="text-center"> <%# Eval("Comentarios").ToString() != string.Empty ? Eval("Comentarios") : "-" %> </td>
+                          <td class="text-center"> <%# Eval("Comentarios") != null ? Eval("Comentarios") : "-" %> </td>
                           <td class="text-right"> <%# Eval("Precio") %> </td>
                           <td class="text-center"> <%# Eval("Cantidad") %> </td>
                           <td class="text-right"> <%# Eval("Total") %> </td>
                           <td class="text-center"> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
-                          <td class="text-center"><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                          <td class="text-center"><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
                           </tr>
                           <asp:HiddenField runat="server" id="hdnIdEstado" Visible="False" Value='<%# Eval("EstadoArticuloPedido.Id") %>'/>
