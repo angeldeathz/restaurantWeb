@@ -102,7 +102,8 @@ namespace Restaurant.Web.Paginas.Reservas
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                string mensaje = ex != null && ex.Message != null ? ex.Message : "Ocurrió un error inesperado. Intente nuevamente";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + mensaje + "', 'error');", true);
                 return;
             }
 
@@ -128,7 +129,11 @@ namespace Restaurant.Web.Paginas.Reservas
             {
                 DateTime horaDesde = fechaReserva.AddMinutes(-60);
                 DateTime horahasta = fechaReserva.AddMinutes(60*2);
-
+                if(reservas == null || reservas.Count == 0)
+                {
+                    idMesa = mesa.Id;
+                    break;
+                }
                 List<Reserva> reservasMesa = reservas.Where(x => x.IdMesa == mesa.Id
                                                             && x.FechaReserva.Date == fechaReserva.Date
                                                             && x.FechaReserva >= horaDesde
