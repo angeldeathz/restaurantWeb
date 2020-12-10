@@ -488,7 +488,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 Pedido pedido = (Pedido)Session["pedidoCliente"];
                 List<ArticuloPedido> articulosPedido = (List<ArticuloPedido>)Session["articulosPedidoCliente"];
                 var totalPedido = articulosPedido.Sum(x => x.Total);
-                lblTotalPagar.Text = totalPedido.ToString();
+                lblTotalPagar.Text = string.Format("${0:N0}", totalPedido);
                 upModalCerrarCuenta.Update();
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalCerrarCuenta", "$('#modalCerrarCuenta').modal('show');", true);
                 limpiarTabs();

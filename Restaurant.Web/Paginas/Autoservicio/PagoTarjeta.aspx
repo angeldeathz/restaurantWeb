@@ -24,6 +24,7 @@
         <div class="imagen-transbank pagar">
           <div class="monto-transbank pagar">
             <asp:Label ID="lblMontoPagar" runat="server"></asp:Label>
+            <asp:TextBox ID="txtMontoPagar" runat="server" Visible="false"></asp:TextBox>
           </div>
 			  	<asp:Button ID="btnPagoCredito" runat="server" Text="" CssClass="metodo-pago-credito" OnClick="btnPagoCredito_Click"/>
         	<asp:Button ID="btnPagoDebito" runat="server" Text="" CssClass="metodo-pago-debito" OnClick="btnPagoDebito_Click"/>

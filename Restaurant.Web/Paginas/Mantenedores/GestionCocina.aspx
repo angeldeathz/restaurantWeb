@@ -200,9 +200,9 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td><%# Eval("Articulo.Nombre") %> </td>
-                                                            <td>$<%# Eval("Precio") %> </td>
+                                                            <td><%# Eval("Precio", "${0:N0}") %> </td>
                                                             <td><%# Eval("Cantidad") %> </td>
-                                                            <td>$<%# Eval("Total") %> </td>
+                                                            <td><%# Eval("Total", "${0:N0}") %></td>
                                                             <td>
                                                                 <asp:LinkButton ID="btnEliminarArticuloPedido" CommandArgument='<%# Eval("IdArticulo") %>' runat="server">
                                                     Eliminar</asp:LinkButton></td>
