@@ -6,7 +6,7 @@
             <h1 class="text-rosado">Gestión de la Cocina</h1>
         </div>
         <div class="col-12">
-            <div class="nav nav-tabs flex-column flex-md-row" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
+            <div class="nav nav-tabs flex-row" id="tabsGestionRestaurante" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="tabPedidos" data-toggle="pill" href="#divPedidos" role="tab" aria-controls="divPedidos" aria-selected="false" runat="server">Pedidos</a>
                 <a class="nav-link" id="tabArticulos" data-toggle="pill" href="#divArticulos" role="tab" aria-controls="divArticulos" aria-selected="false" runat="server">Artículos</a>
             </div>
@@ -43,7 +43,7 @@
                                             <td><%# Eval("Id") %></td>
                                             <td><%# Eval("FechaHoraInicio") %> </td>
                                             <td><%# Eval("FechaHoraFin") %> </td>
-                                            <td><%# Eval("Total") %> </td>
+                                            <td><%# Eval("Total", "${0:N0}") %></td>
                                             <td><%# Eval("Reserva.Cliente.NombreCliente") %> </td>
                                             <td><%# Eval("EstadoPedido.Nombre") %></td>
                                             <td>
@@ -74,9 +74,10 @@
                                         <table class="table styled-table">
                                             <thead>
                                                 <tr>
+                                                    <th class="text-center"><b>Imagen</b></th>
                                                     <th><b>Nombre</b></th>
                                                     <th><b>Descripción</b></th>
-                                                    <th><b>Precio</b></th>
+                                                    <th class="text-right"><b>Precio</b></th>
                                                     <th><b>Tipo de Consumo</b></th>
                                                     <th><b>Estado</b></th>
                                                     <th><b>Acciones</b></th>
@@ -85,9 +86,10 @@
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <tr>
+                                            <td class="text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></td>
                                             <td><%# Eval("Nombre") %> </td>
                                             <td><%# Eval("Descripcion") %> </td>
-                                            <td><%# Eval("Precio") %> </td>
+                                            <td class="text-right"><%# Eval("Precio", "${0:N0}") %></td>
                                             <td><%# Eval("TipoConsumo.Nombre") %> </td>
                                             <td><%# Eval("EstadoArticulo.Nombre") %> </td>
                                             <td>
@@ -198,9 +200,9 @@
                                                     <ItemTemplate>
                                                         <tr>
                                                             <td><%# Eval("Articulo.Nombre") %> </td>
-                                                            <td>$<%# Eval("Precio") %> </td>
+                                                            <td><%# Eval("Precio", "${0:N0}") %> </td>
                                                             <td><%# Eval("Cantidad") %> </td>
-                                                            <td>$<%# Eval("Total") %> </td>
+                                                            <td><%# Eval("Total", "${0:N0}") %></td>
                                                             <td>
                                                                 <asp:LinkButton ID="btnEliminarArticuloPedido" CommandArgument='<%# Eval("IdArticulo") %>' runat="server">
                                                     Eliminar</asp:LinkButton></td>

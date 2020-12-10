@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Gestión de Bodega</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs flex-column flex-md-row" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-row" id="tabs_gestion_inventario" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabInsumos" data-toggle="pill" href="#divInsumos" role="tab" aria-controls="divInsumos" aria-selected="false" runat="server">Insumos</a>
           <a class="nav-link" id="tabProveedores" data-toggle="pill" href="#divProveedores" role="tab" aria-controls="divProveedores" aria-selected="false" runat="server">Proveedores</a>
           <a class="nav-link" id="tabOrdenes" data-toggle="pill" href="#divOrdenes" role="tab" aria-controls="divOrdenes" aria-selected="false" runat="server">Órdenes</a>
@@ -135,7 +135,7 @@
                             <tr>
                             <td> <%# Eval("Id") %></td>
                             <td> <%# Eval("FechaHora") %> </td>
-                            <td> <%# Eval("Total") %> </td>
+                            <td> <%# Eval("Total", "${0:N0}") %> </td>
                             <td> <%# Eval("EstadoOrden.Nombre") %> </td>
                             <td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>
                             <td><asp:LinkButton ID="btnModalEditarOrden" CommandArgument='<%# Eval("Id") %>' runat="server" >
@@ -376,7 +376,7 @@
                                         <ItemTemplate>
                                             <tr>
                                             <td> <%# Eval("Insumo.Nombre") %> </td>
-                                            <td> $<%# Eval("Precio") %> </td>
+                                            <td> <%# Eval("Precio", "${0:N0}") %> </td>
                                             <td> <%# Eval("Cantidad") %> </td>
                                                 <td><asp:LinkButton ID="btnEliminarInsumoOrden" CommandArgument='<%# Eval("IdInsumo") %>' runat="server" >
                                                     Eliminar</asp:LinkButton></td>

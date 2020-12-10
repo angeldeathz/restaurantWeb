@@ -24,11 +24,13 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if(Session["montoTarjeta"] != null)
             {
                 int montoTarjeta = (int)Session["montoTarjeta"];
-                lblMontoPagar.Text = montoTarjeta.ToString();
+                lblMontoPagar.Text = string.Format("{0:N0}", montoTarjeta);
+                txtMontoPagar.Text = montoTarjeta.ToString();
             }
             else
             {
-                lblMontoPagar.Text = pedido.Total.ToString();
+                lblMontoPagar.Text = string.Format("{0:N0}", pedido.Total);
+                txtMontoPagar.Text = pedido.Total.ToString();
             }
         }
         protected void btnPagoCredito_Click(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             MedioPagoDocumento medioPagoDocumento = new MedioPagoDocumento();
             medioPagoDocumento.IdDocumentoPago = idDocumentoPago;
             medioPagoDocumento.IdMedioPago = medioPago;
-            medioPagoDocumento.Monto = Convert.ToInt32(lblMontoPagar.Text);
+            medioPagoDocumento.Monto = Convert.ToInt32(txtMontoPagar.Text);
             _medioPagoDocumentoService = new MedioPagoDocumentoService(token.access_token);
             int idMedioPago = _medioPagoDocumentoService.Guardar(medioPagoDocumento);
             if (idMedioPago == 0)

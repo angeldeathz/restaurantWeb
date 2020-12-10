@@ -244,7 +244,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
                         actualizarRepeater(listaArticulosPedido, articulosPedido, listaArticulosPedidoVacia);
                         var totalPedido = articulosPedido.Sum(x => x.Total);
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
                         txtTotalPedido.Text = totalPedido.ToString();
                         upArticulosPedido.Update();
 
@@ -422,7 +422,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
             Session["articulosPedidos"] = listaArticulos;
             actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
             var totalPedido = listaArticulos.Sum(x => x.Total);
-            lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+            lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();
 
@@ -454,7 +454,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     }
                     else
                     {
-                        lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                        lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
                     }
                     txtTotalPedido.Text = totalPedido.ToString();
                     upArticulosPedido.Update();
@@ -1006,6 +1006,27 @@ namespace Restaurant.Web.Paginas.Mantenedores
             file.PostedFile.SaveAs(pathFile);
 
              return pathFile;
+        }
+
+        public string GetImage(string file)
+        {
+            if (string.IsNullOrEmpty(file))
+                file = "C:\\Storage\\Images\\sin_imagen.jpg";
+
+            var path = Server.MapPath("~/Images/LocalStorage/");
+            var exists = Directory.Exists(path);
+
+            if (!exists)
+                Directory.CreateDirectory(path);
+
+            var fileInfo = new FileInfo(file);
+
+            if (!File.Exists(fileInfo.FullName)) return null;
+
+            var pathToCreateFile = Server.MapPath($"~/Images/LocalStorage/{fileInfo.Name}");
+
+            File.Copy(file, pathToCreateFile, true);
+            return $"../../Images/LocalStorage/{fileInfo.Name}";
         }
     }
 }

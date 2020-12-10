@@ -14,7 +14,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
     {
         private PedidoService _pedidoService;
         private ArticuloPedidoService _articuloPedidoService;
-        private ArticuloService _articuloService;
         protected void Page_Load(object sender, EventArgs e)
         {
             validarIngreso();
@@ -71,7 +70,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             else
             {
-                lblTotalPedido.Text = "Total: $" + totalPedido.ToString() + "-";
+                lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
             }
             txtTotalPedido.Text = totalPedido.ToString();
             upArticulosPedido.Update();

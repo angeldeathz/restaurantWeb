@@ -647,7 +647,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 Session["detalleOrdenProveedor"] = listaInsumos;
                 actualizarRepeater(listaInsumosOrden, listaInsumos, listaInsumosOrdenVacia);
                 var totalOrdenProveedor = listaInsumos.Sum(x => x.Total);
-                lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
+                lblTotalOrden.Text = "Total: " + string.Format("${0:N0}", totalOrdenProveedor) + "-";
                 txtTotalOrden.Text = totalOrdenProveedor.ToString();
                 upInsumosOrden.Update();
 
@@ -683,7 +683,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 }
                 else
                 {
-                    lblTotalOrden.Text = "Total: $" + totalOrdenProveedor.ToString() + "-";
+                    lblTotalOrden.Text = "Total: " + string.Format("${0:N0}", totalOrdenProveedor) + "-";
                 }
                 txtTotalOrden.Text = totalOrdenProveedor.ToString();
                 upInsumosOrden.Update();

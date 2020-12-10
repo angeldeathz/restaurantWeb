@@ -17,11 +17,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
             if (Session["montoTarjeta"] != null)
             {
                 int montoTarjeta = (int)Session["montoTarjeta"];
-                lblMontoPagado.Text = montoTarjeta.ToString();
+                lblMontoPagado.Text = string.Format("{0:N0}", montoTarjeta);
             }
             else
             {
-                lblMontoPagado.Text = pedido.Total.ToString();
+                lblMontoPagado.Text = string.Format("{0:N0}", pedido.Total);
             }
             lblFecha.Text = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
         }

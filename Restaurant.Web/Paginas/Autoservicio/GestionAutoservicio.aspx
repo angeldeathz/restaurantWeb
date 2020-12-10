@@ -5,7 +5,7 @@
         <h1 class="text-rosado">Autoservicio</h1>
       </div>
       <div class="col-12">
-        <div class="nav nav-tabs flex-column flex-md-row" id="tabsAutoservicio" role="tablist" aria-orientation="vertical">
+        <div class="nav nav-tabs flex-row" id="tabsAutoservicio" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="tabMenu" data-toggle="pill" href="#divMenu" role="tab" aria-controls="divMenu" aria-selected="false" runat="server">Menú</a>
           <a class="nav-link" id="tabMiOrden" data-toggle="pill" href="#divMiOrden" role="tab" aria-controls="divMiOrden" aria-selected="false" runat="server">Mi Orden</a>
         </div>
@@ -14,8 +14,8 @@
         <div class="tab-content py-3 px-1">
           <div class="tab-pane show active" id="divMenu" role="tabpanel" aria-labelledby="tabMenu" runat="server" ClientIDMode="Static">
               <div class="row">
-                  <div class="col-4 col-md-2">
-                    <div class="nav nav-pills d-flex flex-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
+                  <div class="col-12 col-md-2">
+                    <div class="nav nav-pills d-flex flex-row flex-md-column" id="tabsTiposPlato" role="tablist" aria-orientation="horizontal">
                       <a class="nav-link active" id="tabEntradas" data-toggle="pill" href="#divEntradas" role="tab" aria-controls="divEntradas" aria-selected="false" runat="server">Entradas</a>
                       <a class="nav-link" id="tabPlatosFondo" data-toggle="pill" href="#divPlatosFondo" role="tab" aria-controls="divPlatosFondo" aria-selected="false" runat="server">Platos de Fondo</a>
                       <a class="nav-link" id="tabEnsaladas" data-toggle="pill" href="#divEnsaladas" role="tab" aria-controls="divEnsaladas" aria-selected="false" runat="server">Ensaladas</a>
@@ -25,7 +25,7 @@
                   </div> 
 
                   <!-- Tabs menu-->
-                  <div class="col-8 col-md-10">
+                  <div class="col-12 col-md-10">
                     <!-- Tab Entradas -->
                     <div class="tab-content py-3 px-1">
                       <div class="tab-pane show active" id="divEntradas" role="tabpanel" aria-labelledby="tabEntradas" runat="server" ClientIDMode="Static">
@@ -44,7 +44,7 @@
                                     <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                     <div class="col-12 col-md-7 col-lg-9">
                                       <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                      <h5>$ <%# Eval("Precio") %></h5>
+                                      <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                       <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                         runat="server">Pedir</asp:LinkButton>
                                     </div>
@@ -70,7 +70,7 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                   <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
                                 </div>
@@ -94,7 +94,7 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5>$ <%# Eval("Precio") %></h5>
+                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                 <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
                               </div>
@@ -118,7 +118,7 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5>$ <%# Eval("Precio") %></h5>
+                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                 <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
                               </div>
@@ -142,7 +142,7 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5>$ <%# Eval("Precio") %></h5>
+                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
                                   <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
                                 </div>
@@ -183,9 +183,9 @@
                           <tr>
                           <td> <%# Eval("Articulo.Nombre") %> </td>
                           <td class="text-center"> <%# Eval("Comentarios") != null ? Eval("Comentarios") : "-" %> </td>
-                          <td class="text-right"> <%# Eval("Precio") %> </td>
+                          <td class="text-right"><%# Eval("Precio", "${0:N0}") %></td>
                           <td class="text-center"> <%# Eval("Cantidad") %> </td>
-                          <td class="text-right"> <%# Eval("Total") %> </td>
+                          <td class="text-right"><%# Eval("Total", "${0:N0}") %></td>
                           <td class="text-center"> <%# Eval("EstadoArticuloPedido.Nombre") %> </td>
                           <td class="text-center"><asp:LinkButton ID="btnEliminarArticulo" CommandArgument='<%# Eval("IdArticulo") %>' runat="server" >
                                   Eliminar</asp:LinkButton></td>
@@ -279,7 +279,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   </div>
                   <br />
-                  <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
+                  <h5 class="d-inline-block mb-4">Total a pagar: </h5>
                   <asp:Label ID="lblTotalPagar" runat="server" CssClass="h5 d-inline-block"></asp:Label>
                 </div> 
                 <div class="row">
@@ -296,7 +296,7 @@
                   <div class="col-12">
                     <asp:Label runat="server" Text="Medio de pago"></asp:Label>
                     <br />
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mt-3">
 						          <asp:Button ID="btnPagarEfectivo" runat="server" CssClass="btn btn-success col-4" Text="Efectivo" OnClick="btnPagarEfectivo_Click" />
 						          <asp:Button ID="btnPagarMixto" runat="server" CssClass="btn btn-warning col-3" Text="Mixto" OnClick="btnPagarMixto_Click" />
                       <asp:Button ID="btnPagarTarjeta" runat="server" CssClass="btn btn-primary col-4" Text="Tarjeta" OnClick="btnPagarTarjeta_Click" />
