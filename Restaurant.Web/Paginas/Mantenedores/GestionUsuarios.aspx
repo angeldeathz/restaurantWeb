@@ -136,8 +136,7 @@
                             <asp:RequiredFieldValidator ID="ValidacionContrasenaRepetir" runat="server" ControlToValidate="txtContrasenaRepetir" Display="Dynamic"
                             CssClass="text-danger" ErrorMessage="Debe repetir la contraseña" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
                             <asp:CompareValidator ID="ValidacionContrasenaIguales" Operator="Equal" runat="server" ValidationGroup="Validate" Display="Dynamic"
-                            ControlToValidate="txtContrasenaRepetir" ControlToCompare="txtContrasena" ErrorMessage="Las contraseñas no coinciden" CssClass="text-danger" 
-                            SetFocusOnError="true"></asp:CompareValidator>
+                            ControlToValidate="txtContrasenaRepetir" ControlToCompare="txtContrasena" ErrorMessage="Las contraseñas no coinciden" CssClass="text-danger"></asp:CompareValidator>
                         </div>
                       </div>
                   </div>

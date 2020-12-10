@@ -174,22 +174,24 @@
                       <div class="row">
                         <div class="col-12 col-sm-4">
                           <asp:Label ID="lblStockActual" runat="server" Text="Stock actual"></asp:Label>
-                          <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionStockActual" runat="server" ControlToValidate="txtStockActual" Display="Dynamic"
                           CssClass="text-danger" ErrorMessage="Debe ingresar el stock actual" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-4">
                           <asp:Label ID="lblStockCritico" runat="server" Text="Stock crítico"></asp:Label>
-                          <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionStockCritico" runat="server" ControlToValidate="txtStockCritico" Display="Dynamic"
-                          CssClass="text-danger" ErrorMessage="Debe ingresar el stock critico" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
+                          CssClass="text-danger" ErrorMessage="Ingrese el stock crítico" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
+                          <asp:CompareValidator ID="ValidacionStockCriticoOptimo" Operator="LessThan" runat="server" ValidationGroup="ValidacionInsumo" Display="Dynamic"
+                          ControlToValidate="txtStockCritico" ControlToCompare="txtStockOptimo" ErrorMessage="Stock crítico debe ser menor al óptimo" CssClass="text-danger"></asp:CompareValidator>
                         </div>
                         <div class="col-12 col-sm-4">
                           <asp:Label ID="lblStockOptimo" runat="server" Text="Stock óptimo"></asp:Label>
-                          <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number"></asp:TextBox>
+                          <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionStockOptimo" runat="server" ControlToValidate="txtStockOptimo" Display="Dynamic"
-                          CssClass="text-danger" ErrorMessage="Debe ingresar el stock óptimo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
-                        </div>
+                          CssClass="text-danger" ErrorMessage="Ingrese el stock óptimo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
+                          </div>
                       </div>
                       <div class="row">
                         <div class="col-12 col-sm-6">

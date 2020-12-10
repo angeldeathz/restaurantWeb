@@ -45,15 +45,14 @@
                 <div class="col-12 col-md-6 form-group my-1 text-left">
                     <asp:Label ID="lblHora" runat="server" Text="Hora"></asp:Label>
                     <div class="row">
-                      <div class="col">
+                      <div class="col-5 pr-1">
                         <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-control"></asp:DropDownList>
                       </div>
-                      <div class="col">
+                      <div class="col-1 p-0 text-center">:</div>
+                      <div class="col-5 pl-1">
                         <asp:DropDownList ID="ddlMinuto" runat="server" CssClass="form-control"></asp:DropDownList>
                       </div>
-                      <div class="col">
-                         Hrs
-                      </div>
+                      <div class="col-1 p-0"><p class="mb-0 mt-2">Hrs</p></div>
                     </div>
                 </div> 
             </div>

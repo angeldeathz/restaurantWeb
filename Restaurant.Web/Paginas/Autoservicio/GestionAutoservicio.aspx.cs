@@ -112,7 +112,6 @@ namespace Restaurant.Web.Paginas.Autoservicio
                             tabMiOrden.Attributes.Add("class", "nav-link active");
                             divMiOrden.Attributes.Add("class", "tab-pane active show");
                         }
-                        //listaArticulosPedido.FindControl("btnEliminarArticulo").Visible = false;
                     }
                     else
                     {
@@ -574,7 +573,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                         btnCerrarCuenta.Visible = false;
                         break;
                     case EstadoPedido.cerradoMixto:
-                        lblTotalPagarCuenta.Text = pedido.Total.ToString();
+                        lblTotalPagarCuenta.Text = string.Format("${0:N0}", pedido.Total);
                         upModalPagoMixto.Update();
                         ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPagoMixto", "$('#modalPagoMixto').modal('show');", true);
                         break;
