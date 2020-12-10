@@ -209,7 +209,7 @@ namespace Restaurant.Web.Paginas.Reservas
                 string x = i < 10 ? "0" + i.ToString() : i.ToString();
                 if(fecha.Date == hoy.Date)
                 {
-                    if(int.Parse(x) <= int.Parse(hoy.ToShortTimeString().Substring(0,2)))
+                    if(int.Parse(x) <= int.Parse(hoy.ToString("HH")))
                     {
                         continue;
                     }

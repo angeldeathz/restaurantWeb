@@ -234,7 +234,8 @@
                       <asp:TextBox ID="txtIdArticulo" runat="server" CssClass="form-control" Visible="false"></asp:TextBox>
                       <div class="row">                        
                         <div class="col-12 col-md-6">
-                            Precio unitario: <asp:Label ID="lblPrecioArticulo" runat="server" Text="Precio"></asp:Label>
+                          <p class="mb-0">Precio unitario</p>
+                          <asp:Label ID="lblPrecioArticulo" CssClass="font-weight-bold lead" runat="server" Text="Precio"></asp:Label>
                         </div>
                         <div class="col-12 col-md-6">
                           <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label>
@@ -324,7 +325,7 @@
               </div>
 					    <div class="modal-body py-4">
                 <div class="text-center">
-                  <h5 class="d-inline-block mt-3">Total a pagar: $</h5>
+                  <h5 class="d-inline-block mt-3">Total a pagar: </h5>
                   <asp:Label ID="lblTotalPagarCuenta" runat="server" CssClass="h5 d-inline-block"></asp:Label>
                   <br />
                   <p> Ingrese montos a pagar:</p>

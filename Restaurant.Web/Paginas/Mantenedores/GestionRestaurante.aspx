@@ -33,6 +33,7 @@
                                 <th><b>Mesa</b></th>
                                 <th><b>Comensales</b></th>
                                 <th><b>Cliente</b></th>
+                                <th><b>Estado</b></th>
                                 <th><b>Acciones</b></th>
                             </tr>
                            </thead>
@@ -45,6 +46,7 @@
                             <td> <%# Eval("Mesa.Nombre") %> </td>
                             <td> <%# Eval("CantidadComensales") %> </td>
                             <td> <%# Eval("Cliente.Persona.Nombre") %> <%# Eval("Cliente.Persona.Apellido") %></td>
+                            <td> <%# Eval("EstadoReserva.Nombre") %> </td>
                             <td><asp:LinkButton ID="btnModalEditarReserva" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                     Editar</asp:LinkButton></td>
                             </tr>

@@ -294,6 +294,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ValidacionStockCritico;
 
         /// <summary>
+        /// ValidacionStockCriticoOptimo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator ValidacionStockCriticoOptimo;
+
+        /// <summary>
         /// lblStockOptimo control.
         /// </summary>
         /// <remarks>
