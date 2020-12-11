@@ -224,6 +224,13 @@ namespace Restaurant.Web.Paginas.Reservas
             }
             ddlHora.DataSource = horas;
             ddlHora.DataBind();
+            if (horas.Count == 0 && fecha.Date == hoy.Date) //Cargar el día siguiente por defecto
+            {
+                DateTime diaSiguiente = fecha.AddDays(1);
+                txtFecha.Text = diaSiguiente.ToString("yyyy-MM-dd");
+                txtFecha.Attributes["min"] = diaSiguiente.ToString("yyyy-MM-dd");
+                cargarHoras(diaSiguiente);
+            }
             int horaInicioMinuto = int.Parse(horarioReserva.HoraInicioTime.Substring(3, 2));
             int horaFinMinuto = int.Parse(horarioReserva.HoraFinTime.Substring(3, 2));
             List<string> minutos = new List<string>();
