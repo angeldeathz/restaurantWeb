@@ -131,7 +131,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                string mensaje = ex != null && ex.Message != null ? ex.Message : "Ocurrió un error inesperado. Intente nuevamente";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + mensaje + "', 'error');", true);
                 return;
             }
         }
@@ -190,7 +191,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                string mensaje = ex != null && ex.Message != null ? ex.Message : "Ocurrió un error inesperado. Intente nuevamente";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + mensaje + "', 'error');", true);
                 return;
             }
         }
@@ -248,7 +250,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + ex.Message + "', 'error');", true);
+                string mensaje = ex != null && ex.Message != null ? ex.Message : "Ocurrió un error inesperado. Intente nuevamente";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', '" + mensaje + "', 'error');", true);
                 return;
             }
         }
