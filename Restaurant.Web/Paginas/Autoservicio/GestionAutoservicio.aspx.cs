@@ -279,12 +279,14 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     lblPrecioArticulo.Text = string.Format("${0:N0}", articulo.Precio);
                     upModalArticulo.Update();
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('show');", true);
+                    limpiarTabsMenu(articulo.IdTipoConsumo);
                 }
                 else
                 {
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "Swal.fire('Error al agregar artículo', '', 'error');", true);
                 }
                 limpiarTabs();
+                
                 tabMenu.Attributes.Add("class", "nav-link active");
                 divMenu.Attributes.Add("class", "tab-pane active show");
             }
@@ -345,7 +347,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     pedidoCliente.Reserva = null;
                     bool editar = _pedidoService.Modificar(pedidoCliente, pedidoCliente.Id);
                 }
-
+                limpiarTabsMenu(articulo.IdTipoConsumo);
                 Session["pedidoCliente"] = pedidoCliente;
 
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalArticulo", "$('#modalArticulo').modal('hide');", true);
@@ -685,6 +687,45 @@ namespace Restaurant.Web.Paginas.Autoservicio
             tabMiOrden.Attributes.Add("class", "nav-link");
             divMenu.Attributes.Add("class", "tab-pane fade");
             divMiOrden.Attributes.Add("class", "tab-pane fade");
+        }
+
+        public void limpiarTabsMenu(int idTipoConsumo)
+        {
+            tabEntradas.Attributes.Add("class", "nav-link");
+            tabPlatosFondo.Attributes.Add("class", "nav-link");
+            tabEnsaladas.Attributes.Add("class", "nav-link");
+            tabPostres.Attributes.Add("class", "nav-link");
+            tabBebestibles.Attributes.Add("class", "nav-link");
+            divEntradas.Attributes.Add("class", "tab-pane fade");
+            divPlatosFondo.Attributes.Add("class", "tab-pane fade");
+            divEnsaladas.Attributes.Add("class", "tab-pane fade");
+            divPostres.Attributes.Add("class", "tab-pane fade");
+            divBebestibles.Attributes.Add("class", "tab-pane fade");
+
+            switch(idTipoConsumo)
+            {
+                case TipoConsumo.bebestibles:
+                    tabBebestibles.Attributes.Add("class", "nav-link active");
+                    divBebestibles.Attributes.Add("class", "tab-pane active show");
+                    break;
+                case TipoConsumo.platosFondo:
+                    tabPlatosFondo.Attributes.Add("class", "nav-link active");
+                    divPlatosFondo.Attributes.Add("class", "tab-pane active show");
+                    break;
+                case TipoConsumo.ensaladas:
+                    tabEnsaladas.Attributes.Add("class", "nav-link active");
+                    divEnsaladas.Attributes.Add("class", "tab-pane active show");
+                    break;
+                case TipoConsumo.postres:
+                    tabPostres.Attributes.Add("class", "nav-link active");
+                    divPostres.Attributes.Add("class", "tab-pane active show");
+                    break;
+                case TipoConsumo.entradas:
+                default:
+                    tabEntradas.Attributes.Add("class", "nav-link active");
+                    divEntradas.Attributes.Add("class", "tab-pane active show");
+                    break;
+            }
         }
 
         public string GetImage(string file)
