@@ -9,5 +9,10 @@ namespace Restaurant.Web.Paginas.Publica
         {
 
         }
+
+        protected void btnEnviarMensaje_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -57,14 +57,8 @@
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/nosotros">Nosotros</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Carta
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#platos">Platos</a>
-                            <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#postres">Postres</a>
-                            <a class="dropdown-item" runat="server" href="/Paginas/Publica/menu#bebestibles">Bebestibles</a>
-                        </div>
+                    <li class="nav-item px-2">
+                        <a class="nav-link" runat="server" href="/Paginas/Publica/menu">Carta</a>
                     </li>
                     <li class="nav-item px-2">
                         <a class="nav-link" runat="server" href="/Paginas/Publica/contacto">Contacto</a>
