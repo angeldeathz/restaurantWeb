@@ -2,9 +2,11 @@
 {
     public class EstadoArticuloPedido
     {
-        public const int recibido = 1;
-        public const int preparado = 2;
-        public const int entregado = 3;
+        public const int pendiente = 1;
+        public const int enPreparacion = 2;
+        public const int listo = 3;
+        public const int entregado = 4;
+        public const int rechazado = 5;
         public EstadoArticuloPedido()
         {
             Id = 0;

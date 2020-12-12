@@ -431,8 +431,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
             nuevoArticuloPedido.Comentarios = comentarios;
 
             EstadoArticuloPedido estadoInicialArticuloPedido = new EstadoArticuloPedido();
-            estadoInicialArticuloPedido.Id = EstadoArticuloPedido.recibido;
-            estadoInicialArticuloPedido.Nombre = "Recibido";
+            estadoInicialArticuloPedido.Id = EstadoArticuloPedido.pendiente;
+            estadoInicialArticuloPedido.Nombre = "Pendiente";
             nuevoArticuloPedido.EstadosArticuloPedido = new List<EstadoArticuloPedido>();
             nuevoArticuloPedido.EstadosArticuloPedido.Add(estadoInicialArticuloPedido);
             nuevoArticuloPedido.IdEstadoArticuloPedido = estadoInicialArticuloPedido.Id;

@@ -196,7 +196,7 @@
 }
 
 .text-rosado {
-    color: #e0897b;
+    color: #e0897b!important; 
 }
 
 .imagen-articulo {

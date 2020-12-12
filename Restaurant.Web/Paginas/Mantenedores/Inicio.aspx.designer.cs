@@ -33,15 +33,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
         protected global::System.Web.UI.WebControls.Label lblPerfil;
 
         /// <summary>
-        /// lblMesasOcupadas control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMesasOcupadas;
-
-        /// <summary>
         /// lblMesasDisponibles control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace Restaurant.Web.Paginas.Mantenedores
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMesasDisponibles;
+
+        /// <summary>
+        /// lblMesasOcupadas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMesasOcupadas;
 
         /// <summary>
         /// lblComensales control.
