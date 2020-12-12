@@ -10,19 +10,19 @@
             <li data-target="#carrusel_home" data-slide-to="2"></li>
           </ol>
           <div class="carousel-inner">
-            <div class="carousel-item p-5 active">
-                <img src="../Images/logo_sxxi.png" alt="Restaurante Siglo XXI"/>
+            <div class="carousel-item p-2 p-md-5 active">
+                <img src="../Images/logo_sxxi.png" alt="Restaurante Siglo XXI" class="img-fluid"/>
                 <h1>Restaurante</h1>
                 <p class="lead text-rosado font-weight-bold">Local de comida tradicional, con más de 50 años de historia</p>
                 <br />
             </div>
-            <div class="carousel-item p-5">
-                <img src="../Images/paste_choclo_2.png" alt="Pastel de Choclo"/>
+            <div class="carousel-item p-2 p-md-5">
+                <img src="../Images/paste_choclo_2.png" alt="Pastel de Choclo" class="img-fluid"/>
                 <h1>Nuestros platos</h1>
                 <p class="lead text-rosado font-weight-bold">Nos caracterizamos por un menú de comida tradicional Chilena</p>
             </div>
-            <div class="carousel-item p-5">
-                <img src="../Images/auto_servicio_2.jpg" alt="Auto Servicio"/>
+            <div class="carousel-item p-2 p-md-5">
+                <img src="../Images/auto_servicio_2.jpg" alt="Auto Servicio" class="img-fluid"/>
                 <h1>Nuestro Servicio</h1>
                 <p class="lead text-rosado font-weight-bold">Ofrecemos una experiencia de auto servicio altamente tecnologizada</p>
             </div>

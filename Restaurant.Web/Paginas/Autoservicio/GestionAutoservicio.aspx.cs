@@ -242,6 +242,7 @@ namespace Restaurant.Web.Paginas.Autoservicio
                     if (totalPedido == 0)
                     {
                         lblTotalPedido.Text = "";
+                        btnHacerPedido.Visible = false;
                     }
                     else
                     {

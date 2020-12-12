@@ -44,9 +44,11 @@
                                     <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                     <div class="col-12 col-md-7 col-lg-9">
                                       <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                      <h5><%# Eval("Precio", "${0:N0}") %></h5>
-                                      <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                      <h5 class="text-center text-md-left"><%# Eval("Precio", "${0:N0}") %></h5>
+                                      <div class="text-center text-md-left">
+                                        <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                         runat="server">Pedir</asp:LinkButton>
+                                      </div>
                                     </div>
                                   </div>
                                 </ItemTemplate>
@@ -70,9 +72,11 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
-                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                  <h5 class="text-center text-md-left"><%# Eval("Precio", "${0:N0}") %></h5>
+                                  <div class="text-center text-md-left">
+                                    <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
+                                  </div>
                                 </div>
                               </div>
                             </ItemTemplate>
@@ -94,9 +98,11 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
-                                <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                <h5 class="text-center text-md-left"><%# Eval("Precio", "${0:N0}") %></h5>
+                                <div class="text-center text-md-left">
+                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
+                                </div>
                               </div>
                             </div>
                           </ItemTemplate>
@@ -118,9 +124,11 @@
                               <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                               <div class="col-12 col-md-7 col-lg-9">
                                 <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                <h5><%# Eval("Precio", "${0:N0}") %></h5>
-                                <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                <h5 class="text-center text-md-left"><%# Eval("Precio", "${0:N0}") %></h5>
+                                <div class="text-center text-md-left">
+                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                   runat="server">Pedir</asp:LinkButton>
+                                </div>
                               </div>
                             </div>
                           </ItemTemplate>
@@ -142,9 +150,11 @@
                                 <div class="col-12 col-md-5 col-lg-3 text-center"><img class="img-fluid imagen-articulo" alt="" src="<%# GetImage(Eval("UrlImagen")?.ToString()) %>"/></div>
                                 <div class="col-12 col-md-7 col-lg-9">
                                   <p class="text-justify"><%# Eval("Descripcion") %></p>
-                                  <h5><%# Eval("Precio", "${0:N0}") %></h5>
-                                  <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
+                                  <h5 class="text-center text-md-left"><%# Eval("Precio", "${0:N0}") %></h5>
+                                  <div class="text-center text-md-left">
+                                    <asp:LinkButton CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' 
                                     runat="server">Pedir</asp:LinkButton>
+                                  </div>
                                 </div>
                               </div>
                             </ItemTemplate>
@@ -202,7 +212,7 @@
                       <asp:TextBox ID="txtTotalPedido" runat="server" Visible="false"></asp:TextBox>
                     </div>
                     <div class="row">
-                      <div class="col-12 col-md-4 col-lg-2 m-auto">
+                      <div class="col-12 col-md-4 col-lg-2 text-center">
                         <asp:Button ID="btnHacerPedido" runat="server" Text="Hacer Pedido" Visible="false" OnClick="btnHacerPedido_Click" CssClass="btn btn-info"/>              
                         <asp:Button ID="btnCerrarCuenta" runat="server" Text="Cerrar Cuenta" Visible="false" OnClick="btnCerrarCuenta_Click" CssClass="btn btn-info"/>
                       </div>
