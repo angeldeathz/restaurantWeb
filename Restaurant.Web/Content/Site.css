@@ -241,3 +241,7 @@
 .styled-table tbody tr:hover {
     color: #009879;
 }
+
+iframe, object, embed {
+    width: 100%;
+}

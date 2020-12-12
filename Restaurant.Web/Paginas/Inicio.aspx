@@ -42,8 +42,8 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Nosotros</h2>
-            <p class="text-rosado">
-                Somos un restaurante familiar, ofreciendo delicosos platos tradicionales por más de 50 años.
+            <p class="font-weight-bold text-rosado">
+                Somos un restaurante familiar, ofreciendo platos tradicionales por más de 50 años.
             </p>
             <p>
                 <a class="btn btn-info" runat="server" href="../Paginas/Publica/nosotros">Conocer más &raquo;</a>
@@ -51,7 +51,7 @@
         </div>
         <div class="col-md-4">
             <h2>Local</h2>
-            <p class="text-rosado">
+            <p class="font-weight-bold text-rosado">
                 Nuestro local es una antigua casona colonial, ubicada en el corazón de providencia, 
             </p>
             <p>
@@ -59,8 +59,8 @@
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Menú</h2>
-            <p class="text-rosado">
+            <h2>Carta</h2>
+            <p class="font-weight-bold text-rosado">
                 Ofrecemos una variedad de platos tradicionales
             </p>
             <p>
