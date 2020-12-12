@@ -212,7 +212,7 @@
                       <asp:TextBox ID="txtTotalPedido" runat="server" Visible="false"></asp:TextBox>
                     </div>
                     <div class="row">
-                      <div class="col-12 col-md-4 col-lg-2 text-center">
+                      <div class="col-12 text-center">
                         <asp:Button ID="btnHacerPedido" runat="server" Text="Hacer Pedido" Visible="false" OnClick="btnHacerPedido_Click" CssClass="btn btn-info"/>              
                         <asp:Button ID="btnCerrarCuenta" runat="server" Text="Cerrar Cuenta" Visible="false" OnClick="btnCerrarCuenta_Click" CssClass="btn btn-info"/>
                       </div>

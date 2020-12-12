@@ -58,7 +58,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 {
                     List<Reserva> reservasActivas = reservas.Where(x => x.EstadoReserva.Id == EstadoReserva.enCurso).ToList();
                     lblComensales.Text = reservasActivas.Count.ToString();
-                    List<Reserva> listaProximaReserva = reservas.Where(x => x.EstadoReserva.Id != EstadoReserva.enCurso &&
+                    List<Reserva> listaProximaReserva = reservas.Where(x => x.EstadoReserva.Id == EstadoReserva.creada &&
                                                                             x.FechaReserva.Date == DateTime.Now.Date &&
                                                                             x.FechaReserva > DateTime.Now).ToList();
                     lblProximaReserva.Text = "Sin próximas reservas para hoy";
