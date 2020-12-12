@@ -8,8 +8,8 @@
             <br/><br/>
             <h3>Estado restaurante</h3>
             <hr />
-            <p class="lead"><i class="fa fa-check-circle"></i>  Mesas ocupadas: <asp:Label runat="server" ID="lblMesasOcupadas"></asp:Label></p>
-            <p class="lead"><i class="fa fa-times-circle"></i>  Mesas disponibles: <asp:Label runat="server" ID="lblMesasDisponibles"></asp:Label></p>
+            <p class="lead"><i class="fa fa-check-circle"></i>  Mesas disponibles: <asp:Label runat="server" ID="lblMesasDisponibles"></asp:Label></p>
+            <p class="lead"><i class="fa fa-times-circle"></i>  Mesas ocupadas: <asp:Label runat="server" ID="lblMesasOcupadas"></asp:Label></p>
             <p class="lead"><i class="fa fa-users"></i>  Cantidad de comensales: <asp:Label runat="server" ID="lblComensales"></asp:Label></p>
             <p class="lead"><i class="fa fa-clock-o"></i>  Próxima reserva: <asp:Label runat="server" ID="lblProximaReserva" CssClass="small"></asp:Label></p>
         </div>
@@ -17,7 +17,7 @@
             <ul class="list-group">
                 <li class="list-group-item active">Mantenedores</li>
                 <li class="list-group-item" runat="server" id="linkBodega">
-                    <a runat="server" href="/Paginas/Mantenedores/GestionBodega.aspx" class="font-weight-bold">Gestión de Bodega</a>
+                    <i class="fa fa-inbox text-rosado"></i>  <a runat="server" href="/Paginas/Mantenedores/GestionBodega.aspx" class="font-weight-bold text-rosado">Gestión de Bodega</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionBodega#divInsumos">Insumos</a></li>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionBodega#divProveedores">Proveedores</a></li>
@@ -25,7 +25,7 @@
                     </ul>
                 </li>
                 <li class="list-group-item" runat="server" id="linkRestaurante">
-                    <a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx" class="font-weight-bold">Gestión de Restaurante</a>
+                    <i class="fa fa-black-tie text-rosado"></i>  <a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx" class="font-weight-bold text-rosado">Gestión de Restaurante</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Reservas</a></li>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionRestaurante.aspx">Clientes</a></li>
@@ -34,14 +34,16 @@
                     </ul>
                 </li>
                 <li class="list-group-item" runat="server" id="linkCocina">
-                    <a runat="server" href="/Paginas/Mantenedores/GestionCocina.aspx" class="font-weight-bold">Gestión de Cocina</a>
+                    <i class="fa fa-cutlery text-rosado"></i>  <a runat="server" href="/Paginas/Mantenedores/GestionCocina.aspx" class="font-weight-bold text-rosado">Gestión de Cocina</a>
                     <ul>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionCocina.aspx">Artículos</a></li>
                         <li><a runat="server" href="/Paginas/Mantenedores/GestionCocina.aspx">Pedidos</a></li>
                     </ul>
                 </li>
-                <li class="list-group-item" runat="server" id="linkUsuarios"><a runat="server" href="/Paginas/Mantenedores/GestionUsuarios.aspx" class="font-weight-bold">Gestión de Usuarios</a></li>
-                <li class="list-group-item" runat="server" id="linkReporteria"><a runat="server" href="/Paginas/Mantenedores/Reporteria.aspx" class="font-weight-bold">Reportería</a></li>
+                <li class="list-group-item" runat="server" id="linkUsuarios">
+                  <i class="fa fa-user text-rosado"></i>  <a runat="server" href="/Paginas/Mantenedores/GestionUsuarios.aspx" class="font-weight-bold text-rosado">Gestión de Usuarios</a></li>
+                <li class="list-group-item" runat="server" id="linkReporteria">
+                  <i class="fa fa-file-text text-rosado"></i>  <a runat="server" href="/Paginas/Mantenedores/Reporteria.aspx" class="font-weight-bold text-rosado">Reportería</a></li>
             </ul>
         </div>
     </div>

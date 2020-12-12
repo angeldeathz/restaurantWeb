@@ -139,6 +139,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     List<Insumo> insumos = _insumoService.Obtener();
                     if (insumos != null && insumos.Count > 0)
                     {
+                        insumos = insumos.OrderBy(x => x.Nombre).ToList();
+
                         ddlInsumoArticulo.DataSource = insumos;
                         ddlInsumoArticulo.DataTextField = "Nombre";
                         ddlInsumoArticulo.DataValueField = "Id";
@@ -199,8 +201,10 @@ namespace Restaurant.Web.Paginas.Mantenedores
             txtCantidadArticuloPedido.Text = "";
 
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "modalPedido", "$('#modalPedido').modal('show');", true);
-            upModalPedido.Update();
             Session["articulosPedidos"] = new List<ArticuloPedido>();
+            upModalPedido.Update();
+            actualizarRepeater(listaArticulosPedido, new List<ArticuloPedido>(), listaArticulosPedidoVacia);
+            upArticulosPedido.Update();
 
             limpiarTabs();
             tabPedidos.Attributes.Add("class", "nav-link active");
@@ -212,6 +216,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
             try
             {
                 ValidarSesion();
+                Session["articulosPedidos"] = new List<ArticuloPedido>();
+
                 int idPedido;
                 if (int.TryParse((string)e.CommandArgument, out idPedido))
                 {
@@ -253,7 +259,6 @@ namespace Restaurant.Web.Paginas.Mantenedores
                         upModalPedido.Update();
                     }
                 }
-                Session["articulosPedidos"] = new List<ArticuloPedido>();
 
                 limpiarTabs();
                 tabPedidos.Attributes.Add("class", "nav-link active");
@@ -354,13 +359,30 @@ namespace Restaurant.Web.Paginas.Mantenedores
                 bool editar = _pedidoService.Modificar(pedido, pedido.Id);
                 if (editar)
                 {
+                    _articuloPedidoService = new ArticuloPedidoService(token.access_token);
+                    //ELIMINAR LOS articulosPedido que ya existen
+                    List<ArticuloPedido> articulosActuales = _articuloPedidoService.Obtener();
+                    if (articulosActuales != null && articulosActuales.Count > 0)
+                    {
+                        articulosActuales = articulosActuales.Where(x => x.IdPedido == pedido.Id).ToList();
+                        foreach (ArticuloPedido articuloPedido in articulosActuales)
+                        {
+                            _articuloPedidoService.Eliminar(articuloPedido.Id);
+                        }
+                    }
+
                     List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
-                    //SE DEBERÍAN ELIMINAR LOS articulosPedido que ya existen, asociados?
                     foreach (ArticuloPedido articuloPedido in listaArticulos)
                     {
-                        articuloPedido.IdPedido = pedido.Id;
-                        _articuloPedidoService = new ArticuloPedidoService(token.access_token);
-                        int idArticuloPedido = _articuloPedidoService.Guardar(articuloPedido);
+                        ArticuloPedido nuevoArticulo = new ArticuloPedido();
+                        nuevoArticulo.IdPedido = pedido.Id;
+                        nuevoArticulo.Cantidad = articuloPedido.Cantidad;
+                        nuevoArticulo.Comentarios = articuloPedido.Comentarios;
+                        nuevoArticulo.IdArticulo = articuloPedido.IdArticulo;
+                        nuevoArticulo.IdEstadoArticuloPedido = articuloPedido.IdEstadoArticuloPedido != 0 ? articuloPedido.IdEstadoArticuloPedido : (articuloPedido.EstadoArticuloPedido != null ? articuloPedido.EstadoArticuloPedido.Id : EstadoArticuloPedido.pendiente );
+                        nuevoArticulo.Precio = articuloPedido.Precio;
+                        nuevoArticulo.Total = articuloPedido.Total;
+                        int idArticuloPedido = _articuloPedidoService.Guardar(nuevoArticulo);
                     }
                     List<Pedido> pedidos = _pedidoService.Obtener();
                     if (pedidos != null && pedidos.Count > 0)
@@ -409,21 +431,13 @@ namespace Restaurant.Web.Paginas.Mantenedores
             articuloPedido.Precio = int.Parse(ddlPrecioArticuloPedido.SelectedItem.Text);
             articuloPedido.Cantidad = int.Parse(txtCantidadArticuloPedido.Text);
             articuloPedido.Total = articuloPedido.Precio * articuloPedido.Cantidad;
-            articuloPedido.IdEstadoArticuloPedido = EstadoArticuloPedido.recibido;
+            articuloPedido.IdEstadoArticuloPedido = EstadoArticuloPedido.pendiente;
             articuloPedido.Articulo = articulo;
 
             List<ArticuloPedido> listaArticulos = (List<ArticuloPedido>)Session["articulosPedidos"];
-            var articuloExiste = listaArticulos.FirstOrDefault(a => a.IdArticulo == articuloPedido.IdArticulo);
-            if (articuloExiste != null)
-            {
-                articuloExiste.Cantidad = articuloExiste.Cantidad + articuloPedido.Cantidad;
-                articuloExiste.Total = articuloExiste.Precio * articuloExiste.Cantidad;
-            }
-            else
-            {
-                listaArticulos.Add(articuloPedido);
-            }
+            listaArticulos.Add(articuloPedido);
             Session["articulosPedidos"] = listaArticulos;
+
             actualizarRepeater(listaArticulosPedido, listaArticulos, listaArticulosPedidoVacia);
             var totalPedido = listaArticulos.Sum(x => x.Total);
             lblTotalPedido.Text = "Total: " + string.Format("${0:N0}", totalPedido) + "-";
@@ -991,6 +1005,8 @@ namespace Restaurant.Web.Paginas.Mantenedores
 
         public void actualizarDdlArticulos(List<Articulo> articulos)
         {
+            articulos = articulos.OrderBy(x => x.Nombre).ToList();
+
             ddlArticuloPedido.DataSource = articulos;
             ddlArticuloPedido.DataTextField = "Nombre";
             ddlArticuloPedido.DataValueField = "Id";
