@@ -129,7 +129,7 @@ namespace Restaurant.Web.Paginas.Reservas
             foreach(Mesa mesa in mesasConCapcidad)
             {
                 DateTime horaDesde = fechaReserva.AddMinutes(-60);
-                DateTime horahasta = fechaReserva.AddMinutes(60*2);
+                DateTime horahasta = fechaReserva.AddMinutes(60);
                 if(reservas == null || reservas.Count == 0)
                 {
                     idMesa = mesa.Id;
