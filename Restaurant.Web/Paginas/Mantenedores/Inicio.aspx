@@ -7,6 +7,7 @@
             <span class="text-rosado">Perfil: <asp:Label runat="server" id="lblPerfil"></asp:Label></span>
             <br/><br/>
             <h3>Estado restaurante</h3>
+            <hr />
             <p class="lead"><i class="fa fa-check-circle"></i>  Mesas ocupadas: <asp:Label runat="server" ID="lblMesasOcupadas"></asp:Label></p>
             <p class="lead"><i class="fa fa-times-circle"></i>  Mesas disponibles: <asp:Label runat="server" ID="lblMesasDisponibles"></asp:Label></p>
             <p class="lead"><i class="fa fa-users"></i>  Cantidad de comensales: <asp:Label runat="server" ID="lblComensales"></asp:Label></p>
