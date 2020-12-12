@@ -67,8 +67,9 @@ namespace Restaurant.Web.Paginas.Mantenedores
                                      r.Id,
                                      r.Cliente.Persona.Nombre,
                                      r.Cliente.Persona.Apellido,
-                                     NombreCliente = String.Format("{0} {1}", r.Cliente.Persona.Nombre, r.Cliente.Persona.Apellido)
+                                     NombreCliente = String.Format("{0} - {1} {2}", r.Id, r.Cliente.Persona.Nombre, r.Cliente.Persona.Apellido)
                                  };
+                        ds = ds.OrderBy(x => x.NombreCliente);
                         ddlReservaPedido.DataSource = ds;
                         ddlReservaPedido.DataTextField = "NombreCliente";
                         ddlReservaPedido.DataValueField = "Id";

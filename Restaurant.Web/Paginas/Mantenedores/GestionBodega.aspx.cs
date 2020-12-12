@@ -36,6 +36,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     List<Insumo> insumos = _insumoService.Obtener();
                     if (insumos != null && insumos.Count > 0)
                     {
+                        insumos = insumos.OrderBy(x => x.Nombre).ToList();
                         actualizarRepeater(listaInsumos, insumos, listaInsumosVacia);
                         actualizarDdlInsumos(insumos);
                     }
@@ -50,6 +51,7 @@ namespace Restaurant.Web.Paginas.Mantenedores
                     List<Proveedor> proveedores = _proveedorService.Obtener();
                     if (proveedores != null && proveedores.Count > 0)
                     {
+                        proveedores = proveedores.OrderBy(x => x.NombreProveedor).ToList();
                         actualizarRepeater(listaProveedores, proveedores, listaProveedoresVacia);
                         actualizarDdlProveedoresInsumos(proveedores);
                         actualizarDdlProveedoresOrdenes(proveedores);
