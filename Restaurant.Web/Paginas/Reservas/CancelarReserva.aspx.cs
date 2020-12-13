@@ -59,8 +59,13 @@ namespace Restaurant.Web.Paginas.Reservas
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorReserva", "Swal.fire('No se encontró la reserva con el Número ingresado', '', 'error');", true);
                     return;
                 }
-                EstadoReserva ultimoEstado = reservaCliente.EstadosReserva.OrderByDescending(x => x.Fecha).FirstOrDefault(); 
-                if(ultimoEstado != null && ultimoEstado.Id == EstadoReserva.cancelada)
+                EstadoReserva ultimoEstado = reservaCliente.EstadosReserva.OrderByDescending(x => x.Fecha).FirstOrDefault();
+                if (ultimoEstado != null && ultimoEstado.Id == EstadoReserva.finalizada)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCancelada", "Swal.fire('Esta reserva ya fue finalizada', '', 'warning');", true);
+                    return;
+                }
+                if (ultimoEstado != null && ultimoEstado.Id == EstadoReserva.cancelada)
                 {
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "errorCancelada", "Swal.fire('Esta reserva ya fue cancelada', '', 'warning');", true);
                     return;
