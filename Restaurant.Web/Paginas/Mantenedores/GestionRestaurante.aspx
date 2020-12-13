@@ -84,16 +84,16 @@
                         </thead>
                     </HeaderTemplate>          
                     <ItemTemplate>
-                        <tr>
-                        <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                      <tr>
+                        <td class="text-center"> <%# Eval("Persona.Rut").ToString() != "0" ? Eval("Persona.Rut") + "-" + Eval("Persona.DigitoVerificador") : "-" %> </td>
                         <td> <%# Eval("Persona.Nombre") %> </td>
                         <td> <%# Eval("Persona.Apellido") %> </td>
                         <td> <%# Eval("Persona.Email") %> </td>
-                        <td> <%# Eval("Persona.Telefono") %> </td>
+                        <td class="text-center"> <%# Eval("Persona.Telefono").ToString() != "0" ? Eval("Persona.Telefono") : "-" %> </td>
                         <td> <%# Eval("Persona.EsPersonaNatural").ToString() != "0" ? "Sí" : "No" %> </td>
                          <td><asp:LinkButton ID="btnModalEditarCliente" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                 Editar</asp:LinkButton></td>
-                        </tr>
+                      </tr>
                     </ItemTemplate>
                     <FooterTemplate>
                         </table>

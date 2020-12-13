@@ -17,35 +17,8 @@ namespace Restaurant.Web.Paginas.Autoservicio
         private ArticuloService _articuloService;
         private TipoDocumentoPagoService _tipoDocumentoPagoService;
         private DocumentoPagoService _documentoPagoService;
-
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            Token token = (Token)Session["token"];
-            Reserva reserva = (Reserva)Session["reservaCliente"];
-            _pedidoService = new PedidoService(token.access_token);
-
-            List<Pedido> pedidos = _pedidoService.Obtener();
-
-            if (pedidos != null && pedidos.Count > 0)
-            {
-                var pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
-                                                                && x.Reserva.Id == reserva.Id
-                                                                && x.FechaHoraInicio.Date == DateTime.Now.Date);
-                if (pedidoCliente != null)
-                {
-
-                    if (pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
-                    {
-                        Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
-                        return;
-                    }
-
-                    cargarPedido(token, pedidoCliente);
-                }
-            }
-        }
-
         private MedioPagoDocumentoService _medioPagoDocumentoService;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -94,11 +67,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
                         btnHacerPedido.Visible = false;
                         if (pedidoCliente.IdEstadoPedido == EstadoPedido.enCurso
                             || pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoConTarjeta
-                            || (pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto && ! PagoTarjetaListo(pedidoCliente.Id)))
+                            || (pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto && !PagoTarjetaListo(pedidoCliente.Id)))
                         {
                             btnCerrarCuenta.Visible = true;
 
-                            if(pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoConTarjeta
+                            if (pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoConTarjeta
                                || pedidoCliente.IdEstadoPedido == EstadoPedido.cerradoMixto)
                             {
                                 btnCerrarCuenta.Text = "Ir a pagar";
@@ -123,9 +96,9 @@ namespace Restaurant.Web.Paginas.Autoservicio
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', 'No se pudo cargar la página, intente nuevamente', 'error');", true);
-                return;
+                //Nada 
             }
+
             if (!IsPostBack)
             {
                 try
@@ -176,11 +149,38 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "error", "Swal.fire('Error', 'No se pudo cargar la página, intente nuevamente', 'error');", true);
-                    return;
+                    //Nada
                 }
             }
         }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Token token = (Token)Session["token"];
+            Reserva reserva = (Reserva)Session["reservaCliente"];
+            _pedidoService = new PedidoService(token.access_token);
+
+            List<Pedido> pedidos = _pedidoService.Obtener();
+
+            if (pedidos != null && pedidos.Count > 0)
+            {
+                var pedidoCliente = pedidos.FirstOrDefault(x => x.IdEstadoPedido != EstadoPedido.cancelado
+                                                                && x.Reserva.Id == reserva.Id
+                                                                && x.FechaHoraInicio.Date == DateTime.Now.Date);
+                if (pedidoCliente != null)
+                {
+
+                    if (pedidoCliente.IdEstadoPedido == EstadoPedido.pagado)
+                    {
+                        Response.Redirect("/Paginas/Autoservicio/PedidoPagado.aspx");
+                        return;
+                    }
+
+                    cargarPedido(token, pedidoCliente);
+                }
+            }
+        }
+
         protected void validarIngreso()
         {
             if (Session["reservaCliente"] == null || Session["token"] == null)
@@ -651,6 +651,10 @@ namespace Restaurant.Web.Paginas.Autoservicio
             Token token = (Token)Session["token"];
             _documentoPagoService = new DocumentoPagoService(token.access_token);
             List<DocumentoPago> listaDocumentoPago = _documentoPagoService.Obtener();
+            if(listaDocumentoPago == null)
+            {
+                return false;
+            }
             DocumentoPago documentoPago = listaDocumentoPago.FirstOrDefault(x => x.IdPedido == idPedido);
             if(documentoPago == null)
             {

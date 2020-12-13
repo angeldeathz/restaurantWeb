@@ -31,10 +31,11 @@
                                   <tr>
                                       <th><b>Id</b></th>
                                       <th><b>Nombre</b></th>
+                                      <th><b>Unidad de medida</b></th>
                                       <th><b>Stock actual</b></th>
                                       <th><b>Stock mínimo</b></th>
                                       <th><b>Stock máximo</b></th>
-                                      <th><b>Unidad de medida</b></th>
+                                      <th><b>Proveedor</b></th>
                                       <th><b>Acciones</b></th>
                                   </tr>
                                 </thead>
@@ -44,10 +45,11 @@
                                 <tr>
                                 <td> <%# Eval("Id") %></td>
                                 <td> <%# Eval("Nombre") %> </td>
+                                <td> <%# Eval("UnidadMedida.Nombre") %> </td>
                                 <td> <%# Eval("StockActual") %> </td>
                                 <td> <%# Eval("StockCritico") %> </td>
                                 <td> <%# Eval("StockOptimo") %> </td>
-                                <td> <%# Eval("UnidadMedida.Nombre") %> </td>
+                                <td> <%# Eval("Proveedor.Persona.Nombre") %>&nbsp; <%# Eval("Proveedor.Persona.Apellido") %></td>
                                 <td><asp:LinkButton ID="btnModalEditarInsumo" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                         Editar</asp:LinkButton></td>
                                 </tr>
@@ -87,17 +89,17 @@
                              </thead>
                             </HeaderTemplate>          
                             <ItemTemplate>
-                                <tr>
-                                <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                              <tr>
+                                <td class="text-center"> <%# Eval("Persona.Rut").ToString() != "0" ? Eval("Persona.Rut") + "-" + Eval("Persona.DigitoVerificador") : "-" %> </td>
                                 <td> <%# Eval("Persona.Nombre") %> </td>
                                 <td> <%# Eval("Persona.Apellido") %> </td>
                                 <td> <%# Eval("Persona.Email") %> </td>
-                                <td> <%# Eval("Persona.Telefono") %> </td>
+                                <td class="text-center"> <%# Eval("Persona.Telefono").ToString() != "0" ? Eval("Persona.Telefono") : "-" %> </td>
                                 <td> <%# Eval("Direccion") %> </td>
                                 <td> <%# Eval("Persona.EsPersonaNatural").ToString() != "0" ? "Sí" : "No" %> </td>
                                  <td><asp:LinkButton ID="btnModalEditarProveedor" CommandArgument='<%# Eval("Id") %>' runat="server" >
                                         Editar</asp:LinkButton></td>
-                                </tr>
+                              </tr>
                             </ItemTemplate>
                             <FooterTemplate>
                                 </table>
@@ -179,18 +181,18 @@
                           CssClass="text-danger" ErrorMessage="Debe ingresar el stock actual" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                         </div>
                         <div class="col-12 col-sm-4">
-                          <asp:Label ID="lblStockCritico" runat="server" Text="Stock crítico"></asp:Label>
+                          <asp:Label ID="lblStockCritico" runat="server" Text="Stock mínimo"></asp:Label>
                           <asp:TextBox ID="txtStockCritico" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionStockCritico" runat="server" ControlToValidate="txtStockCritico" Display="Dynamic"
-                          CssClass="text-danger" ErrorMessage="Ingrese el stock crítico" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
-                          <asp:CompareValidator ID="ValidacionStockCriticoOptimo" Operator="LessThan" runat="server" ValidationGroup="ValidacionInsumo" Display="Dynamic"
-                          ControlToValidate="txtStockCritico" ControlToCompare="txtStockOptimo" ErrorMessage="Stock crítico debe ser menor al óptimo" CssClass="text-danger"></asp:CompareValidator>
+                          CssClass="text-danger" ErrorMessage="Ingrese el stock mínimo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
+                          <asp:CompareValidator ID="ValidacionStockCriticoOptimo" Operator="LessThan" type="Integer" runat="server" ValidationGroup="ValidacionInsumo" Display="Dynamic"
+                          ControlToValidate="txtStockCritico" ControlToCompare="txtStockOptimo" ErrorMessage="Stock mínimo debe ser menor al máximo" CssClass="text-danger"></asp:CompareValidator>
                         </div>
                         <div class="col-12 col-sm-4">
-                          <asp:Label ID="lblStockOptimo" runat="server" Text="Stock óptimo"></asp:Label>
+                          <asp:Label ID="lblStockOptimo" runat="server" Text="Stock máximo"></asp:Label>
                           <asp:TextBox ID="txtStockOptimo" runat="server" CssClass="form-control" TextMode="Number" min="0"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionStockOptimo" runat="server" ControlToValidate="txtStockOptimo" Display="Dynamic"
-                          CssClass="text-danger" ErrorMessage="Ingrese el stock óptimo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
+                          CssClass="text-danger" ErrorMessage="Ingrese el stock máximo" ValidationGroup="ValidacionInsumo"></asp:RequiredFieldValidator>
                           </div>
                       </div>
                       <div class="row">
