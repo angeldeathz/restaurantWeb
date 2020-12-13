@@ -249,7 +249,7 @@
                         </div>
                         <div class="col-12 col-md-6">
                           <asp:Label ID="lblCantidadArticulo" runat="server" Text="Cantidad"></asp:Label>
-                          <asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
+                          <asp:TextBox ID="txtCantidadArticulo" runat="server" CssClass="form-control" TextMode="Number" min="1" max="10"></asp:TextBox>
                           <asp:RequiredFieldValidator ID="ValidacionCantidad" runat="server" ControlToValidate="txtCantidadArticulo" Display="Dynamic"
                           CssClass="text-danger" ErrorMessage="Debe ingresar la cantidad" ValidationGroup="ValidacionArticulo"></asp:RequiredFieldValidator>
                         </div>

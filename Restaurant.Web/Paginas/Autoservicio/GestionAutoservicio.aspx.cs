@@ -313,6 +313,11 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 string comentarios = txtComentarioArticulo.Text;
                 int idArticulo = Convert.ToInt32(txtIdArticulo.Text);
 
+                if(cantidad > 10)
+                {
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "erroArticulo", "Swal.fire('La cantidad máxima por pedido es de 10 artículos', '', 'error');", true);
+                    return;
+                }
                 // Info de artículos disponibles para pedir
                 List<Articulo> articulosDisponibles = (List<Articulo>)Session["articulosDisponibles"];
                 Articulo articulo = articulosDisponibles.FirstOrDefault(a => a.Id == idArticulo);
