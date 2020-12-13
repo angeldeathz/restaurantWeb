@@ -12,7 +12,7 @@
       <div class="col-12 bg-blanco rounded contenedor-mantenedores shadow">
         <div class="tab-content py-3 px-1">
             <div class="tab-pane show active" id="divUsuarios" role="tabpanel" aria-labelledby="tabUsuarios" runat="server" ClientIDMode="Static">
-              <asp:Button ID="btnModalCrearUsuario" runat="server"  Text="Crear Usuario" OnClick="btnModalCrearUsuario_Click" CssClass="btn btn-info float-right"/>
+              <asp:Button ID="btnModalCrearUsuario" runat="server"  Text="Crear Usuario" OnClick="btnModalCrearUsuario_Click" CssClass="btn btn-info float-right" CausesValidation="false"/>
               <asp:UpdatePanel ID="upListaUsuarios" runat="server" ChildrenAsTriggers="false" UpdateMode="Conditional">
                  <ContentTemplate> 
                     <div class="text-center">
@@ -36,16 +36,16 @@
                             </thead>
                           </HeaderTemplate>          
                         <ItemTemplate>
-                            <tr>
-                            <td> <%# Eval("Persona.Rut") %>-<%# Eval("Persona.DigitoVerificador") %> </td>
+                          <tr>
+                            <td class="text-center"> <%# Eval("Persona.Rut").ToString() != "0" ? Eval("Persona.Rut") + "-" + Eval("Persona.DigitoVerificador") : "-" %> </td>
                             <td> <%# Eval("Persona.Nombre") %> </td>
                             <td> <%# Eval("Persona.Apellido") %> </td>
                             <td> <%# Eval("Persona.Email") %> </td>
-                            <td> <%# Eval("Persona.Telefono") %> </td>
+                            <td class="text-center"> <%# Eval("Persona.Telefono").ToString() != "0" ? Eval("Persona.Telefono") : "-" %> </td>
                             <td> <%# Eval("TipoUsuario.Nombre") %> </td>
-                             <td><asp:LinkButton ID="btnModalEditarUsuario" CommandArgument='<%# Eval("Id") %>' runat="server" >
+                             <td><asp:LinkButton ID="btnModalEditarUsuario" CommandArgument='<%# Eval("Id") %>' runat="server" CausesValidation="false">
                                     Editar</asp:LinkButton></td>
-                            </tr>
+                          </tr>
                         </ItemTemplate>
                         <FooterTemplate>
                             </table>
@@ -116,9 +116,9 @@
                           </div>
                         <div class="col-12 col-md-6">
                             <asp:Label ID="lblTelefonoUsuario" runat="server" Text="Teléfono"></asp:Label>
-                            <asp:TextBox ID="txtTelefonoUsuario" runat="server" CssClass="form-control" min="1" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="txtTelefonoUsuario" runat="server" CssClass="form-control" min="0" TextMode="Number"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="ValidacionTelefono" runat="server" ControlToValidate="txtTelefonoUsuario" Display="Dynamic"
-                            CssClass="text-danger" ErrorMessage="Debe ingresar el telefono" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
+                            CssClass="text-danger" ErrorMessage="Debe ingresar el teléfono" ValidationGroup="Validacion"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="ValidacionTelefonoFormato" runat="server" ControlToValidate="txtTelefonoUsuario"  CssClass="text-danger" 
                             ErrorMessage="El teléfono debe tener 9 dígitos" ValidationExpression=".{9}.*" ValidationGroup="Validacion" Display="Dynamic"/>
                         </div>
