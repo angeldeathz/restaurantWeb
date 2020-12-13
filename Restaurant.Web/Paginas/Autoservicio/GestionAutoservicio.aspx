@@ -342,16 +342,16 @@
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-6 form-group">
-                    <asp:Label ID="lblMontoEfectivo" runat="server" CssClass="h5 d-inline-block">En efectivo:</asp:Label>
-						        <asp:TextBox ID="txtMontoEfectivo" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="ValidacionMontoEfectivo" runat="server" ControlToValidate="txtMontoEfectivo" Display="Dynamic"
-                    CssClass="text-danger" ErrorMessage="Debe ingresar el monto con efectivo" ValidationGroup="ValidacionMontoPago"></asp:RequiredFieldValidator>
-                  </div>
-                  <div class="col-12 col-md-6 form-group">
                     <asp:Label ID="lblMontoTarjeta" runat="server" CssClass="h5 d-inline-block">Con tarjeta:</asp:Label>
-						        <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="1"></asp:TextBox>
+						        <asp:TextBox ID="txtMontoTarjeta" runat="server" CssClass="form-control" TextMode="Number" min="1" OnTextChanged="txtMontoTarjeta_TextChanged"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="ValidacionMontoTarjeta" runat="server" ControlToValidate="txtMontoTarjeta" Display="Dynamic"
                     CssClass="text-danger" ErrorMessage="Debe ingresar el monto con tarjeta " ValidationGroup="ValidacionMontoPago"></asp:RequiredFieldValidator>
+                  </div>
+                  <div class="col-12 col-md-6 form-group">
+                    <asp:Label ID="lblMontoEfectivo" runat="server" CssClass="h5 d-inline-block">En efectivo:</asp:Label>
+						        <asp:TextBox ID="txtMontoEfectivo" runat="server" CssClass="form-control" TextMode="Number" min="1" OnTextChanged="txtMontoEfectivo_TextChanged"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="ValidacionMontoEfectivo" runat="server" ControlToValidate="txtMontoEfectivo" Display="Dynamic"
+                    CssClass="text-danger" ErrorMessage="Debe ingresar el monto con efectivo" ValidationGroup="ValidacionMontoPago"></asp:RequiredFieldValidator>
                   </div>
                   <div class="col-12 text-right">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

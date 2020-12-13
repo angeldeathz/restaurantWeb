@@ -776,5 +776,52 @@ namespace Restaurant.Web.Paginas.Autoservicio
                 }
             }
         }
+
+        protected void txtMontoTarjeta_TextChanged(object sender, EventArgs e)
+        {
+            
+            Pedido pedido = (Pedido)Session["pedidoCliente"];
+            int total = pedido.Total;
+            int montoTarjeta = Convert.ToInt32(txtMontoTarjeta.Text);
+            if(montoTarjeta > total)
+            {
+                return;
+            }
+            int montoEfectivo = 0;
+            if (txtMontoEfectivo.Text != string.Empty)
+            {
+                montoEfectivo = Convert.ToInt32(txtMontoEfectivo.Text);
+            }
+            if ((montoTarjeta + montoEfectivo) == total)
+            {
+                return;
+            }
+            montoEfectivo = total - montoTarjeta;
+            txtMontoEfectivo.Text = montoEfectivo.ToString();
+            upModalPagoMixto.Update();
+        }
+
+        protected void txtMontoEfectivo_TextChanged(object sender, EventArgs e)
+        {
+            Pedido pedido = (Pedido)Session["pedidoCliente"];
+            int total = pedido.Total;
+            int montoEfectivo = Convert.ToInt32(txtMontoEfectivo.Text);
+            if (montoEfectivo > total)
+            {
+                return;
+            }
+            int montoTarjeta = 0;
+            if (txtMontoTarjeta.Text != string.Empty)
+            {
+                montoTarjeta = Convert.ToInt32(txtMontoTarjeta.Text);
+            }
+            if ((montoTarjeta + montoEfectivo) == total)
+            {
+                return;
+            }
+            montoTarjeta = total - montoEfectivo;
+            txtMontoTarjeta.Text = montoTarjeta.ToString();
+            upModalPagoMixto.Update();
+        }
     }
 }
